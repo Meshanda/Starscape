@@ -42,14 +42,7 @@ public class CharacterController2D : MonoBehaviour
 		
 		//ground checker
 		Collider2D[] colliders = Physics2D.OverlapBoxAll(_groundCheck.position, _groundBox, 0,_whatIsGround);
-		foreach (var collide in colliders)
-		{
-			if (collide.gameObject != gameObject)
-			{
-				_grounded = true;
-				break;
-			}
-		}
+		_grounded = colliders.Length > 0;
 		
 		Move(MoveDirection);
 		if(_grounded && _wantToJump)
