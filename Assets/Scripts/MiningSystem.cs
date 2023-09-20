@@ -105,13 +105,11 @@ public class MiningSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            var hit = Physics2D.Raycast(_cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity,
-                _minableMask);
+            var cellPos = _groundTilemap.WorldToCell(_mousePosition);
+            var tile = _groundTilemap.GetTile(cellPos);
 
-            if (hit.collider)
+            if (tile)
             {
-                var cellPos = _groundTilemap.WorldToCell(hit.point);
-                var tile = _groundTilemap.GetTile(cellPos);
                 _groundTilemap.SetTile(cellPos, null);
 
                 var dropGO = Instantiate(_dropPrefab, _groundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0.0f), Quaternion.identity);

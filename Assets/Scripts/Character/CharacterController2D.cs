@@ -24,7 +24,7 @@ public class CharacterController2D : MonoBehaviour
 	
 	private bool _wantToJump;
 	
-	private Vector2 _groundBox => new Vector2(Mathf.Abs(transform.localScale.x)*0.98f, _groundedRadius);
+	private Vector2 _groundBox => new Vector2(Mathf.Abs(transform.localScale.x)*0.96f, _groundedRadius);
 	
 	public float MoveDirection { get; set; }
 
