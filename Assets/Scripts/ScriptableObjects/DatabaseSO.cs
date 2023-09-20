@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -18,8 +19,11 @@ public class DatabaseSO : ScriptableObject
 [Serializable]
 public class Item
 {
+    public int id;
     public string name;
     public Sprite sprite;
     public TileBase tile;
+    public Drop drop;
 }
+
 
