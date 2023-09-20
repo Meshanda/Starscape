@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Searcher;
 using UnityEngine;
 
 [Serializable]
@@ -8,10 +9,9 @@ public class ItemStack
 {
     public Item item;
     public int number;
-    public Vector2Int position;
 }
 
-public class InventorySystem : MonoBehaviour
+public class InventorySystem : Singleton<InventorySystem>
 {
     [SerializeField] private List<InventorySlot> _slots;
 
@@ -28,24 +28,34 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public void AddItem(Drop drop)
+    public bool AddItem(ItemStack itemStack)
     {
-        var stack = new ItemStack
+        var slot = GetClosestSlot(itemStack.item);
+        if (!slot)
+            return false;
+
+        if (slot.ItemStack == null)
         {
-            item = drop.item,
-            number = drop.number
-        };
+            slot.ItemStack = itemStack;
+        }
+        else
+        {
+            slot.ItemStack.number += itemStack.number;
+        }
 
-        AddItem(stack);
+        return true;
     }
 
-    public void AddItem(ItemStack itemStack)
+    private InventorySlot GetClosestSlot(Item item)
     {
-        GetClosestSlot();
-    }
+        foreach (var slot in _slots)
+        {
+            if (slot.ItemStack == null || slot.ItemStack.item == item)
+            {
+                return slot;
+            }
+        }
 
-    private void GetClosestSlot()
-    {
-        
+        return null;
     }
 }

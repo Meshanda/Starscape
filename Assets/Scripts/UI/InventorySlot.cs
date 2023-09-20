@@ -1,20 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
     [SerializeField] private Image _itemImage;
-    public Vector2Int pos;
+    [HideInInspector] public Vector2Int pos;
 
     private ItemStack _itemStack;
-
-    public void ChangeSlot(ItemStack stack)
+    public ItemStack ItemStack
     {
-        _itemStack = stack;
-        _itemImage.sprite = stack?.item.sprite;
-        
-        _itemImage.gameObject.SetActive(stack is null);
+        get => _itemStack;
+        set
+        {
+            print("yo");
+            _itemStack = value;
+            Refresh();
+        }
+    }
+
+    private void Refresh()
+    {
+        _itemImage.sprite = _itemStack?.item.sprite;
+        _itemImage.gameObject.SetActive(_itemStack == null);
     }
 }
