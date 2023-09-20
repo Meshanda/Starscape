@@ -15,7 +15,7 @@ public class InventorySystem : Singleton<InventorySystem>
 {
     [SerializeField] private List<InventorySlot> _slots;
 
-    private void Awake()
+    protected override void SingletonAwake()
     {
         InitSlots();
     }

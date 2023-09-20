@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class MiningSystem : MonoBehaviour
 {
+    [SerializeField] private GameObject _dropPrefab;
     [SerializeField] private LayerMask _minableMask;
     [FormerlySerializedAs("_tilemap")] [SerializeField] private Tilemap _groundTilemap;
     [SerializeField] private Tilemap _backgroundTilemap;
@@ -109,11 +110,14 @@ public class MiningSystem : MonoBehaviour
 
             if (hit.collider)
             {
-                Debug.Log(hit.collider.name);
                 var cellPos = _groundTilemap.WorldToCell(hit.point);
                 var tile = _groundTilemap.GetTile(cellPos);
-                Debug.Log(tile.name);
                 _groundTilemap.SetTile(cellPos, null);
+
+                var dropGO = Instantiate(_dropPrefab, _groundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0.0f), Quaternion.identity);
+                var drop = dropGO.GetComponent<Drop>();
+                var item = GameManager.Instance.database.GetItemByTile(tile);
+                drop.ItemStack = item.GenerateLoot();
             }
         }
     }

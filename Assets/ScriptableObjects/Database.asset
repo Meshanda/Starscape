@@ -13,15 +13,31 @@ MonoBehaviour:
   m_Name: Database
   m_EditorClassIdentifier: 
   _items:
-  - id: 0
-    name: feuille_01
-    sprite: {fileID: 0}
-    tile: {fileID: 11400000, guid: a9a80fd02ef9ff04b9bbc7f6323fd442, type: 2}
-  - id: 1
-    name: feuille_02
-    sprite: {fileID: 0}
-    tile: {fileID: 11400000, guid: 17ce13c4a1c5718499e7a7e7e96a684e, type: 2}
-  - id: 2
-    name: feuille_03
-    sprite: {fileID: 0}
-    tile: {fileID: 11400000, guid: 20f3ef476663e0d42a3c21bdcc53d6b1, type: 2}
+  - id: dirt_01
+    name: Dirt
+    sprite: {fileID: 832037546, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tile: {fileID: 11400000, guid: 80a80f2df27c14d4f83086184c025cc8, type: 2}
+    loot:
+      itemId: dirt_01
+      count: 1
+  - id: ground_01
+    name: Ground
+    sprite: {fileID: -1479925464, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
+    loot:
+      itemId: ground_01
+      count: 1
+  - id: iron_01
+    name: Iron
+    sprite: {fileID: 2058351397, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tile: {fileID: 11400000, guid: a1cf7bb6980d3984d9c3d95b10edbfb2, type: 2}
+    loot:
+      itemId: iron_01
+      count: 1
+  - id: copper_01
+    name: Copper
+    sprite: {fileID: 2025984935, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tile: {fileID: 11400000, guid: 9759511fceb7b524e84119e48ee73951, type: 2}
+    loot:
+      itemId: copper_01
+      count: 1

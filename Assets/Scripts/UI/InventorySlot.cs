@@ -15,7 +15,6 @@ public class InventorySlot : MonoBehaviour
         get => _itemStack;
         set
         {
-            print("yo");
             _itemStack = value;
             Refresh();
         }
@@ -23,7 +22,8 @@ public class InventorySlot : MonoBehaviour
 
     private void Refresh()
     {
+        print("Refresh" + _itemStack);
         _itemImage.sprite = _itemStack?.item.sprite;
-        _itemImage.gameObject.SetActive(_itemStack == null);
+        _itemImage.gameObject.SetActive(_itemStack != null);
     }
 }
