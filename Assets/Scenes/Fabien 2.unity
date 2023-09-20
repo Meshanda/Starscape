@@ -1354,7 +1354,7 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1 &369842481
+--- !u!1 &448039964
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1362,43 +1362,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 369842483}
-  - component: {fileID: 369842482}
+  - component: {fileID: 448039966}
+  - component: {fileID: 448039965}
   m_Layer: 0
-  m_Name: InventorySystem
+  m_Name: Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &369842482
+--- !u!114 &448039965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 369842481}
+  m_GameObject: {fileID: 448039964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f82a5aa730ca42f468718793b0ca5d55, type: 3}
+  m_Script: {fileID: 11500000, guid: deaf89b84d5e86546b8a40aaad7394d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minableMask:
-    serializedVersion: 2
-    m_Bits: 64
-  _groundTilemap: {fileID: 1780645444}
-  _backgroundTilemap: {fileID: 237056825}
-  _tile: {fileID: 11400000, guid: a9a80fd02ef9ff04b9bbc7f6323fd442, type: 2}
---- !u!4 &369842483
+  dimensionsXY: {x: 20, y: 10}
+  tile: {fileID: 11400000, guid: a9a80fd02ef9ff04b9bbc7f6323fd442, type: 2}
+  tileGround: {fileID: 1780645444}
+  tileObjects: []
+--- !u!4 &448039966
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 369842481}
+  m_GameObject: {fileID: 448039964}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.90948075, y: -0.105145216, z: -0.029880678}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1548,50 +1546,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1146475106
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1146475108}
-  - component: {fileID: 1146475109}
-  m_Layer: 0
-  m_Name: MiningSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1146475108
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146475106}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1146475109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146475106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 038ff5ad3fff76c45bd5297bcdc20602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1187536427
 GameObject:
   m_ObjectHideFlags: 0
@@ -4951,6 +4905,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 244447703}
-  - {fileID: 1146475108}
-  - {fileID: 369842483}
   - {fileID: 1720046738}
+  - {fileID: 448039966}
