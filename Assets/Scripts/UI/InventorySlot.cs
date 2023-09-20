@@ -24,7 +24,6 @@ public class InventorySlot : MonoBehaviour
 
     private void Refresh()
     {
-        print("Refresh" + _itemStack.number);
         _itemImage.sprite = _itemStack?.item.sprite;
         _itemCount.text = _itemStack?.number.ToString();
         
