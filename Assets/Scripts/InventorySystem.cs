@@ -40,7 +40,8 @@ public class InventorySystem : Singleton<InventorySystem>
         }
         else
         {
-            slot.ItemStack.number += itemStack.number;
+            itemStack.number += slot.ItemStack.number;
+            slot.ItemStack = itemStack;
         }
 
         return true;
