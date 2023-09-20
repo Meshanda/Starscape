@@ -12,6 +12,12 @@ public class MiningSystem : MonoBehaviour
     [SerializeField] private Tilemap _backgroundTilemap;
     [SerializeField] private TileBase _tile;
 
+    [SerializeField] private float _miningDistance = 2.0f;
+
+    private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
+    private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
+
+    
     private Camera _cam;
     
     private void Awake()
@@ -28,6 +34,9 @@ public class MiningSystem : MonoBehaviour
 
     private void PickUpTile()
     {
+        if (_distanceFromPlayer > _miningDistance)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Mouse2))
         {
             var cellPos = _groundTilemap.WorldToCell(_cam.ScreenToWorldPoint(Input.mousePosition));
@@ -53,6 +62,9 @@ public class MiningSystem : MonoBehaviour
 
     private bool TileCanBePlaced(Vector3Int cellPos)
     {
+        if (_distanceFromPlayer > _miningDistance)
+            return false;
+
         if (_groundTilemap.GetTile(cellPos) is not null)
         {
             Debug.Log("Tile is occupied.");
@@ -87,6 +99,9 @@ public class MiningSystem : MonoBehaviour
 
     private void Mining()
     {
+        if (_distanceFromPlayer > _miningDistance)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             var hit = Physics2D.Raycast(_cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity,
