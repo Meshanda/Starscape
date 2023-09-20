@@ -9,21 +9,34 @@ public class InventorySlot : MonoBehaviour
 {
     [SerializeField] private Image _itemImage;
     [SerializeField] private TMP_Text _itemCount;
+    [SerializeField] private GameObject _selection;
+    
     [HideInInspector] public Vector2Int pos;
 
     private ItemStack _itemStack;
     public ItemStack ItemStack
     {
-        get => _itemStack;
+        get
+        {
+            StartCoroutine(RefreshRoutine());
+            return _itemStack;
+        }
         set
         {
             _itemStack = value;
-            Refresh();
+            StartCoroutine(RefreshRoutine());
         }
     }
 
-    private void Refresh()
+    public void Select(bool status)
     {
+        _selection.SetActive(status);
+    }
+
+    private IEnumerator RefreshRoutine()
+    {
+        yield return new WaitForEndOfFrame();
+        
         _itemImage.sprite = _itemStack?.item.sprite;
         _itemCount.text = _itemStack?.number.ToString();
         

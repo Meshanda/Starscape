@@ -42,7 +42,7 @@ public class Item
 
     public ItemStack GenerateLoot()
     {
-        var itemStack = new ItemStack()
+        var itemStack = new ItemStack
         {
             item = GameManager.Instance.database.GetItemById(loot.itemId),
             number = loot.count

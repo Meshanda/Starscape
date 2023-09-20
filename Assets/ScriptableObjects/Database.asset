@@ -41,3 +41,10 @@ MonoBehaviour:
     loot:
       itemId: copper_01
       count: 1
+  - id: ground_02
+    name: Ground2
+    sprite: {fileID: 1188172789, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tile: {fileID: 11400000, guid: 87b929764903e41458a1880c72f27db1, type: 2}
+    loot:
+      itemId: ground_01
+      count: 1
