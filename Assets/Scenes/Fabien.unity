@@ -123,6 +123,60 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1178712722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1178712724}
+  - component: {fileID: 1178712725}
+  m_Layer: 0
+  m_Name: Wave Function
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1178712724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178712722}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1178712725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178712722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deaf89b84d5e86546b8a40aaad7394d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dimensions: 10
+  tileObjects:
+  - {fileID: 6498154195306705445, guid: 418c6c63b90de9a4d8c37f54b0415950, type: 3}
+  - {fileID: 7945752740384844986, guid: c918c89e635a5594a94314cfae989a11, type: 3}
+  - {fileID: -4368290608493486024, guid: 0228e96f304411e439e89a8c7558d074, type: 3}
+  - {fileID: -5621453779501560982, guid: 2e974d72020968744bbbd9ebb47c9904, type: 3}
+  - {fileID: 2309801706624226556, guid: 2d7cfecdaba563040b423601b876380d, type: 3}
+  - {fileID: 6111396275726786036, guid: f1bafdbc3b2f74e4c97f01cd9d769f3c, type: 3}
+  gridComponents: []
+  cellObj: {fileID: 7625500329887048934, guid: 7ca36d0201310744c954a37ed4cd3974, type: 3}
 --- !u!1 &1573353160
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1573353161
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -246,7 +300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1750523570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,3 +351,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1750523571}
   - {fileID: 1573353164}
+  - {fileID: 1178712724}
