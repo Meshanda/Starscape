@@ -1383,7 +1383,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deaf89b84d5e86546b8a40aaad7394d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dimensionsXY: {x: 20, y: 10}
+  dimensionsXY: {x: 300, y: 50}
+  OffsetXY: {x: 150, y: 5}
+  _strates:
+  - Tiles:
+    - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
+      Pourcentage: 1
+    - Tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
+      Pourcentage: 98
+    SizeY: 8
+  - Tiles:
+    - Tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
+      Pourcentage: 50
+    - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
+      Pourcentage: 50
+    SizeY: 2
+  - Tiles:
+    - Tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
+      Pourcentage: 0
+    - Tile: {fileID: 11400000, guid: a1cf7bb6980d3984d9c3d95b10edbfb2, type: 2}
+      Pourcentage: 9
+    - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
+      Pourcentage: 91
+    SizeY: 16
+  - Tiles:
+    - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
+      Pourcentage: 40
+    - Tile: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
+      Pourcentage: 60
+    SizeY: 2
+  - Tiles:
+    - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
+      Pourcentage: 0
+    - Tile: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
+      Pourcentage: 90
+    - Tile: {fileID: 11400000, guid: 9759511fceb7b524e84119e48ee73951, type: 2}
+      Pourcentage: 10
+    SizeY: 16
   tile: {fileID: 11400000, guid: a9a80fd02ef9ff04b9bbc7f6323fd442, type: 2}
   tileGround: {fileID: 1780645444}
   tileObjects: []
