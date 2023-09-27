@@ -13,15 +13,17 @@ public class StrateGeneration : MonoBehaviour
     public Vector2Int dimensionsXY;
     public Vector2Int OffsetXY;
 
+    public bool autoUpdate;
 
     // public List<Cell> gridComponents;
     // public Cell cellObj;
-    [SerializeField] private List<Strate> _strates;
+    [SerializeField] private List<Strate> _strates = new List<Strate>();
     public TileBase tile;
     public Tilemap tileGround;
 
     public TileBase[] tileObjects;
 
+    public List<TilePos> LTiles = new List<TilePos>();
 
     int iterations = 0;
 
@@ -31,7 +33,7 @@ public class StrateGeneration : MonoBehaviour
         InitializeGrid();
     }
     
-    void InitializeGrid()
+    public void InitializeGrid()
     {
         //for (int y = 0; y < dimensionsXY.y; y++)
         //{
@@ -43,7 +45,6 @@ public class StrateGeneration : MonoBehaviour
         int debutStrate = 0;
         for ( int s = 0 ; s < _strates.Count(); s++) 
         {
-            
 
             if(s > 0) 
             {
@@ -59,7 +60,9 @@ public class StrateGeneration : MonoBehaviour
                         tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), _strates[s].Tiles[1].Tile);
                     }
                     else
-                        tileGround.SetTile(new Vector3Int(x- OffsetXY.x, -y- OffsetXY.y), GetTileFromStrate(_strates[s]));
+                    {
+                        tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s],x,y));
+                    }
                 }
             }
         }
@@ -69,7 +72,9 @@ public class StrateGeneration : MonoBehaviour
         //StartCoroutine(CheckEntropy());
     }
 
-    public TileBase GetTileFromStrate(Strate strate) 
+   
+
+    public TileBase GetTileFromStrate(Strate strate, int x, int y) 
     {
         float rng = Random.Range(0, 100);
         int pourcentage = 0;
@@ -78,6 +83,10 @@ public class StrateGeneration : MonoBehaviour
             pourcentage  += strate.Tiles[i].Pourcentage;
             if (rng < pourcentage) 
             {
+                if (strate.Tiles[i].IsMinerai)
+                {
+                    LTiles.Add(new TilePos(strate.Tiles[i].Tile, x, y));
+                }
                 return strate.Tiles[i].Tile;
             }
         }
@@ -96,4 +105,21 @@ public struct TilesStrate
 {
     public TileBase Tile;
     public int Pourcentage;
+    public bool IsMinerai;
 }
+
+[Serializable]
+public struct TilePos
+{
+    public TileBase tiles;
+    public int intX;
+    public int intY;
+
+    public TilePos(TileBase t, int x, int y)
+    {
+        tiles = t;
+        intX = x;
+        intY = y;
+    }
+}
+

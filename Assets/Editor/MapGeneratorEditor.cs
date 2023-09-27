@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(MapGenerator))]
+[CustomEditor(typeof(StrateGeneration))]
 public class MapGene1ratorEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        MapGenerator mapGen = (MapGenerator)target;
+        StrateGeneration mapGen = (StrateGeneration)target;
 
         if (DrawDefaultInspector())
         {
             if (mapGen.autoUpdate)
             {
-                mapGen.GenerateMap();
+                mapGen.InitializeGrid();
 
             }
         }
 
         if (GUILayout.Button("Geneate"))
         {
-            mapGen.GenerateMap();
+            mapGen.InitializeGrid();
         }
      }
 }
