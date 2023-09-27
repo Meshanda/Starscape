@@ -24,7 +24,7 @@ public class CharacterController2D : MonoBehaviour
 	
 	private bool _wantToJump;
 	
-	private Vector2 _groundBox => new Vector2(Mathf.Abs(transform.localScale.x), _groundedRadius);
+	private Vector2 _groundBox => new Vector2(Mathf.Abs(transform.localScale.x)*0.98f, _groundedRadius);
 	
 	public float MoveDirection { get; set; }
 
@@ -103,15 +103,5 @@ public class CharacterController2D : MonoBehaviour
 		Vector3 newScale = transform.localScale;
 		newScale.x *= -1;
 		transform.localScale = newScale;
-	}
-
-	private void OnDrawGizmos()
-	{
-		if(_grounded)
-			Gizmos.color = Color.blue;
-		else
-			Gizmos.color = Color.red;
-		
-		Gizmos.DrawWireCube(_groundCheck.position, _groundBox);
 	}
 }
