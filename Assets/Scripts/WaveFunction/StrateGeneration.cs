@@ -54,7 +54,12 @@ public class StrateGeneration : MonoBehaviour
             {
                 for (int x = 0; x < dimensionsXY.x; x++)
                 {
-                    tileGround.SetTile(new Vector3Int(x- OffsetXY.x, -y- OffsetXY.y), GetTileFromStrate(_strates[s]));
+                    if(_strates[s].SizeY == 2 && y == debutStrate + 1) 
+                    {
+                        tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), _strates[s].Tiles[1].Tile);
+                    }
+                    else
+                        tileGround.SetTile(new Vector3Int(x- OffsetXY.x, -y- OffsetXY.y), GetTileFromStrate(_strates[s]));
                 }
             }
         }
