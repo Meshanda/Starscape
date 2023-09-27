@@ -21,7 +21,10 @@ public class MapGene1ratorEditor : Editor
 
         if (GUILayout.Button("Geneate"))
         {
-            mapGen.InitializeGrid();
+            if (mapGen.autoUpdate)
+            {
+                mapGen.InitializeGrid();
+            }
         }
      }
 }
