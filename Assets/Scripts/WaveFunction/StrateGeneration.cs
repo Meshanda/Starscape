@@ -49,7 +49,6 @@ public class StrateGeneration : MonoBehaviour
             if(s > 0) 
             {
                 debutStrate += _strates[s - 1].SizeY ;
-                Debug.Log(debutStrate);
             }
             for (int y = debutStrate; y < debutStrate+_strates[s].SizeY; y++)
             {

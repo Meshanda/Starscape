@@ -8,9 +8,10 @@ public class Cell
     public Tile[] tileOptions;
     public Vector3Int position;
 
-    public Cell(Vector3Int position, Tile[] tileOtions)
+    public Cell(Vector3Int position, bool collapsed ,Tile[] tileOtions = null)
     {
         this.position = position;
+        this.collapsed = collapsed;
         this.tileOptions = tileOtions;
     }
 

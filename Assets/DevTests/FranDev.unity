@@ -2102,6 +2102,7 @@ GameObject:
   - component: {fileID: 1720046738}
   - component: {fileID: 1720046737}
   - component: {fileID: 1720046739}
+  - component: {fileID: 1720046740}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -2156,6 +2157,28 @@ MonoBehaviour:
   _toPastePrefab: {fileID: 6554965766300727511, guid: e83d41e21ca91c0439e1fce6d3813091, type: 3}
   _tilemap: {fileID: 1780645444}
   _parent: {fileID: 1720046738}
+  _waveFunction: {fileID: 1720046740}
+--- !u!114 &1720046740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720046736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f327e0a3afa3f1845a7b2e2df3b873b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dimensions: {x: 0, y: 0}
+  tileObjects:
+  - {fileID: 11400000, guid: 86980bb56bf6e5846bdcedc0c38f6e2d, type: 2}
+  - {fileID: 11400000, guid: 2d5cfe2aca799944095b8f91a4092d10, type: 2}
+  - {fileID: 11400000, guid: 5e73f32140d686f49b28773905f7c18c, type: 2}
+  - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
+  - {fileID: 11400000, guid: 184ca936e019e5b42a9235082b5e5c51, type: 2}
+  _tileGround: {fileID: 0}
+  tileMap: {fileID: 0}
 --- !u!1 &1780645441
 GameObject:
   m_ObjectHideFlags: 0
