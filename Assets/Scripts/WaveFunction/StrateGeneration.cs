@@ -21,7 +21,7 @@ public class StrateGeneration : MonoBehaviour
     public Tilemap tileGround;
 
     public TileBase[] tileObjects;
-
+    public PasteGrotte pasteGrotte;
 
     int iterations = 0;
 
@@ -29,6 +29,7 @@ public class StrateGeneration : MonoBehaviour
     {
         //gridComponents = new List<Cell>();
         InitializeGrid();
+        pasteGrotte.Copy();
     }
     
     void InitializeGrid()
