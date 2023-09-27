@@ -16,7 +16,7 @@ public class Drop : MonoBehaviour
             
             if (_itemStack != null)
             {
-                _renderer.sprite = _itemStack.item.sprite;
+                _renderer.sprite = _itemStack.GetItem().sprite;
             }
             else
             {

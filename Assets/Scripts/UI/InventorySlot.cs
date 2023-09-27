@@ -37,7 +37,7 @@ public class InventorySlot : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         
-        _itemImage.sprite = _itemStack?.item.sprite;
+        _itemImage.sprite = _itemStack?.GetItem().sprite;
         _itemCount.text = _itemStack?.number.ToString();
         
         _itemImage.gameObject.SetActive(_itemStack != null);

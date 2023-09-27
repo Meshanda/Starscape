@@ -10,8 +10,22 @@ using UnityEngine.Tilemaps;
 [Serializable]
 public class ItemStack
 {
-    public Item item;
+    public string itemID;
     public int number;
+
+    public Item GetItem()
+    {
+        return GameManager.Instance.database.GetItemById(itemID);
+    }
+
+    public ItemStack Clone()
+    {
+        return new ItemStack()
+        {
+            itemID = this.itemID,
+            number = this.number,
+        };
+    }
 }
 
 public class InventorySystem : Singleton<InventorySystem>
@@ -33,6 +47,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
     private int _selectedSlotIndex;
     private bool _invOpen => _invSlotsParent.gameObject.activeSelf;
+    private bool _craftingActive = false;
 
     protected override void SingletonAwake()
     {
@@ -76,6 +91,19 @@ public class InventorySystem : Singleton<InventorySystem>
         
         SelectSlot(0);
     }
+    
+    public void SetCraftingActive(bool active)
+    {
+        if (_craftingActive == active)
+        {
+            return;
+        }
+
+        _craftingActive = active;
+
+        print("SetCraftingActive " + active);
+        // TODO
+    }
 
     public void ToggleInventory()
     {
@@ -87,7 +115,7 @@ public class InventorySystem : Singleton<InventorySystem>
         if (_quickSlots[_selectedSlotIndex].ItemStack == null)
             return null;
 
-        return _quickSlots[_selectedSlotIndex].ItemStack.item.tile;
+        return _quickSlots[_selectedSlotIndex].ItemStack.GetItem().tile;
     }
 
     private void SelectSlot(int slotIndex)
@@ -121,7 +149,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
     public bool AddItem(ItemStack itemStack)
     {
-        var slot = GetClosestSlot(itemStack.item);
+        var slot = GetClosestSlot(itemStack.GetItem());
         if (!slot)
             return false;
 
@@ -144,14 +172,90 @@ public class InventorySystem : Singleton<InventorySystem>
         if (_quickSlots[_selectedSlotIndex].ItemStack.number <= 0)
             _quickSlots[_selectedSlotIndex].ItemStack = null;
     }
+    
+    public void RemoveItem(string itemID, int count)
+    {
+        ForAllSlots(s =>
+        {
+            if (s.ItemStack is not null && s.ItemStack.itemID == itemID)
+            {
+                while (count > 0)
+                {
+                    s.ItemStack.number--;
+                    count--;
+
+                    if (s.ItemStack.number <= 0)
+                    {
+                        s.ItemStack = null;
+                        break;
+                    }
+                }
+            }
+        });
+    }
 
     private InventorySlot GetClosestSlot(Item item)
     {
-        foreach (var slot in _quickSlots.Where(slot => slot.ItemStack?.item == item))
+        foreach (var slot in _quickSlots.Where(slot => slot.ItemStack?.GetItem() == item))
         {
             return slot;
         }
 
         return _quickSlots.FirstOrDefault(slot => slot.ItemStack == null);
+    }
+
+    private int CountItem(string itemID)
+    {
+        int total = 0;
+        ForAllSlots(s =>
+        {
+            if (s.ItemStack is not null && s.ItemStack.itemID == itemID)
+            {
+                total += s.ItemStack.number;
+            }
+        });
+        return total;
+    }
+    
+    private void ForAllSlots(Action<InventorySlot> functor)
+    {
+        foreach (var slot in _quickSlots)
+        {
+            functor.Invoke(slot);
+        }
+        
+        foreach (var slot in _inventorySlots)
+        {
+            functor.Invoke(slot);
+        }
+    }
+
+    public bool TryCraft(CraftRecipe recipe)
+    {
+        if (!_craftingActive)
+        {
+            return false;
+        }
+        
+        foreach (var item in recipe.itemsRequired)
+        {
+            if (CountItem(item.itemID) < item.number)
+            {
+                return false;
+            }
+        }
+        
+        foreach (var item in recipe.itemsRequired)
+        {
+            RemoveItem(item.itemID, item.number);
+        }
+
+        AddItem(recipe.itemCrafted.Clone());
+        return true;
+    }
+    
+    public void TryCraftTest()
+    {
+        print(TryCraft(GameManager.Instance.database.craftRecipes[0]));
     }
 }

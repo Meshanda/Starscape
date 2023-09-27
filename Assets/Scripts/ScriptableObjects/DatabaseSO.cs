@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Database")]
 public class DatabaseSO : ScriptableObject
 {
-    public Item[] _items;
+    [FormerlySerializedAs("_items")] public Item[] items;
+    public List<CraftRecipe> craftRecipes;
 
     public Item GetItemById(string id)
     {
-        return _items.FirstOrDefault(item => item.id.Equals(id));
+        return items.FirstOrDefault(item => item.id.Equals(id));
     }
     
     public Item GetItemByTile(TileBase tile)
     {
-        return _items.FirstOrDefault(item => item.tile.Equals(tile));
+        return items.FirstOrDefault(item => item.tile.Equals(tile));
     }
 }
 
@@ -44,13 +46,17 @@ public class Item
     {
         var itemStack = new ItemStack
         {
-            item = GameManager.Instance.database.GetItemById(loot.itemId),
+            itemID = loot.itemId,
             number = loot.count
         };
 
         return itemStack;
     }
-    
 }
 
-
+[Serializable]
+public struct CraftRecipe
+{
+    public List<ItemStack> itemsRequired;
+    public ItemStack itemCrafted;
+}
