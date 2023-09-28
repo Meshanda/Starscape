@@ -37,6 +37,7 @@ public class Item
 {
     public string id;
     public string name;
+    public string description;
     public Sprite sprite;
     public TileBase tile;
     

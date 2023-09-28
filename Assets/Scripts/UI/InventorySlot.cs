@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image _itemImage;
     [SerializeField] private TMP_Text _itemCount;
@@ -27,7 +28,23 @@ public class InventorySlot : MonoBehaviour
             StartCoroutine(RefreshRoutine());
         }
     }
+    
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (_itemStack is null || !InventorySystem.Instance.IsInventoryOpen)
+            return;
+        
+        TooltipSystem.Instance.Show(_itemStack.ItemName, _itemStack.ItemDescription);
+    }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (_itemStack is null || !InventorySystem.Instance.IsInventoryOpen)
+            return;
+        
+        TooltipSystem.Instance.Hide();
+    }
+    
     public void Select(bool status)
     {
         _selection.SetActive(status);
@@ -43,4 +60,6 @@ public class InventorySlot : MonoBehaviour
         _itemImage.gameObject.SetActive(_itemStack != null);
         _itemCount.gameObject.SetActive(_itemStack?.number > 1);
     }
+
+    
 }

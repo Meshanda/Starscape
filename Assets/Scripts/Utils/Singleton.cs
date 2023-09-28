@@ -10,8 +10,8 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     protected virtual void SingletonAwake() { }
 
     private void Awake()
-    {
-        print("AWAKE");
+    { 
+        //print("AWAKE");
         if (Instance == null)
         {
             Instance = (T)this;

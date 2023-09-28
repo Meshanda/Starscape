@@ -18,6 +18,9 @@ public class ItemStack
         return GameManager.Instance.database.GetItemById(itemID);
     }
 
+    public string ItemName => GetItem().name;
+    public string ItemDescription => GetItem().description;
+
     public ItemStack Clone()
     {
         return new ItemStack()
@@ -40,7 +43,6 @@ public class InventorySystem : Singleton<InventorySystem>
 
     [Header("Prefabs")]
     [SerializeField] private GameObject _slotPfb;
-    [SerializeField] private GameObject _rowPfb;
     
     private readonly List<InventorySlot> _quickSlots = new();
     private readonly List<InventorySlot> _inventorySlots = new();
@@ -48,32 +50,21 @@ public class InventorySystem : Singleton<InventorySystem>
     private int _selectedSlotIndex;
     private bool _invOpen => _invSlotsParent.gameObject.activeSelf;
     private bool _craftingActive = false;
+    public bool IsInventoryOpen => _invSlotsParent.gameObject.activeSelf;
 
     protected override void SingletonAwake()
     {
         InitQuickslots();
         InitInventorySlots();
-        
-        StartCoroutine(FinishInstantiateInventoryRoutine());
-    }
-
-    private IEnumerator FinishInstantiateInventoryRoutine()
-    {
-        _invSlotsParent.gameObject.SetActive(false);
-        yield return new WaitForEndOfFrame();
-        _invSlotsParent.gameObject.SetActive(true);
-        
     }
 
     private void InitInventorySlots()
     {
         for (var i = 0; i < _nbRows; i++)
         {
-            var currentRow = Instantiate(_rowPfb, _invSlotsParent).transform;
-            
             for (var j = 0; j < _nbColumns; j++)
             {
-                var slot = Instantiate(_slotPfb, currentRow).GetComponent<InventorySlot>();
+                var slot = Instantiate(_slotPfb, _invSlotsParent).GetComponent<InventorySlot>();
                 slot.pos = new Vector2Int(i+1, j);
                 _inventorySlots.Add(slot);
             }
@@ -101,7 +92,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
         _craftingActive = active;
 
-        print("SetCraftingActive " + active);
+        // print("SetCraftingActive " + active);
         // TODO
     }
 
