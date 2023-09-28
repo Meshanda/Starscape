@@ -278,7 +278,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3377181712113367936}
-  - component: {fileID: 641170582989765215}
   - component: {fileID: 4311673141044277573}
   m_Layer: 5
   m_Name: Inventory
@@ -307,23 +306,6 @@ RectTransform:
   m_AnchoredPosition: {x: 50, y: -50}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &641170582989765215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7802100215740221174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 038ff5ad3fff76c45bd5297bcdc20602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _nbColumns: 9
-  _nbRows: 3
-  _quickSlotsParent: {fileID: 4241084339394512530}
-  _invSlotsParent: {fileID: 6146880068195970634}
-  _slotPfb: {fileID: 7562246932622451942, guid: 0d18b039c86d29040814547a81eb395d, type: 3}
 --- !u!114 &4311673141044277573
 MonoBehaviour:
   m_ObjectHideFlags: 0

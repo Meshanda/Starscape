@@ -1,35 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Searcher;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
-
-[Serializable]
-public class ItemStack
-{
-    public string itemID;
-    public int number;
-
-    public Item GetItem()
-    {
-        return GameManager.Instance.database.GetItemById(itemID);
-    }
-
-    public string ItemName => GetItem().name;
-    public string ItemDescription => GetItem().description;
-
-    public ItemStack Clone()
-    {
-        return new ItemStack()
-        {
-            itemID = this.itemID,
-            number = this.number,
-        };
-    }
-}
 
 public class InventorySystem : Singleton<InventorySystem>
 {
@@ -40,6 +13,7 @@ public class InventorySystem : Singleton<InventorySystem>
     [Header("Parents")] 
     [SerializeField] private Transform _quickSlotsParent;
     [SerializeField] private Transform _invSlotsParent;
+    public Transform dragAndDropCanvas;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject _slotPfb;
@@ -49,7 +23,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
     private int _selectedSlotIndex;
     private bool _invOpen => _invSlotsParent.gameObject.activeSelf;
-    private bool _craftingActive = false;
+    private bool _craftingActive;
     public bool IsInventoryOpen => _invSlotsParent.gameObject.activeSelf;
 
     protected override void SingletonAwake()
@@ -99,6 +73,9 @@ public class InventorySystem : Singleton<InventorySystem>
     public void ToggleInventory()
     {
         _invSlotsParent.gameObject.SetActive(!_invOpen);
+
+        if (!IsInventoryOpen)
+            TooltipSystem.Instance.Hide();
     }
     
     public TileBase GetSelectedTile()
