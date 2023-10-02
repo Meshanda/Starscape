@@ -22,13 +22,13 @@ public class PasteGrotte : MonoBehaviour
 
     public void Copy() 
     {
-        _Cells = new Cell[_toPastePrefab.size.x, _toPastePrefab.size.y];
-        for(int i = _toPastePrefab.cellBounds.min.x; i < _toPastePrefab.cellBounds.max.x; i++) 
+        _Cells = new Cell[_toPastePrefab.size.x+2, _toPastePrefab.size.y+2];
+        for(int i = _toPastePrefab.cellBounds.min.x-1; i < _toPastePrefab.cellBounds.max.x+1; i++) 
         {
-            for (int j = _toPastePrefab.cellBounds.min.y; j < _toPastePrefab.cellBounds.max.y; j++)
+            for (int j = _toPastePrefab.cellBounds.min.y-1; j < _toPastePrefab.cellBounds.max.y+1; j++)
             {
                 TileBase tile = _toPastePrefab.GetTile(new Vector3Int(i, j));
-                _Cells[i  -_toPastePrefab.cellBounds.min.x, j - _toPastePrefab.cellBounds.min.y] = new Cell(new Vector3Int(i, j) + _offset, (tile == null));
+                _Cells[i  -_toPastePrefab.cellBounds.min.x+1, j - _toPastePrefab.cellBounds.min.y+1] = new Cell(new Vector3Int(i, j) + _offset, (tile == null));
                 if (tile != null) 
                 {
                     _toCollapse.Add(new Vector3Int(i, j));

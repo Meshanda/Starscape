@@ -17,6 +17,7 @@ public class WaveFunction : MonoBehaviour
     public Cell cellObj;
     public Cell[,] cellArray;
     public Tilemap tileMap;
+    public Tilemap tileMapDecor;
 
     int iterations = 0;
 
@@ -104,13 +105,36 @@ public class WaveFunction : MonoBehaviour
             UpdateGeneration();
             return;
         }
-        Tile selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length)];
+        //Tile selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length)];
+        Tile selectedTile = GetTileWithWeight(cellToCollapse);
         cellToCollapse.tileOptions = new Tile[] { selectedTile };
 
         Tile foundTile = cellToCollapse.tileOptions[0];
         //Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity);
-        tileMap.SetTile(cellToCollapse.position, foundTile.tile);
+        if(foundTile.inDecor)
+            tileMapDecor.SetTile(cellToCollapse.position, foundTile.tile);
+        else
+            tileMap.SetTile(cellToCollapse.position, foundTile.tile);
         UpdateGeneration();
+    }
+
+    public Tile GetTileWithWeight(Cell cell) 
+    {
+        int totalWeight = 0;
+        foreach(var option in cell.tileOptions) 
+        {
+            totalWeight += option.weight;
+        }
+        int rngValue = UnityEngine.Random.Range(1, totalWeight + 1);
+        int threshold = 0;
+        for(int i  = 0; i < cell.tileOptions.Length; i++) 
+        {
+            threshold += cell.tileOptions[i].weight;
+            if (rngValue <= threshold)
+                return cell.tileOptions[i];
+        }
+        Debug.Log("Help");
+        return cell.tileOptions[cell.tileOptions.Length-1];
     }
 
     void UpdateGeneration()
