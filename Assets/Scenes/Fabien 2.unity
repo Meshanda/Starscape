@@ -1385,44 +1385,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dimensionsXY: {x: 300, y: 50}
   OffsetXY: {x: 150, y: 5}
+  tileGround: {fileID: 1780645444}
   _strates:
   - Tiles:
     - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
       Pourcentage: 1
-    - Tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
-      Pourcentage: 98
-    SizeY: 8
+      IsMinerai: 1
+    - Tile: {fileID: 11400000, guid: 87b929764903e41458a1880c72f27db1, type: 2}
+      Pourcentage: 100
+      IsMinerai: 0
+    SizeY: 16
   - Tiles:
-    - Tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
-      Pourcentage: 50
-    - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
-      Pourcentage: 50
-    SizeY: 2
-  - Tiles:
-    - Tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
-      Pourcentage: 0
     - Tile: {fileID: 11400000, guid: a1cf7bb6980d3984d9c3d95b10edbfb2, type: 2}
-      Pourcentage: 9
-    - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
-      Pourcentage: 91
-    SizeY: 16
-  - Tiles:
-    - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
-      Pourcentage: 40
-    - Tile: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
-      Pourcentage: 60
-    SizeY: 2
-  - Tiles:
-    - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
-      Pourcentage: 0
-    - Tile: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
-      Pourcentage: 90
+      Pourcentage: 1
+      IsMinerai: 1
     - Tile: {fileID: 11400000, guid: 9759511fceb7b524e84119e48ee73951, type: 2}
-      Pourcentage: 10
+      Pourcentage: 1
+      IsMinerai: 1
+    - Tile: {fileID: 11400000, guid: 3c10b964cd325e14fa8f5b3c3894c8ef, type: 2}
+      Pourcentage: 100
+      IsMinerai: 0
     SizeY: 16
-  tile: {fileID: 11400000, guid: a9a80fd02ef9ff04b9bbc7f6323fd442, type: 2}
-  tileGround: {fileID: 1780645444}
-  tileObjects: []
+  LTiles: []
+  LtilesVoisin: []
+  ProbVoisin: 20
+  ProbVoisinVoisin: 0
+  autoUpdate: 0
 --- !u!4 &448039966
 Transform:
   m_ObjectHideFlags: 0
