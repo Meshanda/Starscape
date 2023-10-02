@@ -21,8 +21,8 @@ public class StrateGeneration : MonoBehaviour
     [Header("Filon")]
     public List<TilePos> LTiles = new List<TilePos>();
     public List<TilePos> LtilesVoisin = new List<TilePos>();
-    public int ProbVoisin;
-    public int ProbVoisinVoisin;
+    public float ProbVoisin;
+    public float ProbVoisinVoisin;
 
     [Header("Auto Update Generator")]
     public bool autoUpdate;
@@ -58,9 +58,8 @@ public class StrateGeneration : MonoBehaviour
     {
         for (int i = 0; i < strate.Tiles.Count(); i++)
         {
-            int pourcentage = strate.Tiles[i].Pourcentage;
-            float rng = Random.Range(0, 100);
-
+            float pourcentage = strate.Tiles[i].Pourcentage;
+            float rng = Random.Range(0.0f, 100.0f);
             if ((rng < pourcentage) || (i == strate.Tiles.Count() - 1))
             {
                 if (strate.Tiles[i].IsMinerai)
@@ -89,7 +88,7 @@ public class StrateGeneration : MonoBehaviour
         }
     }
 
-    public TilePos[] RecFilon(TileBase T , int X , int Y , int Nb)
+    public TilePos[] RecFilon(TileBase T , int X , int Y , float Nb)
     {
         TilePos[] Ltemp =new TilePos[5];
         int n= 0;
@@ -97,7 +96,7 @@ public class StrateGeneration : MonoBehaviour
         {
             for (int j = -1; j < 2; j++)
             {
-                float rng = Random.Range(0, 100);
+                float rng = Random.Range(0.0f, 100.0f);
                 TileBase temp = tileGround.GetTile(new Vector3Int(X + i - OffsetXY.x, -Y + j - OffsetXY.y));
                 if (temp != T && temp != null && rng < Nb && ( i == 0 || j == 0))
                 {
@@ -123,7 +122,7 @@ public struct Strate
 public struct TilesStrate 
 {
     public TileBase Tile;
-    public int Pourcentage;
+    public float Pourcentage;
     public bool IsMinerai;
 }
 
