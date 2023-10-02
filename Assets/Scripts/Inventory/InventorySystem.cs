@@ -140,13 +140,15 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
             return;
 
         var drop = Instantiate(_dropPfb,
-            Camera.main.ScreenToWorldPoint(Input.mousePosition),
+            GameManager.Instance.player.transform.position,
             Quaternion.identity).GetComponent<Drop>();
 
         drop.transform.position = new Vector3(drop.transform.position.x, drop.transform.position.y, 0);
         
         drop.ItemStack = slot.ItemStack;
         slot.ItemStack = null;
+        
+        drop.ThrowInPlayerDir();
     }
 
     private IEnumerator SplitRoutine(InventorySlot slot)
@@ -310,6 +312,11 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     #endregion
 
     #region Items
+
+    public bool CanAddItem(ItemStack itemStack)
+    {
+        return GetClosestSlot(itemStack.GetItem());
+    }
 
     public bool AddItem(ItemStack itemStack)
     {
