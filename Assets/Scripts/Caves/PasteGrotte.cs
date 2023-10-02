@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,11 +12,13 @@ public class PasteGrotte : MonoBehaviour
     [SerializeField] private WaveFunction _waveFunction;
     [SerializeField] private float _minRange;
     [SerializeField] private Vector4 _bounds;
+    [SerializeField] private GameObject _loadingScreen;
     private Vector3Int _offset = new Vector3Int(-25,-25);
     private List<Vector3Int> _toCollapse = new List<Vector3Int>();
     [SerializeField] private int _nbreOfGrotte;
     private Cell[,] _Cells ;
     private List<Cell[,]> _cells = new List<Cell[,]>();
+    [SerializeField] private float _depthToEndLoading;
     
     // Start is called before the first frame update
     void Start()
@@ -28,10 +31,13 @@ public class PasteGrotte : MonoBehaviour
     }
     public void LaunchWaveCollapse()
     {
+       
         if (_cells == null || _cells.Count == 0)
         {
             return;
         }
+        if (_cells[0][0, 0].position.y < _depthToEndLoading)
+            _loadingScreen.SetActive(false);
         _waveFunction.InitializeGrid(_cells[0]);
         _cells.RemoveAt(0);
         Debug.Log(_cells.Count);
@@ -58,8 +64,8 @@ public class PasteGrotte : MonoBehaviour
             }
             antiInfiniteloop++;
         }
+        _cells = _cells.OrderByDescending(x => x[0, 0].position.y).ToList();
         LaunchWaveCollapse();
-
 
     }
     //public void LaunchWaveCollapse() 
