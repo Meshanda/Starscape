@@ -1,46 +1,26 @@
 using System.Collections;
+using Inventory;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HandSlot : MonoBehaviour
+public class HandSlot : Slot
 {
-    [SerializeField] private Image _itemImage;
-    [SerializeField] private TMP_Text _itemCount;
-    
-    private ItemStack _itemStack;
-    public ItemStack ItemStack
+    public override ItemStack ItemStack
     {
-        get
-        {
-            StartCoroutine(RefreshRoutine());
-            return _itemStack;
-        }
+        get => base.ItemStack;
         set
         {
             _itemStack = value;
+
+            TooltipSystem.Instance.SetActive(_itemStack is null);
+
             Refresh();
         }
     }
-    
+
     private void Update()
     {
         transform.position = Input.mousePosition;
-    }
-    
-    private IEnumerator RefreshRoutine()
-    {
-        yield return new WaitForEndOfFrame();
-
-        Refresh();
-    }
-
-    private void Refresh()
-    {
-        _itemImage.sprite = _itemStack?.GetItem().sprite;
-        _itemCount.text = _itemStack?.number.ToString();
-
-        _itemImage.gameObject.SetActive(_itemStack != null);
-        _itemCount.gameObject.SetActive(_itemStack?.number > 1);
     }
 }

@@ -1,16 +1,24 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Inventory;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using Utilities;
 
-public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
+public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, IPointerUpHandler
 {
+    #region Attributes
+
     [Header("Parameters")]
     [SerializeField] [Range(1,9)] private int _nbColumns;
     [SerializeField] [Range(1,4)] private int _nbRows;
+
+    [SerializeField] private float _splitInitialDelay = .25f;
+    [SerializeField] private float _splitMinDelay = .02f;
+    [SerializeField] private float _splitStep = .02f;
 
     [Header("Parents")] 
     [SerializeField] private Transform _quickSlotsParent;
@@ -18,6 +26,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
 
     [Header("Prefabs")]
     [SerializeField] private GameObject _slotPfb;
+    [SerializeField] private GameObject _dropPfb;
     
     private HandSlot _handSlot;
     
@@ -25,6 +34,12 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
     private readonly List<InventorySlot> _inventorySlots = new();
 
     private int _selectedSlotIndex;
+    private Coroutine _splitRoutine;
+    
+    #endregion
+
+    #region Properties
+
     private bool _invOpen => _invSlotsParent.gameObject.activeSelf;
     public bool IsInventoryOpen => _invSlotsParent.gameObject.activeSelf;
     private List<InventorySlot> _allSlots
@@ -49,52 +64,15 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
             OnCraftingFlagsChanged?.Invoke();
         }
     }
-    
+
+    #endregion
+
+    #region Events
+
     public event Action OnCraftablesChanged;
     public event Action OnInventoryChanged;
     public event Action OnCraftingFlagsChanged;
-
-    protected override void SingletonAwake()
-    {
-        InitQuickslots();
-        InitInventorySlots();
-        _handSlot = FindObjectOfType<HandSlot>();
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (!IsInventoryOpen)
-            return;
-
-        var hits = Physics2D.RaycastAll(eventData.position, Vector2.zero);
-        foreach (var hit in hits)
-        {
-            if (hit.collider && hit.collider.transform.TryGetComponent(out InventorySlot slot))
-            {
-                GrabSlot(slot);
-                TooltipSystem.Instance.Hide();
-            }
-        }
-    }
-
-    private void GrabSlot(InventorySlot slot)
-    {
-        if (_handSlot.ItemStack is not null &&
-            slot.ItemStack is not null &&
-            _handSlot.ItemStack.itemID.Equals(slot.ItemStack.itemID))
-        {
-            slot.ItemStack.Add(_handSlot.ItemStack.number);
-            _handSlot.ItemStack = null;
-        }
-        else
-        {
-            var aux = _handSlot.ItemStack;
-        
-            _handSlot.ItemStack = slot.ItemStack;
-            slot.ItemStack = aux;  
-        }
-    }
-
+    
     private void OnEnable()
     {
         OnInventoryChanged += RefreshCraftables;
@@ -115,7 +93,107 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
         OnInventoryChanged -= RefreshCraftables;
         OnCraftingFlagsChanged -= RefreshCraftables;
     }
+    
+    protected override void SingletonAwake()
+    {
+        InitQuickslots();
+        InitInventorySlots();
+        _handSlot = FindObjectOfType<HandSlot>();
+    }
+    
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (!IsInventoryOpen)
+            return;
 
+        var results = Physics2D.RaycastAll(eventData.position, Vector2.zero);
+        InventorySlot slot = results.FirstOrDefault(h => h.collider.GetComponent<InventorySlot>() is not null)
+            .collider?.GetComponent<InventorySlot>();
+
+
+        if (slot is not null)
+        {
+            if (eventData.button.Equals(PointerEventData.InputButton.Left))
+            {
+                GrabSlot(slot);
+
+                if (slot.ItemStack is not null)
+                    TooltipSystem.Instance.Show(slot.ItemStack.ItemName, slot.ItemStack.ItemDescription);
+            }
+            else if (eventData.button.Equals(PointerEventData.InputButton.Right))
+            {
+                _splitRoutine = StartCoroutine(SplitRoutine(slot));
+            }
+        }
+        else 
+        {
+            if (eventData.button.Equals(PointerEventData.InputButton.Left))
+            {
+                DropItemStack(_handSlot);
+            }
+        }
+    }
+
+    private void DropItemStack(Slot slot)
+    {
+        if (slot.ItemStack is null)
+            return;
+
+        var drop = Instantiate(_dropPfb,
+            Camera.main.ScreenToWorldPoint(Input.mousePosition),
+            Quaternion.identity).GetComponent<Drop>();
+
+        drop.transform.position = new Vector3(drop.transform.position.x, drop.transform.position.y, 0);
+        
+        drop.ItemStack = slot.ItemStack;
+        slot.ItemStack = null;
+    }
+
+    private IEnumerator SplitRoutine(InventorySlot slot)
+    {
+        var delay = _splitInitialDelay;
+        
+        while (true)
+        {
+            SplitSlot(slot);
+            yield return new WaitForSeconds(delay);
+            delay = Mathf.Max(delay - _splitStep, _splitMinDelay);
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (!IsInventoryOpen || !eventData.button.Equals(PointerEventData.InputButton.Right))
+            return;
+
+        if (_splitRoutine is not null)  
+            StopCoroutine(_splitRoutine);
+    }
+    
+    public void ToggleInventory()
+    {
+        _invSlotsParent.gameObject.SetActive(!_invOpen);
+        ForAllSlots(slot => slot.Refresh());
+
+        if (!IsInventoryOpen)
+            TooltipSystem.Instance.Hide();
+    }
+
+    #endregion
+
+    #region InitInventory
+
+    private void InitQuickslots()
+    {
+        for (var i = 0; i < _nbColumns; i++)
+        {
+            var quickSlot = Instantiate(_slotPfb, _quickSlotsParent).GetComponent<InventorySlot>();
+            _quickSlots.Add(quickSlot);
+        }
+        
+        SelectSlot(0);
+    }
+    
     private void InitInventorySlots()
     {
         for (var i = 0; i < _nbRows; i++)
@@ -123,39 +201,14 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
             for (var j = 0; j < _nbColumns; j++)
             {
                 var slot = Instantiate(_slotPfb, _invSlotsParent).GetComponent<InventorySlot>();
-                slot.pos = new Vector2Int(i+1, j);
                 _inventorySlots.Add(slot);
             }
         }
     }
 
-    private void InitQuickslots()
-    {
-        for (var i = 0; i < _nbColumns; i++)
-        {
-            var quickSlot = Instantiate(_slotPfb, _quickSlotsParent).GetComponent<InventorySlot>();
-            quickSlot.pos = new Vector2Int(0,i);
-            _quickSlots.Add(quickSlot);
-        }
-        
-        SelectSlot(0);
-    }
+    #endregion
 
-    public void ToggleInventory()
-    {
-        _invSlotsParent.gameObject.SetActive(!_invOpen);
-
-        if (!IsInventoryOpen)
-            TooltipSystem.Instance.Hide();
-    }
-    
-    public TileBase GetSelectedTile()
-    {
-        if (_quickSlots[_selectedSlotIndex].ItemStack == null)
-            return null;
-
-        return _quickSlots[_selectedSlotIndex].ItemStack.GetItem().tile;
-    }
+    #region Slots
 
     private void SelectSlot(int slotIndex)
     {
@@ -185,6 +238,78 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
 
         SelectSlot(previousSlot);
     }
+    
+    private void GrabSlot(InventorySlot slot)
+    {
+        if (_handSlot.ItemStack is not null &&
+            slot.ItemStack is not null &&
+            _handSlot.ItemStack.itemID.Equals(slot.ItemStack.itemID))
+        {
+            slot.ItemStack.Add(_handSlot.ItemStack.number);
+            _handSlot.ItemStack = null;
+        }
+        else
+        {
+            var aux = _handSlot.ItemStack;
+        
+            _handSlot.ItemStack = slot.ItemStack;
+            slot.ItemStack = aux;  
+        }
+    }
+    
+    private void SplitSlot(InventorySlot slot)
+    {
+        if (slot.ItemStack is null)
+            return;
+        
+        if (_handSlot.ItemStack is null)
+        {
+            var stack = new ItemStack
+            {
+                itemID = slot.ItemStack.itemID,
+                number = 1
+            };
+            slot.ItemStackRemoveNumber(1);
+            _handSlot.ItemStack = stack;
+        }
+        else
+        {
+            if (!_handSlot.ItemStack.itemID.Equals(slot.ItemStack.itemID))
+                return;
+
+            _handSlot.ItemStack.number++;
+            slot.ItemStackRemoveNumber(1);
+        }
+    }
+
+    #endregion
+
+    #region Getters
+
+    public Slot GetSelectedSlot()
+    {
+        if (_handSlot.ItemStack is not null)
+            return _handSlot;
+        
+        if (_quickSlots[_selectedSlotIndex].ItemStack == null)
+            return null;
+
+        return _quickSlots[_selectedSlotIndex];
+    }
+
+    private InventorySlot GetClosestSlot(Item item)
+    {
+        foreach (var slot in _allSlots.Where(slot => slot.ItemStack?.GetItem() == item))
+        {
+            return slot;
+        }
+
+        return _allSlots.FirstOrDefault(slot => slot.ItemStack == null);
+    }
+    
+    #endregion
+
+    #region Items
 
     public bool AddItem(ItemStack itemStack)
     {
@@ -204,16 +329,6 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
         OnInventoryChanged?.Invoke();
         return true;
     }
-
-    public void RemoveItem()
-    {
-        _quickSlots[_selectedSlotIndex].ItemStack.number--;
-
-        if (_quickSlots[_selectedSlotIndex].ItemStack.number <= 0)
-            _quickSlots[_selectedSlotIndex].ItemStack = null;
-        
-        OnInventoryChanged?.Invoke();
-    }
     
     public void RemoveItem(string itemID, int count)
     {
@@ -223,59 +338,20 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
             {
                 while (count > 0)
                 {
-                    s.ItemStack.number--;
+                    s.ItemStackRemoveNumber(1);
                     count--;
-
-                    if (s.ItemStack.number <= 0)
-                    {
-                        s.ItemStack = null;
-                        OnInventoryChanged?.Invoke();
+                    OnInventoryChanged?.Invoke();
+                    
+                    if (s.ItemStack is null)
                         break;
-                    }
-                    else
-                    {
-                        OnInventoryChanged?.Invoke();
-                    }
                 }
             }
         });
     }
 
-    private InventorySlot GetClosestSlot(Item item)
-    {
-        foreach (var slot in _allSlots.Where(slot => slot.ItemStack?.GetItem() == item))
-        {
-            return slot;
-        }
+    #endregion
 
-        return _allSlots.FirstOrDefault(slot => slot.ItemStack == null);
-    }
-
-    public int CountItem(string itemID)
-    {
-        int total = 0;
-        ForAllSlots(s =>
-        {
-            if (s.ItemStack is not null && s.ItemStack.itemID == itemID)
-            {
-                total += s.ItemStack.number;
-            }
-        });
-        return total;
-    }
-    
-    private void ForAllSlots(Action<InventorySlot> functor)
-    {
-        foreach (var slot in _quickSlots)
-        {
-            functor.Invoke(slot);
-        }
-        
-        foreach (var slot in _inventorySlots)
-        {
-            functor.Invoke(slot);
-        }
-    }
+    #region Craft
 
     public bool TryCraft(CraftRecipe recipe)
     {
@@ -317,4 +393,39 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
             OnCraftablesChanged?.Invoke();
         }
     }
+
+    #endregion
+
+    #region Utils
+
+    public int CountItem(string itemID)
+    {
+        int total = 0;
+        ForAllSlots(s =>
+        {
+            if (s.ItemStack is not null && s.ItemStack.itemID == itemID)
+            {
+                total += s.ItemStack.number;
+            }
+        });
+        return total;
+    }
+    
+    private void ForAllSlots(Action<InventorySlot> functor)
+    {
+        foreach (var slot in _quickSlots)
+        {
+            functor.Invoke(slot);
+        }
+        
+        foreach (var slot in _inventorySlots)
+        {
+            functor.Invoke(slot);
+        }
+    }
+
+    #endregion
+
+
+    
 }

@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 
 [Serializable]
 public class ItemStack

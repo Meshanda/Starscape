@@ -20,14 +20,14 @@ public class Placing : MonoBehaviour
             return;
         
         var cellPos = World.Instance.GroundTilemap.WorldToCell(_cam.ScreenToWorldPoint(Input.mousePosition));
-        var tile = InventorySystem.Instance.GetSelectedTile();
-        if (!tile)
+        var slot = InventorySystem.Instance.GetSelectedSlot();
+        if (!slot || slot.ItemStack is null)
             return;
 
-        if (TileCanBePlaced(cellPos))
+        if (TileCanBePlaced(cellPos)) 
         {
-            World.Instance.GroundTilemap.SetTile(cellPos, tile);
-            InventorySystem.Instance.RemoveItem();
+            World.Instance.GroundTilemap.SetTile(cellPos, slot.ItemStack.GetItem().tile);
+            slot.ItemStackRemoveNumber(1);
         }
     }
     

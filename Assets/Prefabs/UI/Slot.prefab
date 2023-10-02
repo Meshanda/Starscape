@@ -170,6 +170,7 @@ MonoBehaviour:
   _itemCount: {fileID: 1248258106050346181}
   _selection: {fileID: 1722842786647655819}
   _item: {fileID: 1442982916353673658}
+  ReadOnly: 0
   pos: {x: 0, y: 0}
 --- !u!61 &6020245072715389730
 BoxCollider2D:
@@ -315,7 +316,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0

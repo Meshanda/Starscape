@@ -6,6 +6,6 @@
         {
             to.itemID = from.itemID;
             to.number = from.number;
-        } 
+        }
     }
 }
