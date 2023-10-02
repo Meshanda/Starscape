@@ -36,5 +36,6 @@ public class Mining : MonoBehaviour
             Quaternion.identity).GetComponent<Drop>();
         
         drop.ItemStack = item.GenerateLoot();
+        drop.AddRandomForce();
     }
 }
