@@ -16,10 +16,10 @@ public class ItemStack
 
     public ItemStack Clone()
     {
-        return new ItemStack()
+        return new ItemStack
         {
-            itemID = this.itemID,
-            number = this.number,
+            itemID = itemID,
+            number = number
         };
     }
 

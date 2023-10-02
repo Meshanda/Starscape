@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler, IBeginDragHandler
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    //, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
  
     #region Variables
@@ -13,6 +14,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private TMP_Text _itemCount;
     [SerializeField] private GameObject _selection;
     [SerializeField] private Transform _item;
+    public bool ReadOnly;
     
     [HideInInspector] public Vector2Int pos;
 
@@ -57,62 +59,62 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         TooltipSystem.Instance.Hide();
     }
     
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (!CanInteractWithInventory())
-            return;
-        
-        Debug.Log("Drag");
-        
-        _item.position = eventData.position;
-        var hit = Physics2D.Raycast(eventData.position, Vector2.zero);
-        
-        _previousTarget?.Select(false);
-        
-        if (hit.collider && hit.collider.transform.TryGetComponent(out InventorySlot slot))
-        {
-            if (slot == this) return;
-            
-            _previousTarget = slot;
-            slot.Select(true);
-        }
-    }
-    
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        if (!CanInteractWithInventory())
-            return;
-        
-        Debug.Log("BeginDrag");
-        
-        _previousParent = transform;
-        _previousPos = transform.position;
-
-        _item.SetParent(InventorySystem.Instance.dragAndDropCanvas);
-    }
-    
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        if (!CanInteractWithInventory())
-            return;
-        
-        Debug.Log("EndDrag");
-
-        _item.SetParent(_previousParent);
-        _item.position = _previousPos;
-
-        if (CanChangeSlot())
-        {
-            if (_previousTarget.ItemStack is not null && _previousTarget.ItemStack.itemID.Equals(ItemStack.itemID))
-                _previousTarget.ItemStack.Add(ItemStack.number);
-            else
-                _previousTarget.ItemStack = ItemStack;
-            
-            ItemStack = null;
-        }
-
-        _previousTarget.Select(false);
-    }
+    // public void OnDrag(PointerEventData eventData)
+    // {
+    //     if (!CanInteractWithInventory() || ReadOnly)
+    //         return;
+    //     
+    //     Debug.Log("Drag");
+    //     
+    //     _item.position = eventData.position;
+    //     var hit = Physics2D.Raycast(eventData.position, Vector2.zero);
+    //     
+    //     _previousTarget?.Select(false);
+    //     
+    //     if (hit.collider && hit.collider.transform.TryGetComponent(out InventorySlot slot))
+    //     {
+    //         if (slot == this) return;
+    //         
+    //         _previousTarget = slot;
+    //         slot.Select(true);
+    //     }
+    // }
+    //
+    // public void OnBeginDrag(PointerEventData eventData)
+    // {
+    //     if (!CanInteractWithInventory() || ReadOnly)
+    //         return;
+    //     
+    //     Debug.Log("BeginDrag");
+    //     
+    //     _previousParent = transform;
+    //     _previousPos = transform.position;
+    //
+    //     _item.SetParent(InventorySystem.Instance.dragAndDropCanvas);
+    // }
+    //
+    // public void OnEndDrag(PointerEventData eventData)
+    // {
+    //     if (!CanInteractWithInventory() || ReadOnly)
+    //         return;
+    //     
+    //     Debug.Log("EndDrag");
+    //
+    //     _item.SetParent(_previousParent);
+    //     _item.position = _previousPos;
+    //
+    //     if (CanChangeSlot())
+    //     {
+    //         if (_previousTarget.ItemStack is not null && _previousTarget.ItemStack.itemID.Equals(ItemStack.itemID))
+    //             _previousTarget.ItemStack.Add(ItemStack.number);
+    //         else
+    //             _previousTarget.ItemStack = ItemStack;
+    //         
+    //         ItemStack = null;
+    //     }
+    //
+    //     _previousTarget.Select(false);
+    // }
 
     
 

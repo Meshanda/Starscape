@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
+using Utilities;
 
-public class InventorySystem : Singleton<InventorySystem>
+public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
 {
     [Header("Parameters")]
     [SerializeField] [Range(1,9)] private int _nbColumns;
@@ -13,10 +15,11 @@ public class InventorySystem : Singleton<InventorySystem>
     [Header("Parents")] 
     [SerializeField] private Transform _quickSlotsParent;
     [SerializeField] private Transform _invSlotsParent;
-    public Transform dragAndDropCanvas;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject _slotPfb;
+    
+    private HandSlot _handSlot;
     
     private readonly List<InventorySlot> _quickSlots = new();
     private readonly List<InventorySlot> _inventorySlots = new();
@@ -25,11 +28,55 @@ public class InventorySystem : Singleton<InventorySystem>
     private bool _invOpen => _invSlotsParent.gameObject.activeSelf;
     private bool _craftingActive;
     public bool IsInventoryOpen => _invSlotsParent.gameObject.activeSelf;
+    private List<InventorySlot> _allSlots
+    {
+        get
+        {
+            var list = new List<InventorySlot>(_quickSlots);
+            list.AddRange(_inventorySlots);
+            return list;
+        }
+    }
 
     protected override void SingletonAwake()
     {
         InitQuickslots();
         InitInventorySlots();
+        _handSlot = FindObjectOfType<HandSlot>();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!IsInventoryOpen)
+            return;
+
+        var hits = Physics2D.RaycastAll(eventData.position, Vector2.zero);
+        foreach (var hit in hits)
+        {
+            if (hit.collider && hit.collider.transform.TryGetComponent(out InventorySlot slot))
+            {
+                GrabSlot(slot);
+                TooltipSystem.Instance.Hide();
+            }
+        }
+    }
+
+    private void GrabSlot(InventorySlot slot)
+    {
+        if (_handSlot.ItemStack is not null &&
+            slot.ItemStack is not null &&
+            _handSlot.ItemStack.itemID.Equals(slot.ItemStack.itemID))
+        {
+            slot.ItemStack.Add(_handSlot.ItemStack.number);
+            _handSlot.ItemStack = null;
+        }
+        else
+        {
+            var aux = _handSlot.ItemStack;
+        
+            _handSlot.ItemStack = slot.ItemStack;
+            slot.ItemStack = aux;  
+        }
     }
 
     private void InitInventorySlots()
@@ -164,12 +211,12 @@ public class InventorySystem : Singleton<InventorySystem>
 
     private InventorySlot GetClosestSlot(Item item)
     {
-        foreach (var slot in _quickSlots.Where(slot => slot.ItemStack?.GetItem() == item))
+        foreach (var slot in _allSlots.Where(slot => slot.ItemStack?.GetItem() == item))
         {
             return slot;
         }
 
-        return _quickSlots.FirstOrDefault(slot => slot.ItemStack == null);
+        return _allSlots.FirstOrDefault(slot => slot.ItemStack == null);
     }
 
     private int CountItem(string itemID)
