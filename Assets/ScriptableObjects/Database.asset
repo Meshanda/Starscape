@@ -68,3 +68,4 @@ MonoBehaviour:
     itemCrafted:
       itemID: ground_01
       number: 1
+    requiredFlags: 1

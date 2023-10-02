@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf167f51f684a4da6149c8f980cdcaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distance: 1
+  craftingFlags: 1

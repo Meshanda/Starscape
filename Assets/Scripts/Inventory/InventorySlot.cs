@@ -25,7 +25,11 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         get
         {
-            StartCoroutine(RefreshRoutine());
+            if (isActiveAndEnabled)
+            {
+                StartCoroutine(RefreshRoutine());
+            }
+            
             return _itemStack;
         }
         set
