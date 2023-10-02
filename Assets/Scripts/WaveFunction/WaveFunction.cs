@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static UnityEditor.PlayerSettings;
 
+public delegate void Notify();
 public class WaveFunction : MonoBehaviour
 {
     public Vector2Int dimensions;
@@ -17,8 +17,9 @@ public class WaveFunction : MonoBehaviour
     public Cell cellObj;
     public Cell[,] cellArray;
     public Tilemap tileMap;
-    public Tilemap tileMapDecor;
-
+    public Tilemap tileMapDecor; 
+    public event Notify ProcessCompleted;
+    private List<TileToPlace> _tilesToPlace = new List<TileToPlace>();
     int iterations = 0;
 
     void Awake()
@@ -27,7 +28,6 @@ public class WaveFunction : MonoBehaviour
 
     public void InitializeGrid(Cell[,] cellArray)
     {
-
         this.cellArray = cellArray;
         dimensions.x = cellArray.GetLength(0);
         dimensions.y = cellArray.GetLength(1);
@@ -42,17 +42,6 @@ public class WaveFunction : MonoBehaviour
                 cell.tileOptions = (Tile[])tileObjects.Clone();
             }
         }
-        //for (int y = 0; y < dimensions; y++)
-        //{
-        //    for (int x = 0; x < dimensions; x++)
-        //    {
-        //        Cell newCell = Instantiate(cellObj, new Vector2(x, y), Quaternion.identity);
-        //        newCell.CreateCell(false, tileObjects);
-        //        gridComponents.Add(newCell);
-        //    }
-        //}
-
-        //StartCoroutine(CheckEntropy());
         UpdateGeneration();
     }
 
@@ -111,13 +100,36 @@ public class WaveFunction : MonoBehaviour
 
         Tile foundTile = cellToCollapse.tileOptions[0];
         //Instantiate(foundTile, cellToCollapse.transform.position, Quaternion.identity);
-        if(foundTile.inDecor)
-            tileMapDecor.SetTile(cellToCollapse.position, foundTile.tile);
-        else
-            tileMap.SetTile(cellToCollapse.position, foundTile.tile);
+        //if(foundTile.inDecor)
+        //     tileMap.SetTile(cellToCollapse.position, foundTile.tile);
+        //else
+        //    tileMapDecor.SetTile(cellToCollapse.position, foundTile.tile);
+        _tilesToPlace.Add(new TileToPlace
+        {
+            pos = cellToCollapse.position,
+            tile = foundTile.tile,
+            inDecor = foundTile.inDecor
+        });
+
         UpdateGeneration();
     }
 
+    public void placeAllTile() 
+    {
+        foreach (var tile in _tilesToPlace) 
+        {
+            if(tile.inDecor) 
+            {
+                tileMapDecor.SetTile(tile.pos, tile.tile);
+            }
+            else 
+            {
+                tileMap.SetTile(tile.pos, tile.tile);
+            }
+
+        }
+        _tilesToPlace.Clear();
+    }
     public Tile GetTileWithWeight(Cell cell) 
     {
         int totalWeight = 0;
@@ -246,7 +258,13 @@ public class WaveFunction : MonoBehaviour
         {
             StartCoroutine(CheckEntropy());
         }
-
+        else 
+        {
+            placeAllTile();
+            StopAllCoroutines();
+            iterations = 0;
+            ProcessCompleted?.Invoke();
+        }
     }
 
     void CheckValidity(List<Tile> optionList, List<Tile> validOption)
@@ -260,4 +278,13 @@ public class WaveFunction : MonoBehaviour
             }
         }
     }
+
+
+}
+
+public struct  TileToPlace
+{
+   public Vector3Int pos;
+    public TileBase tile;
+    public bool inDecor;
 }

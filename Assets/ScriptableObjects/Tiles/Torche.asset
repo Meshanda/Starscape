@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 3c70ba9f22c30524497093d825d8af39, type: 2}
   weight: 1
+  inDecor: 1
   upNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
   rightNeighbours:

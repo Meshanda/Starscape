@@ -29,7 +29,7 @@ public class StrateGeneration : MonoBehaviour
     {
         //gridComponents = new List<Cell>();
         InitializeGrid();
-        pasteGrotte.Copy();
+        pasteGrotte.SpawnGrotte();
     }
     
     void InitializeGrid()
