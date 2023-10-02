@@ -112,6 +112,34 @@
             ]
         },
         {
+            "name": "PlayerSpecial",
+            "id": "8296222b-4933-43f2-b8d3-7f2ee6e55c94",
+            "actions": [
+                {
+                    "name": "UseItem",
+                    "type": "Button",
+                    "id": "fcca0c01-7a75-4aed-b1fb-e07af0d73bb1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "64be8a85-9368-4790-970a-557000635735",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "UI",
             "id": "f3c11c3c-90bf-4595-9f94-75f7a229e7ef",
             "actions": [
