@@ -27,10 +27,13 @@ public class StrateGeneration : MonoBehaviour
 
     [Header("Auto Update Generator")]
     public bool autoUpdate;
+    [SerializeField] private PasteGrotte _pasteGrotto;
 
     void Awake()
     {
         InitializeGrid();
+        if(_pasteGrotto != null)
+            _pasteGrotto.SpawnGrotte();
     }
     
     public void InitializeGrid()
