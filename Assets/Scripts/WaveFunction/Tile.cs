@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class Tile : MonoBehaviour
+[CreateAssetMenu(menuName = "ScriptableObjects/Tile") ]
+public class Tile : ScriptableObject
 {
+    public TileBase tile;
+    public int weight;
+    public bool inDecor;
     public Tile[] upNeighbours;
     public Tile[] rightNeighbours;
     public Tile[] downNeighbours;
