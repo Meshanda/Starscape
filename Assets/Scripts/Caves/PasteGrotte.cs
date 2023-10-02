@@ -40,7 +40,6 @@ public class PasteGrotte : MonoBehaviour
             _loadingScreen.SetActive(false);
         _waveFunction.InitializeGrid(_cells[0]);
         _cells.RemoveAt(0);
-        Debug.Log(_cells.Count);
     }
 
     public void SpawnGrotte() 
