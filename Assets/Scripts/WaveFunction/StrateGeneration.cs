@@ -13,10 +13,11 @@ public class StrateGeneration : MonoBehaviour
 {
 
     [Header("Initialisation")]
-    public Vector2Int dimensionsXY;
-    public Vector2Int OffsetXY;
+    public int dimensionsX;
+    private Vector2Int OffsetXY;
     public Tilemap tileGround;
     [SerializeField] private List<Strate> _strates = new List<Strate>();
+    public TileBase tileBase;
 
     [Header("Filon")]
     public List<TilePos> LTiles = new List<TilePos>();
@@ -34,9 +35,12 @@ public class StrateGeneration : MonoBehaviour
     
     public void InitializeGrid()
     {
+        OffsetXY.x = dimensionsX / 2;
+        OffsetXY.y = 5;
         int debutStrate = 0;
         LTiles.Clear();
         LtilesVoisin.Clear();
+        tileGround.ClearAllTiles();
         for ( int s = 0 ; s < _strates.Count(); s++) 
         {
             if(s > 0) 
@@ -45,13 +49,20 @@ public class StrateGeneration : MonoBehaviour
             }
             for (int y = debutStrate; y < debutStrate+_strates[s].SizeY; y++)
             {
-                for (int x = 0; x < dimensionsXY.x; x++)
+                for (int x = 0; x < dimensionsX; x++)
                 {
                     tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s], x, y));
                 }
             }
         }
         SetFilons();
+
+        for(int i = 0; i < dimensionsX ; i++)
+        {
+            tileGround.SetTile(new Vector3Int(i - OffsetXY.x, 0 - OffsetXY.y), tileBase);
+        }
+
+
     }
 
     public TileBase GetTileFromStrate(Strate strate, int x, int y)
