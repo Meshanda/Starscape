@@ -69,3 +69,45 @@ MonoBehaviour:
       itemID: ground_01
       number: 1
     requiredFlags: 1
+  - itemsRequired:
+    - itemID: dirt_01
+      number: 3
+    itemCrafted:
+      itemID: ground_01
+      number: 1
+    requiredFlags: 1
+  - itemsRequired:
+    - itemID: dirt_01
+      number: 4
+    itemCrafted:
+      itemID: ground_01
+      number: 1
+    requiredFlags: 1
+  - itemsRequired:
+    - itemID: dirt_01
+      number: 5
+    itemCrafted:
+      itemID: ground_01
+      number: 1
+    requiredFlags: 1
+  - itemsRequired:
+    - itemID: dirt_01
+      number: 6
+    itemCrafted:
+      itemID: ground_01
+      number: 1
+    requiredFlags: 1
+  - itemsRequired:
+    - itemID: dirt_01
+      number: 7
+    itemCrafted:
+      itemID: ground_01
+      number: 1
+    requiredFlags: 1
+  - itemsRequired:
+    - itemID: dirt_01
+      number: 8
+    itemCrafted:
+      itemID: ground_01
+      number: 1
+    requiredFlags: 1

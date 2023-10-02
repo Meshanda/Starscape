@@ -11,7 +11,6 @@ public class InventorySlot : Slot, IPointerEnterHandler, IPointerExitHandler
     #region Variables
 
     [SerializeField] private GameObject _selection;
-    public bool ReadOnly;
 
     public bool IsSelected => _selection.activeSelf;
 

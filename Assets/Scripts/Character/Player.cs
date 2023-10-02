@@ -14,10 +14,17 @@ public class Player : MonoBehaviour
         switch (scrollValue)
         {
             case > 0:
-                InventorySystem.Instance.SelectPreviousSlot();
+                if (InventorySystem.Instance.IsInventoryOpen)
+                    InventorySystem.Instance.SelectPreviousCraftSlot();
+                else    
+                    InventorySystem.Instance.SelectPreviousSlot();
                 break;
+            
             case < 0:
-                InventorySystem.Instance.SelectNextSlot();
+                if (InventorySystem.Instance.IsInventoryOpen)
+                    InventorySystem.Instance.SelectNextCraftSlot();
+                else    
+                    InventorySystem.Instance.SelectNextSlot();
                 break;
         }
     }

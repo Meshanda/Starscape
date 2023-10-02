@@ -6,6 +6,7 @@ using Inventory;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using Utilities;
 
 public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, IPointerUpHandler
@@ -23,17 +24,25 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     [Header("Parents")] 
     [SerializeField] private Transform _quickSlotsParent;
     [SerializeField] private Transform _invSlotsParent;
+    [SerializeField] private Transform _craftSlotsParent;
+    [SerializeField] private Transform _craftSlotsTransform;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject _slotPfb;
     [SerializeField] private GameObject _dropPfb;
+    [SerializeField] private GameObject _craftSlotPfb;
+
+    [Header("References")] 
+    [SerializeField] private CraftingUI _craftingUI;
     
     private HandSlot _handSlot;
     
     private readonly List<InventorySlot> _quickSlots = new();
     private readonly List<InventorySlot> _inventorySlots = new();
+    private readonly List<CraftingSlot> _craftingSlots = new();
 
-    private int _selectedSlotIndex;
+    private int _selectedSlotIndex; 
+    private int _craftSelectedSlotIndex;
     private Coroutine _splitRoutine;
     
     #endregion
@@ -77,7 +86,8 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     {
         OnInventoryChanged += RefreshCraftables;
         OnCraftingFlagsChanged += RefreshCraftables;
-        
+        OnCraftablesChanged += CraftablesChanged;
+
         // OnCraftablesChanged += () =>
         // {
         //     var craft = "";
@@ -92,6 +102,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     {
         OnInventoryChanged -= RefreshCraftables;
         OnCraftingFlagsChanged -= RefreshCraftables;
+        OnCraftablesChanged -= CraftablesChanged;
     }
     
     protected override void SingletonAwake()
@@ -99,6 +110,8 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         InitQuickslots();
         InitInventorySlots();
         _handSlot = FindObjectOfType<HandSlot>();
+        _invSlotsParent.gameObject.SetActive(false);
+        _craftSlotsTransform.gameObject.SetActive(false);
     }
     
     public void OnPointerDown(PointerEventData eventData)
@@ -147,20 +160,9 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         
         drop.ItemStack = slot.ItemStack;
         slot.ItemStack = null;
+        OnInventoryChanged?.Invoke();
     }
-
-    private IEnumerator SplitRoutine(InventorySlot slot)
-    {
-        var delay = _splitInitialDelay;
-        
-        while (true)
-        {
-            SplitSlot(slot);
-            yield return new WaitForSeconds(delay);
-            delay = Mathf.Max(delay - _splitStep, _splitMinDelay);
-        }
-    }
-
+    
     public void OnPointerUp(PointerEventData eventData)
     {
         if (!IsInventoryOpen || !eventData.button.Equals(PointerEventData.InputButton.Right))
@@ -173,10 +175,22 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     public void ToggleInventory()
     {
         _invSlotsParent.gameObject.SetActive(!_invOpen);
+        _craftSlotsTransform.gameObject.SetActive(craftables.Count > 0 && _invOpen);
+        _quickSlots[_selectedSlotIndex].Select(!_invOpen);
+
         ForAllSlots(slot => slot.Refresh());
 
         if (!IsInventoryOpen)
             TooltipSystem.Instance.Hide();
+    }
+
+    private void CraftablesChanged()
+    {
+        ClearCrafts();
+        PopulateCrafts();
+
+        _craftSlotsTransform.gameObject.SetActive(craftables.Count > 0 && _invOpen);
+        _craftSelectedSlotIndex = Mathf.Max(_craftSelectedSlotIndex, _craftingSlots.Count - 1);
     }
 
     #endregion
@@ -238,6 +252,45 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
         SelectSlot(previousSlot);
     }
+
+    public void SelectCraftSlot(CraftingSlot slot)
+    {
+        if (_craftingSlots[_craftSelectedSlotIndex])
+            _craftingSlots[_craftSelectedSlotIndex].Select(false);
+        
+        _craftSelectedSlotIndex = _craftingSlots.IndexOf(slot);
+        SelectCraftSlot(_craftSelectedSlotIndex);
+    }
+    private void SelectCraftSlot(int slotIndex)
+    {
+        if (_craftingSlots[_craftSelectedSlotIndex])
+            _craftingSlots[_craftSelectedSlotIndex].Select(false);
+
+        _craftingSlots[slotIndex].Select(true);
+        _craftSelectedSlotIndex = slotIndex;
+
+        _craftingUI.Select(_craftingSlots[_craftSelectedSlotIndex].GetComponent<RectTransform>(), _craftingSlots[_craftSelectedSlotIndex].Recipe);
+    }
+
+    public void SelectNextCraftSlot()
+    {
+        var nextSlot = _craftSelectedSlotIndex + 1;
+
+        if (_craftSelectedSlotIndex.Equals(_craftingSlots.Count - 1))
+            nextSlot = _craftingSlots.Count - 1;
+        
+        SelectCraftSlot(nextSlot);
+    }
+
+    public void SelectPreviousCraftSlot()
+    {
+        var previousSlot = _craftSelectedSlotIndex - 1;
+
+        if (_craftSelectedSlotIndex.Equals(0))
+            previousSlot = 0;
+
+        SelectCraftSlot(previousSlot);
+    }
     
     private void GrabSlot(InventorySlot slot)
     {
@@ -255,6 +308,8 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
             _handSlot.ItemStack = slot.ItemStack;
             slot.ItemStack = aux;  
         }
+        
+        OnInventoryChanged?.Invoke();
     }
     
     private void SplitSlot(InventorySlot slot)
@@ -280,6 +335,8 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
             _handSlot.ItemStack.number++;
             slot.ItemStackRemoveNumber(1);
         }
+        
+        OnInventoryChanged?.Invoke();
     }
 
     #endregion
@@ -353,25 +410,23 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
     #region Craft
 
-    public bool TryCraft(CraftRecipe recipe)
+    public void TryCraft(CraftRecipe recipe)
     {
         if (!recipe.CanBeCrafted())
-        {
-            return false;
-        }
+            return;
+
+        if (_handSlot.ItemStack is not null && !_handSlot.ItemStack.itemID.Equals(recipe.itemCrafted.itemID))
+            return;
         
         foreach (var item in recipe.itemsRequired)
         {
             RemoveItem(item.itemID, item.number);
         }
 
-        AddItem(recipe.itemCrafted.Clone());
-        return true;
-    }
-    
-    public void TryCraftTest()
-    {
-        print(TryCraft(GameManager.Instance.database.craftRecipes[0]));
+        if (_handSlot.ItemStack is null)
+            _handSlot.ItemStack = recipe.itemCrafted.Clone();
+        else
+            _handSlot.ItemStack.Add(recipe.itemCrafted.number);
     }
 
     private void RefreshCraftables()
@@ -391,6 +446,26 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         {
             craftables = newCraftables;
             OnCraftablesChanged?.Invoke();
+        }
+    }
+
+    private void ClearCrafts()
+    {
+        foreach (Transform craft in _craftSlotsParent)
+        {
+            Destroy(craft.gameObject);
+        }
+        
+        _craftingSlots.Clear();
+    }
+
+    private void PopulateCrafts()
+    {
+        foreach (var craft in craftables)
+        {
+            var craftSlot = Instantiate(_craftSlotPfb, _craftSlotsParent).GetComponent<CraftingSlot>();
+            _craftingSlots.Add(craftSlot);
+            craftSlot.Recipe = craft;
         }
     }
 
@@ -426,6 +501,20 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
     #endregion
 
+    #region Coroutines
 
+    private IEnumerator SplitRoutine(InventorySlot slot)
+    {
+        var delay = _splitInitialDelay;
+        
+        while (true)
+        {
+            SplitSlot(slot);
+            yield return new WaitForSeconds(delay);
+            delay = Mathf.Max(delay - _splitStep, _splitMinDelay);
+        }
+    }
+
+    #endregion
     
 }

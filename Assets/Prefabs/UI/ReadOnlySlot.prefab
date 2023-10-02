@@ -85,11 +85,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8812276492473855906}
   - component: {fileID: 4006136534963563893}
-  - component: {fileID: 5480379141697206872}
+  - component: {fileID: 8759658821065351945}
   - component: {fileID: 2426128423833877914}
   - component: {fileID: 6020245072715389730}
   m_Layer: 5
-  m_Name: CraftingSlot
+  m_Name: ReadOnlySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +124,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7562246932622451942}
   m_CullTransparentMesh: 1
---- !u!114 &5480379141697206872
+--- !u!114 &8759658821065351945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,12 +133,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7562246932622451942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9aa9b1699a6c540bda88ee699d89cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 01c451ecbc3a4887ac7c66daf705f56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _itemImage: {fileID: 3205107269834700945}
   _itemCount: {fileID: 1248258106050346181}
-  _selected: {fileID: 1722842786647655819}
 --- !u!114 &2426128423833877914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +312,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
