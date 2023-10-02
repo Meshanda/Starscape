@@ -2158,11 +2158,13 @@ MonoBehaviour:
   _toPastePrefab:
   - {fileID: 6554965766300727511, guid: e83d41e21ca91c0439e1fce6d3813091, type: 3}
   - {fileID: 6554965766300727511, guid: 58d50900fe0b01548a54e5b6774feb49, type: 3}
+  - {fileID: 6554965766300727511, guid: c4c9b743aa6403f409d61939b8b6b66c, type: 3}
+  - {fileID: 6554965766300727511, guid: 270a98bc34a356c4daef7eed60f064cd, type: 3}
   _tilemap: {fileID: 1780645444}
   _parent: {fileID: 1720046738}
   _waveFunction: {fileID: 1720046740}
   _minRange: 50
-  _bounds: {x: -120, y: -30, z: 120, w: -40}
+  _bounds: {x: -120, y: -25, z: 120, w: -40}
   _nbreOfGrotte: 4
 --- !u!114 &1720046740
 MonoBehaviour:
