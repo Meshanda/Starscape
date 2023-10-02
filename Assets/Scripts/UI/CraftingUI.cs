@@ -16,6 +16,9 @@ public class CraftingUI : MonoBehaviour
     private float _distance;
     private CraftRecipe _recipe;
 
+    private Coroutine _scrollUpRoutine;
+    private Coroutine _scrollDownRoutine;
+
     public void Select(RectTransform rt, CraftRecipe recipe)
     {
         StopAllCoroutines();
@@ -27,9 +30,9 @@ public class CraftingUI : MonoBehaviour
         _distance = rt.position.y - _middle.position.y;
 
         if (_distance < 0)
-            StartCoroutine(ScrollUp(rt));
+            _scrollUpRoutine = StartCoroutine(ScrollUp(rt));
         else if (_distance > 0)
-            StartCoroutine(ScrollDown(rt));
+            _scrollDownRoutine = StartCoroutine(ScrollDown(rt));
     }
 
     private void ClearHorizontalContainer()
@@ -53,6 +56,7 @@ public class CraftingUI : MonoBehaviour
     {
         while (_distance < 0)
         {
+            if (rt is null) StopCoroutine(_scrollUpRoutine);
             _distance = rt.position.y - _middle.position.y;
             _content.position += new Vector3(0, 1, 0);
             yield return null;
@@ -61,8 +65,9 @@ public class CraftingUI : MonoBehaviour
     
     private IEnumerator ScrollDown(RectTransform rt)
     {
-        while (_distance > 0)
+        while (_distance > 0) 
         {
+            if (rt is null) StopCoroutine(_scrollDownRoutine);
             _distance = rt.position.y - _middle.position.y;
             _content.position += new Vector3(0, -1, 0);
             yield return null;

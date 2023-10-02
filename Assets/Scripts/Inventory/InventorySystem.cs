@@ -50,6 +50,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     #region Properties
 
     private bool _invOpen => _invSlotsParent.gameObject.activeSelf;
+    private bool _craftOpen => _craftSlotsTransform.gameObject.activeSelf;
     public bool IsInventoryOpen => _invSlotsParent.gameObject.activeSelf;
     private List<InventorySlot> _allSlots
     {
@@ -257,7 +258,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
     public void SelectCraftSlot(CraftingSlot slot)
     {
-        if (_craftingSlots[_craftSelectedSlotIndex])
+        if (_craftingSlots.Count - 1 >= _craftSelectedSlotIndex && _craftingSlots[_craftSelectedSlotIndex])
             _craftingSlots[_craftSelectedSlotIndex].Select(false);
         
         _craftSelectedSlotIndex = _craftingSlots.IndexOf(slot);
@@ -276,6 +277,8 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
     public void SelectNextCraftSlot()
     {
+        if (!_craftOpen) return;
+        
         var nextSlot = _craftSelectedSlotIndex + 1;
 
         if (_craftSelectedSlotIndex.Equals(_craftingSlots.Count - 1))
@@ -286,6 +289,8 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
     public void SelectPreviousCraftSlot()
     {
+        if (!_craftOpen) return;
+        
         var previousSlot = _craftSelectedSlotIndex - 1;
 
         if (_craftSelectedSlotIndex.Equals(0))

@@ -1,17 +1,43 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Placing : MonoBehaviour
 {
     [SerializeField] private float _placingDistance = 2.0f;
+    [SerializeField] private float _placingDelay = .15f;
     
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
+
+    private Coroutine _placingRoutine;
     private Camera _cam;
 
     private void Awake()
     {
         _cam = Camera.main;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            _placingRoutine = StartCoroutine(PlacingRoutine());
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            StopCoroutine(_placingRoutine);
+        }
+    }
+
+    private IEnumerator PlacingRoutine()
+    {
+        while (true)
+        {
+            OnPlace();
+            yield return new WaitForSeconds(_placingDelay);
+        }
     }
 
     private void OnPlace()
