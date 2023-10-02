@@ -11,46 +11,34 @@ using Random = UnityEngine.Random;
 
 public class StrateGeneration : MonoBehaviour
 {
-    //public int dimensions;
+
+    [Header("Initialisation")]
     public Vector2Int dimensionsXY;
     public Vector2Int OffsetXY;
-
-    public bool autoUpdate;
-
-    // public List<Cell> gridComponents;
-    // public Cell cellObj;
-    [SerializeField] private List<Strate> _strates = new List<Strate>();
-    public TileBase tile;
     public Tilemap tileGround;
+    [SerializeField] private List<Strate> _strates = new List<Strate>();
 
-    //public TileBase[] tileObjects;
-
+    [Header("Filon")]
     public List<TilePos> LTiles = new List<TilePos>();
+    public List<TilePos> LtilesVoisin = new List<TilePos>();
+    public int ProbVoisin;
+    public int ProbVoisinVoisin;
 
-    int iterations = 0;
-
-    public int GPhillon, MPhillon, PPhillon;
+    [Header("Auto Update Generator")]
+    public bool autoUpdate;
 
     void Awake()
     {
-        //gridComponents = new List<Cell>();
         InitializeGrid();
     }
     
     public void InitializeGrid()
     {
-        //for (int y = 0; y < dimensionsXY.y; y++)
-        //{
-        //    for (int x = 0; x < dimensionsXY.x; x++)
-        //    {
-        //        tileGround.SetTile(new Vector3Int(x, -y), tile);
-        //    }
-        //}
         int debutStrate = 0;
         LTiles.Clear();
+        LtilesVoisin.Clear();
         for ( int s = 0 ; s < _strates.Count(); s++) 
         {
-
             if(s > 0) 
             {
                 debutStrate += _strates[s - 1].SizeY ;
@@ -59,59 +47,21 @@ public class StrateGeneration : MonoBehaviour
             {
                 for (int x = 0; x < dimensionsXY.x; x++)
                 {
-                    if(_strates[s].SizeY == 2 && y == debutStrate + 1) 
-                    {
-                        tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), _strates[s].Tiles[1].Tile);
-                    }
-                    else
-                    {
-                        tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s],x,y));
-                    }
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s], x, y));
                 }
             }
         }
-
-        SetPhillons(LTiles);
-
-        //StartCoroutine(CheckEntropy());
+        SetFilons();
     }
-    public void SetPhillons(List<TilePos> LT)
+
+    public TileBase GetTileFromStrate(Strate strate, int x, int y)
     {
-        foreach (TilePos item in LT)
+        for (int i = 0; i < strate.Tiles.Count(); i++)
         {
-           RecPhillon(item.tiles, item.intX, item.intY, 30);
-        }
-    }
+            int pourcentage = strate.Tiles[i].Pourcentage;
+            float rng = Random.Range(0, 100);
 
-    public void RecPhillon(TileBase T , int X , int Y , int Nb)
-    {  
-        for( int i = -1; i< 2; i++)
-        {
-            for (int j = -1; j < 2; j++)
-            {
-
-
-                if (tileGround.GetTile(new Vector3Int(X + i - OffsetXY.x, -Y + j - OffsetXY.y)) != T 
-                    && tileGround.GetTile(new Vector3Int(X + i - OffsetXY.x, -Y + j - OffsetXY.y)) != null)
-                {
-                    float rng = Random.Range(0, 100);
-                    if (rng < Nb)
-                    {
-                        tileGround.SetTile(new Vector3Int(X + i - OffsetXY.x, -Y + j - OffsetXY.y), T);
-                    }
-                }
-            }
-        }
-    }
-
-    public TileBase GetTileFromStrate(Strate strate, int x, int y) 
-    {
-        float rng = Random.Range(0, 100);
-        int pourcentage = 0;
-        for (int i = 0; i < strate.Tiles.Count(); i++) 
-        {
-            pourcentage  = strate.Tiles[i].Pourcentage;
-            if ((rng < pourcentage) || (i == strate.Tiles.Count()-1 )) 
+            if ((rng < pourcentage) || (i == strate.Tiles.Count() - 1))
             {
                 if (strate.Tiles[i].IsMinerai)
                 {
@@ -120,8 +70,47 @@ public class StrateGeneration : MonoBehaviour
                 return strate.Tiles[i].Tile;
             }
         }
-        return tile;
+        return null;
     }
+
+    public void SetFilons()
+    {
+        foreach (TilePos item in LTiles)
+        {
+            foreach (TilePos TP in RecFilon(item.tiles, item.intX, item.intY, ProbVoisin))
+            {
+                LtilesVoisin.Add(TP);
+            }
+        }
+        foreach (TilePos Tp in LtilesVoisin)
+        {
+            if(Tp.tiles != null)
+            RecFilon(Tp.tiles, Tp.intX, Tp.intY, ProbVoisinVoisin);
+        }
+    }
+
+    public TilePos[] RecFilon(TileBase T , int X , int Y , int Nb)
+    {
+        TilePos[] Ltemp =new TilePos[5];
+        int n= 0;
+        for ( int i = -1; i< 2; i++)
+        {
+            for (int j = -1; j < 2; j++)
+            {
+                float rng = Random.Range(0, 100);
+                TileBase temp = tileGround.GetTile(new Vector3Int(X + i - OffsetXY.x, -Y + j - OffsetXY.y));
+                if (temp != T && temp != null && rng < Nb && ( i == 0 || j == 0))
+                {
+                    tileGround.SetTile(new Vector3Int(X + i - OffsetXY.x, -Y + j - OffsetXY.y), T);
+                    Ltemp[n] = new TilePos(T, X+i, Y+j);
+                    n++;
+                }
+            }
+        }
+        return Ltemp;
+    }
+
+   
 }
 [Serializable]
 public struct Strate 
