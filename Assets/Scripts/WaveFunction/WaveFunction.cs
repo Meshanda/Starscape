@@ -85,7 +85,7 @@ public class WaveFunction : MonoBehaviour
             tempGrid.RemoveRange(stopIndex, tempGrid.Count - stopIndex);
         }
 
-        yield return new WaitForSeconds(0.01f);
+        yield return null;
 
         CollapseCell(tempGrid);
     }
@@ -97,6 +97,13 @@ public class WaveFunction : MonoBehaviour
         Cell cellToCollapse = tempGrid[randIndex];
 
         cellToCollapse.collapsed = true;
+        if (cellToCollapse.tileOptions.Length == 0 || cellToCollapse.tileOptions == null)
+        {
+            cellToCollapse.collapsed = true;
+            Debug.Log("FF");
+            UpdateGeneration();
+            return;
+        }
         Tile selectedTile = cellToCollapse.tileOptions[UnityEngine.Random.Range(0, cellToCollapse.tileOptions.Length)];
         cellToCollapse.tileOptions = new Tile[] { selectedTile };
 
@@ -117,7 +124,6 @@ public class WaveFunction : MonoBehaviour
                 var index = x * dimensions.x + y * dimensions.y;
                 if (cellArray[x,y].collapsed)
                 {
-                    Debug.Log("called");
                     newGenerationCell[x, y] = cellArray[x, y];
                 }
                 else
@@ -129,7 +135,7 @@ public class WaveFunction : MonoBehaviour
                         options.Add(t);
                     }
 
-                    //update above
+                    //update below
                     if (y > 0)
                     {
                         Cell up = cellArray[x,y-1];

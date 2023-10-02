@@ -87,10 +87,7 @@ public class MiningSystem : MonoBehaviour
             _groundTilemap.GetTile(cellRight) is not null ||
             _groundTilemap.GetTile(cellAbove) is not null)
         {
-            Debug.Log($" Below:{_groundTilemap.GetTile(cellBelow) is not null}" +
-                      $"Left: {_groundTilemap.GetTile(cellLeft) is not null}" +
-                      $"Right: {_groundTilemap.GetTile(cellRight) is not null}" +
-                      $"Above: {_groundTilemap.GetTile(cellAbove) is not null}");
+            
             return true;
         }
 
