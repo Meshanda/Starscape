@@ -54,10 +54,39 @@ public class Item
         return itemStack;
     }
 }
+    
+[Flags]
+public enum CraftingFlags
+{
+    CraftingTable   = 1 << 0,
+    Furnace         = 1 << 1,
+    // ...
+}
 
 [Serializable]
 public struct CraftRecipe
 {
     public List<ItemStack> itemsRequired;
     public ItemStack itemCrafted;
+    public CraftingFlags requiredFlags;
+
+    public bool CanBeCrafted()
+    {
+        var inventory = InventorySystem.Instance;
+
+        if ((inventory.CraftingFlags & requiredFlags) == 0)
+        {
+            return false;
+        }
+        
+        foreach (var item in itemsRequired)
+        {
+            if (inventory.CountItem(item.itemID) < item.number)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

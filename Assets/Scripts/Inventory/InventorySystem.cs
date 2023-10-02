@@ -26,7 +26,6 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
 
     private int _selectedSlotIndex;
     private bool _invOpen => _invSlotsParent.gameObject.activeSelf;
-    private bool _craftingActive;
     public bool IsInventoryOpen => _invSlotsParent.gameObject.activeSelf;
     private List<InventorySlot> _allSlots
     {
@@ -37,6 +36,23 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
             return list;
         }
     }
+    
+    public List<CraftRecipe> craftables;
+
+    private CraftingFlags _craftingFlags;
+    public CraftingFlags CraftingFlags
+    {
+        get => _craftingFlags;
+        set
+        {
+            _craftingFlags = value;
+            OnCraftingFlagsChanged?.Invoke();
+        }
+    }
+    
+    public event Action OnCraftablesChanged;
+    public event Action OnInventoryChanged;
+    public event Action OnCraftingFlagsChanged;
 
     protected override void SingletonAwake()
     {
@@ -79,6 +95,27 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
         }
     }
 
+    private void OnEnable()
+    {
+        OnInventoryChanged += RefreshCraftables;
+        OnCraftingFlagsChanged += RefreshCraftables;
+        
+        // OnCraftablesChanged += () =>
+        // {
+        //     var craft = "";
+        //     craftables.ForEach(c => craft += c.itemCrafted.itemID + " ");
+        //     print("craftables changed: < " + craft + ">");
+        // };
+        // OnCraftingFlagsChanged += () => print("crafting flags changed: " + CraftingFlags);
+        // OnInventoryChanged += () => print("inventory changed");
+    }
+
+    private void OnDisable()
+    {
+        OnInventoryChanged -= RefreshCraftables;
+        OnCraftingFlagsChanged -= RefreshCraftables;
+    }
+
     private void InitInventorySlots()
     {
         for (var i = 0; i < _nbRows; i++)
@@ -102,19 +139,6 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
         }
         
         SelectSlot(0);
-    }
-    
-    public void SetCraftingActive(bool active)
-    {
-        if (_craftingActive == active)
-        {
-            return;
-        }
-
-        _craftingActive = active;
-
-        // print("SetCraftingActive " + active);
-        // TODO
     }
 
     public void ToggleInventory()
@@ -177,6 +201,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
             slot.ItemStack.number += itemStack.number;
         }
 
+        OnInventoryChanged?.Invoke();
         return true;
     }
 
@@ -186,6 +211,8 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
 
         if (_quickSlots[_selectedSlotIndex].ItemStack.number <= 0)
             _quickSlots[_selectedSlotIndex].ItemStack = null;
+        
+        OnInventoryChanged?.Invoke();
     }
     
     public void RemoveItem(string itemID, int count)
@@ -202,7 +229,12 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
                     if (s.ItemStack.number <= 0)
                     {
                         s.ItemStack = null;
+                        OnInventoryChanged?.Invoke();
                         break;
+                    }
+                    else
+                    {
+                        OnInventoryChanged?.Invoke();
                     }
                 }
             }
@@ -219,7 +251,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
         return _allSlots.FirstOrDefault(slot => slot.ItemStack == null);
     }
 
-    private int CountItem(string itemID)
+    public int CountItem(string itemID)
     {
         int total = 0;
         ForAllSlots(s =>
@@ -247,17 +279,9 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
 
     public bool TryCraft(CraftRecipe recipe)
     {
-        if (!_craftingActive)
+        if (!recipe.CanBeCrafted())
         {
             return false;
-        }
-        
-        foreach (var item in recipe.itemsRequired)
-        {
-            if (CountItem(item.itemID) < item.number)
-            {
-                return false;
-            }
         }
         
         foreach (var item in recipe.itemsRequired)
@@ -272,5 +296,25 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerClickHandler
     public void TryCraftTest()
     {
         print(TryCraft(GameManager.Instance.database.craftRecipes[0]));
+    }
+
+    private void RefreshCraftables()
+    {
+        List<CraftRecipe> newCraftables = new List<CraftRecipe>();
+
+        var database = GameManager.Instance.database;
+        foreach (var craftRecipe in database.craftRecipes)
+        {
+            if (craftRecipe.CanBeCrafted())
+            {
+                newCraftables.Add(craftRecipe);
+            }
+        }
+
+        if (!newCraftables.SequenceEqual(craftables))
+        {
+            craftables = newCraftables;
+            OnCraftablesChanged?.Invoke();
+        }
     }
 }
