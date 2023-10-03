@@ -5,6 +5,8 @@ using System.Linq;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
+using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using UnityEngine.WSA;
 using Random = UnityEngine.Random;
@@ -13,11 +15,14 @@ public class StrateGeneration : MonoBehaviour
 {
 
     [Header("Initialisation")]
+    public PlayerInput Player;
     public int dimensionsX;
     private Vector2Int OffsetXY;
     public Tilemap tileGround;
     [SerializeField] private List<Strate> _strates = new List<Strate>();
     public TileBase tileBase;
+    public SpriteRenderer shadow;
+    int sizeY = 0;
 
     [Header("Filon")]
     public List<TilePos> LTiles = new List<TilePos>();
@@ -25,25 +30,33 @@ public class StrateGeneration : MonoBehaviour
     public float ProbVoisin;
     public float ProbVoisinVoisin;
 
+    [Header("Shader Graph")]
+    [HideInInspector] public Texture2D wordTilesMap;
+    [HideInInspector] public Texture2D PlayerTexture;
+    public Material lightShader;
+
     [Header("Auto Update Generator")]
     public bool autoUpdate;
     [SerializeField] private PasteGrotte _pasteGrotto;
 
     void Awake()
     {
+        
         InitializeGrid();
         if(_pasteGrotto != null)
-            _pasteGrotto.SpawnGrotte();
+            _pasteGrotto.SpawnGrotte(); 
+
     }
-    
+
     public void InitializeGrid()
     {
         OffsetXY.x = dimensionsX / 2;
-        OffsetXY.y = 5;
+        OffsetXY.y = 6;
         int debutStrate = 0;
         LTiles.Clear();
         LtilesVoisin.Clear();
         tileGround.ClearAllTiles();
+
         for ( int s = 0 ; s < _strates.Count(); s++) 
         {
             if(s > 0) 
@@ -60,12 +73,11 @@ public class StrateGeneration : MonoBehaviour
         }
         SetFilons();
 
-        for(int i = 0; i < dimensionsX ; i++)
-        {
-            tileGround.SetTile(new Vector3Int(i - OffsetXY.x, 0 - OffsetXY.y), tileBase);
-        }
-
-
+        sizeY = tileGround.size.y;
+        ResetShadow();
+        shadow.transform.position = new Vector3(0, -tileGround.CellToWorld(new Vector3Int(0, (sizeY / 2) + OffsetXY.y) ).y + 0.17f);
+        shadow.transform.localScale = new Vector3(tileGround.size.x, -tileGround.size.y, tileGround.size.z) * 0.32f;
+        UpdateShadow();
     }
 
     public TileBase GetTileFromStrate(Strate strate, int x, int y)
@@ -123,7 +135,62 @@ public class StrateGeneration : MonoBehaviour
         return Ltemp;
     }
 
-   
+
+    public void ResetShadow()
+    {
+        wordTilesMap = new Texture2D(dimensionsX, sizeY);
+        wordTilesMap.filterMode = FilterMode.Point;
+        PlayerTexture = new Texture2D(dimensionsX, sizeY);
+        PlayerTexture.filterMode = FilterMode.Point;
+        lightShader.SetTexture("_ShadowTexture", wordTilesMap);
+        lightShader.SetTexture("_PlayerLight", PlayerTexture);
+        for (int i = 0; i < dimensionsX; i++)
+        {
+            for (int j = 0; j < sizeY; j++)
+            {
+                wordTilesMap.SetPixel(i, j, new Color(1, 0, 0, 1));
+                PlayerTexture.SetPixel(i, j, new Color(0, 0, 0, 1));
+            }
+        }
+        wordTilesMap.Apply();
+        PlayerTexture.Apply();
+    }
+
+    public void UpdatePlayerLight()
+    {
+        Vector3Int Cell = tileGround.WorldToCell(Player.transform.position);
+        for (int i = -5; i < 6; i++)
+        {
+            for (int j = -5; j < 6; j++)
+            {
+                Debug.Log("ici" +Cell);
+                PlayerTexture.SetPixel(Cell.x + i,Cell.y + j, new Color(1, 0, 0, 1));
+            }
+        }
+        PlayerTexture.Apply();
+    }
+
+
+    public void UpdateShadow()
+    {
+        for (int i = 0; i < dimensionsX; i++)
+        {
+            for (int j = 0; j < sizeY; j++)
+            {
+                if (tileGround.GetTile(new Vector3Int(i - OffsetXY.x, -j - OffsetXY.y)) != null)
+                {
+                    wordTilesMap.SetPixel(i, j, new Color(wordTilesMap.GetPixel(i, j - 1).r - 0.2f, 0, 0, 1));
+
+                }
+                else
+                {
+                    wordTilesMap.SetPixel(i, j, new Color(1, 0, 0, 1));
+                }
+            }
+        }
+        wordTilesMap.Apply();
+    }
+
 }
 [Serializable]
 public struct Strate 
