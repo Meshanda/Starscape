@@ -6,10 +6,6 @@ public class InventorySlot : Slot, IPointerEnterHandler, IPointerExitHandler
 {
     #region Variables
 
-    [SerializeField] private GameObject _selection;
-
-    public bool IsSelected => _selection.activeSelf;
-
     #endregion
     
     #region Events
@@ -36,10 +32,6 @@ public class InventorySlot : Slot, IPointerEnterHandler, IPointerExitHandler
     private bool CanInteractWithInventory()
     {
         return _itemStack is not null && InventorySystem.Instance.IsInventoryOpen;
-    }
-    public void Select(bool status)
-    {
-        _selection.SetActive(status);
     }
     
     #endregion

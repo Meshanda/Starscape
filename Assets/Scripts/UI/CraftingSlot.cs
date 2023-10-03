@@ -16,11 +16,6 @@ public class CraftingSlot : Slot, IPointerDownHandler, IPointerEnterHandler, IPo
             ItemStack = _recipe.itemCrafted;
         }
     }
-
-    public void Select(bool status)
-    {
-        _selected.SetActive(status);
-    }
     
     public void OnClick()
     {
