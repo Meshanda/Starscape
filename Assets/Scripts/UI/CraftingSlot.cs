@@ -1,12 +1,15 @@
 using System;
+using System.Collections;
 using Inventory;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CraftingSlot : Slot, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
+public class CraftingSlot : Slot, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject _selected;
     private CraftRecipe _recipe;
+    private Coroutine _craftRoutine;
+    private InventorySystem _inv;
 
     public CraftRecipe Recipe
     {
@@ -16,6 +19,11 @@ public class CraftingSlot : Slot, IPointerDownHandler, IPointerEnterHandler, IPo
             _recipe = value;
             ItemStack = _recipe.itemCrafted;
         }
+    }
+
+    private void Start()
+    {
+        _inv = InventorySystem.Instance;
     }
 
     public void Select(bool status)
@@ -30,7 +38,25 @@ public class CraftingSlot : Slot, IPointerDownHandler, IPointerEnterHandler, IPo
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        OnClick();
+        _craftRoutine = StartCoroutine(CraftRoutine());
+    }
+    
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (_craftRoutine is not null)  
+            StopCoroutine(_craftRoutine);
+    }
+
+    public IEnumerator CraftRoutine()
+    {
+        var delay = _inv._splitInitialDelay;
+        
+        while (true)
+        {
+            OnClick();
+            yield return new WaitForSeconds(delay);
+            delay = Mathf.Max(delay - _inv._splitStep, _inv._splitMinDelay);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

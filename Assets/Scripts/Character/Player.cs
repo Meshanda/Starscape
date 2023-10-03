@@ -1,8 +1,12 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer _selectedSprite;
+    
     public void OnToggleInventory()
     {
         InventorySystem.Instance.ToggleInventory();
@@ -26,6 +30,23 @@ public class Player : MonoBehaviour
                 else    
                     InventorySystem.Instance.SelectNextSlot();
                 break;
+        }
+    }
+
+    private WaitForSeconds _refreshHeldItemDelay = new WaitForSeconds(0.1f);
+    
+    private void Start()
+    {
+        StartCoroutine(nameof(RefreshHeldItemRoutine));
+    }
+
+    public IEnumerator RefreshHeldItemRoutine()
+    {
+        while (true)
+        {
+            var itemStack = InventorySystem.Instance.GetSelectedSlot()?.ItemStack;
+            _selectedSprite.sprite = itemStack?.GetItem().sprite;
+            yield return _refreshHeldItemDelay;
         }
     }
 }

@@ -61,6 +61,14 @@ MonoBehaviour:
     loot:
       itemId: crafting_table_01
       count: 1
+  - id: pickaxe_01
+    name: Wood Pickaxe
+    description: Killian remplit la database
+    sprite: {fileID: 21300000, guid: 8afca7ff5b1c29348b2129e86c114c14, type: 3}
+    tile: {fileID: 0}
+    loot:
+      itemId: 0
+      count: 0
   craftRecipes:
   - itemsRequired:
     - itemID: ground_01
@@ -118,3 +126,10 @@ MonoBehaviour:
       itemID: crafting_table_01
       number: 1
     requiredFlags: 0
+  - itemsRequired:
+    - itemID: ground_01
+      number: 5
+    itemCrafted:
+      itemID: pickaxe_01
+      number: 1
+    requiredFlags: 1
