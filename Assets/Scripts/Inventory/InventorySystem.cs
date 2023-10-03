@@ -184,7 +184,13 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         ForAllSlots(slot => slot.Refresh());
 
         if (!IsInventoryOpen)
+        {
             TooltipSystem.Instance.Hide();
+        }
+        else
+        {
+            SelectCraftSlot(Mathf.Clamp(_craftSelectedSlotIndex, 0, _craftingSlots.Count - 1));
+        }
     }
 
     private void CraftablesChanged()
@@ -193,7 +199,9 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         PopulateCrafts();
 
         _craftSlotsTransform.gameObject.SetActive(craftables.Count > 0 && _invOpen);
-        _craftSelectedSlotIndex = Mathf.Max(_craftSelectedSlotIndex, _craftingSlots.Count - 1);
+        
+        if (_craftingSlots.Count > 0)
+            SelectCraftSlot(Mathf.Clamp(_craftSelectedSlotIndex, 0, _craftingSlots.Count - 1));
     }
 
     #endregion
@@ -256,23 +264,32 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         SelectSlot(previousSlot);
     }
 
-    public void SelectCraftSlot(CraftingSlot slot)
+    public void OnClickCraftSlot(CraftingSlot slot)
     {
-        if (_craftingSlots.Count - 1 >= _craftSelectedSlotIndex && _craftingSlots[_craftSelectedSlotIndex])
-            _craftingSlots[_craftSelectedSlotIndex].Select(false);
-        
-        _craftSelectedSlotIndex = _craftingSlots.IndexOf(slot);
-        SelectCraftSlot(_craftSelectedSlotIndex);
+        var newIndex = _craftingSlots.IndexOf(slot);
+
+        if (_craftingUI.SelectedIndex == newIndex && _craftingUI.HasCenteredSelection)
+        {
+            TryCraft(slot.Recipe);
+        }
+        else if (_craftingUI.SelectedIndex != newIndex)
+        {
+            SelectCraftSlot(newIndex);
+        }
     }
+    
     private void SelectCraftSlot(int slotIndex)
     {
-        if (_craftingSlots[_craftSelectedSlotIndex])
+        if (slotIndex < 0 || slotIndex > _craftingSlots.Count - 1)
+            return;
+        
+        if (_craftingSlots.Count > _craftSelectedSlotIndex)
             _craftingSlots[_craftSelectedSlotIndex].Select(false);
 
         _craftingSlots[slotIndex].Select(true);
         _craftSelectedSlotIndex = slotIndex;
 
-        _craftingUI.Select(_craftingSlots[_craftSelectedSlotIndex].GetComponent<RectTransform>(), _craftingSlots[_craftSelectedSlotIndex].Recipe);
+        _craftingUI.Select(_craftingSlots[_craftSelectedSlotIndex].transform, _craftingSlots[_craftSelectedSlotIndex].Recipe, _craftSelectedSlotIndex);
     }
 
     public void SelectNextCraftSlot()

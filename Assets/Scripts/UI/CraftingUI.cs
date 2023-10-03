@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Inventory;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CraftingUI : MonoBehaviour
 {
+    [SerializeField] private float _speed = 2.5f;
+    
     [Header("Horizontal")]
     [SerializeField] private Transform _horizontalContainer;
     [SerializeField] private GameObject _readOnlySlot;
@@ -18,21 +21,29 @@ public class CraftingUI : MonoBehaviour
 
     private Coroutine _scrollUpRoutine;
     private Coroutine _scrollDownRoutine;
+    private CoroutineHelper _co;
 
-    public void Select(RectTransform rt, CraftRecipe recipe)
+    public int SelectedIndex { get; private set; } = -1;
+    public bool HasCenteredSelection { get; private set; } = false;
+
+    private void Awake()
     {
-        StopAllCoroutines();
+        var go = new GameObject();
+        _co = go.AddComponent<CoroutineHelper>();
+    }
+
+    public void Select(Transform rt, CraftRecipe recipe, int selectedIndex)
+    {
+        _co.StopAllCoroutines();
         _recipe = recipe;
         
         ClearHorizontalContainer();
         PopulateHorizontalContainer();
         
-        _distance = rt.position.y - _middle.position.y;
+        SelectedIndex = selectedIndex;
+        HasCenteredSelection = false;
 
-        if (_distance < 0)
-            _scrollUpRoutine = StartCoroutine(ScrollUp(rt));
-        else if (_distance > 0)
-            _scrollDownRoutine = StartCoroutine(ScrollDown(rt));
+        _co.StartCoroutine(ScrollTo(rt));
     }
 
     private void ClearHorizontalContainer()
@@ -51,26 +62,40 @@ public class CraftingUI : MonoBehaviour
             readOnlySlot.ItemStack = stack;
         }
     }
-
-    private IEnumerator ScrollUp(RectTransform rt)
-    {
-        while (_distance < 0)
-        {
-            if (rt is null) StopCoroutine(_scrollUpRoutine);
-            _distance = rt.position.y - _middle.position.y;
-            _content.position += new Vector3(0, 1, 0);
-            yield return null;
-        }
-    }
     
-    private IEnumerator ScrollDown(RectTransform rt)
+    private IEnumerator ScrollTo(Transform rt)
     {
-        while (_distance > 0) 
+        yield return null;
+        
+        if (!rt)
         {
-            if (rt is null) StopCoroutine(_scrollDownRoutine);
+            yield break;
+        }
+        
+        _distance = rt.position.y - _middle.position.y;
+        
+        while (Mathf.Abs(_distance) > 0.001f)
+        {
+            if (!rt)
+            {
+                yield break;
+            }
+            
+            if (_distance > 0)
+            {
+                _content.position += new Vector3(0, Mathf.Max(-Mathf.Abs(_distance), -_speed), 0);
+            }
+        
+            if (_distance < 0)
+            {
+                _content.position += new Vector3(0, Mathf.Min(Mathf.Abs(_distance), _speed), 0);
+            }
+            
             _distance = rt.position.y - _middle.position.y;
-            _content.position += new Vector3(0, -1, 0);
+            
             yield return null;
         }
+
+        HasCenteredSelection = true;
     }
 }
