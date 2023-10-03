@@ -2,7 +2,7 @@
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(menuName = "Custom Tiles", fileName = "CraftingTableTile")]
-public class CraftingTableTile : Tile
+public class CraftingTableTile : UnityEngine.Tilemaps.Tile
 {
 	public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
 	{

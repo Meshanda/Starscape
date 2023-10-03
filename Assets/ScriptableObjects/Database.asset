@@ -63,7 +63,7 @@ MonoBehaviour:
       count: 1
   craftRecipes:
   - itemsRequired:
-    - itemID: dirt_01
+    - itemID: ground_01
       number: 2
     itemCrafted:
       itemID: ground_01
@@ -111,3 +111,10 @@ MonoBehaviour:
       itemID: ground_01
       number: 1
     requiredFlags: 1
+  - itemsRequired:
+    - itemID: ground_01
+      number: 1
+    itemCrafted:
+      itemID: crafting_table_01
+      number: 1
+    requiredFlags: 0

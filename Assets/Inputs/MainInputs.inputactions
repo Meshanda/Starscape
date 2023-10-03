@@ -85,6 +85,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Map",
+                    "type": "Button",
+                    "id": "482acc6e-400c-4da6-b959-3b0ceb81f522",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -206,6 +215,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "19ed263e-27ed-4eef-b0f0-cc6a23466c48",
+                    "path": "<Keyboard>/semicolon",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Map",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -742,6 +762,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Cinematic",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerSpecial",
+            "id": "75db4602-9e31-4635-b955-20892088f3ea",
+            "actions": [
+                {
+                    "name": "Use item",
+                    "type": "Button",
+                    "id": "acbe29db-3e45-467a-bd00-2c04ee047a37",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cf489ad1-8a89-4590-bd45-bb3d340d31fe",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
