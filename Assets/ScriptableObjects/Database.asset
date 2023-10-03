@@ -16,104 +16,118 @@ MonoBehaviour:
   - id: dirt_01
     name: Dirt
     description: This is a dirt block.
-    sprite: {fileID: 832037546, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
-    tile: {fileID: 11400000, guid: 80a80f2df27c14d4f83086184c025cc8, type: 2}
-    loot:
-      itemId: dirt_01
-      count: 1
+    sprite: {fileID: 21300000, guid: 42971c32d57da1a4e8480bce4cb9ff75, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: f3d287865af96c144a480a3924d5b4a4, type: 2}
+      life: 0.5
+      requiredToBreak:
+        type: 0
+        level: 0
+      lootOnBreak:
+        itemID: dirt_01
+        number: 1
+    toolData:
+      toolStrength:
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
   - id: ground_01
     name: Ground
     description: 
     sprite: {fileID: -1479925464, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
-    tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
-    loot:
-      itemId: ground_01
-      count: 1
-  - id: iron_01
-    name: Iron
-    description: 
-    sprite: {fileID: 2058351397, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
-    tile: {fileID: 11400000, guid: a1cf7bb6980d3984d9c3d95b10edbfb2, type: 2}
-    loot:
-      itemId: iron_01
-      count: 1
-  - id: copper_01
-    name: Copper
-    description: 
-    sprite: {fileID: 2025984935, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
-    tile: {fileID: 11400000, guid: 9759511fceb7b524e84119e48ee73951, type: 2}
-    loot:
-      itemId: copper_01
-      count: 1
-  - id: ground_02
-    name: Ground2
-    description: 
-    sprite: {fileID: 1188172789, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
-    tile: {fileID: 11400000, guid: 87b929764903e41458a1880c72f27db1, type: 2}
-    loot:
-      itemId: ground_01
-      count: 1
+    tileInfo:
+      tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
+      life: 0.5
+      requiredToBreak:
+        type: 0
+        level: 0
+      lootOnBreak:
+        itemID: ground_01
+        number: 1
+    toolData:
+      toolStrength:
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
   - id: crafting_table_01
     name: Crafting Table
     description: 
-    sprite: {fileID: 737055279, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
-    tile: {fileID: 11400000, guid: bb85747b5b13686478b4c92c9766ed46, type: 2}
-    loot:
-      itemId: crafting_table_01
-      count: 1
+    sprite: {fileID: 21300000, guid: 5a8df7a6d1f43d841869ac3097a34b01, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: bb85747b5b13686478b4c92c9766ed46, type: 2}
+      life: 1
+      requiredToBreak:
+        type: 0
+        level: 0
+      lootOnBreak:
+        itemID: crafting_table_01
+        number: 1
+    toolData:
+      toolStrength:
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - id: pickaxe_01
+    name: Pickaxe
+    description: 
+    sprite: {fileID: 21300000, guid: 8afca7ff5b1c29348b2129e86c114c14, type: 3}
+    tileInfo:
+      tile: {fileID: 0}
+      life: 1
+      requiredToBreak:
+        type: 0
+        level: 0
+      lootOnBreak:
+        itemID: 
+        number: 0
+    toolData:
+      toolStrength:
+        type: 2
+        level: 0
+      tileDamagePerSecond: 2
+  - id: cobblestone_01
+    name: Cobblestone
+    description: 
+    sprite: {fileID: 21300000, guid: a0f1f2edaf746a54b837e6b7e8ede516, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: e99a9437ce45fc54db42c471a07749f5, type: 2}
+      life: 1
+      requiredToBreak:
+        type: 2
+        level: 0
+      lootOnBreak:
+        itemID: cobblestone_01
+        number: 1
+    toolData:
+      toolStrength:
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
   craftRecipes:
   - itemsRequired:
-    - itemID: ground_01
-      number: 2
-    itemCrafted:
-      itemID: ground_01
+    - itemID: dirt_01
       number: 1
-    requiredFlags: 1
+    itemCrafted:
+      itemID: cobblestone_01
+      number: 1
+    requiredFlags: 0
   - itemsRequired:
-    - itemID: ground_01
+    - itemID: cobblestone_01
+      number: 1
+    itemCrafted:
+      itemID: dirt_01
+      number: 1
+    requiredFlags: 0
+  - itemsRequired:
+    - itemID: dirt_01
       number: 3
     itemCrafted:
-      itemID: ground_01
+      itemID: pickaxe_01
       number: 1
     requiredFlags: 1
   - itemsRequired:
-    - itemID: ground_01
+    - itemID: dirt_01
       number: 4
-    itemCrafted:
-      itemID: ground_01
-      number: 1
-    requiredFlags: 1
-  - itemsRequired:
-    - itemID: ground_01
-      number: 5
-    itemCrafted:
-      itemID: ground_01
-      number: 1
-    requiredFlags: 1
-  - itemsRequired:
-    - itemID: ground_01
-      number: 6
-    itemCrafted:
-      itemID: ground_01
-      number: 1
-    requiredFlags: 1
-  - itemsRequired:
-    - itemID: ground_01
-      number: 7
-    itemCrafted:
-      itemID: ground_01
-      number: 1
-    requiredFlags: 1
-  - itemsRequired:
-    - itemID: ground_01
-      number: 8
-    itemCrafted:
-      itemID: ground_01
-      number: 1
-    requiredFlags: 1
-  - itemsRequired:
-    - itemID: ground_01
-      number: 1
     itemCrafted:
       itemID: crafting_table_01
       number: 1

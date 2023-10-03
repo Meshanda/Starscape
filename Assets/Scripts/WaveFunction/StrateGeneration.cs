@@ -1,8 +1,13 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.WSA;
 using Random = UnityEngine.Random;
 
 public class StrateGeneration : MonoBehaviour
@@ -46,6 +51,12 @@ public class StrateGeneration : MonoBehaviour
             {
                 debutStrate += _strates[s - 1].SizeY ;
             }
+            
+            if(_strates[s].transition) 
+            {
+                Transition(debutStrate, _strates[s]);
+                continue;
+            }
             for (int y = debutStrate; y < debutStrate+_strates[s].SizeY; y++)
             {
                 for (int x = 0; x < dimensionsX; x++)
@@ -56,12 +67,36 @@ public class StrateGeneration : MonoBehaviour
         }
         SetFilons();
 
-        for(int i = 0; i < dimensionsX ; i++)
+        // for(int i = 0; i < dimensionsX ; i++)
+        // {
+        //     tileGround.SetTile(new Vector3Int(i - OffsetXY.x, 0 - OffsetXY.y), tileBase);
+        // }
+
+
+    }
+
+    public void Transition(int start, Strate st) 
+    {
+        int rng = Random.Range(start, start + st.SizeY );
+        for (int x = 0; x < dimensionsX; x++)
         {
-            tileGround.SetTile(new Vector3Int(i - OffsetXY.x, 0 - OffsetXY.y), tileBase);
+            for(int y = start; y < start + st.SizeY; y++) 
+            {
+                if( y < rng) 
+                {
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[0].Tile);
+                }
+                else 
+                {
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[1].Tile);
+                }
+            }
+            rng += Random.Range(-1, 2);
+            rng = Mathf.Min(rng, start + st.SizeY-1);
+            rng = Mathf.Max(rng, start);
+
+            //tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s], x, y));
         }
-
-
     }
 
     public TileBase GetTileFromStrate(Strate strate, int x, int y)
@@ -126,6 +161,7 @@ public struct Strate
 {
    public TilesStrate[] Tiles;
    public int SizeY;
+   public bool transition;   
 }
 
 [Serializable]

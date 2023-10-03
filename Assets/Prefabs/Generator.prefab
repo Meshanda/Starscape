@@ -51,15 +51,15 @@ MonoBehaviour:
     - Tile: {fileID: 11400000, guid: a1e15b193a3c6a04ea446a9f89255716, type: 2}
       Pourcentage: 0.5
       IsMinerai: 0
-    - Tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
+    - Tile: {fileID: 11400000, guid: f3d287865af96c144a480a3924d5b4a4, type: 2}
       Pourcentage: 98
       IsMinerai: 0
     SizeY: 8
   - Tiles:
-    - Tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
+    - Tile: {fileID: 11400000, guid: f3d287865af96c144a480a3924d5b4a4, type: 2}
       Pourcentage: 50
       IsMinerai: 0
-    - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
+    - Tile: {fileID: 11400000, guid: e99a9437ce45fc54db42c471a07749f5, type: 2}
       Pourcentage: 50
       IsMinerai: 0
     SizeY: 2
@@ -73,7 +73,7 @@ MonoBehaviour:
     - Tile: {fileID: 11400000, guid: 9759511fceb7b524e84119e48ee73951, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
-    - Tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
+    - Tile: {fileID: 11400000, guid: e99a9437ce45fc54db42c471a07749f5, type: 2}
       Pourcentage: 91
       IsMinerai: 0
     SizeY: 16
