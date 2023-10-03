@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(CharacterMovement))]
 public class CharacterController2D : MonoBehaviour
 {
 	[SerializeField] private float _jumpHeight = 5f;							// Amount of force added when the player jumps.
