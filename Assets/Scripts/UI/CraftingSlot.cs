@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 
 public class CraftingSlot : Slot, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private GameObject _selected;
     private CraftRecipe _recipe;
 
     public CraftRecipe Recipe
