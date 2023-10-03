@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class TooltipSystem : Singleton<TooltipSystem>
 {
     public Tooltip tooltip;
@@ -10,7 +6,7 @@ public class TooltipSystem : Singleton<TooltipSystem>
     public void Show(string newHeader, string newBody = "")
     {
         if (!_active) return;
-        
+
         tooltip.UpdateUIPosition();
         tooltip.SetText(newHeader, newBody);
         tooltip.gameObject.SetActive(true);

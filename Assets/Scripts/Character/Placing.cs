@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -62,19 +61,16 @@ public class Placing : MonoBehaviour
         var hit = Physics2D.Raycast(_cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity);
         if (hit.collider != null && hit.collider.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("Hit player!");
             return false;
         }
         
         if (World.Instance.GroundTilemap.GetTile(cellPos) is not null)
         {
-            Debug.Log("Tile is occupied.");
             return false;
         }
 
         if (World.Instance.BackGroundTilemap.GetTile(cellPos) is not null)
         {
-            Debug.Log("Background found!");
             return true;
         }
 

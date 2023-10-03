@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Inventory;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class CraftingUI : MonoBehaviour
 {

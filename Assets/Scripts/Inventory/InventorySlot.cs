@@ -1,13 +1,9 @@
-using System.Collections;
 using Inventory;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class InventorySlot : Slot, IPointerEnterHandler, IPointerExitHandler
 {
- 
     #region Variables
 
     [SerializeField] private GameObject _selection;
@@ -19,7 +15,7 @@ public class InventorySlot : Slot, IPointerEnterHandler, IPointerExitHandler
     #region Events
 
     public void OnPointerEnter(PointerEventData eventData)
-    {
+    { 
         if (!CanInteractWithInventory())
             return;
         
