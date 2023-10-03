@@ -50,9 +50,14 @@ public class Placing : MonoBehaviour
         if (!slot || slot.ItemStack is null)
             return;
 
+        if (!slot.ItemStack.GetItem().tileInfo.tile)
+        {
+            return; // item doesn't have a tile, it cannot be placed in the world
+        }
+
         if (TileCanBePlaced(cellPos)) 
         {
-            World.Instance.GroundTilemap.SetTile(cellPos, slot.ItemStack.GetItem().tile);
+            World.Instance.GroundTilemap.SetTile(cellPos, slot.ItemStack.GetItem().tileInfo.tile);
             slot.ItemStackRemoveNumber(1);
         }
     }
