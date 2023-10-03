@@ -19,7 +19,7 @@ public class DatabaseSO : ScriptableObject
     
     public Item GetItemByTile(TileBase tile)
     {
-        return items.FirstOrDefault(item => item.tile.Equals(tile));
+        return items.FirstOrDefault(item => item.tile && item.tile.Equals(tile));
     }
 }
 

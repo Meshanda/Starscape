@@ -17,9 +17,9 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     [SerializeField] [Range(1,9)] private int _nbColumns;
     [SerializeField] [Range(1,4)] private int _nbRows;
 
-    [SerializeField] private float _splitInitialDelay = .25f;
-    [SerializeField] private float _splitMinDelay = .02f;
-    [SerializeField] private float _splitStep = .02f;
+    public float _splitInitialDelay = .25f;
+    public float _splitMinDelay = .02f;
+    public float _splitStep = .02f;
 
     [Header("Parents")] 
     [SerializeField] private Transform _quickSlotsParent;
