@@ -34,6 +34,7 @@ public class PasteGrotte : MonoBehaviour
        
         if (_cells == null || _cells.Count == 0)
         {
+            _loadingScreen.SetActive(false);
             return;
         }
         if (_cells[0][0, 0].position.y < _depthToEndLoading)
@@ -94,9 +95,21 @@ public class PasteGrotte : MonoBehaviour
             for (int j = toPastePrefab.cellBounds.min.y-1; j < toPastePrefab.cellBounds.max.y+1; j++)
             {
                 TileBase tile = toPastePrefab.GetTile(new Vector3Int(i, j));
-                _Cells[i  - toPastePrefab.cellBounds.min.x+1, j - toPastePrefab.cellBounds.min.y+1] = new Cell(new Vector3Int(i, j) + _offset, (tile == null));
+                Cell currentCell = new Cell(new Vector3Int(i, j) + _offset, (tile == null));
+                _Cells[i  - toPastePrefab.cellBounds.min.x+1, j - toPastePrefab.cellBounds.min.y+1] = currentCell;
+                
                 if (tile != null) 
                 {
+                    if (i > 0) 
+                    {
+                        _Cells[i - toPastePrefab.cellBounds.min.x + 1 - 1, j - toPastePrefab.cellBounds.min.y + 1].rightNeighbor = currentCell;
+                        currentCell.leftNeighbor = _Cells[i - toPastePrefab.cellBounds.min.x + 1 - 1, j - toPastePrefab.cellBounds.min.y + 1];
+                    }
+                    if (j > 0)
+                    {
+                        _Cells[i - toPastePrefab.cellBounds.min.x + 1 , j - toPastePrefab.cellBounds.min.y + 1 - 1].upNeighbor = currentCell;
+                        currentCell.downNeighbor = _Cells[i - toPastePrefab.cellBounds.min.x + 1, j - toPastePrefab.cellBounds.min.y + 1 - 1];
+                    }
                     _toCollapse.Add(new Vector3Int(i, j));
                     _tilemap.SetTile(new Vector3Int(i, j) + _offset, null);
                 }

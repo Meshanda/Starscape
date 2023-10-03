@@ -12,22 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4d0072cb0a75947ad9892ed3d43365, type: 3}
   m_Name: Ground
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: af9ff322fb0e680449e1e558fbd2c1bb, type: 2}
-  weight: 0
+  tile: {fileID: 11400000, guid: f698c9b5173958b4c96be457a5569a28, type: 2}
+  weight: 1
+  inDecor: 0
   upNeighbours:
+  - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
+  - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
+  - {fileID: 11400000, guid: 5e73f32140d686f49b28773905f7c18c, type: 2}
   - {fileID: 11400000, guid: 86980bb56bf6e5846bdcedc0c38f6e2d, type: 2}
   - {fileID: 11400000, guid: 2d5cfe2aca799944095b8f91a4092d10, type: 2}
-  - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
-  - {fileID: 11400000, guid: 5e73f32140d686f49b28773905f7c18c, type: 2}
-  - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
+  - {fileID: 11400000}
   rightNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
-  - {fileID: 11400000, guid: 5e73f32140d686f49b28773905f7c18c, type: 2}
   - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 5e73f32140d686f49b28773905f7c18c, type: 2}
   downNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
+  - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
   - {fileID: 11400000, guid: 5e73f32140d686f49b28773905f7c18c, type: 2}
+  - {fileID: 11400000}
   leftNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
-  - {fileID: 11400000, guid: 5e73f32140d686f49b28773905f7c18c, type: 2}
   - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 5e73f32140d686f49b28773905f7c18c, type: 2}
