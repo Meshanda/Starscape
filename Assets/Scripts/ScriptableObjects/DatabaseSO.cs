@@ -74,7 +74,7 @@ public struct CraftRecipe
     {
         var inventory = InventorySystem.Instance;
 
-        if ((inventory.CraftingFlags & requiredFlags) == requiredFlags)
+        if (requiredFlags != 0 && ((inventory.CraftingFlags & requiredFlags) == 0))
         {
             return false;
         }
