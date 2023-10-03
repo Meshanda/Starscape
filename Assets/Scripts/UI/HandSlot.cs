@@ -1,8 +1,5 @@
-using System.Collections;
 using Inventory;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HandSlot : Slot
 {

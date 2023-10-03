@@ -1,25 +1,17 @@
-using System.Collections;
 using Inventory;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class InventorySlot : Slot, IPointerEnterHandler, IPointerExitHandler
 {
- 
     #region Variables
-
-    [SerializeField] private GameObject _selection;
-
-    public bool IsSelected => _selection.activeSelf;
 
     #endregion
     
     #region Events
 
     public void OnPointerEnter(PointerEventData eventData)
-    {
+    { 
         if (!CanInteractWithInventory())
             return;
         
@@ -40,10 +32,6 @@ public class InventorySlot : Slot, IPointerEnterHandler, IPointerExitHandler
     private bool CanInteractWithInventory()
     {
         return _itemStack is not null && InventorySystem.Instance.IsInventoryOpen;
-    }
-    public void Select(bool status)
-    {
-        _selection.SetActive(status);
     }
     
     #endregion

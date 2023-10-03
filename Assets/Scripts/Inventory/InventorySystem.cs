@@ -5,9 +5,6 @@ using System.Linq;
 using Inventory;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Tilemaps;
-using UnityEngine.UI;
-using Utilities;
 
 public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, IPointerUpHandler
 {
