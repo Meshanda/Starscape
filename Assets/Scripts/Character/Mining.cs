@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -10,6 +11,8 @@ public class Mining : MonoBehaviour
 {
     [SerializeField] private GameObject _dropPrefab;
     [SerializeField] private float _miningDistance = 1.0f;
+    [SerializeField] private GameObject _crackPrefab;
+    
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
 
@@ -19,10 +22,15 @@ public class Mining : MonoBehaviour
     private Item _currentMiningItem;
     private (TileBase, Vector3Int) _currentMiningTile;
     private float _currentMiningProgress;
+    private GameObject _crackObject;
+    private SpriteRenderer _crackSpriteRenderer;
     
     private void Awake()
     {
         _cam = Camera.main;
+        _crackObject = Instantiate(_crackPrefab);
+        _crackSpriteRenderer = _crackObject.GetComponent<SpriteRenderer>();
+        _crackObject.SetActive(false);
     }
 
     private void Update()
@@ -37,6 +45,7 @@ public class Mining : MonoBehaviour
             if (_miningRoutine is not null)
                 StopCoroutine(_miningRoutine);
             
+            _crackObject.SetActive(false);
             _currentMiningProgress = 0.0f;
         }
     }
@@ -65,7 +74,7 @@ public class Mining : MonoBehaviour
             
             if (!_currentMiningTile.Item1)
             {
-                return;
+                goto skip;
             }
             
             _currentMiningItem = GameManager.Instance.database.GetItemByTile(tile.Item1);
@@ -75,12 +84,21 @@ public class Mining : MonoBehaviour
                 return;
             }
         }
-            
+        
+        skip:
+        
+        _crackSpriteRenderer.material.SetFloat("_Health", _currentMiningProgress);
+        
         if (!_currentMiningTile.Item1)
         {
+            _crackObject.SetActive(false);
             return;
         }
 
+        _crackObject.SetActive(true);
+        _crackObject.transform.position = World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0);
+        _crackSpriteRenderer.sprite = _currentMiningItem.sprite;
+        
         Item selectedItem = InventorySystem.Instance.GetSelectedSlot()?.ItemStack?.GetItem();
         ToolData selectedToolData = selectedItem is not null ? selectedItem.toolData : ToolData.DEFAULT;
 

@@ -60,10 +60,10 @@ public class StrateGeneration : MonoBehaviour
         }
         SetFilons();
 
-        for(int i = 0; i < dimensionsX ; i++)
-        {
-            tileGround.SetTile(new Vector3Int(i - OffsetXY.x, 0 - OffsetXY.y), tileBase);
-        }
+        // for(int i = 0; i < dimensionsX ; i++)
+        // {
+        //     tileGround.SetTile(new Vector3Int(i - OffsetXY.x, 0 - OffsetXY.y), tileBase);
+        // }
 
 
     }

@@ -470,9 +470,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   _groundCheck: {fileID: 3414171660056861552}
-  _ceilingCheck: {fileID: 2603375149273362692}
-  _groundedRadius: 0.2
+  CharacterAnimator: {fileID: 0}
+  _groundedYAxis: 0.2
+  _groundedXAxis: 0.2
   _ceilingRadius: 0.2
+  _facingRight: 1
 --- !u!114 &6154201203120559927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dropPrefab: {fileID: 6682008877770623002, guid: 5973becb8ec6b454bbd740270bb6baa2, type: 3}
   _miningDistance: 1.5
+  _crackPrefab: {fileID: 939617436016025389, guid: b433ce8967c7ee34ebb47aa7ac33bd0d, type: 3}
 --- !u!114 &7819457848825628168
 MonoBehaviour:
   m_ObjectHideFlags: 0

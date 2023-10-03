@@ -16,10 +16,10 @@ MonoBehaviour:
   - id: dirt_01
     name: Dirt
     description: This is a dirt block.
-    sprite: {fileID: 832037546, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    sprite: {fileID: 21300000, guid: 42971c32d57da1a4e8480bce4cb9ff75, type: 3}
     tileInfo:
-      tile: {fileID: 11400000, guid: 80a80f2df27c14d4f83086184c025cc8, type: 2}
-      life: 1
+      tile: {fileID: 11400000, guid: f3d287865af96c144a480a3924d5b4a4, type: 2}
+      life: 0.5
       requiredToBreak:
         type: 0
         level: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   - id: crafting_table_01
     name: Crafting Table
     description: 
-    sprite: {fileID: 737055279, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    sprite: {fileID: 21300000, guid: 5a8df7a6d1f43d841869ac3097a34b01, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: bb85747b5b13686478b4c92c9766ed46, type: 2}
       life: 1
@@ -88,9 +88,9 @@ MonoBehaviour:
   - id: cobblestone_01
     name: Cobblestone
     description: 
-    sprite: {fileID: 1669423760, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    sprite: {fileID: 21300000, guid: a0f1f2edaf746a54b837e6b7e8ede516, type: 3}
     tileInfo:
-      tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
+      tile: {fileID: 11400000, guid: e99a9437ce45fc54db42c471a07749f5, type: 2}
       life: 1
       requiredToBreak:
         type: 2
@@ -105,7 +105,7 @@ MonoBehaviour:
       tileDamagePerSecond: 1
   craftRecipes:
   - itemsRequired:
-    - itemID: ground_01
+    - itemID: dirt_01
       number: 1
     itemCrafted:
       itemID: cobblestone_01
@@ -115,18 +115,18 @@ MonoBehaviour:
     - itemID: cobblestone_01
       number: 1
     itemCrafted:
-      itemID: ground_01
+      itemID: dirt_01
       number: 1
     requiredFlags: 0
   - itemsRequired:
-    - itemID: ground_01
+    - itemID: dirt_01
       number: 3
     itemCrafted:
       itemID: pickaxe_01
       number: 1
     requiredFlags: 1
   - itemsRequired:
-    - itemID: ground_01
+    - itemID: dirt_01
       number: 4
     itemCrafted:
       itemID: crafting_table_01
