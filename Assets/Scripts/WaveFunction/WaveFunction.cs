@@ -149,7 +149,7 @@ public class WaveFunction : MonoBehaviour
         Debug.Log("done");
         placeAllTile();
         //StopAllCoroutines();
-        //ProcessCompleted?.Invoke();
+        ProcessCompleted?.Invoke();
     }
     private void StartCollapseNotCoroutine()
     {
@@ -163,9 +163,10 @@ public class WaveFunction : MonoBehaviour
 		Debug.Log("done");
         placeAllTile();
 
-		//StopAllCoroutines();
-		//ProcessCompleted?.Invoke();
-	}
+        ProcessCompleted?.Invoke();
+        //StopAllCoroutines();
+        //ProcessCompleted?.Invoke();
+    }
     private bool isCollapsed()
     {
         //check if any cells contain more than one entry

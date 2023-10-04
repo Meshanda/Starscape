@@ -22,24 +22,16 @@ public class PasteGrotte : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _waveFunction.ProcessCompleted += InvokeTheCollapse;
-    }
-    public void InvokeTheCollapse() 
-    {
-        Invoke("LaunchWaveCollapse", 0.01f);
     }
     public void LaunchWaveCollapse()
     {
-       
-        if (_cells == null || _cells.Count == 0)
+        foreach(var cell in _cells) 
         {
-            _loadingScreen.SetActive(false);
-            return;
+            _waveFunction.InitializeGrid(cell);
         }
-        if (_cells[0][0, 0].position.y < _depthToEndLoading)
-            _loadingScreen.SetActive(false);
-        _waveFunction.InitializeGrid(_cells[0]);
-        _cells.RemoveAt(0);
+        
+        //_waveFunction.InitializeGrid(_cells[0]);
+        //_cells.RemoveAt(0);
     }
 
     public void SpawnGrotte() 
