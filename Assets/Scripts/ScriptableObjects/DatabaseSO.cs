@@ -248,6 +248,7 @@ public class Item
     public string name;
     public string description;
     public Sprite sprite;
+    public bool canHaveDecorOnTop;
     public TileInfo tileInfo = TileInfo.DEFAULT;
     public ToolData toolData = ToolData.DEFAULT;
     

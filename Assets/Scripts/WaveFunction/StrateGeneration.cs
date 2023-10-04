@@ -2,15 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
-using UnityEngine.WSA;
-using static UnityEditor.PlayerSettings;
 using Random = UnityEngine.Random;
 
 public class StrateGeneration : MonoBehaviour
@@ -50,6 +45,7 @@ public class StrateGeneration : MonoBehaviour
     [SerializeField] private Tilemap _Decor;
     [SerializeField] private TileBase[] _decors;
     [SerializeField] private int _decorsChance;
+    [SerializeField] private CheckDecor _checkDecor;
     private List<Vector3Int> _posDecor = new List<Vector3Int>();
     void Awake()
     {
@@ -189,6 +185,7 @@ public class StrateGeneration : MonoBehaviour
             treeDist++;
             //tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s], x, y));
         }
+        _checkDecor.SetList(_posDecor);
     }
     public TileBase GetTileFromStrate(Strate strate, int x, int y)
     {

@@ -18,6 +18,7 @@ MonoBehaviour:
     name: Dirt
     description: This is a dirt block.
     sprite: {fileID: 21300000, guid: 42971c32d57da1a4e8480bce4cb9ff75, type: 3}
+    canHaveDecorOnTop: 0
     tileInfo:
       inspectorName: dirt (LOOT [dirt_01 (x1)])
       inspectorNameSimple: 
@@ -43,6 +44,7 @@ MonoBehaviour:
     name: Ground
     description: 
     sprite: {fileID: -1479925464, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    canHaveDecorOnTop: 0
     tileInfo:
       inspectorName: Atlas_67 (LOOT [ground_01 (x1)])
       inspectorNameSimple: 
@@ -68,6 +70,7 @@ MonoBehaviour:
     name: Crafting Table
     description: 
     sprite: {fileID: 21300000, guid: 5a8df7a6d1f43d841869ac3097a34b01, type: 3}
+    canHaveDecorOnTop: 0
     tileInfo:
       inspectorName: CraftingTableTile (LOOT [crafting_table_01 (x1)])
       inspectorNameSimple: 
@@ -93,6 +96,7 @@ MonoBehaviour:
     name: Pickaxe
     description: 
     sprite: {fileID: 21300000, guid: 8afca7ff5b1c29348b2129e86c114c14, type: 3}
+    canHaveDecorOnTop: 0
     tileInfo:
       inspectorName: <invalid>
       inspectorNameSimple: 
@@ -118,6 +122,7 @@ MonoBehaviour:
     name: Cobblestone
     description: 
     sprite: {fileID: 21300000, guid: a0f1f2edaf746a54b837e6b7e8ede516, type: 3}
+    canHaveDecorOnTop: 0
     tileInfo:
       inspectorName: stone (BREAK COND. [Pickaxe (lvl 0)]) (LOOT [cobblestone_01
         (x1)])
@@ -131,6 +136,32 @@ MonoBehaviour:
       lootOnBreak:
         inspectorName: cobblestone_01 (x1)
         itemID: cobblestone_01
+        number: 1
+    toolData:
+      inspectorName: None (lvl 0) (dmg 1)
+      toolStrength:
+        inspectorName: None (lvl 0)
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: grass_01 (TILE)
+    id: grass_01
+    name: grass
+    description: 
+    sprite: {fileID: 21300000, guid: eff8bda531123ab499ad5d794bbedc32, type: 3}
+    canHaveDecorOnTop: 1
+    tileInfo:
+      inspectorName: dirt_grass (LOOT [dirt_01 (x1)])
+      inspectorNameSimple: 
+      tile: {fileID: 11400000, guid: cdcb2f2f1890ef54e866c39566ce3254, type: 2}
+      life: 1
+      requiredToBreak:
+        inspectorName: None (lvl 0)
+        type: 0
+        level: 0
+      lootOnBreak:
+        inspectorName: dirt_01 (x1)
+        itemID: dirt_01
         number: 1
     toolData:
       inspectorName: None (lvl 0) (dmg 1)
