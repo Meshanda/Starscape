@@ -32,7 +32,7 @@ public class Mining : MonoBehaviour
         {
             _currentMiningProgress = value;
             _crackSpriteRenderer?.material?.SetFloat("_Health", _currentMiningProgress);
-            _crackObject.SetActive(_currentMiningProgress > 0.0f);
+            _crackObject?.SetActive(_currentMiningProgress > 0.0f);
         }
     }
     
