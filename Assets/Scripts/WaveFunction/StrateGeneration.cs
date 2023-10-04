@@ -115,6 +115,8 @@ public class StrateGeneration : MonoBehaviour
     }
     public void PasteTree(Vector3Int pos)
     {
+        if (_trees == null || _trees.Length == 0 || _tileMapTree == null)
+            return;
         Tilemap toPastePrefab = _trees[Random.Range(0, _trees.Length)];
         for (int i = toPastePrefab.cellBounds.min.x - 1; i < toPastePrefab.cellBounds.max.x + 1; i++)
         {
@@ -174,7 +176,7 @@ public class StrateGeneration : MonoBehaviour
                 PasteTree(new Vector3Int(x - OffsetXY.x, rng - OffsetXY.y+1, 0));
                 treeDist = 0;
             }
-            if (Random.Range(0f, 1f) < _decorsChance / 100f) 
+            if (Random.Range(0f, 1f) < _decorsChance / 100f && _Decor != null) 
             {
                 _Decor.SetTile(new Vector3Int(x - OffsetXY.x, rng - OffsetXY.y + 1, 0), _decors[Random.Range(0, _decors.Length)]);
                 _posDecor.Add(new Vector3Int(x - OffsetXY.x, rng - OffsetXY.y + 1, 0));
@@ -185,7 +187,9 @@ public class StrateGeneration : MonoBehaviour
             treeDist++;
             //tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s], x, y));
         }
-        _checkDecor.SetList(_posDecor);
+
+        if (_checkDecor != null)
+            _checkDecor.SetList(_posDecor);
     }
     public TileBase GetTileFromStrate(Strate strate, int x, int y)
     {
