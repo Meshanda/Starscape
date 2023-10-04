@@ -6,6 +6,8 @@ public class Placing : MonoBehaviour
 {
     [SerializeField] private float _placingDistance = 2.0f;
     [SerializeField] private float _placingDelay = .15f;
+
+    public static event Action<Item, Vector3Int, Vector2> OnPlaceTile; // item, cellPos, worldPos (centered)
     
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
@@ -50,9 +52,15 @@ public class Placing : MonoBehaviour
         if (!slot || slot.ItemStack is null)
             return;
 
-        if (TileCanBePlaced(cellPos)) 
+        if (!slot.ItemStack.GetItem().tileInfo.tile)
         {
-            World.Instance.GroundTilemap.SetTile(cellPos, slot.ItemStack.GetItem().tile);
+            return; // item doesn't have a tile, it cannot be placed in the world
+        }
+
+        if (TileCanBePlaced(cellPos))
+        {
+            World.Instance.GroundTilemap.SetTile(cellPos, slot.ItemStack.GetItem().tileInfo.tile);
+            OnPlaceTile?.Invoke(slot.ItemStack.GetItem(), cellPos, World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0));
             slot.ItemStackRemoveNumber(1);
         }
     }
@@ -62,19 +70,16 @@ public class Placing : MonoBehaviour
         var hit = Physics2D.Raycast(_cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity);
         if (hit.collider != null && hit.collider.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("Hit player!");
             return false;
         }
         
         if (World.Instance.GroundTilemap.GetTile(cellPos) is not null)
         {
-            Debug.Log("Tile is occupied.");
             return false;
         }
 
         if (World.Instance.BackGroundTilemap.GetTile(cellPos) is not null)
         {
-            Debug.Log("Background found!");
             return true;
         }
 

@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
+
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CharacterMovement))]
 public class CharacterController2D : MonoBehaviour
@@ -13,18 +11,26 @@ public class CharacterController2D : MonoBehaviour
 	[Range(0, .3f)] [SerializeField] private float _movementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private LayerMask _whatIsGround;							// A mask determining what is ground to the character
 	[SerializeField] private Transform _groundCheck;							// A position marking where to check if the player is grounded.
-	[SerializeField] private Transform _ceilingCheck;							// A position marking where to check for ceilings
 	
-	[SerializeField] private float _groundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+	[SerializeField] private Animator CharacterAnimator;
+	
+	[SerializeField] private float _groundedYAxis = .2f; // Radius of the overlap circle to determine if grounded
+	[SerializeField] private float _groundedXAxis = .2f; // Radius of the overlap circle to determine if grounded
 	private bool _grounded;            // Whether or not the player is grounded.
 	[SerializeField] private float _ceilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D _rigidbody2D;
-	private bool _facingRight = true;  // For determining which way the player is currently facing.
+	[SerializeField] private bool _facingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 _velocity = Vector3.zero;
 	
 	private bool _wantToJump;
 	
-	private Vector2 _groundBox => new Vector2(Mathf.Abs(transform.localScale.x)*0.96f, _groundedRadius);
+	private static readonly int XAnimator = Animator.StringToHash("X");
+	private static readonly int YAnimator = Animator.StringToHash("Y");
+	private static readonly int JumpAnimator = Animator.StringToHash("Jumping");
+	private static readonly int FallAnimator = Animator.StringToHash("Falling");
+	private bool _jumping;
+
+	private Vector2 GroundBox => new(_groundedXAxis, _groundedYAxis);
 	
 	public float MoveDirection { get; set; }
 
@@ -41,12 +47,34 @@ public class CharacterController2D : MonoBehaviour
 		_grounded = false;
 		
 		//ground checker
-		Collider2D[] colliders = Physics2D.OverlapBoxAll(_groundCheck.position, _groundBox, 0,_whatIsGround);
+		Collider2D[] colliders = Physics2D.OverlapBoxAll(_groundCheck.position, GroundBox, 0,_whatIsGround);
 		_grounded = colliders.Length > 0;
+		
+		
+		if (_grounded && _rigidbody2D.velocity.y <= 0.1f)
+			_jumping = false;
 		
 		Move(MoveDirection);
 		if(_grounded && _wantToJump)
 			Jump();
+
+		UpdateAnimation();
+	}
+
+	private void UpdateAnimation()
+	{
+		if (!CharacterAnimator)
+			return;
+		
+		CharacterAnimator.SetFloat(XAnimator, MoveDirection);
+		
+		if(_rigidbody2D.velocity.y <= -3.0f)
+			CharacterAnimator.SetBool(FallAnimator, !_grounded);
+		else
+		{
+			CharacterAnimator.SetBool(FallAnimator, !_grounded);
+			CharacterAnimator.SetBool(JumpAnimator, _jumping);
+		}
 	}
 
 
@@ -76,6 +104,7 @@ public class CharacterController2D : MonoBehaviour
 		if (_grounded)
 		{
 			_wantToJump = false;
+			_jumping = true;
 			
 			_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
 			// Add a vertical force to the player
@@ -103,5 +132,11 @@ public class CharacterController2D : MonoBehaviour
 		Vector3 newScale = transform.localScale;
 		newScale.x *= -1;
 		transform.localScale = newScale;
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireCube(_groundCheck.position, GroundBox);
 	}
 }

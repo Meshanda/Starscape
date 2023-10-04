@@ -5,9 +5,6 @@ using System.Linq;
 using Inventory;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Tilemaps;
-using UnityEngine.UI;
-using Utilities;
 
 public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, IPointerUpHandler
 {
@@ -17,9 +14,9 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     [SerializeField] [Range(1,9)] private int _nbColumns;
     [SerializeField] [Range(1,4)] private int _nbRows;
 
-    [SerializeField] private float _splitInitialDelay = .25f;
-    [SerializeField] private float _splitMinDelay = .02f;
-    [SerializeField] private float _splitStep = .02f;
+    public float _splitInitialDelay = .25f;
+    public float _splitMinDelay = .02f;
+    public float _splitStep = .02f;
 
     [Header("Parents")] 
     [SerializeField] private Transform _quickSlotsParent;
@@ -154,7 +151,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
             return;
 
         var drop = Instantiate(_dropPfb,
-            GameManager.Instance.player.transform.position,
+            GameManager.Instance.player.DropPosition.position,
             Quaternion.identity).GetComponent<Drop>();
 
         drop.transform.position = new Vector3(drop.transform.position.x, drop.transform.position.y, 0);

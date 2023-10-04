@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -26,5 +24,10 @@ public class MapGene1ratorEditor : Editor
                 mapGen.InitializeGrid();
             }
         }
-     }
+        if (GUILayout.Button("Light"))
+        {
+            mapGen.UpdateShadowGround();
+            mapGen.UpdatePlayerLight();
+        }
+    }
 }
