@@ -25,7 +25,9 @@ public class CharacterController2D : MonoBehaviour
 	private bool _wantToJump;
 	
 	private static readonly int XAnimator = Animator.StringToHash("X");
+	private static readonly int YAnimator = Animator.StringToHash("Y");
 	private static readonly int JumpAnimator = Animator.StringToHash("Jumping");
+	private static readonly int FallAnimator = Animator.StringToHash("Falling");
 	private bool _jumping;
 
 	private Vector2 GroundBox => new(_groundedXAxis, _groundedYAxis);
@@ -65,8 +67,14 @@ public class CharacterController2D : MonoBehaviour
 			return;
 		
 		CharacterAnimator.SetFloat(XAnimator, MoveDirection);
-		CharacterAnimator.SetBool(JumpAnimator, _jumping);
-
+		
+		if(_rigidbody2D.velocity.y <= -3.0f)
+			CharacterAnimator.SetBool(FallAnimator, !_grounded);
+		else
+		{
+			CharacterAnimator.SetBool(FallAnimator, !_grounded);
+			CharacterAnimator.SetBool(JumpAnimator, _jumping);
+		}
 	}
 
 
