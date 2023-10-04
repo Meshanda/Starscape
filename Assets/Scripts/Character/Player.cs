@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _selectedSprite;
-    
+    [SerializeField] private Transform _dropPosition;
+
+    public Transform DropPosition => _dropPosition;
+
     public void OnToggleInventory()
     {
         InventorySystem.Instance.ToggleInventory();

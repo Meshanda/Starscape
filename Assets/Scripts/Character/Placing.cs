@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ public class Placing : MonoBehaviour
 {
     [SerializeField] private float _placingDistance = 2.0f;
     [SerializeField] private float _placingDelay = .15f;
+
+    public static event Action<Item, Vector2> OnPlaceTile; // item, worldPos
     
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
@@ -54,9 +57,10 @@ public class Placing : MonoBehaviour
             return; // item doesn't have a tile, it cannot be placed in the world
         }
 
-        if (TileCanBePlaced(cellPos)) 
+        if (TileCanBePlaced(cellPos))
         {
             World.Instance.GroundTilemap.SetTile(cellPos, slot.ItemStack.GetItem().tileInfo.tile);
+            OnPlaceTile?.Invoke(slot.ItemStack.GetItem(), World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0));
             slot.ItemStackRemoveNumber(1);
         }
     }
