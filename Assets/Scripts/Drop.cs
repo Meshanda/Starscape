@@ -45,7 +45,7 @@ public class Drop : MonoBehaviour
     
     public void ThrowInPlayerDir()
     {
-        Vector2 dir = GameManager.Instance.player.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        Vector2 dir = GameManager.Instance.player.transform.localScale.x < 0 ? Vector2.right : Vector2.left;
         dir += Vector2.up * 0.35f;
         _rb.AddForce(dir * _throwForce);
 

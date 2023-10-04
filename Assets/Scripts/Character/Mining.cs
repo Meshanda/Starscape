@@ -12,6 +12,8 @@ public class Mining : MonoBehaviour
     [SerializeField] private GameObject _dropPrefab;
     [SerializeField] private float _miningDistance = 1.0f;
     [SerializeField] private GameObject _crackPrefab;
+
+    public static event Action<Item, Vector2> OnMineTile; // item, worldPos
     
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
@@ -21,7 +23,19 @@ public class Mining : MonoBehaviour
     
     private Item _currentMiningItem;
     private (TileBase, Vector3Int) _currentMiningTile;
+    
     private float _currentMiningProgress;
+    private float CurrentMiningProgress
+    {
+        get => _currentMiningProgress;
+        set
+        {
+            _currentMiningProgress = value;
+            _crackSpriteRenderer?.material?.SetFloat("_Health", _currentMiningProgress);
+            _crackObject?.SetActive(_currentMiningProgress > 0.0f);
+        }
+    }
+    
     private GameObject _crackObject;
     private SpriteRenderer _crackSpriteRenderer;
     
@@ -45,8 +59,7 @@ public class Mining : MonoBehaviour
             if (_miningRoutine is not null)
                 StopCoroutine(_miningRoutine);
             
-            _crackObject.SetActive(false);
-            _currentMiningProgress = 0.0f;
+            CurrentMiningProgress = 0.0f;
         }
     }
 
@@ -69,12 +82,12 @@ public class Mining : MonoBehaviour
 
         if (_currentMiningTile != tile)
         {
-            _currentMiningProgress = 0.0f;
             _currentMiningTile = tile;
+            CurrentMiningProgress = 0.0f;
             
             if (!_currentMiningTile.Item1)
             {
-                goto skip;
+                return;
             }
             
             _currentMiningItem = GameManager.Instance.database.GetItemByTile(tile.Item1);
@@ -83,37 +96,32 @@ public class Mining : MonoBehaviour
                 Debug.LogWarning("Unreferenced tile in database!");
                 return;
             }
+            
+            _crackObject.transform.position = World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0);
+            _crackSpriteRenderer.sprite = _currentMiningItem.sprite;
         }
-        
-        skip:
-        
-        _crackSpriteRenderer.material.SetFloat("_Health", _currentMiningProgress);
-        
+
         if (!_currentMiningTile.Item1)
         {
-            _crackObject.SetActive(false);
             return;
         }
 
-        _crackObject.SetActive(true);
-        _crackObject.transform.position = World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0);
-        _crackSpriteRenderer.sprite = _currentMiningItem.sprite;
-        
         Item selectedItem = InventorySystem.Instance.GetSelectedSlot()?.ItemStack?.GetItem();
         ToolData selectedToolData = selectedItem is not null ? selectedItem.toolData : ToolData.DEFAULT;
 
         if (selectedToolData.toolStrength.IsEnoughFor(_currentMiningItem.tileInfo.requiredToBreak))
         {
-            _currentMiningProgress += (Time.deltaTime * selectedToolData.tileDamagePerSecond) / _currentMiningItem.tileInfo.life;
+            CurrentMiningProgress += (Time.deltaTime * selectedToolData.tileDamagePerSecond) / _currentMiningItem.tileInfo.life;
         }
         else
         {
             return; // do nothing, we can't mine this tile with the item we currently have selected
         }
 
-        if (_currentMiningProgress >= 1.0f) // destroy tile
+        if (CurrentMiningProgress >= 1.0f) // destroy tile
         {
             World.Instance.GroundTilemap.SetTile(cellPos, null);
+            OnMineTile?.Invoke(_currentMiningItem, World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0));
 
             if (!_currentMiningItem.tileInfo.HasAnyLoot())
             {
