@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -151,7 +152,7 @@ public class StrateGeneration : MonoBehaviour
         {
             for (int j = 0; j < sizeY; j++)
             {
-                wordTilesMap.SetPixel(i, j, new Color(1, 0, 0, 1));
+                wordTilesMap.SetPixel(i, j, new UnityEngine.Color(1, 0, 0, 1));
             }
         }
 
@@ -166,7 +167,7 @@ public class StrateGeneration : MonoBehaviour
         {
             for (int j = 0; j < sizeY; j++)
             {
-                PlayerTexture.SetPixel(i, j, new Color(0, 0, 0, 1));
+                PlayerTexture.SetPixel(i, j, new UnityEngine.Color(0, 0, 0, 1));
             }
         }
         PlayerTexture.Apply();
@@ -178,11 +179,11 @@ public class StrateGeneration : MonoBehaviour
     {
         ResetShadowPlayer();
         Vector3Int Cell = tileGround.WorldToCell(Player.transform.position);
-        for (int i = -5; i < 6; i++)
+        for (int i = -10; i < 11; i++)
         {
-            for (int j = -5; j < 6; j++)
+            for (int j = -10; j < 11; j++)
             {
-                PlayerTexture.SetPixel(Cell.x + OffsetXY.x + i, sizeY - Cell.y + j - OffsetXY.y, new Color(1 - (0.1f*Mathf.Abs(i)+0.1f* Mathf.Abs(j)), 0, 0, 1));
+                PlayerTexture.SetPixel(Cell.x + OffsetXY.x + i, sizeY - Cell.y + j - OffsetXY.y, new UnityEngine.Color(1 - (0.1f*Mathf.Abs(i)+0.1f* Mathf.Abs(j)), 0, 0, 1));
             }
         }
         PlayerTexture.Apply();
@@ -196,18 +197,36 @@ public class StrateGeneration : MonoBehaviour
         {
             for (int j = 0; j < sizeY; j++)
             {
+                float temp = 1;
+
                 if (tileGround.GetTile(new Vector3Int(i - OffsetXY.x, -j - OffsetXY.y)) != null)
                 {
-                    wordTilesMap.SetPixel(i, j, new Color(wordTilesMap.GetPixel(i, j - 1).r - 0.2f, 0, 0, 1));
+                    temp = wordTilesMap.GetPixel(i, j - 1).r - 0.2f;
 
-                }
+                } 
                 else
                 {
-                    wordTilesMap.SetPixel(i, j, new Color(1, 0, 0, 1));
+                    temp = 1;
+                }
+
+                
+                wordTilesMap.SetPixel(i, j, new UnityEngine.Color(temp, 0, 0, 1));
+
+            }
+        }
+        for (int i = 0; i < dimensionsX; i++)
+        {
+            for (int j = 0; j < sizeY; j++)
+            {
+                if (tileGround.GetTile(new Vector3Int(i - OffsetXY.x + 1, -j - OffsetXY.y)) == null
+                    || tileGround.GetTile(new Vector3Int(i - OffsetXY.x - 1, -j - OffsetXY.y)) == null)
+                {
+                    wordTilesMap.SetPixel(i, j, new UnityEngine.Color(wordTilesMap.GetPixel(i, j).r+0.3f, 0, 0, 1));
                 }
             }
         }
-        wordTilesMap.Apply();
+
+                wordTilesMap.Apply();
     }
 
 }
