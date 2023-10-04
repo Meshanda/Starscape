@@ -13,7 +13,7 @@ public class Mining : MonoBehaviour
     [SerializeField] private float _miningDistance = 1.0f;
     [SerializeField] private GameObject _crackPrefab;
 
-    public static event Action<Item, Vector2> OnMineTile; // item, worldPos
+    public static event Action<Item, Vector3Int, Vector2> OnMineTile; // item, cellPos, worldPos (centered)
     
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
@@ -121,7 +121,7 @@ public class Mining : MonoBehaviour
         if (CurrentMiningProgress >= 1.0f) // destroy tile
         {
             World.Instance.GroundTilemap.SetTile(cellPos, null);
-            OnMineTile?.Invoke(_currentMiningItem, World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0));
+            OnMineTile?.Invoke(_currentMiningItem, cellPos, World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0));
 
             if (!_currentMiningItem.tileInfo.HasAnyLoot())
             {

@@ -49,17 +49,16 @@ public class StrateGeneration : MonoBehaviour
 
         Mining.OnMineTile += CallEventShadow;
         Placing.OnPlaceTile += CallEventShadow;
-
     }
 
-    private void CallEventShadow(Item item, Vector2 vector)
+    private void CallEventShadow(Item item, Vector3Int cellPos, Vector2 vector)
     {
-        // UpdateShadowGround();
+        UpdateShadowGround();
     }
 
     private void Update()
     {
-        // UpdatePlayerLight();
+        UpdatePlayerLight();
     }
 
     public void InitializeGrid()

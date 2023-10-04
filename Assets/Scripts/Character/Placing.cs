@@ -7,7 +7,7 @@ public class Placing : MonoBehaviour
     [SerializeField] private float _placingDistance = 2.0f;
     [SerializeField] private float _placingDelay = .15f;
 
-    public static event Action<Item, Vector2> OnPlaceTile; // item, worldPos
+    public static event Action<Item, Vector3Int, Vector2> OnPlaceTile; // item, cellPos, worldPos (centered)
     
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
@@ -60,7 +60,7 @@ public class Placing : MonoBehaviour
         if (TileCanBePlaced(cellPos))
         {
             World.Instance.GroundTilemap.SetTile(cellPos, slot.ItemStack.GetItem().tileInfo.tile);
-            OnPlaceTile?.Invoke(slot.ItemStack.GetItem(), World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0));
+            OnPlaceTile?.Invoke(slot.ItemStack.GetItem(), cellPos, World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0));
             slot.ItemStackRemoveNumber(1);
         }
     }
