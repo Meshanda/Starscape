@@ -10,6 +10,7 @@ using UnityEngine.Experimental.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using UnityEngine.WSA;
+using static UnityEditor.PlayerSettings;
 using Random = UnityEngine.Random;
 
 public class StrateGeneration : MonoBehaviour
@@ -39,7 +40,17 @@ public class StrateGeneration : MonoBehaviour
     [Header("Auto Update Generator")]
     public bool autoUpdate;
     [SerializeField] private PasteGrotte _pasteGrotto;
+    [Header("Tree")]
+    [SerializeField] private Tilemap[] _trees;
+    [SerializeField] private Tilemap _tileMapTree;
+    [SerializeField] private int _treeMinDist;
+    [SerializeField] private int _treeChance;
 
+    [Header("Decors")]
+    [SerializeField] private Tilemap _Decor;
+    [SerializeField] private TileBase[] _decors;
+    [SerializeField] private int _decorsChance;
+    private List<Vector3Int> _posDecor = new List<Vector3Int>();
     void Awake()
     {
         
@@ -73,9 +84,14 @@ public class StrateGeneration : MonoBehaviour
 
         for ( int s = 0 ; s < _strates.Count(); s++) 
         {
-            if(s > 0) 
+            if(s > 1) 
             {
                 debutStrate += _strates[s - 1].SizeY ;
+            }
+            if(s == 0)
+            {
+                FirstStrate(_strates[s]);
+                continue;
             }
             
             if(_strates[s].transition) 
@@ -100,6 +116,23 @@ public class StrateGeneration : MonoBehaviour
         UpdateShadowGround();
 
 
+
+    }
+    public void PasteTree(Vector3Int pos)
+    {
+        Tilemap toPastePrefab = _trees[Random.Range(0, _trees.Length)];
+        for (int i = toPastePrefab.cellBounds.min.x - 1; i < toPastePrefab.cellBounds.max.x + 1; i++)
+        {
+            for (int j = toPastePrefab.cellBounds.min.y - 1; j < toPastePrefab.cellBounds.max.y + 1; j++)
+            {
+                TileBase tile = toPastePrefab.GetTile(new Vector3Int(i, j));
+                if (tile != null)
+                {
+                    _tileMapTree.SetTile(new Vector3Int(i, j) + pos, tile);
+                }
+
+            }
+        }
     }
 
     public void Transition(int start, Strate st) 
@@ -111,7 +144,7 @@ public class StrateGeneration : MonoBehaviour
             {
                 if( y < rng) 
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[0].Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x,-y - OffsetXY.y), st.Tiles[0].Tile);
                 }
                 else 
                 {
@@ -121,11 +154,43 @@ public class StrateGeneration : MonoBehaviour
             rng += Random.Range(-1, 2);
             rng = Mathf.Min(rng, start + st.SizeY-1);
             rng = Mathf.Max(rng, start);
-
-            //tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s], x, y));
         }
     }
 
+    public void FirstStrate(Strate st) 
+    {
+        int treeDist = 0;
+        int rng = Random.Range(0, st.SizeY);
+        for (int x = 0; x < dimensionsX; x++)
+        {
+            for (int y = 0; y <= rng; y++)
+            {
+                if (y == rng)
+                {
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y - OffsetXY.y), st.Tiles[0].Tile);
+                }
+                else
+                {
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y - OffsetXY.y), st.Tiles[1].Tile);
+                }
+            }
+            if( treeDist > _treeMinDist &&  Random.Range(0f,1f) < _treeChance/100f )
+            {
+                PasteTree(new Vector3Int(x - OffsetXY.x, rng - OffsetXY.y+1, 0));
+                treeDist = 0;
+            }
+            if (Random.Range(0f, 1f) < _decorsChance / 100f) 
+            {
+                _Decor.SetTile(new Vector3Int(x - OffsetXY.x, rng - OffsetXY.y + 1, 0), _decors[Random.Range(0, _decors.Length)]);
+                _posDecor.Add(new Vector3Int(x - OffsetXY.x, rng - OffsetXY.y + 1, 0));
+            }
+            rng += Random.Range(-1, 2)* Random.Range(0, 2);
+            rng = Mathf.Min(rng, st.SizeY );
+            rng = Mathf.Max(rng, 1);
+            treeDist++;
+            //tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s], x, y));
+        }
+    }
     public TileBase GetTileFromStrate(Strate strate, int x, int y)
     {
         for (int i = 0; i < strate.Tiles.Count(); i++)
