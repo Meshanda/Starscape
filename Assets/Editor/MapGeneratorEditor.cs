@@ -24,5 +24,10 @@ public class MapGene1ratorEditor : Editor
                 mapGen.InitializeGrid();
             }
         }
-     }
+        if (GUILayout.Button("Light"))
+        {
+            mapGen.UpdateShadowGround();
+            mapGen.UpdatePlayerLight();
+        }
+    }
 }

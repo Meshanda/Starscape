@@ -6,6 +6,8 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
+using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using UnityEngine.WSA;
 using Random = UnityEngine.Random;
@@ -14,11 +16,14 @@ public class StrateGeneration : MonoBehaviour
 {
 
     [Header("Initialisation")]
+    public PlayerInput Player;
     public int dimensionsX;
     private Vector2Int OffsetXY;
     public Tilemap tileGround;
     [SerializeField] private List<Strate> _strates = new List<Strate>();
     public TileBase tileBase;
+    public SpriteRenderer shadow;
+    int sizeY = 0;
 
     [Header("Filon")]
     public List<TilePos> LTiles = new List<TilePos>();
@@ -26,17 +31,37 @@ public class StrateGeneration : MonoBehaviour
     public float ProbVoisin;
     public float ProbVoisinVoisin;
 
+    [Header("Shader Graph")]
+    [HideInInspector] public Texture2D wordTilesMap;
+    [HideInInspector] public Texture2D PlayerTexture;
+    public Material lightShader;
+
     [Header("Auto Update Generator")]
     public bool autoUpdate;
     [SerializeField] private PasteGrotte _pasteGrotto;
 
     void Awake()
     {
+        
         InitializeGrid();
         if(_pasteGrotto != null)
             _pasteGrotto.SpawnGrotte();
+
+        Mining.OnMineTile += CallEventShadow;
+        Placing.OnPlaceTile += CallEventShadow;
+
     }
-    
+
+    private void CallEventShadow(Item item, Vector2 vector)
+    {
+        UpdateShadowGround();
+    }
+
+    private void Update()
+    {
+        UpdatePlayerLight();
+    }
+
     public void InitializeGrid()
     {
         OffsetXY.x = dimensionsX / 2;
@@ -45,6 +70,7 @@ public class StrateGeneration : MonoBehaviour
         LTiles.Clear();
         LtilesVoisin.Clear();
         tileGround.ClearAllTiles();
+
         for ( int s = 0 ; s < _strates.Count(); s++) 
         {
             if(s > 0) 
@@ -66,11 +92,12 @@ public class StrateGeneration : MonoBehaviour
             }
         }
         SetFilons();
-
-        // for(int i = 0; i < dimensionsX ; i++)
-        // {
-        //     tileGround.SetTile(new Vector3Int(i - OffsetXY.x, 0 - OffsetXY.y), tileBase);
-        // }
+        sizeY = tileGround.size.y;
+        ResetShadowGround();
+        ResetShadowPlayer();
+        shadow.transform.position = new Vector3(0, -tileGround.CellToWorld(new Vector3Int(0, (sizeY / 2) + OffsetXY.y)).y + 0.17f);
+        shadow.transform.localScale = new Vector3(tileGround.size.x, -tileGround.size.y, tileGround.size.z) * 0.32f;
+        UpdateShadowGround();
 
 
     }
@@ -154,7 +181,93 @@ public class StrateGeneration : MonoBehaviour
         return Ltemp;
     }
 
-   
+
+    public void ResetShadowGround()
+    {
+        wordTilesMap = new Texture2D(dimensionsX, sizeY);
+        wordTilesMap.filterMode = FilterMode.Point;
+        lightShader.SetTexture("_ShadowTexture", wordTilesMap);
+        for (int i = 0; i < dimensionsX; i++)
+        {
+            for (int j = 0; j < sizeY; j++)
+            {
+                wordTilesMap.SetPixel(i, j, new Color(1, 0, 0, 1));
+            }
+        }
+
+        wordTilesMap.Apply();
+    }
+    public void ResetShadowPlayer()
+    {
+        PlayerTexture = new Texture2D(dimensionsX, sizeY);
+        PlayerTexture.filterMode = FilterMode.Point;
+        lightShader.SetTexture("_PlayerLight", PlayerTexture);
+        for (int i = 0; i < dimensionsX; i++)
+        {
+            for (int j = 0; j < sizeY; j++)
+            {
+                PlayerTexture.SetPixel(i, j, new Color(0, 0, 0, 1));
+            }
+        }
+        PlayerTexture.Apply();
+    }
+
+
+
+    public void UpdatePlayerLight()
+    {
+        ResetShadowPlayer();
+        Vector3Int Cell = tileGround.WorldToCell(Player.transform.position);
+        for (int i = -10; i < 11; i++)
+        {
+            for (int j = -10; j < 11; j++)
+            {
+                PlayerTexture.SetPixel(Cell.x + OffsetXY.x + i, sizeY - Cell.y + j - OffsetXY.y, new Color(1 - (0.1f*Mathf.Abs(i)+0.1f* Mathf.Abs(j)), 0, 0, 1));
+            }
+        }
+        PlayerTexture.Apply();
+    }
+
+
+    public void UpdateShadowGround()
+    {
+        ResetShadowGround();
+        for (int i = 0; i < dimensionsX; i++)
+        {
+            for (int j = 0; j < sizeY; j++)
+            {
+                float temp = 1;
+
+                if (tileGround.GetTile(new Vector3Int(i - OffsetXY.x, -j - OffsetXY.y)) != null)
+                {
+                    temp = wordTilesMap.GetPixel(i, j - 1).r - 0.2f;
+
+                } 
+                else
+                {
+                    temp = 1;
+                }
+
+                
+                wordTilesMap.SetPixel(i, j, new Color(temp, 0, 0, 1));
+
+            }
+        }
+        for (int i = 0; i < dimensionsX; i++)
+        {
+            for (int j = 0; j < sizeY; j++)
+            {
+                if (tileGround.GetTile(new Vector3Int(i - OffsetXY.x + 1, -j - OffsetXY.y)) == null
+                    || tileGround.GetTile(new Vector3Int(i - OffsetXY.x - 1, -j - OffsetXY.y)) == null)
+                {
+                    wordTilesMap.SetPixel(i, j, new Color(wordTilesMap.GetPixel(i, j).r+0.3f, 0, 0, 1));
+                }
+            }
+        }
+
+                wordTilesMap.Apply();
+    }
+
 }
 [Serializable]
 public struct Strate 
