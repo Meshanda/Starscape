@@ -48,6 +48,11 @@ public class StrateGeneration : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        UpdatePlayerLight();
+    }
+
     public void InitializeGrid()
     {
         OffsetXY.x = dimensionsX / 2;
@@ -74,10 +79,11 @@ public class StrateGeneration : MonoBehaviour
         SetFilons();
 
         sizeY = tileGround.size.y;
-        ResetShadow();
+        ResetShadowGround();
+        ResetShadowPlayer();
         shadow.transform.position = new Vector3(0, -tileGround.CellToWorld(new Vector3Int(0, (sizeY / 2) + OffsetXY.y) ).y + 0.17f);
         shadow.transform.localScale = new Vector3(tileGround.size.x, -tileGround.size.y, tileGround.size.z) * 0.32f;
-        UpdateShadow();
+        UpdateShadowGround();
     }
 
     public TileBase GetTileFromStrate(Strate strate, int x, int y)
@@ -136,43 +142,56 @@ public class StrateGeneration : MonoBehaviour
     }
 
 
-    public void ResetShadow()
+    public void ResetShadowGround()
     {
         wordTilesMap = new Texture2D(dimensionsX, sizeY);
         wordTilesMap.filterMode = FilterMode.Point;
-        PlayerTexture = new Texture2D(dimensionsX, sizeY);
-        PlayerTexture.filterMode = FilterMode.Point;
         lightShader.SetTexture("_ShadowTexture", wordTilesMap);
-        lightShader.SetTexture("_PlayerLight", PlayerTexture);
         for (int i = 0; i < dimensionsX; i++)
         {
             for (int j = 0; j < sizeY; j++)
             {
                 wordTilesMap.SetPixel(i, j, new Color(1, 0, 0, 1));
+            }
+        }
+
+        wordTilesMap.Apply();
+    }
+    public void ResetShadowPlayer()
+    {
+        PlayerTexture = new Texture2D(dimensionsX, sizeY);
+        PlayerTexture.filterMode = FilterMode.Point;
+        lightShader.SetTexture("_PlayerLight", PlayerTexture);
+        for (int i = 0; i < dimensionsX; i++)
+        {
+            for (int j = 0; j < sizeY; j++)
+            {
                 PlayerTexture.SetPixel(i, j, new Color(0, 0, 0, 1));
             }
         }
-        wordTilesMap.Apply();
         PlayerTexture.Apply();
     }
 
+
+
     public void UpdatePlayerLight()
     {
+        ResetShadowPlayer();
         Vector3Int Cell = tileGround.WorldToCell(Player.transform.position);
         for (int i = -5; i < 6; i++)
         {
             for (int j = -5; j < 6; j++)
             {
-                Debug.Log("ici" +Cell);
-                PlayerTexture.SetPixel(Cell.x + i,Cell.y + j, new Color(1, 0, 0, 1));
+                PlayerTexture.SetPixel(Cell.x + OffsetXY.x + i, sizeY - Cell.y + j - OffsetXY.y, new Color(1 - (0.1f*Mathf.Abs(i)+0.1f* Mathf.Abs(j)), 0, 0, 1));
             }
         }
         PlayerTexture.Apply();
     }
 
 
-    public void UpdateShadow()
+    public void UpdateShadowGround()
     {
+        ResetShadowGround();
         for (int i = 0; i < dimensionsX; i++)
         {
             for (int j = 0; j < sizeY; j++)

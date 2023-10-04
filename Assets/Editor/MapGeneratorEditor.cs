@@ -28,7 +28,7 @@ public class MapGene1ratorEditor : Editor
         }
         if (GUILayout.Button("Light"))
         {
-            mapGen.UpdateShadow();
+            mapGen.UpdateShadowGround();
             mapGen.UpdatePlayerLight();
         }
     }
