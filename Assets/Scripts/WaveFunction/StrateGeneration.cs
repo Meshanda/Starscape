@@ -32,10 +32,13 @@ public class StrateGeneration : MonoBehaviour
     void Awake()
     {
         InitializeGrid();
-        if(_pasteGrotto != null)
+        
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K)&&_pasteGrotto != null)
             _pasteGrotto.SpawnGrotte();
     }
-    
     public void InitializeGrid()
     {
         OffsetXY.x = dimensionsX / 2;

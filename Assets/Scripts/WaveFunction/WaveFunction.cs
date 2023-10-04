@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.WSA;
@@ -14,6 +15,7 @@ public class WaveFunction : MonoBehaviour
     public Vector2Int dimensions;
     public Tile[] tileObjects;
     public Tile _tileGround;
+    public TileBase _tileError;
 
     //public List<Cell> gridComponents;
     public Cell cellObj;
@@ -24,12 +26,58 @@ public class WaveFunction : MonoBehaviour
     private List<TileToPlace> _tilesToPlace = new List<TileToPlace>();
     int iterations = 0;
     private  List<Cell> baseCellToPropagate = new List<Cell>();
+    private bool _emergencyStop = false;
     void Awake()
     {
     }
 
+    public void CorrectRule()
+    {
+        List<Tile> tiles = new List<Tile>(tileObjects);
+        tiles.Add(_tileGround);
+        tiles = tiles.Distinct().ToList();
+        
+        foreach(Tile currentTile in tiles) 
+        {
+            foreach(Tile right in currentTile.rightNeighbours) 
+            {
+                if (!right.leftNeighbours.Contains(currentTile)) 
+                {
+                    right.leftNeighbours.Add(currentTile);
+                    Debug.Log(currentTile.name + " added to " + right.name + " left");
+                }
+            }
+            foreach (Tile up in currentTile.upNeighbours)
+            {
+                if (!up.downNeighbours.Contains(currentTile))
+                {
+                    up.downNeighbours.Add(currentTile);
+                    Debug.Log(currentTile.name + " added to " + up.name + " down");
+                }
+            }
+            foreach (Tile left in currentTile.leftNeighbours)
+            {
+                if (!left.rightNeighbours.Contains(currentTile))
+                {
+                    left.rightNeighbours.Add(currentTile);
+                    Debug.Log(currentTile.name + " added to " + left.name + " right");
+                }
+            }
+            foreach (Tile down in currentTile.downNeighbours)
+            {
+                if (!down.upNeighbours.Contains(currentTile))
+                {
+                    down.upNeighbours.Add(currentTile);
+                    Debug.Log(currentTile.name + " added to " + down.name + " up");
+                }
+            }
+        }
+
+    }
+
     public void InitializeGrid(Cell[,] cellArray)
     {
+        CorrectRule();
         this.cellArray = cellArray;
         foreach (var cell in cellArray) 
         {
@@ -55,15 +103,15 @@ public class WaveFunction : MonoBehaviour
             Propagate(cell);
         }
         //UpdateGeneration();
-        StartCoroutine(StartCollapse());
-        //StartCollapseNotCoroutine();
+        //StartCoroutine(StartCollapse());
+        StartCollapseNotCoroutine();
     }
 
     int collapsed;
     IEnumerator StartCollapse()
     {
         collapsed = 0;
-        while (!isCollapsed())
+        while (!isCollapsed() && !_emergencyStop)
         {
             Debug.Log("working");
             yield return null;
@@ -78,7 +126,7 @@ public class WaveFunction : MonoBehaviour
     private void StartCollapseNotCoroutine()
     {
         collapsed = 0;
-        while (!isCollapsed())
+        while (!isCollapsed() && !_emergencyStop)
         {
             Debug.Log("working");
             Iterate();
@@ -366,7 +414,7 @@ public class WaveFunction : MonoBehaviour
     
     public bool GetPossibleNeighborOption(Cell currentCell ,Cell neigborCell, GetPossibleNeighbor func , string funcName ) 
     {
-        if (neigborCell == null || neigborCell.collapsed)
+        if (neigborCell == null )
         {
             return false;
         }
@@ -402,23 +450,31 @@ public class WaveFunction : MonoBehaviour
                 neigborCell.tileOptions.RemoveAt(i);
                 if(neigborCell.tileOptions.Count == 0 )
                 {
+                    _emergencyStop = true;
+                    _tilesToPlace.Add(new TileToPlace
+                    {
+                        pos = neigborCell.position,
+                        tile = _tileError,
+                        inDecor = false
+                    });
 
                     Debug.Log(debug);
+                    return false; 
                 }
                 i -= 1;
                 constrained = true;
             }
         }
-        if(neigborCell.tileOptions.Count == 1) 
-        {
-            neigborCell.collapsed = true;
-            _tilesToPlace.Add(new TileToPlace
-            {
-                pos = neigborCell.position,
-                tile = neigborCell.tileOptions[0].tile,
-                inDecor = false
-            });
-        }
+        //if(neigborCell.tileOptions.Count == 1) 
+        //{
+        //    neigborCell.collapsed = true;
+        //    _tilesToPlace.Add(new TileToPlace
+        //    {
+        //        pos = neigborCell.position,
+        //        tile = neigborCell.tileOptions[0].tile,
+        //        inDecor = false
+        //    });
+        //}
 
         return constrained;
     }
@@ -426,7 +482,7 @@ public class WaveFunction : MonoBehaviour
     {
         List<Cell> cellsAffected = new List<Cell> { cell };
 
-        while (cellsAffected.Count > 0)
+        while (cellsAffected.Count > 0 && !_emergencyStop)
         {
             Cell currentCell = cellsAffected[0];
             cellsAffected.Remove(currentCell);
