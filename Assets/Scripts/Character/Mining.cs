@@ -13,7 +13,7 @@ public class Mining : MonoBehaviour
     [SerializeField] private float _miningDistance = 1.0f;
     [SerializeField] private GameObject _crackPrefab;
 
-    public static event Action<Item, Vector2> OnMineTile; // Item, WorldPos
+    public static event Action<Item, Vector2> OnMineTile; // item, worldPos
     
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
