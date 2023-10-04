@@ -22,23 +22,16 @@ public class PasteGrotte : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _waveFunction.ProcessCompleted += InvokeTheCollapse;
-    }
-    public void InvokeTheCollapse() 
-    {
-        Invoke("LaunchWaveCollapse", 0.01f);
     }
     public void LaunchWaveCollapse()
     {
-       
-        if (_cells == null || _cells.Count == 0)
+        foreach(var cell in _cells) 
         {
-            return;
+            _waveFunction.InitializeGrid(cell);
         }
-        if (_cells[0][0, 0].position.y < _depthToEndLoading)
-            _loadingScreen.SetActive(false);
-        _waveFunction.InitializeGrid(_cells[0]);
-        _cells.RemoveAt(0);
+        
+        //_waveFunction.InitializeGrid(_cells[0]);
+        //_cells.RemoveAt(0);
     }
 
     public void SpawnGrotte() 
@@ -66,13 +59,6 @@ public class PasteGrotte : MonoBehaviour
         LaunchWaveCollapse();
 
     }
-    //public void LaunchWaveCollapse() 
-    //{
-    //    foreach(var cell in _cells) 
-    //    {
-    //        _waveFunction.InitializeGrid(cell);
-    //        Debug.Log("a");
-    //    }
 
 
     private bool CanBePlaced(List<Vector3> placedGrotte, Vector3 pos) 
@@ -93,8 +79,26 @@ public class PasteGrotte : MonoBehaviour
             for (int j = toPastePrefab.cellBounds.min.y-1; j < toPastePrefab.cellBounds.max.y+1; j++)
             {
                 TileBase tile = toPastePrefab.GetTile(new Vector3Int(i, j));
-                _Cells[i  - toPastePrefab.cellBounds.min.x+1, j - toPastePrefab.cellBounds.min.y+1] = new Cell(new Vector3Int(i, j) + _offset, (tile == null));
-                if (tile != null) 
+                Cell currentCell = new Cell(new Vector3Int(i, j) + _offset, (tile == null));
+                int x = i - toPastePrefab.cellBounds.min.x + 1;
+                int y = j - toPastePrefab.cellBounds.min.y + 1;
+
+				_Cells[x, y] = currentCell;
+				currentCell.arrayPosition.x = x;
+				currentCell.arrayPosition.y = y;
+
+				if (i > 0)
+				{
+					//_Cells[i - toPastePrefab.cellBounds.min.x + 1 - 1, j - toPastePrefab.cellBounds.min.y + 1].right = currentCell;
+					//currentCell.left = _Cells[i - toPastePrefab.cellBounds.min.x + 1 - 1, j - toPastePrefab.cellBounds.min.y + 1];
+				}
+				if (j > 0)
+				{
+					//_Cells[i - toPastePrefab.cellBounds.min.x + 1, j - toPastePrefab.cellBounds.min.y + 1 - 1].up = currentCell;
+					//currentCell.down = _Cells[i - toPastePrefab.cellBounds.min.x + 1, j - toPastePrefab.cellBounds.min.y + 1 - 1];
+				}
+
+				if (tile != null) 
                 {
                     _toCollapse.Add(new Vector3Int(i, j));
                     _tilemap.SetTile(new Vector3Int(i, j) + _offset, null);
