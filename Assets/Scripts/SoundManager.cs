@@ -20,15 +20,15 @@ public class SoundManager : MonoBehaviour
 
     private void OnEnable()
     {
-        // Mining.OnBreakBlock += OnBreakBlock;
+        Mining.OnMineTile += OnBreakBlock;
     }
 
     private void OnDisable()
     {
-        // Mining.OnBreakBlock -= OnBreakBlock;
+        Mining.OnMineTile -= OnBreakBlock;
     }
 
-    private void OnBreakBlock()
+    private void OnBreakBlock(Item item, Vector2 position)
     {
         _sfxSource.PlayOneShot(_breakBlock);
     }
