@@ -20,12 +20,12 @@ public class SoundManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Mining.OnBreakBlock += OnBreakBlock;
+        // Mining.OnBreakBlock += OnBreakBlock;
     }
 
     private void OnDisable()
     {
-        Mining.OnBreakBlock -= OnBreakBlock;
+        // Mining.OnBreakBlock -= OnBreakBlock;
     }
 
     private void OnBreakBlock()
