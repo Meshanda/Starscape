@@ -28,7 +28,7 @@ public class SoundManager : MonoBehaviour
         Mining.OnMineTile -= OnBreakBlock;
     }
 
-    private void OnBreakBlock(Item item, Vector2 position)
+    private void OnBreakBlock(Item item, Vector3Int cellPos, Vector2 position)
     {
         _sfxSource.PlayOneShot(_breakBlock);
     }
