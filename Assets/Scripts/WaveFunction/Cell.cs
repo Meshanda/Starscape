@@ -7,6 +7,7 @@ public class Cell
     public bool collapsed = false;
     public List<Tile> tileOptions;
     public Vector3Int position;
+	public Vector3Int arrayPosition;
 
     public Cell upNeighbor;
     public Cell downNeighbor;

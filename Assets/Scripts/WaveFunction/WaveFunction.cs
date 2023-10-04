@@ -27,12 +27,45 @@ public class WaveFunction : MonoBehaviour
     int iterations = 0;
     private  List<Cell> baseCellToPropagate = new List<Cell>();
     private bool _emergencyStop = false;
-    void Awake()
+
+    private Cell GetCell(int x, int y) 
+    {
+        if (x < 0 || x >= cellArray.GetLength(0))
+            return null;
+
+		if (y < 0 || y >= cellArray.GetLength(1))
+			return null;
+
+        return cellArray[x, y];
+	}
+
+    private Cell GetRight(Cell oCell) 
+    {
+        return GetCell( oCell.arrayPosition.x - 1, oCell.arrayPosition.y );
+	}
+
+	private Cell GetLeft(Cell oCell)
+	{
+		return GetCell( oCell.arrayPosition.x + 1, oCell.arrayPosition.y );
+	}
+
+	private Cell GetUp(Cell oCell)
+	{
+		return GetCell( oCell.arrayPosition.x, oCell.arrayPosition.y + 1 );
+	}
+
+	private Cell GetDown(Cell oCell)
+	{
+		return GetCell( oCell.arrayPosition.x, oCell.arrayPosition.y - 1 );
+	}
+
+	void Awake()
     {
     }
 
     public void CorrectRule()
     {
+		//TODO ajouter exception "Ground"
         List<Tile> tiles = new List<Tile>(tileObjects);
         tiles.Add(_tileGround);
         tiles = tiles.Distinct().ToList();
@@ -77,7 +110,7 @@ public class WaveFunction : MonoBehaviour
 
     public void InitializeGrid(Cell[,] cellArray)
     {
-        CorrectRule();
+        //CorrectRule();
         this.cellArray = cellArray;
         foreach (var cell in cellArray) 
         {
@@ -102,9 +135,10 @@ public class WaveFunction : MonoBehaviour
         {
             Propagate(cell);
         }
-        //UpdateGeneration();
-        //StartCoroutine(StartCollapse());
-        StartCollapseNotCoroutine();
+
+		//UpdateGeneration();
+		//StartCoroutine(StartCollapse());
+		StartCollapseNotCoroutine();
     }
 
     int collapsed;
@@ -128,20 +162,22 @@ public class WaveFunction : MonoBehaviour
         collapsed = 0;
         while (!isCollapsed() && !_emergencyStop)
         {
-            Debug.Log("working");
+            //Debug.Log("working");
             Iterate();
-        }
-        Debug.Log("done");
+		}
+		//Verif2();
+		Debug.Log("done");
         placeAllTile();
-        //StopAllCoroutines();
-        //ProcessCompleted?.Invoke();
-    }
+
+		//StopAllCoroutines();
+		//ProcessCompleted?.Invoke();
+	}
     private bool isCollapsed()
     {
         //check if any cells contain more than one entry
         foreach (Cell c in cellArray)
         {
-            if (c.tileOptions.Count > 1)
+            if (c.collapsed == false)
                 return false;
         }
         return true;
@@ -223,10 +259,12 @@ public class WaveFunction : MonoBehaviour
     {
         foreach (var tile in _tilesToPlace) 
         {
+            /*
             if(tile.tile != null)
                 Debug.Log(tile.tile.name);
             else
                 Debug.Log("Empty");
+            */
             if (tile.inDecor) 
             {
                 tileMapDecor.SetTile(tile.pos, tile.tile);
@@ -415,13 +453,12 @@ public class WaveFunction : MonoBehaviour
     public bool GetPossibleNeighborOption(Cell currentCell ,Cell neigborCell, GetPossibleNeighbor func , string funcName ) 
     {
         if (neigborCell == null )
-        {
             return false;
-        }
-        int a;
-        if (neigborCell.tileOptions.Count > 1)
-             a = 3;
-        string debug = "Tiles Options "+ currentCell.tileOptions.Count + ":";
+
+		if (neigborCell.tileOptions.Count == 1 && neigborCell.tileOptions[0] == _tileGround)
+			return false;
+
+		string debug = "Tiles Options "+ currentCell.tileOptions.Count + ":";
         foreach (Tile tile in currentCell.tileOptions)
         {
             debug += tile.name + ", ";
@@ -441,6 +478,7 @@ public class WaveFunction : MonoBehaviour
         debug +="Function "+ funcName;
         List<Tile> ogConnectionNeigbor = new List<Tile> (neigborCell.tileOptions);
         bool constrained = false;
+
         for (int i = 0; i < neigborCell.tileOptions.Count; i++)
         {
             //if the list of sockets that we have on the right does not contain the connector on the other cell to the left...
@@ -482,33 +520,32 @@ public class WaveFunction : MonoBehaviour
     {
         List<Cell> cellsAffected = new List<Cell> { cell };
 
-        while (cellsAffected.Count > 0 && !_emergencyStop)
+		while (cellsAffected.Count > 0 && !_emergencyStop)
         {
             Cell currentCell = cellsAffected[0];
             cellsAffected.Remove(currentCell);
 
-            //get neighbor to the right
-            Cell otherCell = currentCell.rightNeighbor;
+            Cell otherCell = GetRight(currentCell);
             bool hasChanged = GetPossibleNeighborOption(currentCell, otherCell, GetRightPossibleNeighbor, "GetRightPossibleNeighbor");
             if(hasChanged ) 
             {
                 cellsAffected.Add(otherCell);
             }
-            otherCell = currentCell.upNeighbor;
+            otherCell = GetUp(currentCell);
             hasChanged = GetPossibleNeighborOption(currentCell, otherCell, GetUpPossibleNeighbor, "GetUpPossibleNeighbor");
             if (hasChanged)
             {
                 cellsAffected.Add(otherCell);
             }
 
-            otherCell = currentCell.leftNeighbor;
-            hasChanged = GetPossibleNeighborOption(currentCell, otherCell, GetLeftPossibleNeighbor, "GetleftPossibleNeighbor");
+            otherCell = GetLeft(currentCell);
+			hasChanged = GetPossibleNeighborOption(currentCell, otherCell, GetLeftPossibleNeighbor, "GetleftPossibleNeighbor");
             if (hasChanged)
             {
                 cellsAffected.Add(otherCell);
             }
 
-            otherCell = currentCell.downNeighbor;
+            otherCell = GetDown(currentCell);
             hasChanged = GetPossibleNeighborOption(currentCell, otherCell, GetDownPossibleNeighbor, "GetDownPossibleNeighbor");
             if (hasChanged)
             {
@@ -518,6 +555,66 @@ public class WaveFunction : MonoBehaviour
     }
 
     void CheckValidity(List<Tile> optionList, List<Tile> validOption)
+    private void Print( Cell oCell )
+	{
+		string sDebug = oCell.position.x + ";" + oCell.position.y + ":" + oCell.tileOptions[0].name;
+
+        sDebug += "\n";
+
+		Cell oRight = GetRight(oCell);
+		Cell oLeft = GetLeft(oCell);
+		Cell oUp = GetUp(oCell);
+		Cell oDown = GetDown(oCell);
+
+		if (oRight != null)
+        {
+            if (oRight.tileOptions.Count != 1)
+                sDebug += "error count: " + oRight.tileOptions.Count;
+            sDebug += oRight.tileOptions[0].name;
+        }
+        else
+		{
+			sDebug += "NONE";
+		}
+
+		sDebug += "\n";
+		if (oLeft != null)
+		{
+			if (oLeft.tileOptions.Count != 1)
+				sDebug += "error count: " + oLeft.tileOptions.Count;
+			sDebug += oLeft.tileOptions[0].name;
+		}
+		else
+		{
+			sDebug += "NONE";
+		}
+
+		sDebug += "\n";
+		if (oUp != null)
+		{
+			if (oUp.tileOptions.Count != 1)
+				sDebug += "error count: " + oUp.tileOptions.Count;
+			sDebug += oUp.tileOptions[0].name;
+		}
+		else
+		{
+			sDebug += "NONE";
+		}
+
+		sDebug += "\n";
+		if (oDown != null)
+		{
+			if (oDown.tileOptions.Count != 1)
+				sDebug += "error count: " + oDown.tileOptions.Count;
+			sDebug += oDown.tileOptions[0].name;
+		}
+		else
+		{
+			sDebug += "NONE";
+		}
+
+		Debug.Log(sDebug);
+	}
     {
         for (int x = optionList.Count - 1; x >= 0; x--)
         {

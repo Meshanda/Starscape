@@ -96,20 +96,26 @@ public class PasteGrotte : MonoBehaviour
             {
                 TileBase tile = toPastePrefab.GetTile(new Vector3Int(i, j));
                 Cell currentCell = new Cell(new Vector3Int(i, j) + _offset, (tile == null));
-                _Cells[i  - toPastePrefab.cellBounds.min.x+1, j - toPastePrefab.cellBounds.min.y+1] = currentCell;
-                
-                if (tile != null) 
+                int x = i - toPastePrefab.cellBounds.min.x + 1;
+                int y = j - toPastePrefab.cellBounds.min.y + 1;
+
+				_Cells[x, y] = currentCell;
+				currentCell.arrayPosition.x = x;
+				currentCell.arrayPosition.y = y;
+
+				if (i > 0)
+				{
+					//_Cells[i - toPastePrefab.cellBounds.min.x + 1 - 1, j - toPastePrefab.cellBounds.min.y + 1].right = currentCell;
+					//currentCell.left = _Cells[i - toPastePrefab.cellBounds.min.x + 1 - 1, j - toPastePrefab.cellBounds.min.y + 1];
+				}
+				if (j > 0)
+				{
+					//_Cells[i - toPastePrefab.cellBounds.min.x + 1, j - toPastePrefab.cellBounds.min.y + 1 - 1].up = currentCell;
+					//currentCell.down = _Cells[i - toPastePrefab.cellBounds.min.x + 1, j - toPastePrefab.cellBounds.min.y + 1 - 1];
+				}
+
+				if (tile != null) 
                 {
-                    if (i > 0) 
-                    {
-                        _Cells[i - toPastePrefab.cellBounds.min.x + 1 - 1, j - toPastePrefab.cellBounds.min.y + 1].rightNeighbor = currentCell;
-                        currentCell.leftNeighbor = _Cells[i - toPastePrefab.cellBounds.min.x + 1 - 1, j - toPastePrefab.cellBounds.min.y + 1];
-                    }
-                    if (j > 0)
-                    {
-                        _Cells[i - toPastePrefab.cellBounds.min.x + 1 , j - toPastePrefab.cellBounds.min.y + 1 - 1].upNeighbor = currentCell;
-                        currentCell.downNeighbor = _Cells[i - toPastePrefab.cellBounds.min.x + 1, j - toPastePrefab.cellBounds.min.y + 1 - 1];
-                    }
                     _toCollapse.Add(new Vector3Int(i, j));
                     _tilemap.SetTile(new Vector3Int(i, j) + _offset, null);
                 }
