@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class CraftingSlot : Slot, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private GameObject _selected;
     private CraftRecipe _recipe;
     private Coroutine _craftRoutine;
     private InventorySystem _inv;
@@ -24,11 +23,6 @@ public class CraftingSlot : Slot, IPointerDownHandler, IPointerUpHandler, IPoint
     private void Start()
     {
         _inv = InventorySystem.Instance;
-    }
-
-    public void Select(bool status)
-    {
-        _selected.SetActive(status);
     }
     
     public void OnClick()

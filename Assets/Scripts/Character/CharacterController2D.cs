@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CharacterMovement))]
@@ -52,7 +49,7 @@ public class CharacterController2D : MonoBehaviour
 		_grounded = colliders.Length > 0;
 		
 		
-		if (_grounded && _rigidbody2D.velocity.y <= 0)
+		if (_grounded && _rigidbody2D.velocity.y <= 0.1f)
 			_jumping = false;
 		
 		Move(MoveDirection);

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -50,9 +49,14 @@ public class Placing : MonoBehaviour
         if (!slot || slot.ItemStack is null)
             return;
 
+        if (!slot.ItemStack.GetItem().tileInfo.tile)
+        {
+            return; // item doesn't have a tile, it cannot be placed in the world
+        }
+
         if (TileCanBePlaced(cellPos)) 
         {
-            World.Instance.GroundTilemap.SetTile(cellPos, slot.ItemStack.GetItem().tile);
+            World.Instance.GroundTilemap.SetTile(cellPos, slot.ItemStack.GetItem().tileInfo.tile);
             slot.ItemStackRemoveNumber(1);
         }
     }
@@ -62,19 +66,16 @@ public class Placing : MonoBehaviour
         var hit = Physics2D.Raycast(_cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity);
         if (hit.collider != null && hit.collider.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("Hit player!");
             return false;
         }
         
         if (World.Instance.GroundTilemap.GetTile(cellPos) is not null)
         {
-            Debug.Log("Tile is occupied.");
             return false;
         }
 
         if (World.Instance.BackGroundTilemap.GetTile(cellPos) is not null)
         {
-            Debug.Log("Background found!");
             return true;
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -10,16 +11,26 @@ public class Mining : MonoBehaviour
 {
     [SerializeField] private GameObject _dropPrefab;
     [SerializeField] private float _miningDistance = 1.0f;
-    [SerializeField] private float _miningDelay = .15f;
+    [SerializeField] private GameObject _crackPrefab;
+    
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
 
     private Coroutine _miningRoutine;
     private Camera _cam;
     
+    private Item _currentMiningItem;
+    private (TileBase, Vector3Int) _currentMiningTile;
+    private float _currentMiningProgress;
+    private GameObject _crackObject;
+    private SpriteRenderer _crackSpriteRenderer;
+    
     private void Awake()
     {
         _cam = Camera.main;
+        _crackObject = Instantiate(_crackPrefab);
+        _crackSpriteRenderer = _crackObject.GetComponent<SpriteRenderer>();
+        _crackObject.SetActive(false);
     }
 
     private void Update()
@@ -31,7 +42,11 @@ public class Mining : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            StopCoroutine(_miningRoutine);
+            if (_miningRoutine is not null)
+                StopCoroutine(_miningRoutine);
+            
+            _crackObject.SetActive(false);
+            _currentMiningProgress = 0.0f;
         }
     }
 
@@ -40,7 +55,7 @@ public class Mining : MonoBehaviour
         while (true)
         {
             OnMine();
-            yield return new WaitForSeconds(_miningDelay);
+            yield return null;
         }
     }
 
@@ -50,17 +65,66 @@ public class Mining : MonoBehaviour
             return;
 
         var cellPos = World.Instance.GroundTilemap.WorldToCell(_mousePosition);
-        var tile = World.Instance.GroundTilemap.GetTile(cellPos);
-        if (!tile) return;
-        
-        World.Instance.GroundTilemap.SetTile(cellPos, null);
+        (TileBase, Vector3Int) tile = (World.Instance.GroundTilemap.GetTile(cellPos), cellPos);
 
-        var item = GameManager.Instance.database.GetItemByTile(tile);
-        var drop = Instantiate(_dropPrefab,
-            World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0.0f),
-            Quaternion.identity).GetComponent<Drop>();
+        if (_currentMiningTile != tile)
+        {
+            _currentMiningProgress = 0.0f;
+            _currentMiningTile = tile;
+            
+            if (!_currentMiningTile.Item1)
+            {
+                goto skip;
+            }
+            
+            _currentMiningItem = GameManager.Instance.database.GetItemByTile(tile.Item1);
+            if (_currentMiningItem is null)
+            {
+                Debug.LogWarning("Unreferenced tile in database!");
+                return;
+            }
+        }
         
-        drop.ItemStack = item.GenerateLoot();
-        drop.AddRandomForce();
+        skip:
+        
+        _crackSpriteRenderer.material.SetFloat("_Health", _currentMiningProgress);
+        
+        if (!_currentMiningTile.Item1)
+        {
+            _crackObject.SetActive(false);
+            return;
+        }
+
+        _crackObject.SetActive(true);
+        _crackObject.transform.position = World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0);
+        _crackSpriteRenderer.sprite = _currentMiningItem.sprite;
+        
+        Item selectedItem = InventorySystem.Instance.GetSelectedSlot()?.ItemStack?.GetItem();
+        ToolData selectedToolData = selectedItem is not null ? selectedItem.toolData : ToolData.DEFAULT;
+
+        if (selectedToolData.toolStrength.IsEnoughFor(_currentMiningItem.tileInfo.requiredToBreak))
+        {
+            _currentMiningProgress += (Time.deltaTime * selectedToolData.tileDamagePerSecond) / _currentMiningItem.tileInfo.life;
+        }
+        else
+        {
+            return; // do nothing, we can't mine this tile with the item we currently have selected
+        }
+
+        if (_currentMiningProgress >= 1.0f) // destroy tile
+        {
+            World.Instance.GroundTilemap.SetTile(cellPos, null);
+
+            if (!_currentMiningItem.tileInfo.HasAnyLoot())
+            {
+                return; // tile does not drop anything
+            }
+        
+            var drop = Instantiate(_dropPrefab,
+                World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0.0f),
+                Quaternion.identity).GetComponent<Drop>();
+            drop.ItemStack = _currentMiningItem.tileInfo.GenerateLoot();
+            drop.AddRandomForce();
+        }
     }
 }

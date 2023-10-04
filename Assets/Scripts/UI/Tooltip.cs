@@ -1,17 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 [ExecuteInEditMode]
 public class Tooltip : MonoBehaviour
 {
-    public TextMeshProUGUI header;
-    public TextMeshProUGUI body;
-    public LayoutElement layoutElement;
+    [SerializeField] private TextMeshProUGUI header;
+    [SerializeField] private TextMeshProUGUI body;
+    [SerializeField] private LayoutElement layoutElement;
+
+    [SerializeField] private RectTransform _rtLayout;
+    [SerializeField] private RectTransform _rt;
     
     public int characterWrapLimit;
 
@@ -19,7 +18,7 @@ public class Tooltip : MonoBehaviour
     {
         if (Application.isEditor)
             UpdateUISize();
-
+        
         UpdateUIPosition();
     }
 
@@ -41,6 +40,7 @@ public class Tooltip : MonoBehaviour
     
     private void UpdateUISize()
     {
+        _rt.sizeDelta = _rtLayout.sizeDelta;
         var headerLength = header.text.Length;
         var bodyLength = body.text.Length;
 

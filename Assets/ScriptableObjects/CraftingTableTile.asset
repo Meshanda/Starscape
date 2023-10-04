@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d8eed6aec249d696b6f269cc8ecdf8, type: 3}
   m_Name: CraftingTableTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 737055279, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5a8df7a6d1f43d841869ac3097a34b01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
