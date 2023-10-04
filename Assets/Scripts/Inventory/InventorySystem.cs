@@ -111,7 +111,12 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         _invSlotsParent.gameObject.SetActive(false);
         _craftSlotsTransform.gameObject.SetActive(false);
     }
-    
+
+    private void Start()
+    {
+        OnInventoryChanged?.Invoke();
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (!IsInventoryOpen)
