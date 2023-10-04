@@ -118,12 +118,6 @@ public class WaveFunction : MonoBehaviour
             {
                 baseCellToPropagate.Add(cell);
                 cell.tileOptions = new List<Tile> { _tileGround };
-                _tilesToPlace.Add(new TileToPlace
-                {
-                    pos = cell.position,
-                    tile = _tileGround.tile,
-                    inDecor = false
-                });
             }
             else 
             {
@@ -296,120 +290,120 @@ public class WaveFunction : MonoBehaviour
         return cell.tileOptions[cell.tileOptions.Count-1];
     }
 
-    void UpdateGeneration()
-    {
-        Cell[,] newGenerationCell =(Cell[,])cellArray.Clone();
-        int nbreNotCollapsed = 0;
-        for (int y = 0; y < dimensions.y; y++)
-        {
-            for (int x = 0; x < dimensions.x; x++)
-            {
-                var index = x * dimensions.x + y * dimensions.y;
-                if (cellArray[x,y].collapsed)
-                {
-                    newGenerationCell[x, y] = cellArray[x, y];
-                }
-                else
-                {
-                    nbreNotCollapsed++;
-                    List<Tile> options = new List<Tile>();
-                    foreach (Tile t in tileObjects)
-                    {
-                        options.Add(t);
-                    }
+    //void UpdateGeneration()
+    //{
+    //    Cell[,] newGenerationCell =(Cell[,])cellArray.Clone();
+    //    int nbreNotCollapsed = 0;
+    //    for (int y = 0; y < dimensions.y; y++)
+    //    {
+    //        for (int x = 0; x < dimensions.x; x++)
+    //        {
+    //            var index = x * dimensions.x + y * dimensions.y;
+    //            if (cellArray[x,y].collapsed)
+    //            {
+    //                newGenerationCell[x, y] = cellArray[x, y];
+    //            }
+    //            else
+    //            {
+    //                nbreNotCollapsed++;
+    //                List<Tile> options = new List<Tile>();
+    //                foreach (Tile t in tileObjects)
+    //                {
+    //                    options.Add(t);
+    //                }
 
-                    //update below
-                    if (y > 0)
-                    {
-                        Cell up = cellArray[x,y-1];
-                        List<Tile> validOptions = new List<Tile>();
+    //                //update below
+    //                if (y > 0)
+    //                {
+    //                    Cell up = cellArray[x,y-1];
+    //                    List<Tile> validOptions = new List<Tile>();
                         
-                        foreach (Tile possibleOptions in up.tileOptions)
-                        {
-                            var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-                            var valid = tileObjects[valOption].upNeighbours;
+    //                    foreach (Tile possibleOptions in up.tileOptions)
+    //                    {
+    //                        var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
+    //                        var valid = tileObjects[valOption].upNeighbours;
 
-                            validOptions = validOptions.Concat(valid).ToList();
-                        }
+    //                        validOptions = validOptions.Concat(valid).ToList();
+    //                    }
 
-                        CheckValidity(options, validOptions);
-                    }
+    //                    CheckValidity(options, validOptions);
+    //                }
 
-                    //update right
-                    if (x < dimensions.x - 1)
-                    {
-                        Cell right = cellArray[x+1 , y ];
-                        List<Tile> validOptions = new List<Tile>();
+    //                //update right
+    //                if (x < dimensions.x - 1)
+    //                {
+    //                    Cell right = cellArray[x+1 , y ];
+    //                    List<Tile> validOptions = new List<Tile>();
 
-                        foreach (Tile possibleOptions in right.tileOptions)
-                        {
-                            var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-                            var valid = tileObjects[valOption].leftNeighbours;
+    //                    foreach (Tile possibleOptions in right.tileOptions)
+    //                    {
+    //                        var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
+    //                        var valid = tileObjects[valOption].leftNeighbours;
 
-                            validOptions = validOptions.Concat(valid).ToList();
-                        }
+    //                        validOptions = validOptions.Concat(valid).ToList();
+    //                    }
 
-                        CheckValidity(options, validOptions);
-                    }
+    //                    CheckValidity(options, validOptions);
+    //                }
 
-                    //look down
-                    if (y < dimensions.y - 1)
-                    {
-                        Cell down = cellArray[x, y+1];
-                        List<Tile> validOptions = new List<Tile>();
+    //                //look down
+    //                if (y < dimensions.y - 1)
+    //                {
+    //                    Cell down = cellArray[x, y+1];
+    //                    List<Tile> validOptions = new List<Tile>();
 
-                        foreach (Tile possibleOptions in down.tileOptions)
-                        {
-                            var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-                            var valid = tileObjects[valOption].downNeighbours;
+    //                    foreach (Tile possibleOptions in down.tileOptions)
+    //                    {
+    //                        var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
+    //                        var valid = tileObjects[valOption].downNeighbours;
 
-                            validOptions = validOptions.Concat(valid).ToList();
-                        }
+    //                        validOptions = validOptions.Concat(valid).ToList();
+    //                    }
 
-                        CheckValidity(options, validOptions);
-                    }
+    //                    CheckValidity(options, validOptions);
+    //                }
 
-                    //look left
-                    if (x > 0)
-                    {
-                        Cell left = cellArray[x - 1, y];
-                        List<Tile> validOptions = new List<Tile>();
+    //                //look left
+    //                if (x > 0)
+    //                {
+    //                    Cell left = cellArray[x - 1, y];
+    //                    List<Tile> validOptions = new List<Tile>();
 
-                        foreach (Tile possibleOptions in left.tileOptions)
-                        {
-                            var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-                            var valid = tileObjects[valOption].rightNeighbours;
+    //                    foreach (Tile possibleOptions in left.tileOptions)
+    //                    {
+    //                        var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
+    //                        var valid = tileObjects[valOption].rightNeighbours;
 
-                            validOptions = validOptions.Concat(valid).ToList();
-                        }
+    //                        validOptions = validOptions.Concat(valid).ToList();
+    //                    }
 
-                        CheckValidity(options, validOptions);
-                    }
+    //                    CheckValidity(options, validOptions);
+    //                }
 
-                    Tile[] newTileList = new Tile[options.Count];
+    //                Tile[] newTileList = new Tile[options.Count];
 
-                    for (int i = 0; i < options.Count; i++)
-                    {
-                        newTileList[i] = options[i];
-                    }
+    //                for (int i = 0; i < options.Count; i++)
+    //                {
+    //                    newTileList[i] = options[i];
+    //                }
 
-                    newGenerationCell[x, y].RecreateCell(newTileList.ToList());
-                }
-            }
-        }
+    //                newGenerationCell[x, y].RecreateCell(newTileList.ToList());
+    //            }
+    //        }
+    //    }
 
-        cellArray = newGenerationCell;
-        iterations++;
+    //    cellArray = newGenerationCell;
+    //    iterations++;
 
        
-        //else 
-        //{
-        //    placeAllTile();
-        //    StopAllCoroutines();
-        //    iterations = 0;
-        //    ProcessCompleted?.Invoke();
-        //}
-    }
+    //    //else 
+    //    //{
+    //    //    placeAllTile();
+    //    //    StopAllCoroutines();
+    //    //    iterations = 0;
+    //    //    ProcessCompleted?.Invoke();
+    //    //}
+    //}
 
     public List<Tile> GetRightPossibleNeighbor(Cell cell) 
     {
@@ -554,7 +548,7 @@ public class WaveFunction : MonoBehaviour
         }
     }
 
-    void CheckValidity(List<Tile> optionList, List<Tile> validOption)
+    //void CheckValidity(List<Tile> optionList, List<Tile> validOption)
     private void Print( Cell oCell )
 	{
 		string sDebug = oCell.position.x + ";" + oCell.position.y + ":" + oCell.tileOptions[0].name;
@@ -615,16 +609,6 @@ public class WaveFunction : MonoBehaviour
 
 		Debug.Log(sDebug);
 	}
-    {
-        for (int x = optionList.Count - 1; x >= 0; x--)
-        {
-            var element = optionList[x];
-            if (!validOption.Contains(element))
-            {
-                optionList.RemoveAt(x);
-            }
-        }
-    }
 
 
 }

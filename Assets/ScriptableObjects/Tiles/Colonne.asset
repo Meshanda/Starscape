@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Colonne
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 051efc23755722b48b633c125f94387a, type: 2}
-  weight: 15
+  weight: 60
   inDecor: 1
   upNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}

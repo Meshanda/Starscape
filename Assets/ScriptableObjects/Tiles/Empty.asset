@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4d0072cb0a75947ad9892ed3d43365, type: 3}
   m_Name: Empty
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: a9a80fd02ef9ff04b9bbc7f6323fd442, type: 2}
-  weight: 1
+  tile: {fileID: 0}
+  weight: 80
   inDecor: 0
   upNeighbours:
   - {fileID: 11400000}

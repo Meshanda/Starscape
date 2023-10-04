@@ -68,13 +68,6 @@ public class PasteGrotte : MonoBehaviour
         LaunchWaveCollapse();
 
     }
-    //public void LaunchWaveCollapse() 
-    //{
-    //    foreach(var cell in _cells) 
-    //    {
-    //        _waveFunction.InitializeGrid(cell);
-    //        Debug.Log("a");
-    //    }
 
 
     private bool CanBePlaced(List<Vector3> placedGrotte, Vector3 pos) 
