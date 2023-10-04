@@ -60,9 +60,8 @@ public class Placing : MonoBehaviour
         if (TileCanBePlaced(cellPos))
         {
             World.Instance.GroundTilemap.SetTile(cellPos, slot.ItemStack.GetItem().tileInfo.tile);
-            slot.ItemStackRemoveNumber(1);
-            
             OnPlaceTile?.Invoke(slot.ItemStack.GetItem(), World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0));
+            slot.ItemStackRemoveNumber(1);
         }
     }
     

@@ -45,8 +45,16 @@ public class StrateGeneration : MonoBehaviour
         
         InitializeGrid();
         if(_pasteGrotto != null)
-            _pasteGrotto.SpawnGrotte(); 
+            _pasteGrotto.SpawnGrotte();
 
+        Mining.OnMineTile += CallEventShadow;
+        Placing.OnPlaceTile += CallEventShadow;
+
+    }
+
+    private void CallEventShadow(Item item, Vector2 vector)
+    {
+        UpdateShadowGround();
     }
 
     private void Update()
