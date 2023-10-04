@@ -65,12 +65,12 @@ public class StrateGeneration : MonoBehaviour
 
     private void CallEventShadow(Item item, Vector2 vector)
     {
-        UpdateShadowGround();
+        // UpdateShadowGround();
     }
 
     private void Update()
     {
-        UpdatePlayerLight();
+        // UpdatePlayerLight();
     }
 
     public void InitializeGrid()
