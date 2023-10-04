@@ -49,7 +49,7 @@ public class CharacterController2D : MonoBehaviour
 		_grounded = colliders.Length > 0;
 		
 		
-		if (_grounded && _rigidbody2D.velocity.y <= 0)
+		if (_grounded && _rigidbody2D.velocity.y <= 0.1f)
 			_jumping = false;
 		
 		Move(MoveDirection);
