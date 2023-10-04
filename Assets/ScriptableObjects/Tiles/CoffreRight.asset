@@ -16,10 +16,12 @@ MonoBehaviour:
   weight: 220
   inDecor: 0
   upNeighbours:
+  - {fileID: 11400000, guid: 184ca936e019e5b42a9235082b5e5c51, type: 2}
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
-  - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
   rightNeighbours:
+  - {fileID: 11400000, guid: 184ca936e019e5b42a9235082b5e5c51, type: 2}
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
+  - {fileID: 11400000, guid: 5e73f32140d686f49b28773905f7c18c, type: 2}
   downNeighbours:
   - {fileID: 11400000, guid: 184ca936e019e5b42a9235082b5e5c51, type: 2}
   leftNeighbours:
