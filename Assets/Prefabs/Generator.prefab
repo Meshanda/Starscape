@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7440454831780387226}
   - component: {fileID: 2460924752174387848}
+  - component: {fileID: 449052780076163221}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -170,3 +171,15 @@ MonoBehaviour:
   lightShader: {fileID: -876546973899608171, guid: ff92e310a76878f49a5616e008ec78ae, type: 3}
   autoUpdate: 0
   _pasteGrotto: {fileID: 0}
+--- !u!114 &449052780076163221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776290454705868516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5d69060d30b7a429f9cd4cdbc04cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
