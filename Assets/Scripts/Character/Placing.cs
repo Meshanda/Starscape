@@ -19,30 +19,27 @@ public class Placing : MonoBehaviour
     {
         _cam = Camera.main;
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            _placingRoutine = StartCoroutine(PlacingRoutine());
-        }
-
-        if (Input.GetKeyUp(KeyCode.Mouse1))
-        {
-            StopCoroutine(_placingRoutine);
-        }
-    }
-
+    
     private IEnumerator PlacingRoutine()
     {
         while (true)
         {
-            OnPlace();
+            PlaceBlock();
             yield return new WaitForSeconds(_placingDelay);
         }
     }
 
     private void OnPlace()
+    {
+        _placingRoutine = StartCoroutine(PlacingRoutine());
+    }
+
+    private void OnPlaceRelease()
+    {
+        StopCoroutine(_placingRoutine);
+    }
+
+    private void PlaceBlock()
     {
         if (_distanceFromPlayer > _placingDistance)
             return;

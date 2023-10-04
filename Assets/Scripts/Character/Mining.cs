@@ -47,32 +47,29 @@ public class Mining : MonoBehaviour
         _crackObject.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            _miningRoutine = StartCoroutine(MiningRoutine());
-        }
-
-        if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            if (_miningRoutine is not null)
-                StopCoroutine(_miningRoutine);
-            
-            CurrentMiningProgress = 0.0f;
-        }
-    }
-
     private IEnumerator MiningRoutine()
     {
         while (true)
         {
-            OnMine();
+            MineBlock();
             yield return null;
         }
     }
 
     private void OnMine()
+    {
+        _miningRoutine = StartCoroutine(MiningRoutine());
+    }
+    
+    private void OnMineRelease()
+    {
+        if (_miningRoutine is not null)
+            StopCoroutine(_miningRoutine);
+            
+        CurrentMiningProgress = 0.0f;
+    }
+
+    private void MineBlock()
     {
         if (_distanceFromPlayer > _miningDistance)
             return;

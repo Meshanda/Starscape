@@ -16,6 +16,11 @@ public class Rocket : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        CreatePlatform();
+    }
+
     public void CreatePlatform()
     {
         var pos = GroundTile.WorldToCell(_platformPos.position);   
