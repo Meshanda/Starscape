@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 using UnityEngine.InputSystem;
@@ -69,6 +70,12 @@ public class StrateGeneration : MonoBehaviour
             {
                 debutStrate += _strates[s - 1].SizeY ;
             }
+            
+            if(_strates[s].transition) 
+            {
+                Transition(debutStrate, _strates[s]);
+                continue;
+            }
             for (int y = debutStrate; y < debutStrate+_strates[s].SizeY; y++)
             {
                 for (int x = 0; x < dimensionsX; x++)
@@ -79,12 +86,36 @@ public class StrateGeneration : MonoBehaviour
         }
         SetFilons();
 
-        sizeY = tileGround.size.y;
-        ResetShadowGround();
-        ResetShadowPlayer();
-        shadow.transform.position = new Vector3(0, -tileGround.CellToWorld(new Vector3Int(0, (sizeY / 2) + OffsetXY.y) ).y + 0.17f);
-        shadow.transform.localScale = new Vector3(tileGround.size.x, -tileGround.size.y, tileGround.size.z) * 0.32f;
-        UpdateShadowGround();
+        // for(int i = 0; i < dimensionsX ; i++)
+        // {
+        //     tileGround.SetTile(new Vector3Int(i - OffsetXY.x, 0 - OffsetXY.y), tileBase);
+        // }
+
+
+    }
+
+    public void Transition(int start, Strate st) 
+    {
+        int rng = Random.Range(start, start + st.SizeY );
+        for (int x = 0; x < dimensionsX; x++)
+        {
+            for(int y = start; y < start + st.SizeY; y++) 
+            {
+                if( y < rng) 
+                {
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[0].Tile);
+                }
+                else 
+                {
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[1].Tile);
+                }
+            }
+            rng += Random.Range(-1, 2);
+            rng = Mathf.Min(rng, start + st.SizeY-1);
+            rng = Mathf.Max(rng, start);
+
+            //tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s], x, y));
+        }
     }
 
     public TileBase GetTileFromStrate(Strate strate, int x, int y)
@@ -235,6 +266,7 @@ public struct Strate
 {
    public TilesStrate[] Tiles;
    public int SizeY;
+   public bool transition;   
 }
 
 [Serializable]

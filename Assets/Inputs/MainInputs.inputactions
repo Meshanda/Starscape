@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "InventoryScroll",
+                    "type": "Value",
+                    "id": "b5eddeae-caa1-4d53-a223-933367128a0d",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Mine",
                     "type": "Button",
                     "id": "cf29daf1-96b1-4297-a53c-87616b3c6978",
@@ -42,9 +51,45 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Place",
+                    "type": "Button",
+                    "id": "c90b16e1-094a-4a53-9ea6-97872063b0e5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PickUp",
+                    "type": "Button",
+                    "id": "d9f6f5c0-aa04-4a4d-af11-723c9350e14e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleInventory",
+                    "type": "Button",
+                    "id": "56cff501-2344-497c-be87-c78857ec145e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "6ede3540-8834-449c-b1ae-8ac05b18c7a3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Map",
                     "type": "Button",
-                    "id": "f56fee35-8ee3-4822-8f69-9f3f6ea880b9",
+                    "id": "482acc6e-400c-4da6-b959-3b0ceb81f522",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -120,40 +165,67 @@
                 },
                 {
                     "name": "",
-                    "id": "00ecea7f-19fe-45dc-aff6-f3424b88d6d4",
+                    "id": "58bc89fb-2199-4240-b8c2-c0f2b05b5195",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Place",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c2bcd3cb-0ef6-4fe6-b5b4-cb8f2aa73102",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41b9ff47-3603-43c3-9768-b360d092e7b0",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8ccd5a3-1cfa-4dcd-85c0-b2aef651fce0",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "99350ccf-bf46-4e9d-877c-3d05a823fa3b",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "19ed263e-27ed-4eef-b0f0-cc6a23466c48",
                     "path": "<Keyboard>/semicolon",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Map",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "PlayerSpecial",
-            "id": "8296222b-4933-43f2-b8d3-7f2ee6e55c94",
-            "actions": [
-                {
-                    "name": "UseItem",
-                    "type": "Button",
-                    "id": "fcca0c01-7a75-4aed-b1fb-e07af0d73bb1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "64be8a85-9368-4790-970a-557000635735",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UseItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -690,6 +762,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Cinematic",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerSpecial",
+            "id": "75db4602-9e31-4635-b955-20892088f3ea",
+            "actions": [
+                {
+                    "name": "Use item",
+                    "type": "Button",
+                    "id": "acbe29db-3e45-467a-bd00-2c04ee047a37",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cf489ad1-8a89-4590-bd45-bb3d340d31fe",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
