@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1483691201859407547}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.025, y: 0.263, z: 0}
+  m_LocalPosition: {x: 0.025, y: 0.189, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -113,7 +113,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7340640009580509231}
   - component: {fileID: 2816600801606964169}
-  - component: {fileID: 4216744632181301835}
   m_Layer: 3
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -188,27 +187,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4216744632181301835
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2569560105788870111}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 312d16c936635ba40bbd3a584dff1f1f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2716234054106731482
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +379,7 @@ GameObject:
   - component: {fileID: 4397760935792163573}
   - component: {fileID: 4792336140931619548}
   - component: {fileID: 3112506102595616039}
+  - component: {fileID: 5072383616937193734}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -460,7 +439,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   _groundCheck: {fileID: 3414171660056861552}
-  CharacterAnimator: {fileID: 4216744632181301835}
+  CharacterAnimator: {fileID: 5072383616937193734}
   _groundedYAxis: 0.1
   _groundedXAxis: 0.26
   _ceilingRadius: 0.2
@@ -595,7 +574,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.027312413, y: 0.7506075}
+  m_Offset: {x: 0.027312413, y: 0.7163674}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -606,8 +585,29 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8927536, y: 1.2309561}
+  m_Size: {x: 0.8927536, y: 1.299436}
   m_EdgeRadius: 0
+--- !u!95 &5072383616937193734
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633506197213965983}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 312d16c936635ba40bbd3a584dff1f1f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4355925594926244066
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,8 +635,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.2906225, w: 0.95683783}
   m_LocalPosition: {x: -0.306, y: 0.368, z: 0}
-  m_LocalScale: {x: 0.45199, y: 0.45199, z: 0.45199}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4720758128298117244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -33.79}
@@ -686,7 +686,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 0.48, y: 0.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -842,7 +842,7 @@ Transform:
   m_GameObject: {fileID: 8908376126768741263}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.507355, y: -2.3771982, z: -6.1963634}
+  m_LocalPosition: {x: -6.7467856, y: 0.47545958, z: -6.1963634}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
