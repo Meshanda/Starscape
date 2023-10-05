@@ -16,11 +16,13 @@ public class PlayerCameraConfiner : MonoBehaviour
     private void Awake()
     {
         _cinemachineConfiner = GetComponent<CinemachineConfiner2D>();
-        _cinemachineConfiner.m_BoundingShape2D = ConfinerCollider;
     }
+
 
     private void Start()
     {
+        _cinemachineConfiner.m_BoundingShape2D = ConfinerCollider;
+        
         float xMin = GroundTilemap.cellBounds.xMin * 0.32f;
         float xMax = GroundTilemap.cellBounds.xMax * 0.32f;
         float yMin = GroundTilemap.cellBounds.yMin * 0.32f;
