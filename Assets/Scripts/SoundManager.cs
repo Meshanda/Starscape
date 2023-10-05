@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SoundManager : Singleton<SoundManager>
 {
-    public static Action OnStartMusic;
+    public static Action OnGameStartMusic;
     public static Action<Item> OnBreakBlock;
     public static Action OnPlayerFootStep;
     public static Action OnPlayerJump;
@@ -29,7 +29,7 @@ public class SoundManager : Singleton<SoundManager>
 
     private void OnEnable()
     {
-        OnStartMusic += Event_OnStartMusic;
+        OnGameStartMusic += Event_OnGameStartMusic;
         OnBreakBlock += Event_OnBreakBlock;
         OnPlayerFootStep += Event_OnPlayerFootStep;
         OnPlayerJump += Event_OnPlayerJump;
@@ -38,7 +38,7 @@ public class SoundManager : Singleton<SoundManager>
 
     private void OnDisable()
     {
-        OnStartMusic -= Event_OnStartMusic;
+        OnGameStartMusic -= Event_OnGameStartMusic;
         OnBreakBlock -= Event_OnBreakBlock;
         OnPlayerFootStep -= Event_OnPlayerFootStep;
         OnPlayerJump -= Event_OnPlayerJump;
@@ -51,7 +51,7 @@ public class SoundManager : Singleton<SoundManager>
         SetVolumeSfx(Settings.volumeFx);
     }
     
-    private void Event_OnStartMusic()
+    private void Event_OnGameStartMusic()
     {
         _musicSource.clip = _music;
         _musicSource.Play();

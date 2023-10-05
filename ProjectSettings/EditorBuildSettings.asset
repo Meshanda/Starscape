@@ -8,16 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: b520d6fd526816d42aaba048166c809a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SelectPlanet.unity
     guid: a0e05273521cd554cba795662948223b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: 286719081eaf38e4db46ca6e8239047f
-  - enabled: 0
+  - enabled: 1
     path: Assets/DevTests/Merge.unity
     guid: fd4cc9c48d61e4044b19d6e04abfcfe3
   m_configObjects: {}
