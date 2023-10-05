@@ -215,7 +215,7 @@ public class World : Singleton<World>
         
         var originTilePos = placeTilemap.WorldToCell(worldPos);
         
-        var tilePos = originTilePos; // TODO for size in a for loop
+        var tilePos = originTilePos; // TODO size in a for loop maybe one day
 
         if (!isRecheck)
         {

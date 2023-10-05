@@ -245,7 +245,7 @@ public class TilePlacingRequirements
 [Serializable]
 public class TilePlacingRules
 {
-    public Vector2 tileSize = Vector2.one;
+    // public Vector2 tileSize = Vector2.one; // TODO size maybe one day
     public World.TilemapLayer placeLayer = World.TilemapLayer.Ground;
     public List<TilePlacingRequirements> requirements = new List<TilePlacingRequirements>() // if any are valid, we can place.
     {

@@ -2547,6 +2547,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1414284447643278819, guid: cffef8145159ee243ae0d50e6ebc2a55, type: 3}
+      propertyPath: _speed
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414284447643278819, guid: cffef8145159ee243ae0d50e6ebc2a55, type: 3}
       propertyPath: _children.Array.data[8]
       value: 
       objectReference: {fileID: 0}
