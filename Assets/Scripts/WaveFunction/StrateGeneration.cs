@@ -12,7 +12,7 @@ public class StrateGeneration : MonoBehaviour
 {
     [Header("Initialisation")]
     public int dimensionsX;
-    public Vector2Int OffsetXY;
+    [HideInInspector] public Vector2Int OffsetXY;
     public Tilemap tileGround;
     [SerializeField] private List<Strate> _strates = new List<Strate>();
     private Vector2Int size;
@@ -48,15 +48,10 @@ public class StrateGeneration : MonoBehaviour
             _pasteGrotto.SpawnGrotte();
     }
 
-
     public TileBase GetTile(int i, int j)
     {
-        return tileGround.GetTile(new Vector3Int(i - OffsetXY.x, -j - OffsetXY.y));
+        return tileGround.GetTile(new Vector3Int(i - tileGround.size.x/2, j - tileGround.size.y +1 + OffsetXY.y));
     }
-
-
-    //private void CallEventShadow(Item item, Vector3Int cellPos, Vector2 vector)
-
 
     public Vector2Int GetTilesPos(Vector3 Player)
     {
@@ -67,7 +62,7 @@ public class StrateGeneration : MonoBehaviour
     public void InitializeGrid()
     {
         OffsetXY.x = dimensionsX / 2;
-        OffsetXY.y = 0;
+        OffsetXY.y = _strates[0].SizeY;
         int debutStrate = 0;
         LTiles.Clear();
         LtilesVoisin.Clear();
@@ -94,16 +89,18 @@ public class StrateGeneration : MonoBehaviour
             {
                 for (int x = 0; x < dimensionsX; x++)
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s], x, y));
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y ), GetTileFromStrate(_strates[s], x, y));
                 }
             }
         }
         SetFilons();
-        size = new Vector2Int(dimensionsX, tileGround.size.y);
+        size = (Vector2Int)tileGround.size;
+
         float pair = -0.18f;
         if (tileGround.size.y % 2 == 0) pair = 0;
-        Vector2 shadowPos = new Vector3(0, -tileGround.CellToWorld(new Vector3Int(0, (size.y / 2) - 1 + OffsetXY.y)).y + pair);
-        Vector2 ShadowScale = new Vector3(tileGround.size.x, tileGround.size.y, tileGround.size.z) * 0.32f;
+        Vector3Int middelY = new Vector3Int(0,(tileGround.size.y/2)-1 );
+        Vector2 shadowPos = new Vector3(0, -tileGround.CellToWorld(middelY).y + pair + OffsetXY.y * 0.32f);
+        Vector2 ShadowScale = new Vector3(tileGround.size.x, tileGround.size.y , tileGround.size.z) * 0.32f;
 
         if (Fog != null)
             Fog.InitShadow(size, shadowPos, ShadowScale);
@@ -139,11 +136,11 @@ public class StrateGeneration : MonoBehaviour
             {
                 if (y < rng)
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[0].Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y ), st.Tiles[0].Tile);
                 }
                 else
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[1].Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y ), st.Tiles[1].Tile);
                 }
             }
             rng += Random.Range(-1, 2);
@@ -162,28 +159,28 @@ public class StrateGeneration : MonoBehaviour
             {
                 if (y == rng)
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y - OffsetXY.y), st.Tiles[0].Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y ), st.Tiles[0].Tile);
                 }
                 else
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y - OffsetXY.y), st.Tiles[1].Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y ), st.Tiles[1].Tile);
                 }
             }
             if (treeDist > _treeMinDist && Random.Range(0f, 1f) < _treeChance / 100f)
             {
-                PasteTree(new Vector3Int(x - OffsetXY.x, rng - OffsetXY.y + 1, 0));
+                PasteTree(new Vector3Int(x - OffsetXY.x, rng  + 1, 0));
                 treeDist = 0;
             }
             if (Random.Range(0f, 1f) < _decorsChance / 100f && _Decor != null)
             {
-                _Decor.SetTile(new Vector3Int(x - OffsetXY.x, rng - OffsetXY.y + 1, 0), _decors[Random.Range(0, _decors.Length)]);
-                _posDecor.Add(new Vector3Int(x - OffsetXY.x, rng - OffsetXY.y + 1, 0));
+                _Decor.SetTile(new Vector3Int(x - OffsetXY.x, rng  + 1, 0), _decors[Random.Range(0, _decors.Length)]);
+                _posDecor.Add(new Vector3Int(x - OffsetXY.x, rng  + 1, 0));
             }
             rng += Random.Range(-1, 2) * Random.Range(0, 2);
             rng = Mathf.Min(rng, st.SizeY);
             rng = Mathf.Max(rng, 1);
             treeDist++;
-            //tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s], x, y));
+            //tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y ), GetTileFromStrate(_strates[s], x, y));
         }
 
         if (_checkDecor != null)
@@ -232,10 +229,10 @@ public class StrateGeneration : MonoBehaviour
             for (int j = -1; j < 2; j++)
             {
                 float rng = Random.Range(0.0f, 100.0f);
-                TileBase temp = tileGround.GetTile(new Vector3Int(X + i - OffsetXY.x, -Y + j - OffsetXY.y));
+                TileBase temp = tileGround.GetTile(new Vector3Int(X + i - OffsetXY.x, -Y + j ));
                 if (temp != T && temp != null && rng < Nb && (i == 0 || j == 0))
                 {
-                    tileGround.SetTile(new Vector3Int(X + i - OffsetXY.x, -Y + j - OffsetXY.y), T);
+                    tileGround.SetTile(new Vector3Int(X + i - OffsetXY.x, -Y + j ), T);
                     Ltemp[n] = new TilePos(T, X + i, Y + j);
                     n++;
                 }

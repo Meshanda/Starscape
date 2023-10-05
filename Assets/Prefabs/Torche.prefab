@@ -98,5 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Position: {x: 0, y: 0}
-  intensity: 0
-  range: 0
+  intensity: 1
+  range: 1
