@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using Cursor = UnityEngine.Cursor;
 
 namespace UI
 {
@@ -6,6 +8,7 @@ namespace UI
     {
         [SerializeField] private Canvas _cursorCanvas;
         [SerializeField] private GameObject _cursorPfb;
+        
         private GameObject _cursor;
 
         private void Start()
@@ -16,6 +19,18 @@ namespace UI
         private void Update()
         {
             _cursor.transform.position = Input.mousePosition;
+        }
+
+        public void SetSize(float size)
+        {
+            _cursor.transform.localScale = new Vector3(size, size, size);
+            Settings.cursorSize = size;
+        }
+
+        public void SetColor(Color newColor)
+        {
+            _cursor.GetComponent<Image>().color = newColor;
+            Settings.cursorColor = newColor;
         }
 
         public void SetCursor()
