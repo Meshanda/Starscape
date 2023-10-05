@@ -281,7 +281,6 @@ public class WaveFunction : MonoBehaviour
             if (rngValue <= threshold)
                 return cell.tileOptions[i];
         }
-        Debug.Log("Help" + rngValue +" "+ totalWeight+" "+ cell.tileOptions.Count);
         return cell.tileOptions[cell.tileOptions.Count-1];
     }
 
