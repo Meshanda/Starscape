@@ -1081,6 +1081,9 @@ MonoBehaviour:
   _sfxSource: {fileID: 693374049}
   _music: {fileID: 8300000, guid: 498b1a920c222d34caa0332e93514245, type: 3}
   _breakBlock: {fileID: 8300000, guid: d078473ff141e7449a42363f2652b083, type: 3}
+  _rocketTakeoff: {fileID: 8300000, guid: a9f8c877fd5cb384ba164277e73d97c8, type: 3}
+  _playerFootStep: {fileID: 8300000, guid: 9c23204fc90bc0749bedb181819935e1, type: 3}
+  _playerJump: {fileID: 8300000, guid: b644ecfce5068c04fa04230b5c436b62, type: 3}
 --- !u!82 &693374048
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10050,6 +10053,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 184ca936e019e5b42a9235082b5e5c51, type: 2}
   - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
   _tileGround: {fileID: 11400000, guid: 184ca936e019e5b42a9235082b5e5c51, type: 2}
+  _tileError: {fileID: 0}
   tileMap: {fileID: 1780645444}
   tileMapDecor: {fileID: 1187536430}
 --- !u!1 &1722717262
