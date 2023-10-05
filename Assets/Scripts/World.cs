@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class World : Singleton<World>
@@ -25,12 +27,23 @@ public class World : Singleton<World>
 
     public Tilemap UtilTilemap => GroundTilemap;
     
-    
     [field: Header("Prefabs")]
     [field: SerializeField] public GameObject DropPrefab { get; private set; }
+    
+    [field: Header("Variables")]
+    public float tileVerificationDelay = 0.1f;
 
     public static event Action<Tilemap, Vector3Int, Item> OnMineTile; // tilemap, tilePos, item
     public static event Action<Tilemap, Vector3Int, Item> OnPlaceTile; // tilemap, tilePos, item
+
+    private List<Tilemap> _gameplayTilemaps = new List<Tilemap>();
+
+    protected override void SingletonAwake()
+    {
+        _gameplayTilemaps.Add(BackgroundTilemap);
+        _gameplayTilemaps.Add(DecorTilemap);
+        _gameplayTilemaps.Add(GroundTilemap);
+    }
 
     public bool IsAWorldTilemap(Tilemap tilemap)
     {
@@ -39,20 +52,32 @@ public class World : Singleton<World>
                || tilemap == GroundTilemap;
     }
 
-    public void ForAllGameplayTilemaps(Action<Tilemap> functor)
+    private void RecheckTile(Vector3Int tilePos, ref List<(Tilemap, Vector3Int)> tilesToDestroy)
     {
-        functor(BackgroundTilemap);
-        functor(DecorTilemap);
-        functor(GroundTilemap);
-    }
-
-    public void RecheckTileNeighbours(Vector3Int tilePos)
-    {
-        // Recheck SELF and NEIGHBOURS (center, up, down, left, right)
-        ForAllGameplayTilemaps(tilemap =>
+        foreach (var tilemap in _gameplayTilemaps)
         {
-
-        });
+            TileBase tile = tilemap.GetTile(tilePos);
+            if (tile != null && !CanItemBePlaced(GameManager.Instance.database.GetItemByTile(tile), GetWorldCenterOfTile(tilePos), true))
+            {
+                tilesToDestroy.Add((tilemap, tilePos));
+            }
+        }
+    }
+    
+    private IEnumerator RecheckTileNeighbours(Vector3Int tilePos)
+    {
+        yield return new WaitForSeconds(tileVerificationDelay);
+        
+        List<(Tilemap, Vector3Int)> tilesToDestroy = new List<(Tilemap, Vector3Int)>();
+        
+        // Recheck SELF and NEIGHBOURS (center, up, down, left, right)
+        RecheckTile(tilePos, ref tilesToDestroy);
+        RecheckTile(tilePos + Vector3Int.up, ref tilesToDestroy);
+        RecheckTile(tilePos + Vector3Int.down, ref tilesToDestroy);
+        RecheckTile(tilePos + Vector3Int.left, ref tilesToDestroy);
+        RecheckTile(tilePos + Vector3Int.right, ref tilesToDestroy);
+        
+        tilesToDestroy.ForEach(t => TryDestroyTile(t.Item1, t.Item2));
     }
     
     public bool TryDestroyTile(Tilemap tilemap, Vector3Int tilePos)
@@ -69,8 +94,13 @@ public class World : Singleton<World>
             return false;
         }
 
+        if (!tilemap.GetTile(tilePos))
+        {
+            return false;
+        }
+        
         tilemap.SetTile(tilePos, null);
-        RecheckTileNeighbours(tilePos);
+        StartCoroutine(RecheckTileNeighbours(tilePos));
         OnMineTile?.Invoke(tilemap, tilePos, item);
 
         if (!item.tileInfo.breakingRules.HasAnyLoot())
@@ -85,7 +115,7 @@ public class World : Singleton<World>
     public bool TryPlaceTile(string itemID, Vector2 worldPos)
     {
         Item item = GameManager.Instance.database.GetItemById(itemID);
-        if (!CanItemBePlaced(item, worldPos))
+        if (!CanItemBePlaced(item, worldPos, false))
         {
             return false;
         }
@@ -111,7 +141,7 @@ public class World : Singleton<World>
         return UtilTilemap.CellToWorld(tilePos) + new Vector3(0.16f, 0.16f, 0.0f);
     }
     
-    private bool CanItemBePlaced(Item item, Vector2 worldPos)
+    private bool CanItemBePlaced(Item item, Vector2 worldPos, bool skipSelf)
     {
         if (item is null)
         {
@@ -132,7 +162,20 @@ public class World : Singleton<World>
         
         var tilePos = tilemap.WorldToCell(worldPos);
 
-        return true;
+        bool isTileOccupied = false;
+        if (!skipSelf)
+        {
+            if (tilemap == DecorTilemap || tilemap == GroundTilemap)
+            {
+                isTileOccupied = (DecorTilemap.GetTile(tilePos) != null) || (GroundTilemap.GetTile(tilePos) != null);
+            }
+            else
+            {
+                isTileOccupied = tilemap.GetTile(tilePos) != null;
+            }
+        }
+
+        return !isTileOccupied;
         
         // if (World.Instance.GroundTilemap.GetTile(cellPos) is not null)
         // {
@@ -217,7 +260,7 @@ public class World : Singleton<World>
         
         VisualizationTilemap.SetTile(tilePos, heldItem.tileInfo.tile);
 
-        if (CanItemBePlaced(heldItem, worldPos) && playerCondMet)
+        if (CanItemBePlaced(heldItem, worldPos, false) && playerCondMet)
         {
             VisualizationTilemap.color = vizGoodColor;
         }
