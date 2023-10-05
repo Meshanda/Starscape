@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,8 +8,8 @@ public class Tile : ScriptableObject
     public TileBase tile;
     public int weight;
     public bool inDecor;
-    public Tile[] upNeighbours;
-    public Tile[] rightNeighbours;
-    public Tile[] downNeighbours;
-    public Tile[] leftNeighbours;
+    public List<Tile> upNeighbours;
+    public List<Tile> rightNeighbours;
+    public List<Tile> downNeighbours;
+    public List<Tile> leftNeighbours;
 }

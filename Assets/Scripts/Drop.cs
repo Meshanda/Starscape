@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,8 +13,9 @@ public class Drop : MonoBehaviour
     [SerializeField] private BoxCollider2D _hardCollision;
 
     private Rigidbody2D _rb;
+    private bool _hasBeenAdded;
     
-    private ItemStack _itemStack;
+    [SerializeField, ReadOnlyField] private ItemStack _itemStack;
     public ItemStack ItemStack
     {
         get => _itemStack;
@@ -82,10 +84,16 @@ public class Drop : MonoBehaviour
         if (!other.tag.Equals("Player"))
             return;
 
-        if (Vector2.Distance(transform.position, other.transform.position) < _collectDistance)
+        if (_hasBeenAdded)
+            return;
+        
+        Transform dest = other.GetComponent<Player>().DropPosition;
+
+        if (Vector2.Distance(transform.position, dest.position) < _collectDistance)
         {
             if (InventorySystem.Instance.AddItem(ItemStack))
             {
+                _hasBeenAdded = true;
                 Destroy(gameObject);
             }
             else
@@ -97,7 +105,7 @@ public class Drop : MonoBehaviour
         {
             if (InventorySystem.Instance.CanAddItem(ItemStack))
             {
-                _rb.velocity = (other.transform.position - transform.position).normalized * Time.deltaTime * _magnetSpeed;
+                _rb.velocity = (dest.position - transform.position).normalized * Time.deltaTime * _magnetSpeed;
             }
         }
     }

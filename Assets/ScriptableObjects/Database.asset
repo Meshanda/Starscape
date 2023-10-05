@@ -13,122 +13,228 @@ MonoBehaviour:
   m_Name: Database
   m_EditorClassIdentifier: 
   items:
-  - id: dirt_01
+  - inspectorName: dirt_01 (TILE)
+    id: dirt_01
     name: Dirt
     description: This is a dirt block.
     sprite: {fileID: 21300000, guid: 42971c32d57da1a4e8480bce4cb9ff75, type: 3}
+    canHaveDecorOnTop: 0
     tileInfo:
+      inspectorName: dirt (LOOT [dirt_01 (x1)])
+      inspectorNameSimple: 
       tile: {fileID: 11400000, guid: f3d287865af96c144a480a3924d5b4a4, type: 2}
       life: 0.5
       requiredToBreak:
+        inspectorName: None (lvl 0)
         type: 0
         level: 0
       lootOnBreak:
+        inspectorName: dirt_01 (x1)
         itemID: dirt_01
         number: 1
     toolData:
+      inspectorName: None (lvl 0) (dmg 1)
       toolStrength:
+        inspectorName: None (lvl 0)
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - id: ground_01
+  - inspectorName: ground_01 (TILE)
+    id: ground_01
     name: Ground
     description: 
     sprite: {fileID: -1479925464, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    canHaveDecorOnTop: 0
     tileInfo:
+      inspectorName: Atlas_67 (LOOT [ground_01 (x1)])
+      inspectorNameSimple: 
       tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
       life: 0.5
       requiredToBreak:
+        inspectorName: None (lvl 0)
         type: 0
         level: 0
       lootOnBreak:
+        inspectorName: ground_01 (x1)
         itemID: ground_01
         number: 1
     toolData:
+      inspectorName: None (lvl 0) (dmg 1)
       toolStrength:
+        inspectorName: None (lvl 0)
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - id: crafting_table_01
+  - inspectorName: crafting_table_01 (TILE)
+    id: crafting_table_01
     name: Crafting Table
     description: 
     sprite: {fileID: 21300000, guid: 5a8df7a6d1f43d841869ac3097a34b01, type: 3}
+    canHaveDecorOnTop: 0
     tileInfo:
+      inspectorName: CraftingTableTile (LOOT [crafting_table_01 (x1)])
+      inspectorNameSimple: 
       tile: {fileID: 11400000, guid: bb85747b5b13686478b4c92c9766ed46, type: 2}
       life: 1
       requiredToBreak:
+        inspectorName: None (lvl 0)
         type: 0
         level: 0
       lootOnBreak:
+        inspectorName: crafting_table_01 (x1)
         itemID: crafting_table_01
         number: 1
     toolData:
+      inspectorName: None (lvl 0) (dmg 1)
       toolStrength:
+        inspectorName: None (lvl 0)
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - id: pickaxe_01
+  - inspectorName: pickaxe_01 (TOOL)
+    id: pickaxe_01
     name: Pickaxe
     description: 
     sprite: {fileID: 21300000, guid: 8afca7ff5b1c29348b2129e86c114c14, type: 3}
+    canHaveDecorOnTop: 0
     tileInfo:
+      inspectorName: <invalid>
+      inspectorNameSimple: 
       tile: {fileID: 0}
       life: 1
       requiredToBreak:
+        inspectorName: None (lvl 0)
         type: 0
         level: 0
       lootOnBreak:
+        inspectorName: <invalid>
         itemID: 
         number: 0
     toolData:
+      inspectorName: Pickaxe (lvl 0) (dmg 2)
       toolStrength:
+        inspectorName: Pickaxe (lvl 0)
         type: 2
         level: 0
       tileDamagePerSecond: 2
-  - id: cobblestone_01
+  - inspectorName: cobblestone_01 (TILE)
+    id: cobblestone_01
     name: Cobblestone
     description: 
     sprite: {fileID: 21300000, guid: a0f1f2edaf746a54b837e6b7e8ede516, type: 3}
+    canHaveDecorOnTop: 0
     tileInfo:
+      inspectorName: stone (BREAK COND. [Pickaxe (lvl 0)]) (LOOT [cobblestone_01
+        (x1)])
+      inspectorNameSimple: 
       tile: {fileID: 11400000, guid: e99a9437ce45fc54db42c471a07749f5, type: 2}
       life: 1
       requiredToBreak:
+        inspectorName: Pickaxe (lvl 0)
         type: 2
         level: 0
       lootOnBreak:
+        inspectorName: cobblestone_01 (x1)
         itemID: cobblestone_01
         number: 1
     toolData:
+      inspectorName: None (lvl 0) (dmg 1)
       toolStrength:
+        inspectorName: None (lvl 0)
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: grass_01 (TILE)
+    id: grass_01
+    name: Grass
+    description: 
+    sprite: {fileID: 21300000, guid: eff8bda531123ab499ad5d794bbedc32, type: 3}
+    canHaveDecorOnTop: 1
+    tileInfo:
+      inspectorName: dirt_grass (LOOT [dirt_01 (x1)])
+      inspectorNameSimple: 
+      tile: {fileID: 11400000, guid: cdcb2f2f1890ef54e866c39566ce3254, type: 2}
+      life: 1
+      requiredToBreak:
+        inspectorName: None (lvl 0)
+        type: 0
+        level: 0
+      lootOnBreak:
+        inspectorName: dirt_01 (x1)
+        itemID: dirt_01
+        number: 1
+    toolData:
+      inspectorName: None (lvl 0) (dmg 1)
+      toolStrength:
+        inspectorName: None (lvl 0)
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: bedrock_01 (TILE)
+    id: bedrock_01
+    name: Bedrock
+    description: How did you get this?
+    sprite: {fileID: 1576435574, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    canHaveDecorOnTop: 0
+    tileInfo:
+      inspectorName: Atlas_81 (BREAK COND. [None (lvl 1000)]) (LOOT [bedrock_01 (x1)])
+      inspectorNameSimple: 
+      tile: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
+      life: 1
+      requiredToBreak:
+        inspectorName: None (lvl 1000)
+        type: 0
+        level: 1000
+      lootOnBreak:
+        inspectorName: bedrock_01 (x1)
+        itemID: bedrock_01
+        number: 1
+    toolData:
+      inspectorName: None (lvl 0) (dmg 1)
+      toolStrength:
+        inspectorName: None (lvl 0)
         type: 0
         level: 0
       tileDamagePerSecond: 1
   craftRecipes:
-  - itemsRequired:
-    - itemID: dirt_01
-      number: 1
+  - inspectorName: cobblestone_01 (x1)
+    itemsRequired: []
     itemCrafted:
+      inspectorName: cobblestone_01 (x1)
       itemID: cobblestone_01
       number: 1
     requiredFlags: 0
-  - itemsRequired:
-    - itemID: cobblestone_01
-      number: 1
+  - inspectorName: dirt_01 (x1)
+    itemsRequired: []
     itemCrafted:
+      inspectorName: dirt_01 (x1)
       itemID: dirt_01
       number: 1
     requiredFlags: 0
-  - itemsRequired:
-    - itemID: dirt_01
+  - inspectorName: pickaxe_01 (x1)
+    itemsRequired:
+    - inspectorName: dirt_01 (x3)
+      itemID: dirt_01
       number: 3
     itemCrafted:
+      inspectorName: pickaxe_01 (x1)
       itemID: pickaxe_01
       number: 1
     requiredFlags: 1
-  - itemsRequired:
-    - itemID: dirt_01
+  - inspectorName: crafting_table_01 (x1)
+    itemsRequired:
+    - inspectorName: dirt_01 (x4)
+      itemID: dirt_01
       number: 4
     itemCrafted:
+      inspectorName: crafting_table_01 (x1)
       itemID: crafting_table_01
+      number: 1
+    requiredFlags: 0
+  - inspectorName: bedrock_01 (x1)
+    itemsRequired: []
+    itemCrafted:
+      inspectorName: bedrock_01 (x1)
+      itemID: bedrock_01
       number: 1
     requiredFlags: 0

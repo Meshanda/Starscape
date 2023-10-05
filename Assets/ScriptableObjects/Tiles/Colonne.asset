@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Colonne
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 051efc23755722b48b633c125f94387a, type: 2}
-  weight: 15
+  weight: 60
   inDecor: 1
   upNeighbours:
-  - {fileID: 11400000}
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
+  - {fileID: 11400000}
   rightNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
-  - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
+  - {fileID: 11400000, guid: 86980bb56bf6e5846bdcedc0c38f6e2d, type: 2}
   downNeighbours:
   - {fileID: 11400000}
   leftNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
-  - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
+  - {fileID: 11400000, guid: 2d5cfe2aca799944095b8f91a4092d10, type: 2}
