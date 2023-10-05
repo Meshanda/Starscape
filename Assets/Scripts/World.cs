@@ -200,7 +200,7 @@ public class World : Singleton<World>
         return true;
     }
 
-    private bool CanItemBePlaced(Item item, Vector2 worldPos, bool skipSelf)
+    private bool CanItemBePlaced(Item item, Vector2 worldPos, bool isRecheck)
     {
         if (item is null)
         {
@@ -217,7 +217,7 @@ public class World : Singleton<World>
         
         var tilePos = originTilePos; // TODO for size in a for loop
 
-        if (!skipSelf)
+        if (!isRecheck)
         {
             var hit = Physics2D.BoxCast(GetWorldCenterOfTile(tilePos), tileSize + entityCheckMargin, 0.0f, Vector2.zero, Mathf.Infinity, entityLayers);
             if (hit.collider)
@@ -227,7 +227,7 @@ public class World : Singleton<World>
         }
 
         bool isTileOccupied = false;
-        if (!skipSelf)
+        if (!isRecheck)
         {
             if (placeTilemap == DecorTilemap || placeTilemap == GroundTilemap)
             {
@@ -253,38 +253,39 @@ public class World : Singleton<World>
                 if (requirement.whitelistCenter.Count > 0)
                 {
                     if (!HasRequiredTile(ref _gameplayTilemaps, tilePos,
-                            tile => requirement.whitelistCenter.Contains(GameManager.Instance.database.GetItemByTile(tile).id))) goto next;
+                            tile => requirement.whitelistCenter.Contains(GameManager.Instance.database.GetItemByTile(tile).id))) continue;
                 }
                 else
                 {
                     var tilemaps = GetTilemapsFromLayers(requirement.whitelistCenterLayers);
-                    if (!HasRequiredTile(ref tilemaps, tilePos)) goto next;
+                    if (!HasRequiredTile(ref tilemaps, tilePos)) continue;
                 }
             }
-            
-            if (requirement.HasAnyNeighbourRequirements())
+
+            if (!(isRecheck && item.tileInfo.canBeBuiltFrom)) // we don't care about rechecking neighbour requirements if we are a canBeBuiltFrom tile
             {
-                if (requirement.whitelistNeighbours.Count > 0)
+                if (requirement.HasAnyNeighbourRequirements())
                 {
-                    if (!HasAllRequiredNeighbours(requirement.requiredNeighbours, ref _gameplayTilemaps, tilePos,
-                            tile => requirement.whitelistNeighbours.Contains(GameManager.Instance.database.GetItemByTile(tile).id))) goto next;
-                }
-                else if (requirement.whitelistNeighbourLayers != 0)
-                {
-                    var tilemaps = GetTilemapsFromLayers(requirement.whitelistNeighbourLayers);
-                    if (!HasAllRequiredNeighbours(requirement.requiredNeighbours, ref tilemaps, tilePos)) goto next;
-                }
-                else
-                {
-                    // any neighbour
-                    if (!HasAllRequiredNeighbours(requirement.requiredNeighbours, ref _gameplayTilemaps, tilePos)) goto next;
+                    if (requirement.whitelistNeighbours.Count > 0)
+                    {
+                        if (!HasAllRequiredNeighbours(requirement.requiredNeighbours, ref _gameplayTilemaps, tilePos,
+                                tile => requirement.whitelistNeighbours.Contains(GameManager.Instance.database.GetItemByTile(tile).id))) continue;
+                    }
+                    else if (requirement.whitelistNeighbourLayers != 0)
+                    {
+                        var tilemaps = GetTilemapsFromLayers(requirement.whitelistNeighbourLayers);
+                        if (!HasAllRequiredNeighbours(requirement.requiredNeighbours, ref tilemaps, tilePos)) continue;
+                    }
+                    else
+                    {
+                        // any neighbour
+                        if (!HasAllRequiredNeighbours(requirement.requiredNeighbours, ref _gameplayTilemaps, tilePos)) continue;
+                    }
                 }
             }
             
             areRequirementsMet = true;
             break;
-            
-            next: ;
         }
         
         return !isTileOccupied && areRequirementsMet;
