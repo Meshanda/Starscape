@@ -104,7 +104,8 @@ public class StrateGeneration : MonoBehaviour
                 {
                     TilesStrate ts = GetTileFromStrate(_strates[s], x, y);
                     tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), ts.Tile);
-                    _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), ts.TilesBG);
+                    if(_bg != null)
+                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), ts.TilesBG);
                 }
             }
         }
@@ -148,12 +149,14 @@ public class StrateGeneration : MonoBehaviour
                 if( y < rng) 
                 {
                     tileGround.SetTile(new Vector3Int(x - OffsetXY.x,-y - OffsetXY.y), st.Tiles[0].Tile);
-                    _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[0].TilesBG);
+                    if (_bg != null)
+                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[0].TilesBG);
                 }
                 else 
                 {
                     tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[1].Tile);
-                    _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[1].TilesBG);
+                    if (_bg != null)
+                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[1].TilesBG);
                 }
             }
             rng += Random.Range(-1, 2);
