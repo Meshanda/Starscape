@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e4d0072cb0a75947ad9892ed3d43365, type: 3}
-  m_Name: Colonne
+  m_Name: ColonneUp
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 717f9c474fc2d55438441bbe72aaad8e, type: 2}
-  weight: 150
+  tile: {fileID: 11400000, guid: 6e2f9221b583e674a94e9d31aba2046b, type: 2}
+  weight: 2.1474836e+9
   inDecor: 1
-  upNeighbours:
-  - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
-  - {fileID: 11400000}
+  upNeighbours: []
   rightNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
   - {fileID: 11400000, guid: 86980bb56bf6e5846bdcedc0c38f6e2d, type: 2}
+  - {fileID: 11400000, guid: 4c9556d1dfd91ad45b21d78f898731b1, type: 2}
   downNeighbours:
-  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 5a23ecee90de33546aca77898c9b6005, type: 2}
   leftNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
   - {fileID: 11400000, guid: 2d5cfe2aca799944095b8f91a4092d10, type: 2}
+  - {fileID: 11400000, guid: 5ecc79b7ba64c3d41af5dc2bc3471732, type: 2}

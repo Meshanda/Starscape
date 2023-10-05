@@ -18,15 +18,14 @@ MonoBehaviour:
   upNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
   - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
+  - {fileID: 11400000, guid: b3755d11a1e381f4d86f1102acaa6cae, type: 2}
   rightNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
-  - {fileID: 11400000, guid: 5f86f84201307e44eac45e9e0731c5c5, type: 2}
   - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
-  - {fileID: 11400000, guid: 7d4c904265eccee46bda100983fb3c75, type: 2}
+  - {fileID: 11400000, guid: 4c9556d1dfd91ad45b21d78f898731b1, type: 2}
   downNeighbours:
   - {fileID: 11400000, guid: 06f47a84e3af30c41aa0d69a02685013, type: 2}
   leftNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
-  - {fileID: 11400000, guid: 5f86f84201307e44eac45e9e0731c5c5, type: 2}
   - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
-  - {fileID: 11400000, guid: 7d4c904265eccee46bda100983fb3c75, type: 2}
+  - {fileID: 11400000, guid: 5ecc79b7ba64c3d41af5dc2bc3471732, type: 2}

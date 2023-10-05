@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e4d0072cb0a75947ad9892ed3d43365, type: 3}
-  m_Name: GreenBannerMiddle
+  m_Name: BlueBannerMiddle 1
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: b73f31b8bfb897a46a43cdc9eb62126b, type: 2}
-  weight: 500
+  tile: {fileID: 11400000, guid: 1fa7df4b0c2655e4cb06b2e69b5df33c, type: 2}
+  weight: 0.001
   inDecor: 1
   upNeighbours:
-  - {fileID: 11400000, guid: ae90940e3a1fe5a46aa9da25ffc1aeb0, type: 2}
+  - {fileID: 11400000, guid: 7d4c904265eccee46bda100983fb3c75, type: 2}
+  - {fileID: 11400000, guid: 9a9a1ddaa3d9b484eb82a084e0be2539, type: 2}
   rightNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
   - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
-  - {fileID: 11400000, guid: 4c9556d1dfd91ad45b21d78f898731b1, type: 2}
   downNeighbours:
-  - {fileID: 11400000, guid: bc970a5f4b9744d4bb709858780eba80, type: 2}
+  - {fileID: 11400000, guid: 75501d3b61a52c3459b4c9613680d0a3, type: 2}
   leftNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
   - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
-  - {fileID: 11400000, guid: 5ecc79b7ba64c3d41af5dc2bc3471732, type: 2}
