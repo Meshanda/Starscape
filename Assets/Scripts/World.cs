@@ -35,6 +35,9 @@ public class World : Singleton<World>
     
     [field: Header("Variables")]
     public float tileVerificationDelay = 0.1f;
+    public Vector3 tileSize = new Vector2(0.32f, 0.32f);
+    public Vector3 entityCheckMargin = new Vector2(0.05f, 0.05f);
+    public LayerMask entityLayers;
 
     public static event Action<Tilemap, Vector3Int, Item> OnMineTile; // tilemap, tilePos, item
     public static event Action<Tilemap, Vector3Int, Item> OnPlaceTile; // tilemap, tilePos, item
@@ -161,7 +164,7 @@ public class World : Singleton<World>
     
     public Vector2 GetWorldCenterOfTile(Vector3Int tilePos)
     {
-        return UtilTilemap.CellToWorld(tilePos) + new Vector3(0.16f, 0.16f, 0.0f);
+        return UtilTilemap.CellToWorld(tilePos) + (tileSize / 2.0f);
     }
     
     private bool HasRequiredTile(ref List<Tilemap> tilemaps, Vector3Int inTilePos, Predicate<TileBase> predicate = null)
@@ -196,7 +199,7 @@ public class World : Singleton<World>
 
         return true;
     }
-    
+
     private bool CanItemBePlaced(Item item, Vector2 worldPos, bool skipSelf)
     {
         if (item is null)
@@ -210,14 +213,18 @@ public class World : Singleton<World>
             return false;
         }
         
-        var hit = Physics2D.Raycast(worldPos, Vector2.zero, Mathf.Infinity);
-        if (hit.collider != null && hit.collider.gameObject.tag.Equals("Player")) // TODO polish
-        {
-            return false;
-        }
-        
         var originTilePos = placeTilemap.WorldToCell(worldPos);
+        
         var tilePos = originTilePos; // TODO for size in a for loop
+
+        if (!skipSelf)
+        {
+            var hit = Physics2D.BoxCast(GetWorldCenterOfTile(tilePos), tileSize + entityCheckMargin, 0.0f, Vector2.zero, Mathf.Infinity, entityLayers);
+            if (hit.collider)
+            {
+                return false;
+            }
+        }
 
         bool isTileOccupied = false;
         if (!skipSelf)

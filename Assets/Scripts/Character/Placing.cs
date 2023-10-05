@@ -6,7 +6,6 @@ public class Placing : MonoBehaviour
 {
     [SerializeField] private float _placingDistance = 2.0f;
     [SerializeField] private float _placingDelay = .15f;
-    [SerializeField] private float _vizDelay = .15f;
 
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));

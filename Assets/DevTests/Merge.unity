@@ -9634,14 +9634,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8783220257367831826, guid: c81cb624c96da8146b39a5e07c51494d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.507355
-      objectReference: {fileID: 0}
-    - target: {fileID: 8783220257367831826, guid: c81cb624c96da8146b39a5e07c51494d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.3771982
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10023,6 +10015,12 @@ MonoBehaviour:
   vizGoodColor: {r: 1, g: 1, b: 1, a: 0.2}
   vizBadColor: {r: 1, g: 0, b: 0, a: 0.4}
   <DropPrefab>k__BackingField: {fileID: 6682008877770623002, guid: 5973becb8ec6b454bbd740270bb6baa2, type: 3}
+  tileVerificationDelay: 0.1
+  tileSize: {x: 0.32, y: 0.32, z: 0}
+  entityCheckMargin: {x: 0, y: 0, z: 0}
+  entityLayers:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1722717262
 GameObject:
   m_ObjectHideFlags: 0
