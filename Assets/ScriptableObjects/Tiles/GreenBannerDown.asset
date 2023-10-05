@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GreenBannerDown
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 93c2f839faf156f4799eed189d606e4c, type: 2}
-  weight: 100
+  weight: 10000
   inDecor: 1
   upNeighbours:
   - {fileID: 11400000, guid: 06f47a84e3af30c41aa0d69a02685013, type: 2}

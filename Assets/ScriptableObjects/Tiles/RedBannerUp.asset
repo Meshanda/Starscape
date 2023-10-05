@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RedBannerUp
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: cc60883e56f26704994628d815f55b10, type: 2}
-  weight: 10
+  weight: 100
   inDecor: 1
   upNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
@@ -25,6 +25,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4c9556d1dfd91ad45b21d78f898731b1, type: 2}
   downNeighbours:
   - {fileID: 11400000, guid: e68feda0ff5b7124b95051ab7442e385, type: 2}
+  - {fileID: 11400000, guid: d511ac13e29b7e8409b220e23d8d48f4, type: 2}
   leftNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
   - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}

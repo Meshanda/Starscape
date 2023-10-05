@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: RedBannerMiddle 1
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: aed1478eba63e5d48b22bcdc7a6663ae, type: 2}
-  weight: 100
+  weight: 0.01
   inDecor: 1
   upNeighbours:
   - {fileID: 11400000, guid: 5f86f84201307e44eac45e9e0731c5c5, type: 2}
+  - {fileID: 11400000, guid: e68feda0ff5b7124b95051ab7442e385, type: 2}
   rightNeighbours:
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
   - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
