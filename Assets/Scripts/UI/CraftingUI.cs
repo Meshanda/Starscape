@@ -23,14 +23,14 @@ public class CraftingUI : MonoBehaviour
     public int SelectedIndex { get; private set; } = -1;
     public bool HasCenteredSelection { get; private set; } = false;
 
-    private void Awake()
-    {
-        var go = new GameObject();
-        _co = go.AddComponent<CoroutineHelper>();
-    }
-
     public void Select(Transform rt, CraftRecipe recipe, int selectedIndex)
     {
+        if (!_co)
+        {
+            var go = new GameObject();
+            _co = go.AddComponent<CoroutineHelper>();
+        }
+        
         _co.StopAllCoroutines();
         _recipe = recipe;
         
