@@ -32,12 +32,12 @@ namespace UI
 
         public void VolumeFx(float value)
         {
-            
+            SoundManager.Instance.SetVolumeSfx(value);
         }
         
         public void VolumeMusic(float value)
         {
-            
+            SoundManager.Instance.SetVolumeMusic(value);
         }
 
         public void CursorSize(float size)

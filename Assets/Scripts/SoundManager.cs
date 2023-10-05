@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : Singleton<SoundManager>
 {
     public static Action OnStartMusic;
     public static Action<Item> OnBreakBlock;
@@ -40,7 +40,12 @@ public class SoundManager : MonoBehaviour
         OnRocketTakeoff -= Event_RocketTakeoff;
     }
 
-
+    private void Start()
+    {
+        SetVolumeMusic(Settings.volumeMusic);
+        SetVolumeSfx(Settings.volumeFx);
+    }
+    
     private void Event_OnStartMusic()
     {
         _musicSource.clip = _music;
@@ -65,5 +70,16 @@ public class SoundManager : MonoBehaviour
     private void Event_RocketTakeoff()
     {
         _sfxSource.PlayOneShot(_rocketTakeoff);
+    }
+    
+    public void SetVolumeMusic(float value)
+    {
+        _musicSource.volume = value;
+        Settings.volumeMusic = value;
+    } 
+    public void SetVolumeSfx(float value)
+    {
+        _sfxSource.volume = value;
+        Settings.volumeFx = value;
     }
 }
