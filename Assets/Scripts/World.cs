@@ -10,4 +10,7 @@ public class World : Singleton<World>
     
     [SerializeField] private Tilemap _backgroundTilemap;
     public Tilemap BackGroundTilemap => _backgroundTilemap;
+
+    [SerializeField] private PolygonCollider2D _confinerBox;
+    public PolygonCollider2D ConfinerBox => _confinerBox;
 }
