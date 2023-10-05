@@ -29,7 +29,9 @@ public class CharacterController2D : MonoBehaviour
 	private static readonly int FallAnimator = Animator.StringToHash("Falling");
 	private bool _jumping;
 
-	private Vector2 GroundBox => new(_groundedXAxis, _groundedYAxis);
+    public static event Action<Vector3> OnMoveEvent; // item, worldPos
+
+    private Vector2 GroundBox => new(_groundedXAxis, _groundedYAxis);
 	
 	public float MoveDirection { get; set; }
 
@@ -58,6 +60,11 @@ public class CharacterController2D : MonoBehaviour
 			Jump();
 
 		UpdateAnimation();
+
+		if(_rigidbody2D.velocity != Vector2.zero)
+		{
+			OnMoveEvent?.Invoke(transform.position);
+        }
 	}
 
 	private void UpdateAnimation()

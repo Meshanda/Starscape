@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7440454831780387226}
   - component: {fileID: 2460924752174387848}
+  - component: {fileID: 449052780076163221}
+  - component: {fileID: 5366634333664938337}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -44,129 +46,218 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deaf89b84d5e86546b8a40aaad7394d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   dimensionsX: 300
+  OffsetXY: {x: 0, y: 0}
   tileGround: {fileID: 0}
   _strates:
   - Tiles:
+    - Tile: {fileID: 11400000, guid: cdcb2f2f1890ef54e866c39566ce3254, type: 2}
+      TilesBG: {fileID: 0}
+      Pourcentage: 0.5
+      IsMinerai: 1
+    - Tile: {fileID: 11400000, guid: f3d287865af96c144a480a3924d5b4a4, type: 2}
+      TilesBG: {fileID: 0}
+      Pourcentage: 0.5
+      IsMinerai: 1
+    SizeY: 8
+    transition: 1
+  - Tiles:
     - Tile: {fileID: 11400000, guid: f481abf869bad104b9965f52e78eb057, type: 2}
+      TilesBG: {fileID: 11400000, guid: 80a80f2df27c14d4f83086184c025cc8, type: 2}
       Pourcentage: 0.5
       IsMinerai: 0
     - Tile: {fileID: 11400000, guid: f3d287865af96c144a480a3924d5b4a4, type: 2}
+      TilesBG: {fileID: 11400000, guid: 80a80f2df27c14d4f83086184c025cc8, type: 2}
       Pourcentage: 98
       IsMinerai: 0
     SizeY: 20
     transition: 0
   - Tiles:
     - Tile: {fileID: 11400000, guid: f3d287865af96c144a480a3924d5b4a4, type: 2}
+      TilesBG: {fileID: 11400000, guid: 80a80f2df27c14d4f83086184c025cc8, type: 2}
       Pourcentage: 50
       IsMinerai: 0
     - Tile: {fileID: 11400000, guid: e99a9437ce45fc54db42c471a07749f5, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 50
       IsMinerai: 0
     SizeY: 15
     transition: 1
   - Tiles:
     - Tile: {fileID: 11400000, guid: 9cb449c5979d6cc4bbf196ca38602be5, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     - Tile: {fileID: 11400000, guid: ab6104784bd5b5b40b9c7cd957c34f0a, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     - Tile: {fileID: 11400000, guid: e99a9437ce45fc54db42c471a07749f5, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 91
       IsMinerai: 0
     SizeY: 50
     transition: 0
   - Tiles:
     - Tile: {fileID: 11400000, guid: e99a9437ce45fc54db42c471a07749f5, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 50
       IsMinerai: 1
     - Tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 50
       IsMinerai: 0
     SizeY: 16
     transition: 1
   - Tiles:
     - Tile: {fileID: 11400000, guid: 58f8459b5870c4a49a03460b697fcd86, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     - Tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     SizeY: 16
     transition: 0
   - Tiles:
     - Tile: {fileID: 11400000, guid: 58f8459b5870c4a49a03460b697fcd86, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     - Tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     SizeY: 16
     transition: 0
   - Tiles:
     - Tile: {fileID: 11400000, guid: 58f8459b5870c4a49a03460b697fcd86, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     - Tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
+      Pourcentage: 0.5
+      IsMinerai: 0
+    SizeY: 16
+    transition: 0
+  - Tiles:
+    - Tile: {fileID: 11400000, guid: 58f8459b5870c4a49a03460b697fcd86, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
+      Pourcentage: 0.47
+      IsMinerai: 1
+    - Tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
+      Pourcentage: 0.5
+      IsMinerai: 0
+    SizeY: 16
+    transition: 0
+  - Tiles:
+    - Tile: {fileID: 11400000, guid: 58f8459b5870c4a49a03460b697fcd86, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
+      Pourcentage: 0.5
+      IsMinerai: 1
+    - Tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     SizeY: 16
     transition: 0
   - Tiles:
     - Tile: {fileID: 11400000, guid: 58f8459b5870c4a49a03460b697fcd86, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     - Tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     SizeY: 16
     transition: 0
   - Tiles:
     - Tile: {fileID: 11400000, guid: 58f8459b5870c4a49a03460b697fcd86, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     - Tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     SizeY: 16
     transition: 0
   - Tiles:
     - Tile: {fileID: 11400000, guid: 58f8459b5870c4a49a03460b697fcd86, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     - Tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
+      TilesBG: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       Pourcentage: 0.5
       IsMinerai: 1
     SizeY: 16
     transition: 0
-  - Tiles:
-    - Tile: {fileID: 11400000, guid: 58f8459b5870c4a49a03460b697fcd86, type: 2}
-      Pourcentage: 0.5
-      IsMinerai: 1
-    - Tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
-      Pourcentage: 0.5
-      IsMinerai: 1
-    SizeY: 16
-    transition: 0
-  - Tiles:
-    - Tile: {fileID: 11400000, guid: 58f8459b5870c4a49a03460b697fcd86, type: 2}
-      Pourcentage: 0.5
-      IsMinerai: 1
-    - Tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
-      Pourcentage: 0.5
-      IsMinerai: 1
-    SizeY: 16
-    transition: 0
-  tileBase: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
-  shadow: {fileID: 0}
   LTiles: []
   LtilesVoisin: []
   ProbVoisin: 50
   ProbVoisinVoisin: 50
-  wordTilesMap: {fileID: 0}
-  PlayerTexture: {fileID: 0}
-  lightShader: {fileID: -876546973899608171, guid: ff92e310a76878f49a5616e008ec78ae, type: 3}
+  Fog: {fileID: 449052780076163221}
   autoUpdate: 0
   _pasteGrotto: {fileID: 0}
+  _trees:
+  - {fileID: 5638885701267574304, guid: 84baadeea8a6f86469e5a617502b1b45, type: 3}
+  - {fileID: 5638885701267574304, guid: 03a5448401628b0468d4ad62ef8ca596, type: 3}
+  - {fileID: 5638885701267574304, guid: 5392ef801bf25c44685397892c7254c5, type: 3}
+  - {fileID: 5638885701267574304, guid: 1489c88f98f6e114ca2aa7091cf09375, type: 3}
+  _tileMapTree: {fileID: 0}
+  _treeMinDist: 5
+  _treeChance: 20
+  _Decor: {fileID: 0}
+  _decors:
+  - {fileID: 11400000, guid: 650df526e008d7746999236cff676662, type: 2}
+  - {fileID: 11400000, guid: 83b30fe66030fcf45adc82289898d83f, type: 2}
+  - {fileID: 11400000, guid: 4db738bd8357d204ebe1553554200561, type: 2}
+  - {fileID: 11400000, guid: 671885d49050be7459ec3f755613ee55, type: 2}
+  - {fileID: 11400000, guid: e2ef4a087f7a07d42abc43fe2fed077d, type: 2}
+  - {fileID: 11400000, guid: 83b30fe66030fcf45adc82289898d83f, type: 2}
+  - {fileID: 11400000, guid: 4db738bd8357d204ebe1553554200561, type: 2}
+  - {fileID: 11400000, guid: 671885d49050be7459ec3f755613ee55, type: 2}
+  - {fileID: 11400000, guid: e2ef4a087f7a07d42abc43fe2fed077d, type: 2}
+  - {fileID: 11400000, guid: 83b30fe66030fcf45adc82289898d83f, type: 2}
+  - {fileID: 11400000, guid: 4db738bd8357d204ebe1553554200561, type: 2}
+  - {fileID: 11400000, guid: 671885d49050be7459ec3f755613ee55, type: 2}
+  - {fileID: 11400000, guid: e2ef4a087f7a07d42abc43fe2fed077d, type: 2}
+  _decorsChance: 50
+  _checkDecor: {fileID: 5366634333664938337}
+  _bg: {fileID: 0}
+  _bgTile: {fileID: 11400000, guid: 80a80f2df27c14d4f83086184c025cc8, type: 2}
+--- !u!114 &449052780076163221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776290454705868516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfce5f0a21c8e8e409062bba0df5dc51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightShader: {fileID: -876546973899608171, guid: ff92e310a76878f49a5616e008ec78ae, type: 3}
+  shadow: {fileID: 0}
+  LTorche: []
+  generator: {fileID: 0}
+--- !u!114 &5366634333664938337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776290454705868516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ea7f4460b615749ad98ef286053c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _decor: {fileID: 0}
+  _listToCheckDecor: []

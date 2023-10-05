@@ -159,7 +159,6 @@ public class WaveFunction : MonoBehaviour
             Iterate();
 		}
 		//Verif2();
-		Debug.Log("done");
         placeAllTile();
 
         ProcessCompleted?.Invoke();
