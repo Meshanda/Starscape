@@ -10228,6 +10228,8 @@ MonoBehaviour:
   - {fileID: 6554965766300727511, guid: 270a98bc34a356c4daef7eed60f064cd, type: 3}
   - {fileID: 6554965766300727511, guid: a5556a0b9110a5f4d858839201d022eb, type: 3}
   - {fileID: 6554965766300727511, guid: b8a43db01865a1242aeb726714772bc0, type: 3}
+  - {fileID: 6554965766300727511, guid: 814e1ca1c21985d47bb44b1d5ee82d87, type: 3}
+  - {fileID: 6554965766300727511, guid: 09ea692eeda9d6a41b95693de63a6cd5, type: 3}
   _tilemap: {fileID: 1780645444}
   _parent: {fileID: 1720046738}
   _waveFunction: {fileID: 1720046740}
@@ -11285,7 +11287,7 @@ Transform:
   m_GameObject: {fileID: 1949036816}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 60}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
