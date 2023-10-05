@@ -5043,6 +5043,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4177748847545266185, guid: b2bf138400ec8884c9df586934505403, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClickPlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177748847545266185, guid: b2bf138400ec8884c9df586934505403, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UI.MainMenuManager, Assembly-CSharp
       objectReference: {fileID: 0}

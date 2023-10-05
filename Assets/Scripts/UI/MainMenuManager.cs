@@ -48,6 +48,10 @@ namespace UI
 
         #region Click methods
 
+        public void ClickPlay()
+        {
+            SceneLoader.LoadScene(GameState.GameScene);
+        }
         public void ClickSettings()
         {
             ChangeCanvas(_settingsCanvas);
