@@ -168,34 +168,73 @@ public class TilePlacingRequirements
     [HideInInspector] public string inspectorName;
     #endregion
     
-    // all specified are required for this struct element to be valid
-    public World.TilemapLayer requiredLayers; 
-    public TileNeighbour requiredNeighbours;
+    [Header("Center Tile (requiredCenter > requiredCenterLayers)")]
+    public List<string> whitelistCenter; // on the placing tile, we need to find at least one that is in this array
+    public World.TilemapLayer whitelistCenterLayers; // on the placing tile, we need to find at least one that is in this var
+    
+    [Header("Neighbour Tiles IF requiredNeighbours (whitelistNeighbours > whitelistNeighbourLayers)")]
+    public TileNeighbour requiredNeighbours; // do we need specific neighbours in order to be placed?
+    public List<string> whitelistNeighbours; // ^^^ in all directions, we need to find at least one that is in this array
+    public World.TilemapLayer whitelistNeighbourLayers; // ^^^ in all directions, we need to find at least one that is in this var
 
-    public TilePlacingRequirements(World.TilemapLayer requiredLayers = default, TileNeighbour requiredNeighbours = default)
+    public TilePlacingRequirements(TileNeighbour requiredNeighbours = default, World.TilemapLayer whitelistNeighbourLayers = default)
     {
-        this.requiredLayers = requiredLayers;
         this.requiredNeighbours = requiredNeighbours;
+        this.whitelistNeighbourLayers = whitelistNeighbourLayers;
+    }
+
+    public bool HasAnyRequirements()
+    {
+        return HasAnyCenterRequirements() || HasAnyNeighbourRequirements();
+    }
+    
+    public bool HasAnyCenterRequirements()
+    {
+        return whitelistCenter.Count > 0 || whitelistCenterLayers != 0;
+    }
+    
+    public bool HasAnyNeighbourRequirements()
+    {
+        return requiredNeighbours != 0;
     }
 
     #region Inspector
     
     public void OnValidate(DatabaseSO database)
     {
-        if (requiredLayers == 0 && requiredNeighbours == 0)
+        if (!HasAnyRequirements())
         {
             inspectorName = "<empty>";
         }
         else
         {
             inspectorName = string.Empty;
-            if (requiredLayers != 0)
+            if (HasAnyCenterRequirements())
             {
-                inspectorName += " layers(" + requiredLayers + ")";
+                if (whitelistCenter.Count > 0)
+                {
+                    inspectorName += " center(<specific>)";
+                }
+                else
+                {
+                    inspectorName += " center(<" + whitelistCenterLayers + ">)";
+                }
             }
-            if (requiredNeighbours != 0)
+            if (HasAnyNeighbourRequirements())
             {
-                inspectorName += " neighbours(" + requiredNeighbours + ")";
+                inspectorName += " neighbours(" + requiredNeighbours;
+                if (whitelistNeighbours.Count > 0)
+                {
+                    inspectorName += " <specific>)";
+                }
+                else if (whitelistNeighbourLayers != 0)
+                {
+                    inspectorName += " <" + whitelistNeighbourLayers + ">)";
+                }
+                else
+                {
+                    inspectorName += ")";
+                }
             }
         }
     }
@@ -210,29 +249,17 @@ public class TilePlacingRules
     public World.TilemapLayer placeLayer = World.TilemapLayer.Ground;
     public List<TilePlacingRequirements> requirements = new List<TilePlacingRequirements>() // if any are valid, we can place.
     {
-        new(default, TileNeighbour.Up),
-        new(default, TileNeighbour.Down),
-        new(default, TileNeighbour.Left),
-        new(default, TileNeighbour.Right),
+        new(TileNeighbour.Up, World.TilemapLayer.Ground),
+        new(TileNeighbour.Down, World.TilemapLayer.Ground),
+        new(TileNeighbour.Left, World.TilemapLayer.Ground),
+        new(TileNeighbour.Right, World.TilemapLayer.Ground),
     };
 
     [CanBeNull]
     public Tilemap GetPlaceTilemap()
     {
-        if ((placeLayer & World.TilemapLayer.Background) != 0)
-        {
-            return World.Instance.BackgroundTilemap;
-        }
-        else if ((placeLayer & World.TilemapLayer.Decor) != 0)
-        {
-            return World.Instance.DecorTilemap;
-        }
-        else if ((placeLayer & World.TilemapLayer.Ground) != 0)
-        {
-            return World.Instance.GroundTilemap;
-        }
-        
-        return null;
+        var tilemaps = World.Instance.GetTilemapsFromLayers(placeLayer);
+        return tilemaps.Count > 0 ? tilemaps[0] : null;
     }
 
     #region Inspector
@@ -249,6 +276,7 @@ public class TilePlacingRules
 public class TileInfo
 {
     public TileBase tile;
+    public bool canBeBuiltFrom = true;
     public TilePlacingRules placingRules = new();
     public TileBreakingRules breakingRules = new();
 

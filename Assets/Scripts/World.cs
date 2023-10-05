@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
+using Utilities;
 
 public class World : Singleton<World>
 {
@@ -50,6 +53,26 @@ public class World : Singleton<World>
         return tilemap == BackgroundTilemap
                || tilemap == DecorTilemap
                || tilemap == GroundTilemap;
+    }
+    
+    public List<Tilemap> GetTilemapsFromLayers(TilemapLayer layers)
+    {
+        List<Tilemap> tilemaps = new List<Tilemap>();
+        
+        if ((layers & TilemapLayer.Background) != 0)
+        {
+            tilemaps.Add(BackgroundTilemap);
+        }
+        else if ((layers & TilemapLayer.Decor) != 0)
+        {
+            tilemaps.Add(DecorTilemap);
+        }
+        else if ((layers & TilemapLayer.Ground) != 0)
+        {
+            tilemaps.Add(GroundTilemap);
+        }
+        
+        return tilemaps;
     }
 
     private void RecheckTile(Vector3Int tilePos, ref List<(Tilemap, Vector3Int)> tilesToDestroy)
@@ -141,6 +164,39 @@ public class World : Singleton<World>
         return UtilTilemap.CellToWorld(tilePos) + new Vector3(0.16f, 0.16f, 0.0f);
     }
     
+    private bool HasRequiredTile(ref List<Tilemap> tilemaps, Vector3Int inTilePos, Predicate<TileBase> predicate = null)
+    {
+        return tilemaps.Select(tilemap => tilemap.GetTile(inTilePos))
+            .Any(tile => tile != null && (predicate == null || predicate(tile)) && GameManager.Instance.database.GetItemByTile(tile).tileInfo.canBeBuiltFrom);
+    }
+    
+    private bool HasAllRequiredNeighbours(TileNeighbour neighbours, ref List<Tilemap> tilemaps, Vector3Int inCenterTilePos, Predicate<TileBase> predicate = null)
+    {
+        var tilePosUp = inCenterTilePos + Vector3Int.up;
+        var tilePosDown = inCenterTilePos + Vector3Int.down;
+        var tilePosLeft = inCenterTilePos + Vector3Int.left;
+        var tilePosRight = inCenterTilePos + Vector3Int.right;
+                    
+        if ((neighbours & TileNeighbour.Up) != 0)
+        {
+            if (!HasRequiredTile(ref tilemaps, tilePosUp, predicate)) return false;
+        }
+        if ((neighbours & TileNeighbour.Down) != 0)
+        {
+            if (!HasRequiredTile(ref tilemaps, tilePosDown, predicate)) return false;
+        }
+        if ((neighbours & TileNeighbour.Left) != 0)
+        {
+            if (!HasRequiredTile(ref tilemaps, tilePosLeft, predicate)) return false;
+        }
+        if ((neighbours & TileNeighbour.Right) != 0)
+        {
+            if (!HasRequiredTile(ref tilemaps, tilePosRight, predicate)) return false;
+        }
+
+        return true;
+    }
+    
     private bool CanItemBePlaced(Item item, Vector2 worldPos, bool skipSelf)
     {
         if (item is null)
@@ -148,8 +204,8 @@ public class World : Singleton<World>
             return false;
         }
         
-        var tilemap = item.tileInfo.placingRules.GetPlaceTilemap();
-        if (!item.tileInfo.tile || !tilemap)
+        var placeTilemap = item.tileInfo.placingRules.GetPlaceTilemap();
+        if (!item.tileInfo.tile || !placeTilemap)
         {
             return false;
         }
@@ -160,51 +216,71 @@ public class World : Singleton<World>
             return false;
         }
         
-        var tilePos = tilemap.WorldToCell(worldPos);
+        var originTilePos = placeTilemap.WorldToCell(worldPos);
+        var tilePos = originTilePos; // TODO for size in a for loop
 
         bool isTileOccupied = false;
         if (!skipSelf)
         {
-            if (tilemap == DecorTilemap || tilemap == GroundTilemap)
+            if (placeTilemap == DecorTilemap || placeTilemap == GroundTilemap)
             {
                 isTileOccupied = (DecorTilemap.GetTile(tilePos) != null) || (GroundTilemap.GetTile(tilePos) != null);
             }
             else
             {
-                isTileOccupied = tilemap.GetTile(tilePos) != null;
+                isTileOccupied = placeTilemap.GetTile(tilePos) != null;
             }
         }
 
-        return !isTileOccupied;
+        bool areRequirementsMet = item.tileInfo.placingRules.requirements.Count <= 0;
+        foreach (TilePlacingRequirements requirement in item.tileInfo.placingRules.requirements)
+        {
+            if (!requirement.HasAnyRequirements())
+            {
+                Debug.LogWarning("ERROR: Forgot empty requirements inside the database (\"" + item.id + "\"");
+                continue;
+            }
+
+            if (requirement.HasAnyCenterRequirements())
+            {
+                if (requirement.whitelistCenter.Count > 0)
+                {
+                    if (!HasRequiredTile(ref _gameplayTilemaps, tilePos,
+                            tile => requirement.whitelistCenter.Contains(GameManager.Instance.database.GetItemByTile(tile).id))) goto next;
+                }
+                else
+                {
+                    var tilemaps = GetTilemapsFromLayers(requirement.whitelistCenterLayers);
+                    if (!HasRequiredTile(ref tilemaps, tilePos)) goto next;
+                }
+            }
+            
+            if (requirement.HasAnyNeighbourRequirements())
+            {
+                if (requirement.whitelistNeighbours.Count > 0)
+                {
+                    if (!HasAllRequiredNeighbours(requirement.requiredNeighbours, ref _gameplayTilemaps, tilePos,
+                            tile => requirement.whitelistNeighbours.Contains(GameManager.Instance.database.GetItemByTile(tile).id))) goto next;
+                }
+                else if (requirement.whitelistNeighbourLayers != 0)
+                {
+                    var tilemaps = GetTilemapsFromLayers(requirement.whitelistNeighbourLayers);
+                    if (!HasAllRequiredNeighbours(requirement.requiredNeighbours, ref tilemaps, tilePos)) goto next;
+                }
+                else
+                {
+                    // any neighbour
+                    if (!HasAllRequiredNeighbours(requirement.requiredNeighbours, ref _gameplayTilemaps, tilePos)) goto next;
+                }
+            }
+            
+            areRequirementsMet = true;
+            break;
+            
+            next: ;
+        }
         
-        // if (World.Instance.GroundTilemap.GetTile(cellPos) is not null)
-        // {
-        //     return false;
-        // }
-        //
-        // if (World.Instance.BackgroundTilemap.GetTile(cellPos) is not null)
-        // {
-        //     return true;
-        // }
-        //
-        // var cellAbove = cellPos + new Vector3Int(0, 1);
-        // var cellBelow = cellPos + new Vector3Int(0, -1);
-        // var cellLeft = cellPos + new Vector3Int(-1, 0);
-        // var cellRight = cellPos + new Vector3Int(1, 0);
-        //
-        // if (World.Instance.GroundTilemap.GetTile(cellBelow) is not null ||
-        //     World.Instance.GroundTilemap.GetTile(cellLeft) is not null ||
-        //     World.Instance.GroundTilemap.GetTile(cellRight) is not null ||
-        //     World.Instance.GroundTilemap.GetTile(cellAbove) is not null)
-        // {
-        //     // Debug.Log($" Below:{World.Instance.GroundTilemap.GetTile(cellBelow) is not null}" +
-        //     //           $"Left: {World.Instance.GroundTilemap.GetTile(cellLeft) is not null}" +
-        //     //           $"Right: {World.Instance.GroundTilemap.GetTile(cellRight) is not null}" +
-        //     //           $"Above: {World.Instance.GroundTilemap.GetTile(cellAbove) is not null}");
-        //     return true;
-        // }
-        //
-        // return false;
+        return !isTileOccupied && areRequirementsMet;
     }
 
     public (Tilemap, TileBase, Vector3Int) FindHitTile(Vector2 worldPos, Item heldItem)
