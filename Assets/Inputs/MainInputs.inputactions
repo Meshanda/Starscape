@@ -51,9 +51,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "MineRelease",
+                    "type": "Button",
+                    "id": "03707d06-362e-4e77-bd91-6eccc61caed0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Place",
                     "type": "Button",
                     "id": "c90b16e1-094a-4a53-9ea6-97872063b0e5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PlaceRelease",
+                    "type": "Button",
+                    "id": "8d6d3dac-e381-48ea-95e9-d06aa24ae0ef",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -112,7 +130,7 @@
                     "name": "",
                     "id": "c459c131-d49d-4d13-9926-fc477244dcf7",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Mine",
@@ -167,7 +185,7 @@
                     "name": "",
                     "id": "58bc89fb-2199-4240-b8c2-c0f2b05b5195",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Place",
@@ -226,6 +244,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Map",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b494b64-26f0-49e7-9873-2d1def2ab90c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlaceRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "791cd4d7-9312-4425-a12c-4b342efaeb23",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MineRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -111,7 +111,12 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         _invSlotsParent.gameObject.SetActive(false);
         _craftSlotsTransform.gameObject.SetActive(false);
     }
-    
+
+    private void Start()
+    {
+        OnInventoryChanged?.Invoke();
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (!IsInventoryOpen)
@@ -151,7 +156,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
             return;
 
         var drop = Instantiate(_dropPfb,
-            GameManager.Instance.player.transform.position,
+            GameManager.Instance.player.DropPosition.position,
             Quaternion.identity).GetComponent<Drop>();
 
         drop.transform.position = new Vector3(drop.transform.position.x, drop.transform.position.y, 0);

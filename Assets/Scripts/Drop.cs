@@ -45,7 +45,7 @@ public class Drop : MonoBehaviour
     
     public void ThrowInPlayerDir()
     {
-        Vector2 dir = GameManager.Instance.player.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        Vector2 dir = GameManager.Instance.player.transform.localScale.x < 0 ? Vector2.right : Vector2.left;
         dir += Vector2.up * 0.35f;
         _rb.AddForce(dir * _throwForce);
 
@@ -82,7 +82,9 @@ public class Drop : MonoBehaviour
         if (!other.tag.Equals("Player"))
             return;
 
-        if (Vector2.Distance(transform.position, other.transform.position) < _collectDistance)
+        Transform dest = other.GetComponent<Player>().DropPosition;
+
+        if (Vector2.Distance(transform.position, dest.position) < _collectDistance)
         {
             if (InventorySystem.Instance.AddItem(ItemStack))
             {
@@ -97,7 +99,7 @@ public class Drop : MonoBehaviour
         {
             if (InventorySystem.Instance.CanAddItem(ItemStack))
             {
-                _rb.velocity = (other.transform.position - transform.position).normalized * Time.deltaTime * _magnetSpeed;
+                _rb.velocity = (dest.position - transform.position).normalized * Time.deltaTime * _magnetSpeed;
             }
         }
     }
