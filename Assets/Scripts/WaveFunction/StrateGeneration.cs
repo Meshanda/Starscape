@@ -45,7 +45,8 @@ public class StrateGeneration : MonoBehaviour
     [Header("Bg")]
     [SerializeField] private Tilemap _bg;
     [SerializeField] private TileBase _bgTile;
-    void Awake()
+
+    void Start()
     {
         InitializeGrid();
         if (_pasteGrotto != null)
@@ -94,9 +95,9 @@ public class StrateGeneration : MonoBehaviour
                 for (int x = 0; x < dimensionsX; x++)
                 {
                     TilesStrate ts = GetTileFromStrate(_strates[s], x, y);
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), ts.Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y ), ts.Tile);
                     if(_bg != null)
-                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), ts.TilesBG);
+                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y ), ts.TilesBG);
                 }
             }
         }
@@ -143,15 +144,15 @@ public class StrateGeneration : MonoBehaviour
             {
                 if (y < rng)
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x,-y - OffsetXY.y), st.Tiles[0].Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x,-y ), st.Tiles[0].Tile);
                     if (_bg != null)
-                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[0].TilesBG);
+                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y ), st.Tiles[0].TilesBG);
                 }
                 else
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[1].Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y ), st.Tiles[1].Tile);
                     if (_bg != null)
-                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[1].TilesBG);
+                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y ), st.Tiles[1].TilesBG);
                 }
             }
             rng += Random.Range(-1, 2);
@@ -170,7 +171,7 @@ public class StrateGeneration : MonoBehaviour
             {
                 if (y == rng)
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y - OffsetXY.y), st.Tiles[0].Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y ), st.Tiles[0].Tile);
 
                 }
                 else
