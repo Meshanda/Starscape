@@ -37,6 +37,7 @@ namespace UI
         private Camera _mainCam;
         private void Start()
         {
+            SoundManager.Instance.PlayMenuMusic();
             _startPosTitle = _camTitle.transform.localEulerAngles;
             _startPosSettings = _camSettings.transform.localEulerAngles;
             _startPosCredits = _camCredits.transform.localEulerAngles;
@@ -73,25 +74,33 @@ namespace UI
 
         public void ClickPlay()
         {
+            SoundManager.Instance.PlayClickSound();
             SceneLoader.LoadScene(GameState.GameScene);
         }
         public void ClickSettings()
         {
+            SoundManager.Instance.PlayWhooshSound();
+            SoundManager.Instance.PlayClickSound();
             ChangeCanvas(_settingsCanvas);
         }
 
         public void ClickCredits()
         {
+            SoundManager.Instance.PlayWhooshSound();
+            SoundManager.Instance.PlayClickSound();
             ChangeCanvas(_creditsCanvas);
         }
 
         public void ClickBackToTitle()
         {
+            SoundManager.Instance.PlayWhooshSound();
+            SoundManager.Instance.PlayClickSound();
             ChangeCanvas(_titleCanvas);
         }
 
         public void ClickQuit()
         {
+            SoundManager.Instance.PlayClickSound();
 #if UNITY_EDITOR
             if (Application.isEditor)
                 EditorApplication.isPlaying = false;

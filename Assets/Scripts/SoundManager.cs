@@ -15,12 +15,17 @@ public class SoundManager : Singleton<SoundManager>
 
     [Header("Music")]
     [SerializeField] private AudioClip _music;
+    [SerializeField] private AudioClip _menuMusic;
 
     [Header("Sfx Sounds")]
     [SerializeField] private AudioClip _breakBlock;
     [SerializeField] private AudioClip _rocketTakeoff;
     [SerializeField] private AudioClip _playerFootStep;
     [SerializeField] private AudioClip _playerJump;
+    
+    [Header("UI Sounds")]
+    [SerializeField] private AudioClip _screenChanged;
+    [SerializeField] private AudioClip _buttonClicked;
 
     private void OnEnable()
     {
@@ -70,6 +75,21 @@ public class SoundManager : Singleton<SoundManager>
     private void Event_RocketTakeoff()
     {
         _sfxSource.PlayOneShot(_rocketTakeoff);
+    }
+
+    public void PlayClickSound()
+    {
+        _sfxSource.PlayOneShot(_buttonClicked);
+    }
+    public void PlayWhooshSound()
+    {
+        _sfxSource.PlayOneShot(_screenChanged);
+    }
+
+    public void PlayMenuMusic()
+    {
+        _musicSource.clip = _menuMusic;
+        _musicSource.Play();
     }
     
     public void SetVolumeMusic(float value)
