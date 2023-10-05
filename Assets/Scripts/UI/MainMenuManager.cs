@@ -65,9 +65,11 @@ namespace UI
 
         public void ClickQuit()
         {
+#if UNITY_EDITOR
             if (Application.isEditor)
                 EditorApplication.isPlaying = false;
             else
+#endif
                 Application.Quit();
         }
 

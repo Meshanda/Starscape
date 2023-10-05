@@ -6,8 +6,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.WSA;
-using static UnityEditor.PlayerSettings;
+
 
 public delegate void Notify();
 public class WaveFunction : MonoBehaviour
