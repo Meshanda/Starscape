@@ -1978,9 +1978,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightShader: {fileID: -876546973899608171, guid: ff92e310a76878f49a5616e008ec78ae, type: 3}
   shadow: {fileID: 1952692896}
-  wordTilesMap: {fileID: 0}
-  PlayerTexture: {fileID: 0}
-  TorcheTexture: {fileID: 0}
+  LTorche: []
+  generator: {fileID: 0}
 --- !u!1 &532638488
 GameObject:
   m_ObjectHideFlags: 0

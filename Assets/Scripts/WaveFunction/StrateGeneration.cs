@@ -46,7 +46,7 @@ public class StrateGeneration : MonoBehaviour
         return tileGround.GetTile(new Vector3Int(i - OffsetXY.x, -j - OffsetXY.y));
     }
 
-    public Vector2Int GetPlayerPos(Vector3 Player)
+    public Vector2Int GetTilesPos(Vector3 Player)
     {
         return (Vector2Int)tileGround.WorldToCell(Player);
     } 
@@ -83,7 +83,7 @@ public class StrateGeneration : MonoBehaviour
         }
         SetFilons();
         size = new Vector2Int(dimensionsX, tileGround.size.y);
-        float pair = -0.18f;
+        float pair = -0.18f;   
         if (tileGround.size.y % 2 == 0) pair = 0;
         Vector2 shadowPos = new Vector3(0, -tileGround.CellToWorld(new Vector3Int(0, (size.y/ 2)-1 + OffsetXY.y)).y + pair);
         Vector2 ShadowScale = new Vector3(tileGround.size.x, tileGround.size.y, tileGround.size.z) * 0.32f;

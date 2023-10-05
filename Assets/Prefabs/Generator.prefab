@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deaf89b84d5e86546b8a40aaad7394d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   dimensionsX: 300
+  OffsetXY: {x: 0, y: 0}
   tileGround: {fileID: 0}
   _strates:
   - Tiles:
@@ -160,15 +160,11 @@ MonoBehaviour:
       IsMinerai: 1
     SizeY: 16
     transition: 0
-  tileBase: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
-  shadow: {fileID: 0}
   LTiles: []
   LtilesVoisin: []
   ProbVoisin: 50
   ProbVoisinVoisin: 50
-  wordTilesMap: {fileID: 0}
-  PlayerTexture: {fileID: 0}
-  lightShader: {fileID: -876546973899608171, guid: ff92e310a76878f49a5616e008ec78ae, type: 3}
+  Fog: {fileID: 0}
   autoUpdate: 0
   _pasteGrotto: {fileID: 0}
 --- !u!114 &449052780076163221
@@ -180,6 +176,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1776290454705868516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da5d69060d30b7a429f9cd4cdbc04cd4, type: 3}
+  m_Script: {fileID: 11500000, guid: cfce5f0a21c8e8e409062bba0df5dc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightShader: {fileID: 0}
+  shadow: {fileID: 0}
+  LTorche: []

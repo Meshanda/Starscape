@@ -1,21 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 [RequireComponent(typeof(StrateGeneration))]
 public class FogOfWarGenerator : MonoBehaviour
 {
     public Material lightShader;
     public SpriteRenderer shadow;
-    private StrateGeneration generator;
-    [HideInInspector]public Texture2D wordTilesMap;
-    [HideInInspector] public Texture2D PlayerTexture;
-    [HideInInspector] public Texture2D TorcheTexture;
+    public List<Torche> LTorche = new List<Torche>();
 
-    int textureSizeX = 0;
-    int textureSizeY = 0;
+    [HideInInspector]public StrateGeneration generator;
+    private Texture2D wordTilesMap;
+    private Texture2D PlayerTexture;
+    private Texture2D TorcheTexture;
+    private int textureSizeX = 0;
+    private int textureSizeY = 0;
     
 
     private void Awake()
@@ -26,6 +29,19 @@ public class FogOfWarGenerator : MonoBehaviour
         generator = GetComponent<StrateGeneration>();
     }
 
+    public void CallEventTorche(Torche torche)
+    {
+        LTorche.Add(torche);
+        UpdateTorcheLight(torche);
+    }
+    public void CallEventRemoveTorche(Torche torche)
+    {
+        RemoveTocheShadow(torche);
+        LTorche.Remove(torche);
+    }
+
+
+
     private void CallEventShadowPlayer(Vector3 vector)
     {
         UpdatePlayerLight(vector);
@@ -33,6 +49,13 @@ public class FogOfWarGenerator : MonoBehaviour
     private void CallEventShadowGround(Item item, Vector2 vector)
     {
         UpdateShadowGround();
+        foreach ( Torche T in LTorche)
+        {
+            if( T.Position == vector)
+            {
+                CallEventRemoveTorche(T);
+            }
+        }
     }
     public void InitShadow(Vector2Int Size, Vector2 position, Vector2 scale)
     {
@@ -116,7 +139,7 @@ public class FogOfWarGenerator : MonoBehaviour
     public void UpdatePlayerLight(Vector3 pos)
     {
         ResetShadowPlayer();
-        Vector2Int Cell = generator.GetPlayerPos(pos);
+        Vector2Int Cell = generator.GetTilesPos(pos);
         for (int i = -10; i < 11; i++)
         {
             for (int j = -10; j < 11; j++)
@@ -146,10 +169,41 @@ public class FogOfWarGenerator : MonoBehaviour
         }
         TorcheTexture.Apply();
     }
-
-    public void UpdateTorcheLight(Vector3Int cell)
+    public void UpdateAllTorcheLight()
     {
-        ResetShadowPlayer();
+        ResetShadowTorche();
+        foreach (Torche T in LTorche)
+        {
+            UpdateTorcheLight(T);
+        }
+    }
+
+    public void UpdateTorcheLight(Torche torche)
+    {
+        for (int i = -torche.range; i <= torche.range; i++)
+        {
+            for (int j = -torche.range; j <= torche.range; j++)
+            {
+                int x = torche.Position.x + generator.OffsetXY.x + i;
+                int y = textureSizeY + torche.Position.y + j - generator.OffsetXY.y;
+                if (y < textureSizeY && y >= 0)
+                    TorcheTexture.SetPixel(x, y, new Color(torche.intensity - ((torche.intensity / torche.range) * Mathf.Abs(i) + (torche.intensity / torche.range) * Mathf.Abs(j)), 0, 0, 1));
+            }
+        }
+        TorcheTexture.Apply();
+    }
+    public void RemoveTocheShadow(Torche torche)
+    {
+        for (int i = -torche.range; i <= torche.range; i++)
+        {
+            for (int j = -torche.range; j <= torche.range; j++)
+            {
+                int x = torche.Position.x + generator.OffsetXY.x + i;
+                int y = textureSizeY + torche.Position.y + j - generator.OffsetXY.y;
+                if (y < textureSizeY && y >= 0)
+                    TorcheTexture.SetPixel(x, y, new Color(0, 0, 0, 1));
+            }
+        }
         TorcheTexture.Apply();
     }
     #endregion
