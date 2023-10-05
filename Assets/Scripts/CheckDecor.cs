@@ -15,15 +15,10 @@ public class CheckDecor : MonoBehaviour
 
     public void Start()
     {
-        Mining.OnMineTile += DestroyedSquare;
+        // Mining.OnMineTile += DestroyedSquare;
     }
     private void DestroyedSquare(Item item,Vector3Int TilePos, Vector2 Worldpos) 
     {
-        if( !item.canHaveDecorOnTop ) 
-        {
-            return;
-        }
-
         for(int i = 0; i < _listToCheckDecor.Count; i++) 
         {
             if (_listToCheckDecor[i].x == TilePos.x && TilePos.y + 1 == _listToCheckDecor[i].y)
