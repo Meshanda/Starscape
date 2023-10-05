@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class Tile : ScriptableObject
 {
     public TileBase tile;
-    public int weight;
+    public float weight;
     public bool inDecor;
     public List<Tile> upNeighbours;
     public List<Tile> rightNeighbours;
