@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
@@ -15,3 +16,4 @@ public class ReadOnlyFieldAttributeDrawer : PropertyDrawer
 		GUI.enabled = true;
 	}
 }
+#endif

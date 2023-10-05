@@ -119,6 +119,7 @@ public class Mining : MonoBehaviour
         {
             World.Instance.GroundTilemap.SetTile(cellPos, null);
             OnMineTile?.Invoke(_currentMiningItem, cellPos, World.Instance.GroundTilemap.CellToWorld(cellPos) + new Vector3(0.16f, 0.16f, 0));
+            SoundManager.OnBreakBlock(_currentMiningItem);
 
             if (!_currentMiningItem.tileInfo.HasAnyLoot())
             {

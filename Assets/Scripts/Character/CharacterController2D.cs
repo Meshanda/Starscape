@@ -17,7 +17,6 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private float _groundedYAxis = .2f; // Radius of the overlap circle to determine if grounded
 	[SerializeField] private float _groundedXAxis = .2f; // Radius of the overlap circle to determine if grounded
 	private bool _grounded;            // Whether or not the player is grounded.
-	[SerializeField] private float _ceilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D _rigidbody2D;
 	[SerializeField] private bool _facingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 _velocity = Vector3.zero;

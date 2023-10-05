@@ -41,7 +41,11 @@ public class StrateGeneration : MonoBehaviour
     [SerializeField] private int _decorsChance;
     [SerializeField] private CheckDecor _checkDecor;
     private List<Vector3Int> _posDecor = new List<Vector3Int>();
-    void Start()
+
+    [Header("Bg")]
+    [SerializeField] private Tilemap _bg;
+    [SerializeField] private TileBase _bgTile;
+    void Awake()
     {
         InitializeGrid();
         if (_pasteGrotto != null)
@@ -89,7 +93,10 @@ public class StrateGeneration : MonoBehaviour
             {
                 for (int x = 0; x < dimensionsX; x++)
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y ), GetTileFromStrate(_strates[s], x, y));
+                    TilesStrate ts = GetTileFromStrate(_strates[s], x, y);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), ts.Tile);
+                    if(_bg != null)
+                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), ts.TilesBG);
                 }
             }
         }
@@ -136,11 +143,15 @@ public class StrateGeneration : MonoBehaviour
             {
                 if (y < rng)
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y ), st.Tiles[0].Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x,-y - OffsetXY.y), st.Tiles[0].Tile);
+                    if (_bg != null)
+                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[0].TilesBG);
                 }
                 else
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y ), st.Tiles[1].Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[1].Tile);
+                    if (_bg != null)
+                        _bg.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), st.Tiles[1].TilesBG);
                 }
             }
             rng += Random.Range(-1, 2);
@@ -159,7 +170,8 @@ public class StrateGeneration : MonoBehaviour
             {
                 if (y == rng)
                 {
-                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y ), st.Tiles[0].Tile);
+                    tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y - OffsetXY.y), st.Tiles[0].Tile);
+
                 }
                 else
                 {
@@ -186,7 +198,7 @@ public class StrateGeneration : MonoBehaviour
         if (_checkDecor != null)
             _checkDecor.SetList(_posDecor);
     }
-    public TileBase GetTileFromStrate(Strate strate, int x, int y)
+    public TilesStrate GetTileFromStrate(Strate strate, int x, int y)
     {
         for (int i = 0; i < strate.Tiles.Count(); i++)
         {
@@ -198,10 +210,10 @@ public class StrateGeneration : MonoBehaviour
                 {
                     LTiles.Add(new TilePos(strate.Tiles[i].Tile, x, y));
                 }
-                return strate.Tiles[i].Tile;
+                return strate.Tiles[i];
             }
         }
-        return null;
+        return strate.Tiles[0];
     }
 
     public void SetFilons()
@@ -253,6 +265,7 @@ public struct Strate
 public struct TilesStrate
 {
     public TileBase Tile;
+    public TileBase TilesBG;
     public float Pourcentage;
     public bool IsMinerai;
 }
