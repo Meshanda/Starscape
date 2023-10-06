@@ -898,18 +898,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3111961756833301985, guid: 83be3763ae91ff04ca247122d6667ce7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 3111961756833301985, guid: 83be3763ae91ff04ca247122d6667ce7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3111961756833301985, guid: 83be3763ae91ff04ca247122d6667ce7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3111961756833301985, guid: 83be3763ae91ff04ca247122d6667ce7, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -941,10 +929,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket
       objectReference: {fileID: 0}
-    - target: {fileID: 8996423746600593117, guid: 83be3763ae91ff04ca247122d6667ce7, type: 3}
-      propertyPath: _platformMap
-      value: 
-      objectReference: {fileID: 272148353207670522, guid: c95806332dc822e42b2040356eb3892f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

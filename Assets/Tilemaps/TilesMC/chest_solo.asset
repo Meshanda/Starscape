@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39d8eed6aec249d696b6f269cc8ecdf8, type: 3}
-  m_Name: CraftingTableTile
+  m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: chest_solo
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 5a8df7a6d1f43d841869ac3097a34b01, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2b61fe9e9e122a9499daf290770cc119, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -31,6 +31,6 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 8688669891700445473, guid: a102d4cc22635934d80a5808c4a05bf9, type: 3}
+  m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
