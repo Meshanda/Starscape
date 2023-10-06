@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -17,13 +19,18 @@ public class WaveFunction : MonoBehaviour
     public Cell cellObj;
     public Cell[,] cellArray;
     public Tilemap tileMap;
-    public Tilemap tileMapDecor; 
+    public Tilemap tileMapDecor;
+    public Tilemap tileMapBG; 
     public event Notify ProcessCompleted;
     private List<TileToPlace> _tilesToPlace = new List<TileToPlace>();
     int iterations = 0;
     private  List<Cell> baseCellToPropagate = new List<Cell>();
+    public event Action OnFinishedGrotto; 
     private bool _emergencyStop = false;
+    private System.Random random;
+    private bool _finished = false;
 
+    public event Action<List<TileToPlace>> GenerationComplete;
     private Cell GetCell(int x, int y) 
     {
         if (x < 0 || x >= cellArray.GetLength(0))
@@ -57,13 +64,18 @@ public class WaveFunction : MonoBehaviour
 
 	void Awake()
     {
+       
     }
+    private void OnDestroy()
+    {
+    }
+    
+
 
     public void CorrectRule()
     {
 		//TODO ajouter exception "Ground"
         List<Tile> tiles = new List<Tile>(tileObjects);
-        tiles.Add(_tileGround);
         tiles = tiles.Distinct().ToList();
         
         foreach(Tile currentTile in tiles) 
@@ -103,10 +115,19 @@ public class WaveFunction : MonoBehaviour
         }
 
     }
-
+    private void GenerationFinishedEventHandler(List<TileToPlace> listToPlace)
+    {
+        _tilesToPlace = listToPlace;
+        placeAllTile();
+        // Votre logique à exécuter lorsque la génération est terminée
+    }
     public void InitializeGrid(Cell[,] cellArray)
     {
         //CorrectRule();
+        foreach(var tile in tileObjects) 
+        {
+            tile.SOName = tile.name;
+        }
         this.cellArray = cellArray;
         foreach (var cell in cellArray) 
         {
@@ -114,6 +135,12 @@ public class WaveFunction : MonoBehaviour
             {
                 baseCellToPropagate.Add(cell);
                 cell.tileOptions = new List<Tile> { _tileGround };
+                //_tilesToPlace.Add(new TileToPlace
+                //{
+                //    pos = cell.position,
+                //    tile = _tileGround.tile,
+                //    inDecor = false
+                //});
             }
             else 
             {
@@ -121,46 +148,83 @@ public class WaveFunction : MonoBehaviour
             }
         }
 
-        foreach (var cell in baseCellToPropagate)
-        {
-            Propagate(cell);
-        }
 
-		//UpdateGeneration();
-		//StartCoroutine(StartCollapse());
-		StartCollapseNotCoroutine();
+
+        //UpdateGeneration();
+        //StartCoroutine(StartCollapse());
+        List<TileToPlace> tilesToPlace= null;
+        _finished = false;
+        System.Threading.Thread generationThread = new System.Threading.Thread(()=> { _tilesToPlace = StartCollapseNotCoroutine(); _finished = true; });
+        generationThread.Start();
+        StartCoroutine(EndCheck());
+        //generationThread.Join();
+    }
+    public IEnumerator EndCheck() 
+    {
+        yield return new WaitUntil(() => _finished);
+        placeAllTile();
+        OnFinishedGrotto?.Invoke();
     }
 
+    public bool HasToPropagate(Cell cell) 
+    {
+        if((GetLeft(cell) == null || (GetLeft(cell).tileOptions.Count > 1 ))
+           || (GetRight(cell) == null || GetRight(cell).tileOptions.Count > 1)
+            || (GetUp(cell) == null || GetUp(cell).tileOptions.Count > 1)
+            || (GetDown(cell) == null || GetDown(cell).tileOptions.Count > 1)) 
+        {
+            return true;
+        }
+        return false;
+    }
     int collapsed;
     IEnumerator StartCollapse()
     {
+        int i = 0;
+        for(int j = 0; j < baseCellToPropagate.Count; j++)
+        {
+            if (!HasToPropagate(baseCellToPropagate[j])) 
+            {
+                continue;
+            }
+            Propagate(baseCellToPropagate[j]);
+            if (j < baseCellToPropagate.Count / 2) ;
+                yield return null;
+        }
         collapsed = 0;
+        i = 0;
         while (!isCollapsed() && !_emergencyStop)
         {
-            Debug.Log("working");
+            i++;
+
             yield return null;
-            Debug.Break();
+            //Debug.Log("working");
             Iterate();
+            //placeAllTile();
         }
-        Debug.Log("done");
-        placeAllTile();
         //StopAllCoroutines();
-        ProcessCompleted?.Invoke();
+        OnFinishedGrotto?.Invoke();
     }
-    private void StartCollapseNotCoroutine()
+    private List<TileToPlace> StartCollapseNotCoroutine()
     {
+        random = new System.Random();
+        int i = 0;
+        for (int j = 0; j < baseCellToPropagate.Count; j++)
+        {
+            if (!HasToPropagate(baseCellToPropagate[j]))
+            {
+                continue;
+            }
+            Propagate(baseCellToPropagate[j]);
+        }
         collapsed = 0;
         while (!isCollapsed() && !_emergencyStop)
         {
             //Debug.Log("working");
             Iterate();
 		}
-		//Verif2();
-        placeAllTile();
-
-        ProcessCompleted?.Invoke();
-        //StopAllCoroutines();
         //ProcessCompleted?.Invoke();
+        return _tilesToPlace;
     }
     private bool isCollapsed()
     {
@@ -213,7 +277,8 @@ public class WaveFunction : MonoBehaviour
 
     Cell CollapseCell(List<Cell> tempGrid)
     {
-        int randIndex = UnityEngine.Random.Range(0, tempGrid.Count);
+
+        int randIndex = random.Next(0, tempGrid.Count); 
 
         Cell cellToCollapse = tempGrid[randIndex];
 
@@ -241,7 +306,6 @@ public class WaveFunction : MonoBehaviour
             inDecor = foundTile.inDecor
         });
         collapsed++;
-        placeAllTile();
         return cellToCollapse;
     }
 
@@ -249,15 +313,8 @@ public class WaveFunction : MonoBehaviour
     {
         foreach (var tile in _tilesToPlace) 
         {
-            if (tile.inDecor) 
-            {
-                tileMapDecor.SetTile(tile.pos, tile.tile);
-            }
-            else 
-            {
-                tileMap.SetTile(tile.pos, tile.tile);
-            }
-
+            Tilemap placeTilemap = World.Instance.GetTilemapsFromLayers(GameManager.Instance.database.GetItemByTile(tile.tile).tileInfo.placingRules.placeLayer)[0];
+            placeTilemap.SetTile(tile.pos, tile.tile);
         }
         _tilesToPlace.Clear();
     }
@@ -268,7 +325,8 @@ public class WaveFunction : MonoBehaviour
         {
             totalWeight += option.weight;
         }
-        float rngValue = UnityEngine.Random.Range(0f, totalWeight + 1f);
+        float rngValue = (float)random.NextDouble();
+        rngValue = rngValue*( totalWeight + 1f); 
         float threshold = 0;
         for(int i  = 0; i < cell.tileOptions.Count; i++) 
         {
@@ -328,24 +386,24 @@ public class WaveFunction : MonoBehaviour
 		if (neigborCell.tileOptions.Count == 1 && neigborCell.tileOptions[0] == _tileGround)
 			return false;
 
-		string debug = "Tiles Options "+ currentCell.tileOptions.Count + ":";
+        string debug = "Tiles Options " + currentCell.tileOptions.Count + ":";
         foreach (Tile tile in currentCell.tileOptions)
         {
-            debug += tile.name + ", ";
+            debug += tile.SOName + ", ";
         }
         debug += " PossibleConnection :";
         //Get sockets that we have available on our Right
         List<Tile> possibleConnections = func(currentCell);
-        foreach (Tile tile in possibleConnections) 
+        foreach (Tile tile in possibleConnections)
         {
-            debug += tile.name+", ";
+            debug += tile.SOName + ", ";
         }
         debug += " neighbor connection : ";
         foreach (Tile tile in neigborCell.tileOptions)
         {
-            debug += tile.name + ", ";
+            debug += tile.SOName + ", ";
         }
-        debug +="Function "+ funcName;
+        debug += "Function " + funcName;
         List<Tile> ogConnectionNeigbor = new List<Tile> (neigborCell.tileOptions);
         bool constrained = false;
 
@@ -493,5 +551,6 @@ public struct  TileToPlace
 {
    public Vector3Int pos;
     public TileBase tile;
+    public string SOname;
     public bool inDecor;
 }

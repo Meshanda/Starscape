@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CornerSpiderWebTopRight
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 69f7fd5513e7e5f4395f5300960e0178, type: 2}
+  SOName: CornerSpiderWebTopRight
   weight: 1
   inDecor: 1
   upNeighbours:
@@ -35,12 +36,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d511ac13e29b7e8409b220e23d8d48f4, type: 2}
   - {fileID: 11400000, guid: e68feda0ff5b7124b95051ab7442e385, type: 2}
   - {fileID: 11400000, guid: 5f86f84201307e44eac45e9e0731c5c5, type: 2}
-  - {fileID: 11400000, guid: 75501d3b61a52c3459b4c9613680d0a3, type: 2}
-  - {fileID: 11400000, guid: 7d4c904265eccee46bda100983fb3c75, type: 2}
   - {fileID: 11400000, guid: bc970a5f4b9744d4bb709858780eba80, type: 2}
   - {fileID: 11400000, guid: 06f47a84e3af30c41aa0d69a02685013, type: 2}
   - {fileID: 11400000, guid: ae90940e3a1fe5a46aa9da25ffc1aeb0, type: 2}
   - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
   - {fileID: 11400000}
+  - {fileID: 11400000, guid: 75501d3b61a52c3459b4c9613680d0a3, type: 2}
+  - {fileID: 11400000, guid: 9a9a1ddaa3d9b484eb82a084e0be2539, type: 2}
+  - {fileID: 11400000, guid: 7d4c904265eccee46bda100983fb3c75, type: 2}
   - {fileID: 11400000, guid: f238bea11a817724e99f8759ab1f5876, type: 2}
-  - {fileID: 11400000, guid: 68a00ea44ed44594e9a45af37fbe03f8, type: 2}

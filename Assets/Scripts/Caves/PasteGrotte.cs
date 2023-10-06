@@ -18,20 +18,24 @@ public class PasteGrotte : MonoBehaviour
     private Cell[,] _Cells ;
     private List<Cell[,]> _cells = new List<Cell[,]>();
     [SerializeField] private float _depthToEndLoading;
-    
+
     // Start is called before the first frame update
-    void Start()
+    void Awake() => _waveFunction.OnFinishedGrotto += LaunchWaveCollapse;
+    public  void LaunchWaveCollapse()
     {
-    }
-    public void LaunchWaveCollapse()
-    {
-        foreach(var cell in _cells) 
+        //foreach (var cell in _cells)
+        //{
+        //    _waveFunction.InitializeGrid(cell);
+        //}
+        if (_cells.Count <= 0)
         {
-            _waveFunction.InitializeGrid(cell);
+            Debug.Log("Done");
+            return;
         }
-        
-        //_waveFunction.InitializeGrid(_cells[0]);
-        //_cells.RemoveAt(0);
+        var cell = _cells[0];
+
+        _cells.RemoveAt(0);
+        _waveFunction.InitializeGrid(cell);
     }
 
     public void SpawnGrotte() 
@@ -57,7 +61,6 @@ public class PasteGrotte : MonoBehaviour
         }
         _cells = _cells.OrderByDescending(x => x[0, 0].position.y).ToList();
         LaunchWaveCollapse();
-
     }
 
 
@@ -70,33 +73,57 @@ public class PasteGrotte : MonoBehaviour
         }
         return true;
     }
+    public Vector4 getBounds(Tilemap toPastePrefab)
+    {
+        Vector4 bounds = new Vector4();
+        bool checkLeft = false;
+        bool checkTop = false;
+        for (int i = toPastePrefab.cellBounds.min.x - 1; i < toPastePrefab.cellBounds.max.x + 1; i++)
+        {
+            for (int j = toPastePrefab.cellBounds.min.y - 1; j < toPastePrefab.cellBounds.max.y + 1; j++)
+            {
+                TileBase tile = toPastePrefab.GetTile(new Vector3Int(i, j));
+                if(tile != null ) 
+                {
+                    if(bounds.x > i || !checkLeft) 
+                    {
+                        checkLeft =true;
+                        bounds.x = i;
+                    }
+                    if (bounds.y > j || !checkTop)
+                    {
+                        checkTop = true;
+                        bounds.y = j;
+                    }
 
+                    if(bounds.z < i )
+                        bounds.z = i;
+
+                    if (bounds.w < j)
+                        bounds.w = j;
+
+                }
+            }
+        }
+        return bounds;
+    }
     public Cell[,] Copy(Tilemap toPastePrefab) 
     {
-        _Cells = new Cell[toPastePrefab.size.x+2, toPastePrefab.size.y+2];
-        for(int i = toPastePrefab.cellBounds.min.x-1; i < toPastePrefab.cellBounds.max.x+1; i++) 
+        Vector4 bounds = getBounds(toPastePrefab);
+
+        _Cells = new Cell[(int)Mathf.Abs(bounds.z- bounds.x)+3, (int)Mathf.Abs(bounds.w - bounds.y) + 3];
+        for(int i = (int)bounds.x - 1; i < (int)bounds.z + 2; i++) 
         {
-            for (int j = toPastePrefab.cellBounds.min.y-1; j < toPastePrefab.cellBounds.max.y+1; j++)
+            for (int j = (int)bounds.y - 1; j < (int)bounds.w+2; j++)
             {
                 TileBase tile = toPastePrefab.GetTile(new Vector3Int(i, j));
                 Cell currentCell = new Cell(new Vector3Int(i, j) + _offset, (tile == null));
-                int x = i - toPastePrefab.cellBounds.min.x + 1;
-                int y = j - toPastePrefab.cellBounds.min.y + 1;
+                int x = i - (int)bounds.x + 1;
+                int y = j - (int)bounds.y + 1;
 
 				_Cells[x, y] = currentCell;
 				currentCell.arrayPosition.x = x;
 				currentCell.arrayPosition.y = y;
-
-				if (i > 0)
-				{
-					//_Cells[i - toPastePrefab.cellBounds.min.x + 1 - 1, j - toPastePrefab.cellBounds.min.y + 1].right = currentCell;
-					//currentCell.left = _Cells[i - toPastePrefab.cellBounds.min.x + 1 - 1, j - toPastePrefab.cellBounds.min.y + 1];
-				}
-				if (j > 0)
-				{
-					//_Cells[i - toPastePrefab.cellBounds.min.x + 1, j - toPastePrefab.cellBounds.min.y + 1 - 1].up = currentCell;
-					//currentCell.down = _Cells[i - toPastePrefab.cellBounds.min.x + 1, j - toPastePrefab.cellBounds.min.y + 1 - 1];
-				}
 
 				if (tile != null) 
                 {
@@ -109,9 +136,4 @@ public class PasteGrotte : MonoBehaviour
         return(Cell[,]) _Cells.Clone();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
