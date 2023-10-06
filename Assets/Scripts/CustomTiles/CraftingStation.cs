@@ -9,7 +9,7 @@ public class CraftingStation : MonoBehaviour
 	
 	private void Update()
 	{
-		bool isInRange = Vector3.Distance(GameManager.Instance.player.transform.position, transform.position) < distance;
+		bool isInRange = Vector2.Distance(GameManager.Instance.player.transform.position, transform.position) < distance;
 		if (isInRange)
 		{
 			InventorySystem.Instance.CraftingFlags |= craftingFlags;
