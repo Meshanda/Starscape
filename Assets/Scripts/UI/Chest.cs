@@ -5,36 +5,27 @@ using UnityEngine.EventSystems;
 
 namespace UI
 {
-    public class Chest : MonoBehaviour, IPointerDownHandler
+    public class Chest : MonoBehaviour
     {
         public List<ItemStack> itemStacks = new();
 
         private Transform _slotParent; 
         public bool ChestOpen { get; private set; }
 
-        private void Start()
+        public void PlaceLoot(List<ItemStack> loots)
         {
             itemStacks.Clear();
-            for (int i = 0; i < InventorySystem.Instance._nbChestSlots; i++)
+            foreach (var loot in loots)
             {
-                var stack = new ItemStack
-                {
-                    itemID = "dirt_01",
-                    number = i+1
-                };
-                
-                itemStacks.Add(stack);
+                itemStacks.Add(loot);
             }
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void ClickChest()
         {
-            if (eventData.button == PointerEventData.InputButton.Right)
-            {
-                ToggleChest(!ChestOpen);
-            }
+            ToggleChest(!ChestOpen);
         }
-
+        
         private void ToggleChest(bool status)
         {
             ChestOpen = status;
@@ -47,6 +38,5 @@ namespace UI
             
             InventorySystem.Instance.ToggleInventory();
         }
-        
     }
 }

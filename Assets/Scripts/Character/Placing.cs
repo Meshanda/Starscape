@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UI;
 using UnityEngine;
 
 public class Placing : MonoBehaviour
@@ -63,6 +64,17 @@ public class Placing : MonoBehaviour
         var slot = InventorySystem.Instance.GetSelectedSlot();
         if (!slot || slot.ItemStack is null)
             return;
+        
+        var hits = Physics2D.RaycastAll(_cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity);
+
+        foreach (var hit in hits)
+        {
+            if (hit.collider is not null && hit.collider.TryGetComponent(out Chest chest))
+            {
+                chest.ClickChest();
+                return;
+            }
+        }
 
         if (World.Instance.TryPlaceTile(slot.ItemStack.itemID, _cam.ScreenToWorldPoint(Input.mousePosition)))
         {
