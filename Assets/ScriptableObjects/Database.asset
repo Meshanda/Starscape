@@ -1072,115 +1072,11 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: wood_chest_01 (TILE)
-    id: wood_chest_01
-    name: Wood Chest
-    description: 
-    sprite: {fileID: 596879963, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
-    tileInfo:
-      tile: {fileID: 11400000, guid: 79abddcf3055bec4ba5e49d5ee81aae5, type: 2}
-      canBeBuiltFrom: 0
-      placingRules:
-        placeLayer: 2
-        requirements:
-        - inspectorName: ' neighbours(Up <Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 1
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 4
-        - inspectorName: ' neighbours(Down <Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 2
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 4
-        - inspectorName: ' neighbours(Left <Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 4
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 4
-        - inspectorName: ' neighbours(Right <Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 8
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 4
-      breakingRules:
-        life: 1
-        requiredStrength:
-          inspectorName: 
-          type: 0
-          level: 0
-        loot:
-          inspectorName: 
-          itemID: wood_chest_01
-          number: 1
-    toolData:
-      isTool: 0
-      toolStrength:
-        inspectorName: 
-        type: 0
-        level: 0
-      tileDamagePerSecond: 1
-  - inspectorName: wood_chest_02 (TILE)
-    id: wood_chest_02
-    name: Wood Chest
-    description: 
-    sprite: {fileID: 912830914, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
-    tileInfo:
-      tile: {fileID: 11400000, guid: 19c6d78de53e2404aa10c185fd615612, type: 2}
-      canBeBuiltFrom: 0
-      placingRules:
-        placeLayer: 2
-        requirements:
-        - inspectorName: ' neighbours(Up <Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 1
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 4
-        - inspectorName: ' neighbours(Down <Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 2
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 4
-        - inspectorName: ' neighbours(Left <Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 4
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 4
-        - inspectorName: ' neighbours(Right <Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 8
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 4
-      breakingRules:
-        life: 1
-        requiredStrength:
-          inspectorName: 
-          type: 0
-          level: 0
-        loot:
-          inspectorName: 
-          itemID: wood_chest_01
-          number: 1
-    toolData:
-      isTool: 0
-      toolStrength:
-        inspectorName: 
-        type: 0
-        level: 0
-      tileDamagePerSecond: 1
   - inspectorName: wood_hammer (TOOL)
     id: wood_hammer
     name: Wood Hammer
     description: 
-    sprite: {fileID: 21300000, guid: 9b191b66e74d5ba418a0f0fd7d179094, type: 3}
+    sprite: {fileID: 21300000, guid: 4a3e1dd1604181f498f2c2ba61553d01, type: 3}
     tileInfo:
       tile: {fileID: 0}
       canBeBuiltFrom: 1
@@ -1232,7 +1128,7 @@ MonoBehaviour:
     id: wood_pickaxe
     name: Wood Pickaxe
     description: 
-    sprite: {fileID: 21300000, guid: 45328e2a57af3a64d98a817640cedd42, type: 3}
+    sprite: {fileID: 21300000, guid: 96d43918a7239be42bfaba2b31e0d000, type: 3}
     tileInfo:
       tile: {fileID: 0}
       canBeBuiltFrom: 1
@@ -1284,7 +1180,7 @@ MonoBehaviour:
     id: copper_pickaxe
     name: Copper Pickaxe
     description: 
-    sprite: {fileID: 21300000, guid: cce4612e4bd679b4c9e958cc5560e71c, type: 3}
+    sprite: {fileID: 21300000, guid: 7533f5e54b6dbfe429402e4769747397, type: 3}
     tileInfo:
       tile: {fileID: 0}
       canBeBuiltFrom: 1
@@ -1336,7 +1232,7 @@ MonoBehaviour:
     id: crafting_table
     name: Crafting Table
     description: 
-    sprite: {fileID: 21300000, guid: 5a8df7a6d1f43d841869ac3097a34b01, type: 3}
+    sprite: {fileID: 21300000, guid: c991a649b8e876f4e936185aef18d8f3, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: bb85747b5b13686478b4c92c9766ed46, type: 2}
       canBeBuiltFrom: 1
@@ -1388,7 +1284,7 @@ MonoBehaviour:
     id: stone_furnace
     name: Stone Furnace
     description: 
-    sprite: {fileID: 21300000, guid: 42b6101c4f1e0d142839d96bcb76ea44, type: 3}
+    sprite: {fileID: 21300000, guid: 74e90b3ccf68537428809ece4c51c50a, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: 0a8fb8fd14ac46e48b9fbc6da6ff7ee8, type: 2}
       canBeBuiltFrom: 1
@@ -1440,7 +1336,7 @@ MonoBehaviour:
     id: copper_ingot
     name: Copper Ingot
     description: 
-    sprite: {fileID: 21300000, guid: 1e7aa42ed017a9b4e9b9e01a9c942b70, type: 3}
+    sprite: {fileID: 21300000, guid: 3c57128045809c74abd4bd96bf83b2ee, type: 3}
     tileInfo:
       tile: {fileID: 0}
       canBeBuiltFrom: 1
@@ -2616,6 +2512,64 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+  - inspectorName: chest_solo (TILE)
+    id: chest_solo
+    name: Chest
+    description: 
+    sprite: {fileID: 21300000, guid: 2b61fe9e9e122a9499daf290770cc119, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 934ea17dd4260454cbb55daaddd3c43d, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 1
+        loot:
+          inspectorName: 
+          itemID: chest_solo
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
   craftRecipes:
   - inspectorName: oak_wood (x1)
     itemsRequired: []
@@ -2713,5 +2667,15 @@ MonoBehaviour:
     itemCrafted:
       inspectorName: stone_furnace (x1)
       itemID: stone_furnace
+      number: 1
+    requiredFlags: 1
+  - inspectorName: chest_solo (x1) [ <oak_wood (x2)> ]
+    itemsRequired:
+    - inspectorName: oak_wood (x2)
+      itemID: oak_wood
+      number: 2
+    itemCrafted:
+      inspectorName: chest_solo (x1)
+      itemID: chest_solo
       number: 1
     requiredFlags: 1
