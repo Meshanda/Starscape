@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -22,8 +23,9 @@ public class MinimapConfiner : MonoBehaviour
 
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return null;
         InitBounds();
     }
 

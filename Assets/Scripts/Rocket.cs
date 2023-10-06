@@ -32,6 +32,6 @@ public class Rocket : MonoBehaviour
                     GroundTile.SetTile(new Vector3Int(i, j) + pos, tile);
                 }
             }
-        }
+        } 
     }
 }
