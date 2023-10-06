@@ -40,7 +40,6 @@ public class FogOfWarGenerator : MonoBehaviour
     }
     private void CallEventShadowGroundMining(Tilemap tilemaps, Vector3Int vector, Item item)
     {
-        Debug.Log(vector);
         UpdateTileGround((Vector2Int) vector);
         foreach (Torche T in LTorche)
         {
