@@ -2860,6 +2860,58 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+  - inspectorName: torche (TILE)
+    id: torche
+    name: Torche
+    description: 
+    sprite: {fileID: 21300000, guid: c4ea3fd374171d74caafd2643c75b213, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: e90be45797331da4fb856aa95d524750, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: crafting_table
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
   craftRecipes:
   - inspectorName: oak_wood (x1)
     itemsRequired: []
@@ -3012,3 +3064,10 @@ MonoBehaviour:
       itemID: ruby
       number: 2
     requiredFlags: 2
+  - inspectorName: torche (x1)
+    itemsRequired: []
+    itemCrafted:
+      inspectorName: torche (x1)
+      itemID: torche
+      number: 1
+    requiredFlags: 0
