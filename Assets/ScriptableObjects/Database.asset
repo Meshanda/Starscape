@@ -156,12 +156,12 @@ MonoBehaviour:
         life: 1
         requiredStrength:
           inspectorName: 
-          type: 0
-          level: 0
+          type: 2
+          level: 1
         loot:
           inspectorName: 
-          itemID: gravel_dirt
-          number: 1
+          itemID: silex
+          number: 2
     toolData:
       isTool: 0
       toolStrength:
@@ -800,7 +800,7 @@ MonoBehaviour:
         requiredStrength:
           inspectorName: 
           type: 2
-          level: 0
+          level: 2
         loot:
           inspectorName: 
           itemID: stone
@@ -852,7 +852,7 @@ MonoBehaviour:
         requiredStrength:
           inspectorName: 
           type: 2
-          level: 0
+          level: 2
         loot:
           inspectorName: 
           itemID: stone_copper
@@ -904,7 +904,7 @@ MonoBehaviour:
         requiredStrength:
           inspectorName: 
           type: 2
-          level: 0
+          level: 2
         loot:
           inspectorName: 
           itemID: stone_copper
@@ -956,7 +956,7 @@ MonoBehaviour:
         requiredStrength:
           inspectorName: 
           type: 2
-          level: 1
+          level: 3
         loot:
           inspectorName: 
           itemID: greystone
@@ -1008,7 +1008,7 @@ MonoBehaviour:
         requiredStrength:
           inspectorName: 
           type: 2
-          level: 1
+          level: 3
         loot:
           inspectorName: 
           itemID: greystone_ruby
@@ -1060,7 +1060,7 @@ MonoBehaviour:
         requiredStrength:
           inspectorName: 
           type: 2
-          level: 1
+          level: 3
         loot:
           inspectorName: 
           itemID: greystone_ruby
@@ -1174,13 +1174,71 @@ MonoBehaviour:
       toolStrength:
         inspectorName: 
         type: 2
-        level: 0
+        level: 1
       tileDamagePerSecond: 2
+  - inspectorName: silex_pickaxe (TOOL)
+    id: silex_pickaxe
+    name: Silex Pickaxe
+    description: 
+    sprite: {fileID: 21300000, guid: 7533f5e54b6dbfe429402e4769747397, type: 3}
+    tileInfo:
+      tile: {fileID: 0}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 0
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 100000
+        loot:
+          inspectorName: 
+          itemID: chest_solo
+          number: 1
+    toolData:
+      isTool: 1
+      toolStrength:
+        inspectorName: 
+        type: 2
+        level: 2
+      tileDamagePerSecond: 3
   - inspectorName: copper_pickaxe (TOOL)
     id: copper_pickaxe
     name: Copper Pickaxe
     description: 
-    sprite: {fileID: 21300000, guid: 7533f5e54b6dbfe429402e4769747397, type: 3}
+    sprite: {fileID: 21300000, guid: abf070506d45f9045a996d858d960455, type: 3}
     tileInfo:
       tile: {fileID: 0}
       canBeBuiltFrom: 1
@@ -1226,8 +1284,66 @@ MonoBehaviour:
       toolStrength:
         inspectorName: 
         type: 2
-        level: 1
-      tileDamagePerSecond: 3
+        level: 3
+      tileDamagePerSecond: 4.5
+  - inspectorName: ruby_pickaxe (TOOL)
+    id: ruby_pickaxe
+    name: Ruby pickaxe
+    description: Diamond pickaxe identifying as a ruby pickaxe
+    sprite: {fileID: 21300000, guid: 4ec2a7858144fef4c91b34421bd0dca5, type: 3}
+    tileInfo:
+      tile: {fileID: 0}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 0
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 100000
+        loot:
+          inspectorName: 
+          itemID: chest_solo
+          number: 1
+    toolData:
+      isTool: 1
+      toolStrength:
+        inspectorName: 
+        type: 2
+        level: 4
+      tileDamagePerSecond: 8
   - inspectorName: crafting_table (TILE)
     id: crafting_table
     name: Crafting Table
@@ -2570,6 +2686,180 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+  - inspectorName: rocket_platform (TILE)
+    id: rocket_platform
+    name: "Si tu vois \xE7a c'est que t'es un bg ;)"
+    description: 
+    sprite: {fileID: 21300000, guid: 252c8068fc9efe4408dfc389e48e718e, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 0ef11a4ae6c034d4fac56014485706c1, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 100000
+        loot:
+          inspectorName: 
+          itemID: chest_solo
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: silex
+    id: silex
+    name: Silex
+    description: 
+    sprite: {fileID: 21300000, guid: 989152029d678cc41b83650287d3100f, type: 3}
+    tileInfo:
+      tile: {fileID: 0}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 0
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 100000
+        loot:
+          inspectorName: 
+          itemID: chest_solo
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: ruby
+    id: ruby
+    name: Ruby
+    description: 
+    sprite: {fileID: 21300000, guid: 173a141581d51cc45ae3830b066a5dcd, type: 3}
+    tileInfo:
+      tile: {fileID: 0}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 0
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 100000
+        loot:
+          inspectorName: 
+          itemID: chest_solo
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
   craftRecipes:
   - inspectorName: oak_wood (x1)
     itemsRequired: []
@@ -2599,14 +2889,57 @@ MonoBehaviour:
       itemID: bedrock
       number: 1
     requiredFlags: 0
-  - inspectorName: wood_pickaxe (x1) [ <oak_wood (x3)> ]
+  - inspectorName: wood_pickaxe (x1) [ <oak_wood (x3)> <dirt (x1)> ]
     itemsRequired:
     - inspectorName: oak_wood (x3)
       itemID: oak_wood
       number: 3
+    - inspectorName: dirt (x1)
+      itemID: dirt
+      number: 1
     itemCrafted:
       inspectorName: wood_pickaxe (x1)
       itemID: wood_pickaxe
+      number: 1
+    requiredFlags: 1
+  - inspectorName: silex_pickaxe (x1) [ <silex (x6)> <wood_pickaxe (x1)> ]
+    itemsRequired:
+    - inspectorName: silex (x6)
+      itemID: silex
+      number: 6
+    - inspectorName: wood_pickaxe (x1)
+      itemID: wood_pickaxe
+      number: 1
+    itemCrafted:
+      inspectorName: silex_pickaxe (x1)
+      itemID: silex_pickaxe
+      number: 1
+    requiredFlags: 1
+  - inspectorName: copper_pickaxe (x1) [ <copper_ingot (x12)> <silex_pickaxe (x1)>
+      ]
+    itemsRequired:
+    - inspectorName: copper_ingot (x12)
+      itemID: copper_ingot
+      number: 12
+    - inspectorName: silex_pickaxe (x1)
+      itemID: silex_pickaxe
+      number: 1
+    itemCrafted:
+      inspectorName: copper_pickaxe (x1)
+      itemID: copper_pickaxe
+      number: 1
+    requiredFlags: 1
+  - inspectorName: ruby_pickaxe (x1) [ <ruby (x16)> <copper_pickaxe (x1)> ]
+    itemsRequired:
+    - inspectorName: ruby (x16)
+      itemID: ruby
+      number: 16
+    - inspectorName: copper_pickaxe (x1)
+      itemID: copper_pickaxe
+      number: 1
+    itemCrafted:
+      inspectorName: ruby_pickaxe (x1)
+      itemID: ruby_pickaxe
       number: 1
     requiredFlags: 1
   - inspectorName: wood_hammer (x1) [ <oak_wood (x3)> ]
@@ -2617,16 +2950,6 @@ MonoBehaviour:
     itemCrafted:
       inspectorName: wood_hammer (x1)
       itemID: wood_hammer
-      number: 1
-    requiredFlags: 1
-  - inspectorName: copper_pickaxe (x1) [ <copper_ingot (x3)> ]
-    itemsRequired:
-    - inspectorName: copper_ingot (x3)
-      itemID: copper_ingot
-      number: 3
-    itemCrafted:
-      inspectorName: copper_pickaxe (x1)
-      itemID: copper_pickaxe
       number: 1
     requiredFlags: 1
   - inspectorName: copper_ingot (x1) [ <stone_copper (x1)> ]
@@ -2679,3 +3002,13 @@ MonoBehaviour:
       itemID: chest_solo
       number: 1
     requiredFlags: 1
+  - inspectorName: ruby (x2) [ <greystone_ruby (x1)> ]
+    itemsRequired:
+    - inspectorName: greystone_ruby (x1)
+      itemID: greystone_ruby
+      number: 1
+    itemCrafted:
+      inspectorName: ruby (x2)
+      itemID: ruby
+      number: 2
+    requiredFlags: 2
