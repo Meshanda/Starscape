@@ -169,12 +169,12 @@ public class TilePlacingRequirements
     #endregion
     
     [Header("Center Tile (requiredCenter > requiredCenterLayers)")]
-    public List<string> whitelistCenter; // on the placing tile, we need to find at least one that is in this array
+    public List<string> whitelistCenter = new List<string>(); // on the placing tile, we need to find at least one that is in this array
     public World.TilemapLayer whitelistCenterLayers; // on the placing tile, we need to find at least one that is in this var
     
     [Header("Neighbour Tiles IF requiredNeighbours (whitelistNeighbours > whitelistNeighbourLayers)")]
     public TileNeighbour requiredNeighbours; // do we need specific neighbours in order to be placed?
-    public List<string> whitelistNeighbours; // ^^^ in all directions, we need to find at least one that is in this array
+    public List<string> whitelistNeighbours = new List<string>(); // ^^^ in all directions, we need to find at least one that is in this array
     public World.TilemapLayer whitelistNeighbourLayers; // ^^^ in all directions, we need to find at least one that is in this var
 
     public TilePlacingRequirements(TileNeighbour requiredNeighbours = default, World.TilemapLayer whitelistNeighbourLayers = default)

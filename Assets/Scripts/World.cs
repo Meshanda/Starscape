@@ -217,7 +217,7 @@ public class World : Singleton<World>
         
         var tilePos = originTilePos; // TODO size in a for loop maybe one day
 
-        if (!isRecheck)
+        if (!isRecheck && placeTilemap == GroundTilemap)
         {
             var hit = Physics2D.BoxCast(GetWorldCenterOfTile(tilePos), tileSize + entityCheckMargin, 0.0f, Vector2.zero, Mathf.Infinity, entityLayers);
             if (hit.collider)
