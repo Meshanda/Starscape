@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CraftingUI : MonoBehaviour
 {
-    [SerializeField] private float _speed = 2.5f;
+    [SerializeField] private float _speed = 600.0f;
     
     [Header("Horizontal")]
     [SerializeField] private Transform _horizontalContainer;
@@ -80,12 +80,12 @@ public class CraftingUI : MonoBehaviour
             
             if (_distance > 0)
             {
-                _content.position += new Vector3(0, Mathf.Max(-Mathf.Abs(_distance), -_speed), 0);
+                _content.position += new Vector3(0, Mathf.Max(-Mathf.Abs(_distance), -_speed * Time.deltaTime), 0);
             }
         
             if (_distance < 0)
             {
-                _content.position += new Vector3(0, Mathf.Min(Mathf.Abs(_distance), _speed), 0);
+                _content.position += new Vector3(0, Mathf.Min(Mathf.Abs(_distance), _speed * Time.deltaTime), 0);
             }
             
             _distance = rt.position.y - _middle.position.y;

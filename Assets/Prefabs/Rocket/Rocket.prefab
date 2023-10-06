@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583debaeff0db07449dfc319023b96ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _platformMap: {fileID: 272148353207670522, guid: c95806332dc822e42b2040356eb3892f, type: 3}
+  _platformMap: {fileID: 0}
   _platformPos: {fileID: 4907771236501377855}
 --- !u!61 &7180736772193278876
 BoxCollider2D:
