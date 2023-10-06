@@ -380,6 +380,12 @@ public class CraftRecipe
         itemsRequired.ForEach(i => i?.OnValidate(database));
 
         inspectorName = itemCrafted?.inspectorName;
+        if (itemsRequired.Count > 0)
+        {
+            inspectorName += " [ ";
+            itemsRequired.ForEach(i => inspectorName += "<" + i?.inspectorName + "> ");
+            inspectorName += "]";
+        }
     }
     
     #endregion

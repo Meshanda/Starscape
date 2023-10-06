@@ -66,11 +66,11 @@ public class World : Singleton<World>
         {
             tilemaps.Add(BackgroundTilemap);
         }
-        else if ((layers & TilemapLayer.Decor) != 0)
+        if ((layers & TilemapLayer.Decor) != 0)
         {
             tilemaps.Add(DecorTilemap);
         }
-        else if ((layers & TilemapLayer.Ground) != 0)
+        if ((layers & TilemapLayer.Ground) != 0)
         {
             tilemaps.Add(GroundTilemap);
         }
@@ -170,7 +170,7 @@ public class World : Singleton<World>
     private bool HasRequiredTile(ref List<Tilemap> tilemaps, Vector3Int inTilePos, Predicate<TileBase> predicate = null)
     {
         return tilemaps.Select(tilemap => tilemap.GetTile(inTilePos))
-            .Any(tile => tile != null && (predicate == null || predicate(tile)) && GameManager.Instance.database.GetItemByTile(tile).tileInfo.canBeBuiltFrom);
+            .Any(tile => tile && (predicate == null || predicate(tile)) && GameManager.Instance.database.GetItemByTile(tile).tileInfo.canBeBuiltFrom);
     }
     
     private bool HasAllRequiredNeighbours(TileNeighbour neighbours, ref List<Tilemap> tilemaps, Vector3Int inCenterTilePos, Predicate<TileBase> predicate = null)

@@ -45,7 +45,6 @@ public class StrateGeneration : MonoBehaviour
     [SerializeField] private Tilemap _Decor;
     [SerializeField] private TileBase[] _decors;
     [SerializeField] private int _decorsChance;
-    [SerializeField] private CheckDecor _checkDecor;
     private List<Vector3Int> _posDecor = new List<Vector3Int>();
     void Awake()
     {
@@ -187,9 +186,6 @@ public class StrateGeneration : MonoBehaviour
             treeDist++;
             //tileGround.SetTile(new Vector3Int(x - OffsetXY.x, -y - OffsetXY.y), GetTileFromStrate(_strates[s], x, y));
         }
-
-        if (_checkDecor != null)
-            _checkDecor.SetList(_posDecor);
     }
     public TileBase GetTileFromStrate(Strate strate, int x, int y)
     {
