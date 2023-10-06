@@ -19,9 +19,9 @@ public class FogOfWarGenerator : MonoBehaviour
 
     private void Awake()
     {
-        // World.OnMineTile += CallEventShadowGroundMining;
-        // World.OnPlaceTile += CallEventShadowGroundPlacing;
-        // CharacterController2D.OnMoveEvent += CallEventShadowPlayer;
+        World.OnMineTile += CallEventShadowGroundMining;
+        World.OnPlaceTile += CallEventShadowGroundPlacing;
+        CharacterController2D.OnMoveEvent += CallEventShadowPlayer;
         generator = GetComponent<StrateGeneration>();
     }
     public void CallEventTorche(Torche torche)
@@ -38,29 +38,37 @@ public class FogOfWarGenerator : MonoBehaviour
     {
         UpdatePlayerLight(vector);
     }
-    private void CallEventShadowGroundMining(Tilemap tilemap, Vector3Int V3, Item item)
+    private void CallEventShadowGroundMining(Tilemap tilemaps, Vector3Int vector, Item item)
     {
-        UpdateAllShadowGround();
+        UpdateTileGround((Vector2Int) vector);
+        foreach (Torche T in LTorche)
+        {
+            if (T.Position == (Vector2Int)vector)
+            {
+                CallEventRemoveTorche(T);
+            }
+        }
     }
-    private void CallEventShadowGroundPlacing(Tilemap tilemap, Vector3Int V3, Item item)
+    private void CallEventShadowGroundPlacing(Tilemap tilemaps, Vector3Int vector, Item item)
     {
-        UpdateAllShadowGround();
+        UpdateTileGround((Vector2Int)vector);
     }
     public void InitShadow(Vector2Int SizeXY, Vector2 position, Vector2 scale)
     {
-        return;
         textureSize = SizeXY;
         shadow.transform.position = position;
         shadow.transform.localScale = scale;
 
-        ResetShadowGround();
-        ResetShadowPlayer();
-        ResetShadowTorche();
+        InitShadowGround();
+        InitShadowPlayer();
+        InitShadowTorche();
+
+
         UpdateAllShadowGround();
     }
 
     #region Ground Shadow
-    public void ResetShadowGround()
+    public void InitShadowGround()
     {
         wordTilesMap = new Texture2D(textureSize.x, textureSize.y);
         wordTilesMap.filterMode = FilterMode.Point;
@@ -75,7 +83,45 @@ public class FogOfWarGenerator : MonoBehaviour
 
         wordTilesMap.Apply();
     }
-    
+
+    public void UpdateTileGround(Vector2Int pos)
+    {
+        
+        for (int i = 10; i >= - 11; i--)
+        {
+            for (int j = 10; j >= - 11; j--)
+            {
+                int x = pos.x + generator.OffsetXY.x + i;
+                int y = textureSize.y + pos.y + j - generator.OffsetXY.y;
+                float temp = 1;
+                if (generator.GetTile(x,y) != null && y != textureSize.y - 1)
+                {
+                    temp = wordTilesMap.GetPixel( x, y + 1).r - 0.2f;
+                }
+                else
+                {
+                    temp = 1;
+                }
+                if (y < textureSize.y && y >= 0)
+                {
+                    wordTilesMap.SetPixel(x, y, new Color(temp, 0, 0, 1));
+                }
+            }
+        }
+        for (int i = 10; i >= -11; i--)
+        {
+            for (int j = 10; j >= -11; j--)
+            {
+                int x = pos.x + generator.OffsetXY.x + i;
+                int y = textureSize.y + pos.y + j - generator.OffsetXY.y;
+                if (generator.GetTile( x +1, y) == null || generator.GetTile(x -1, y) == null)
+                {
+                    wordTilesMap.SetPixel(x, y, new Color(wordTilesMap.GetPixel(x, y).r + 0.3f, 0, 0, 1));
+                }
+            }
+        }
+        wordTilesMap.Apply();
+    }
     public void UpdateAllShadowGround()
     {
         for (int i = textureSize.x-1; i >= 0  ; i--)
@@ -110,7 +156,7 @@ public class FogOfWarGenerator : MonoBehaviour
     #endregion
 
     #region Player Light
-    public void ResetShadowPlayer()
+    public void InitShadowPlayer()
     {
         PlayerTexture = new Texture2D(textureSize.x, textureSize.y);
         PlayerTexture.filterMode = FilterMode.Point;
@@ -120,6 +166,17 @@ public class FogOfWarGenerator : MonoBehaviour
             for (int j = 0; j < textureSize.y; j++)
             {
                 PlayerTexture.SetPixel(i, j, new Color(0, 0, 0, 1));
+            }
+        }
+        PlayerTexture.Apply();
+    }
+    public void ResetOldPosPlayer(Vector2Int pos)
+    {
+        for (int i = -10; i < 11; i++)
+        {
+            for (int j = -10; j < 11; j++)
+            {
+                PlayerTexture.SetPixel(pos.x+i, pos.y+j, new Color(0, 0, 0, 1));
             }
         }
         PlayerTexture.Apply();
@@ -134,7 +191,7 @@ public class FogOfWarGenerator : MonoBehaviour
         }
         else
         {
-            ResetShadowPlayer();
+            ResetOldPosPlayer(playerCell);
             playerCell = Cell;
         }
         for (int i = -10; i < 11; i++)
@@ -152,7 +209,7 @@ public class FogOfWarGenerator : MonoBehaviour
     #endregion
 
     #region Torche Light
-    public void ResetShadowTorche()
+    public void InitShadowTorche()
     {
         TorcheTexture = new Texture2D(textureSize.x, textureSize.y);
         TorcheTexture.filterMode = FilterMode.Point;
@@ -168,7 +225,7 @@ public class FogOfWarGenerator : MonoBehaviour
     }
     public void UpdateAllTorcheLight()
     {
-        ResetShadowTorche();
+        InitShadowTorche();
         foreach (Torche T in LTorche)
         {
             UpdateTorcheLight(T);
