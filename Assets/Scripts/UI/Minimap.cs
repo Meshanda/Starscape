@@ -1,5 +1,7 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -26,8 +28,9 @@ namespace UI
 
             ChangeMinimapZoom?.Invoke(_currentZoomValue);
             SoundManager.Instance.PlayClickSound();
+            GameManager.Instance.LoseFocus();
         }
-
+        
         public void ClickPlus()
         {
             _currentZoomValue--;
@@ -36,6 +39,7 @@ namespace UI
             
             ChangeMinimapZoom?.Invoke(_currentZoomValue);
             SoundManager.Instance.PlayClickSound();
+            GameManager.Instance.LoseFocus();
         }
     }
 }
