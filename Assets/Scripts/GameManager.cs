@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameObject _settingsCanvas;
+    [SerializeField] private GameObject _confirmerPopUp;
 	public DatabaseSO database;
 	public Player player;
 
@@ -44,5 +45,17 @@ public class GameManager : Singleton<GameManager>
     {
         _settingsCanvas.SetActive(!_settingsCanvas.activeSelf);
         SoundManager.Instance.PlayClickSound();
+    }
+    
+    public void TogglePopUpConfirmer()
+    {
+        _confirmerPopUp.SetActive(!_confirmerPopUp.activeSelf);
+        SoundManager.Instance.PlayClickSound();
+    }
+
+    public void BackToMenu()
+    {
+        SoundManager.Instance.PlayClickSound();
+        SceneLoader.LoadScene(GameState.MainMenu);
     }
 }

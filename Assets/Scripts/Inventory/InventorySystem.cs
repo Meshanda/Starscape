@@ -627,7 +627,8 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
     public void ClickBackToMenu()
     {
-        SoundManager.Instance.PlayClickSound();
+        GameManager.Instance.TogglePopUpConfirmer();
+        ToggleInventory();
     }
 
     #endregion
