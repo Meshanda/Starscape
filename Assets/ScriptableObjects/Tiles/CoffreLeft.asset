@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4d0072cb0a75947ad9892ed3d43365, type: 3}
   m_Name: CoffreLeft
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 19c6d78de53e2404aa10c185fd615612, type: 2}
+  tile: {fileID: 11400000, guid: 9fc9797e0a74ba5458990ece50aa6c59, type: 2}
   weight: 100
   inDecor: 0
   upNeighbours:
@@ -27,5 +27,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a23ecee90de33546aca77898c9b6005, type: 2}
   - {fileID: 11400000, guid: b3755d11a1e381f4d86f1102acaa6cae, type: 2}
   - {fileID: 11400000, guid: 5e73f32140d686f49b28773905f7c18c, type: 2}
-  - {fileID: 11400000, guid: 5ecc79b7ba64c3d41af5dc2bc3471732, type: 2}
   - {fileID: 11400000, guid: 36dad1b7902191a47943f29d67410223, type: 2}

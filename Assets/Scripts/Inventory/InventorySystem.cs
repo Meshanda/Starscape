@@ -29,7 +29,6 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
     [Header("Prefabs")]
     [SerializeField] private GameObject _slotPfb;
-    [SerializeField] private GameObject _dropPfb;
     [SerializeField] private GameObject _craftSlotPfb;
     [SerializeField] private GameObject _chestSlotPfb;
 
@@ -163,17 +162,9 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         if (slot.ItemStack is null)
             return;
 
-        var drop = Instantiate(_dropPfb,
-            GameManager.Instance.player.DropPosition.position,
-            Quaternion.identity).GetComponent<Drop>();
-
-        drop.transform.position = new Vector3(drop.transform.position.x, drop.transform.position.y, 0);
-        
-        drop.ItemStack = slot.ItemStack;
+        World.Instance.GenerateDrop(slot.ItemStack.Clone(), GameManager.Instance.player.DropPosition.position).ThrowInPlayerDir();
         slot.ItemStack = null;
         OnInventoryChanged?.Invoke();
-        
-        drop.ThrowInPlayerDir();
     }
     
     public void OnPointerUp(PointerEventData eventData)

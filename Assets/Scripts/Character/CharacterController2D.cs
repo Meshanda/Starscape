@@ -61,7 +61,7 @@ public class CharacterController2D : MonoBehaviour
 
 		UpdateAnimation();
 
-		if(_rigidbody2D.velocity != Vector2.zero)
+		if(_rigidbody2D.velocity.magnitude >  0.01f)
 		{
 			OnMoveEvent?.Invoke(transform.position);
         }

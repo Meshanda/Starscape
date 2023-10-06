@@ -62,4 +62,36 @@ public class ItemStack
             inspectorName = "<invalid>";
         }
     }
+    
+    #region Inspector
+
+    protected bool Equals(ItemStack other)
+    {
+        return itemID == other.itemID && number == other.number;
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((ItemStack) obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(itemID, number);
+    }
+
+    public static bool operator ==(ItemStack left, ItemStack right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(ItemStack left, ItemStack right)
+    {
+        return !Equals(left, right);
+    }
+
+    #endregion
 }

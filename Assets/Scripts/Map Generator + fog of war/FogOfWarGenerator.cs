@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(StrateGeneration))]
 public class FogOfWarGenerator : MonoBehaviour
@@ -7,7 +8,7 @@ public class FogOfWarGenerator : MonoBehaviour
     public Material lightShader;
     public SpriteRenderer shadow;
     public List<Torche> LTorche = new List<Torche>();
-
+    private Vector2Int playerCell = new Vector2Int(1000, 1000);
     [HideInInspector]public StrateGeneration generator;
     private Texture2D wordTilesMap;
     private Texture2D PlayerTexture;
@@ -18,9 +19,9 @@ public class FogOfWarGenerator : MonoBehaviour
 
     private void Awake()
     {
-        Mining.OnMineTile += CallEventShadowGroundMining;
-        Placing.OnPlaceTile += CallEventShadowGroundPlacing;
-        CharacterController2D.OnMoveEvent += CallEventShadowPlayer;
+        // World.OnMineTile += CallEventShadowGroundMining;
+        // World.OnPlaceTile += CallEventShadowGroundPlacing;
+        // CharacterController2D.OnMoveEvent += CallEventShadowPlayer;
         generator = GetComponent<StrateGeneration>();
     }
     public void CallEventTorche(Torche torche)
@@ -37,30 +38,25 @@ public class FogOfWarGenerator : MonoBehaviour
     {
         UpdatePlayerLight(vector);
     }
-    private void CallEventShadowGroundMining(Item item, Vector3Int V3, Vector2 vector)
+    private void CallEventShadowGroundMining(Tilemap tilemap, Vector3Int V3, Item item)
     {
-        UpdateShadowGround();
-        foreach (Torche T in LTorche)
-        {
-            if (T.Position == vector)
-            {
-                CallEventRemoveTorche(T);
-            }
-        }
+        UpdateAllShadowGround();
     }
-    private void CallEventShadowGroundPlacing(Item item, Vector3Int V3, Vector2 vector)
+    private void CallEventShadowGroundPlacing(Tilemap tilemap, Vector3Int V3, Item item)
     {
-        UpdateShadowGround();
+        UpdateAllShadowGround();
     }
     public void InitShadow(Vector2Int SizeXY, Vector2 position, Vector2 scale)
     {
+        return;
         textureSize = SizeXY;
+        shadow.transform.position = position;
+        shadow.transform.localScale = scale;
+
         ResetShadowGround();
         ResetShadowPlayer();
         ResetShadowTorche();
-        shadow.transform.position = position;
-        shadow.transform.localScale = scale;
-        UpdateShadowGround();
+        UpdateAllShadowGround();
     }
 
     #region Ground Shadow
@@ -79,16 +75,15 @@ public class FogOfWarGenerator : MonoBehaviour
 
         wordTilesMap.Apply();
     }
-
-    public void UpdateShadowGround()
+    
+    public void UpdateAllShadowGround()
     {
-        ResetShadowGround();
-        for (int i = textureSize.x; i > 0  ; i--)
+        for (int i = textureSize.x-1; i >= 0  ; i--)
         {
-            for (int j = textureSize.y; j > 0  ; j--)
+            for (int j = textureSize.y-1; j >= 0  ; j--)
             {
-                float temp = 1;
-                if (generator.GetTile(i, j) != null)
+                float temp;
+                if (generator.GetTile(i, j) != null &&  j != textureSize.y-1)
                 {
                     temp = wordTilesMap.GetPixel(i, j + 1).r - 0.2f;
 
@@ -100,7 +95,7 @@ public class FogOfWarGenerator : MonoBehaviour
                 wordTilesMap.SetPixel(i, j, new Color(temp, 0, 0, 1));
             }
         }
-        /*for (int i = 0; i < textureSize.x; i++)
+        for (int i = 0; i < textureSize.x; i++)
         {
             for (int j = 0; j < textureSize.y; j++)
             {
@@ -109,7 +104,7 @@ public class FogOfWarGenerator : MonoBehaviour
                     wordTilesMap.SetPixel(i, j, new Color(wordTilesMap.GetPixel(i, j).r + 0.3f, 0, 0, 1));
                 }
             }
-        }*/
+        }
         wordTilesMap.Apply();
     }
     #endregion
@@ -132,8 +127,16 @@ public class FogOfWarGenerator : MonoBehaviour
 
     public void UpdatePlayerLight(Vector3 pos)
     {
-        ResetShadowPlayer();
         Vector2Int Cell = generator.GetTilesPos(pos);
+        if (Cell == playerCell)
+        {
+            return;
+        }
+        else
+        {
+            ResetShadowPlayer();
+            playerCell = Cell;
+        }
         for (int i = -10; i < 11; i++)
         {
             for (int j = -10; j < 11; j++)

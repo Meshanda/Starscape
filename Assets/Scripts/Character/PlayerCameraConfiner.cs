@@ -1,3 +1,4 @@
+using System.Collections;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -16,8 +17,10 @@ public class PlayerCameraConfiner : MonoBehaviour
     }
 
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return null;
+        
         _cinemachineConfiner.m_BoundingShape2D = ConfinerCollider;
         
         float xMin = GroundTilemap.cellBounds.xMin * 0.32f;
