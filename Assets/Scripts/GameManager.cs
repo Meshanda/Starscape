@@ -12,6 +12,9 @@ public class GameManager : Singleton<GameManager>
     public void Start()
     {
         SoundManager.OnGameStartMusic();
+        
+        CursorManager.Instance?.SetColor(Settings.cursorColor);
+        CursorManager.Instance?.SetSize(Settings.cursorSize);
     }
 
     private void OnEnable()

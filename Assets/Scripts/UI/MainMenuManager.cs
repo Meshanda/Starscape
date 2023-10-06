@@ -35,6 +35,8 @@ namespace UI
         private Vector3 _startPosCredits;
         
         private Camera _mainCam;
+
+        
         private void Start()
         {
             SoundManager.Instance.PlayMenuMusic();
