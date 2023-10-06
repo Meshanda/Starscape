@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CraftingUI : MonoBehaviour
 {
-    [SerializeField] private float _speed = 600.0f;
+    [SerializeField] private float _speed = 1000.0f;
     
     [Header("Horizontal")]
     [SerializeField] private Transform _horizontalContainer;

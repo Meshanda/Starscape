@@ -1181,7 +1181,7 @@ MonoBehaviour:
         inspectorName: 
         type: 8
         level: 1
-      tileDamagePerSecond: 2
+      tileDamagePerSecond: 1
   - inspectorName: wood_pickaxe (TOOL)
     id: wood_pickaxe
     name: Wood Pickaxe
