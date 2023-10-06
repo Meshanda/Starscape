@@ -136,7 +136,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         
         if (_currentChest is null) return;
         
-        if (Vector3.Distance(GameManager.Instance.player.transform.position, _currentChest.transform.position) >= _currentChest.distance)
+        if (Vector2.Distance(GameManager.Instance.player.transform.position, _currentChest.transform.position) >= _currentChest.distance)
         {
             CloseChest(_currentChest);
         }
