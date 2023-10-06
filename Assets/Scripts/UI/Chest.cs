@@ -8,9 +8,18 @@ namespace UI
     public class Chest : MonoBehaviour
     {
         public List<ItemStack> itemStacks = new();
+        public float distance = 2;
 
         private Transform _slotParent; 
-        public bool ChestOpen { get; private set; }
+        public bool ChestOpen { get; set; }
+
+        private void Start()
+        {
+            for (int i = 0; i < InventorySystem.Instance._nbChestSlots; i++)
+            {
+                itemStacks.Add(default);
+            }
+        }
 
         public void PlaceLoot(List<ItemStack> loots)
         {
@@ -18,6 +27,15 @@ namespace UI
             foreach (var loot in loots)
             {
                 itemStacks.Add(loot);
+            }
+        }
+
+        public void UpdateChest(List<InventorySlot> loots)
+        {
+            itemStacks.Clear();
+            foreach (var loot in loots)
+            {
+                itemStacks.Add(loot.ItemStack);
             }
         }
 
@@ -30,13 +48,14 @@ namespace UI
         {
             ChestOpen = status;
             if (status)
-            {
-                InventorySystem.Instance.OpenChest(itemStacks);
-            }
+                InventorySystem.Instance.OpenChest(this);
             else
-                InventorySystem.Instance.CloseChest();
+            {
+                InventorySystem.Instance.CloseChest(this);
+                InventorySystem.Instance.ToggleInventory();
+            }
             
-            InventorySystem.Instance.ToggleInventory();
+            
         }
     }
 }

@@ -2500,6 +2500,122 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+  - inspectorName: chest_right (TILE)
+    id: chest_right
+    name: Chest
+    description: 
+    sprite: {fileID: 21300000, guid: 7ac4ed40dd324a34fb0667d4ddadec4a, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 5d63afaf366801143bd1e7dd731ae551, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 100000
+        loot:
+          inspectorName: 
+          itemID: oak_wood_wall
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: chest_left (TILE)
+    id: chest_left
+    name: Chest
+    description: 
+    sprite: {fileID: 21300000, guid: 099e51862300a01499aa1f0e4eca322c, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: e19da605829893f4faf8405101eb79bc, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 100000
+        loot:
+          inspectorName: 
+          itemID: oak_wood_wall
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
   craftRecipes:
   - inspectorName: oak_wood (x1)
     itemsRequired: []

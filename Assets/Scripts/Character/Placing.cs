@@ -61,10 +61,20 @@ public class Placing : MonoBehaviour
         if (_distanceFromPlayer > _placingDistance)
             return;
         
+        if (CheckChest()) return;
+
         var slot = InventorySystem.Instance.GetSelectedSlot();
         if (!slot || slot.ItemStack is null)
             return;
         
+        if (World.Instance.TryPlaceTile(slot.ItemStack.itemID, _cam.ScreenToWorldPoint(Input.mousePosition)))
+        {
+            slot.ItemStackRemoveNumber(1);
+        }
+    }
+
+    private bool CheckChest()
+    {
         var hits = Physics2D.RaycastAll(_cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity);
 
         foreach (var hit in hits)
@@ -72,13 +82,10 @@ public class Placing : MonoBehaviour
             if (hit.collider is not null && hit.collider.TryGetComponent(out Chest chest))
             {
                 chest.ClickChest();
-                return;
+                return true;
             }
         }
 
-        if (World.Instance.TryPlaceTile(slot.ItemStack.itemID, _cam.ScreenToWorldPoint(Input.mousePosition)))
-        {
-            slot.ItemStackRemoveNumber(1);
-        }
+        return false;
     }
 }

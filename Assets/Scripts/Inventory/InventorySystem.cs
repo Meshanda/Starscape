@@ -47,6 +47,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     private Coroutine _splitRoutine;
 
     private bool _chestOpen;
+    private Chest _currentChest;
     
     #endregion
 
@@ -123,6 +124,16 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     {
         OnInventoryChanged?.Invoke();
     }
+    
+    private void Update()
+    {
+        if (_currentChest is null) return;
+        
+        if (Vector3.Distance(GameManager.Instance.player.transform.position, _currentChest.transform.position) >= _currentChest.distance)
+        {
+            CloseChest(_currentChest);
+        }
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -179,6 +190,10 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     public void ToggleInventory()
     {
         _invSlotsParent.gameObject.SetActive(!_invOpen);
+
+        if (_invOpen is false)
+            CloseChest(_currentChest);
+        
         _chestSlotsTransform.gameObject.SetActive(_invOpen && _chestOpen);
         _craftSlotsTransform.gameObject.SetActive(craftables.Count > 0 && _invOpen);
         _quickSlots[_selectedSlotIndex].Select(!_invOpen);
@@ -248,17 +263,34 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
     #region Slots
 
-    public void OpenChest(List<ItemStack> chestSlots)
+    public void OpenChest(Chest chest)
     {
+        if (_currentChest is not null && _currentChest != chest && _currentChest.ChestOpen) 
+        {
+            CloseChest(_currentChest);
+        }
+        
+        _currentChest = chest;
         _chestOpen = true;
+        
         for (int i = 0; i < _nbChestSlots; i++)
         {
-            _chestSlots[i].ItemStack = chestSlots[i];
+            _chestSlots[i].ItemStack = chest.itemStacks[i];
         }
+
+        if (!_invOpen)
+            ToggleInventory();
+        else
+            _chestSlotsTransform.gameObject.SetActive(_chestOpen);
     }
 
-    public void CloseChest()
+    public void CloseChest(Chest chest)
     {
+        if (chest is null) return;
+        
+        chest.UpdateChest(_chestSlots);
+        chest.ChestOpen = false;
+        _currentChest = null;
         _chestOpen = false;
         _chestSlotsTransform.gameObject.SetActive(_chestOpen);
         EmptyChestSlot();

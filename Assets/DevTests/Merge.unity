@@ -6392,6 +6392,10 @@ PrefabInstance:
       value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 5955522117290463457, guid: cffef8145159ee243ae0d50e6ebc2a55, type: 3}
+      propertyPath: _chestSlotPfb
+      value: 
+      objectReference: {fileID: 7562246932622451942, guid: 1c5e9320799f62442a25f155f26e321e, type: 3}
+    - target: {fileID: 5955522117290463457, guid: cffef8145159ee243ae0d50e6ebc2a55, type: 3}
       propertyPath: _splitMinDelay
       value: 0.02
       objectReference: {fileID: 0}

@@ -15,7 +15,6 @@ public class MapToggle : MonoBehaviour
 
     public void OnMap() 
     {
-//        Debug.Log("aaaa");
         ChangeRenderTexture();
     }
 
