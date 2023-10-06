@@ -26,6 +26,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     [SerializeField] private Transform _craftSlotsParent;
     [SerializeField] private Transform _craftSlotsTransform;
     [SerializeField] private Transform _chestSlotsTransform;
+    [SerializeField] private Transform _buttonTransform;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject _slotPfb;
@@ -202,6 +203,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     public void ToggleInventory()
     {
         _invSlotsParent.gameObject.SetActive(!_invOpen);
+        _buttonTransform.gameObject.SetActive(_invOpen);
 
         if (_invOpen is false)
             CloseChest(_currentChest);
@@ -661,5 +663,20 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     }
 
     #endregion
-    
+
+    #region Click Buttons
+
+    public void ClickSettings()
+    {
+        GameManager.Instance.ToggleSettings();
+        ToggleInventory();
+    }
+
+    public void ClickBackToMenu()
+    {
+        GameManager.Instance.TogglePopUpConfirmer();
+        ToggleInventory();
+    }
+
+    #endregion
 }

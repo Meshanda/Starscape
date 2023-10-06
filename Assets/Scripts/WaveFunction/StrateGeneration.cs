@@ -180,7 +180,7 @@ public class StrateGeneration : MonoBehaviour
                 PasteTree(new Vector3Int(x - OffsetXY.x, rng  + 1, 0));
                 treeDist = 0;
             }
-            if (Random.Range(0f, 1f) < _decorsChance / 100f && _Decor != null)
+            if (Random.Range(0f, 1f) < _decorsChance / 100f && _Decor != null && treeDist > 1)
             {
                 _Decor.SetTile(new Vector3Int(x - OffsetXY.x, rng  + 1, 0), _decors[Random.Range(0, _decors.Length)]);
                 _posDecor.Add(new Vector3Int(x - OffsetXY.x, rng  + 1, 0));

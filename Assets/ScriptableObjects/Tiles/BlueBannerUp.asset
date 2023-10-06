@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BlueBannerUp
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 59eb57d73836fdc4caaedfb718923427, type: 2}
+  SOName: BlueBannerUp
   weight: 100
   inDecor: 1
   upNeighbours:
