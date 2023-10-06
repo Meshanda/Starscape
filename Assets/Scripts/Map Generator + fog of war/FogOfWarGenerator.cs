@@ -19,8 +19,8 @@ public class FogOfWarGenerator : MonoBehaviour
 
     private void Awake()
     {
-        World.OnMineTile += CallEventShadowGroundMining;
-        World.OnPlaceTile += CallEventShadowGroundPlacing;
+        World.OnMineTile += CallEventShadowGround;
+        World.OnPlaceTile += CallEventShadowGround;
         CharacterController2D.OnMoveEvent += CallEventShadowPlayer;
         generator = GetComponent<StrateGeneration>();
     }
@@ -38,20 +38,9 @@ public class FogOfWarGenerator : MonoBehaviour
     {
         UpdatePlayerLight(vector);
     }
-    private void CallEventShadowGroundMining(Tilemap tilemaps, Vector3Int vector, Item item)
+    private void CallEventShadowGround(Tilemap tilemaps, Vector3Int vector, Item item)
     {
         UpdateTileGround((Vector2Int) vector);
-        foreach (Torche T in LTorche)
-        {
-            if (T.Position == (Vector2Int)vector)
-            {
-                CallEventRemoveTorche(T);
-            }
-        }
-    }
-    private void CallEventShadowGroundPlacing(Tilemap tilemaps, Vector3Int vector, Item item)
-    {
-        UpdateTileGround((Vector2Int)vector);
     }
     public void InitShadow(Vector2Int SizeXY, Vector2 position, Vector2 scale)
     {
