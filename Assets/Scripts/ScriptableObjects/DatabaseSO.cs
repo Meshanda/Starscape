@@ -347,7 +347,7 @@ public class CraftRecipe
     [HideInInspector] public string inspectorName;
     #endregion
     
-    public List<ItemStack> itemsRequired;
+    public List<ItemStack> itemsRequired = new List<ItemStack>();
     public ItemStack itemCrafted;
     public CraftingFlags requiredFlags;
 

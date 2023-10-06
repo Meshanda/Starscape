@@ -57,8 +57,15 @@ public class Player : MonoBehaviour
         while (true)
         {
             var itemStack = InventorySystem.Instance.GetSelectedSlot()?.ItemStack;
-            if(ItemStack.IsValid(itemStack))
+            if (ItemStack.IsValid(itemStack))
+            {
                 _selectedSprite.sprite = itemStack?.GetItem().sprite;
+            }
+            else
+            {
+                _selectedSprite.sprite = null;
+            }
+            
             yield return _refreshHeldItemDelay;
         }
     }

@@ -18,22 +18,13 @@ public class Placing : MonoBehaviour
         _cam = Camera.main;
     }
 
-    private void Start()
+    private void Update()
     {
-        StartCoroutine(nameof(VisualizeHeldItemRoutine));
-    }
+        // refresh visualized item continuously
+        Item selectedItem = InventorySystem.Instance.GetSelectedSlot()?.ItemStack?.GetItem();
+        Vector2 worldPos = _cam.ScreenToWorldPoint(Input.mousePosition);
 
-    private IEnumerator VisualizeHeldItemRoutine()
-    {
-        while (true)
-        {
-            Item selectedItem = InventorySystem.Instance.GetSelectedSlot()?.ItemStack?.GetItem();
-            Vector2 worldPos = _cam.ScreenToWorldPoint(Input.mousePosition);
-
-            World.Instance.VisualizeHeldItem(worldPos, selectedItem, _distanceFromPlayer <= _placingDistance);
-            
-            yield return null;
-        }
+        World.Instance.VisualizeHeldItem(worldPos, selectedItem, _distanceFromPlayer <= _placingDistance);
     }
 
     private IEnumerator PlacingRoutine()
