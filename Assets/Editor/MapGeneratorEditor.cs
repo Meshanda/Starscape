@@ -24,10 +24,10 @@ public class MapGene1ratorEditor : Editor
                 mapGen.InitializeGrid();
             }
         }
-        if (GUILayout.Button("Light"))
+        if (GUILayout.Button("Torche"))
         {
-            mapGen.UpdateShadowGround();
-            mapGen.UpdatePlayerLight();
+            mapGen.Fog.UpdateAllTorcheLight();
         }
     }
 }
+

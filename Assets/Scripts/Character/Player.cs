@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +9,16 @@ public class Player : MonoBehaviour
 
     public Transform DropPosition => _dropPosition;
 
+    public void OnQuickSlot1() { InventorySystem.Instance.SelectSlot(0); }
+    public void OnQuickSlot2() { InventorySystem.Instance.SelectSlot(1); }
+    public void OnQuickSlot3() { InventorySystem.Instance.SelectSlot(2); }
+    public void OnQuickSlot4() { InventorySystem.Instance.SelectSlot(3); }
+    public void OnQuickSlot5() { InventorySystem.Instance.SelectSlot(4); }
+    public void OnQuickSlot6() { InventorySystem.Instance.SelectSlot(5); }
+    public void OnQuickSlot7() { InventorySystem.Instance.SelectSlot(6); }
+    public void OnQuickSlot8() { InventorySystem.Instance.SelectSlot(7); }
+    public void OnQuickSlot9() { InventorySystem.Instance.SelectSlot(8); }
+    
     public void OnToggleInventory()
     {
         InventorySystem.Instance.ToggleInventory();

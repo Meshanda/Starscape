@@ -1,13 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.WSA;
-using static UnityEditor.PlayerSettings;
+
 
 public delegate void Notify();
 public class WaveFunction : MonoBehaviour
@@ -160,7 +156,6 @@ public class WaveFunction : MonoBehaviour
             Iterate();
 		}
 		//Verif2();
-		Debug.Log("done");
         placeAllTile();
 
         ProcessCompleted?.Invoke();
@@ -254,12 +249,6 @@ public class WaveFunction : MonoBehaviour
     {
         foreach (var tile in _tilesToPlace) 
         {
-            /*
-            if(tile.tile != null)
-                Debug.Log(tile.tile.name);
-            else
-                Debug.Log("Empty");
-            */
             if (tile.inDecor) 
             {
                 tileMapDecor.SetTile(tile.pos, tile.tile);
@@ -274,137 +263,23 @@ public class WaveFunction : MonoBehaviour
     }
     public Tile GetTileWithWeight(Cell cell) 
     {
-        int totalWeight = 0;
+        float totalWeight = 0;
         foreach(var option in cell.tileOptions) 
         {
             totalWeight += option.weight;
         }
-        int rngValue = UnityEngine.Random.Range(1, totalWeight + 1);
-        int threshold = 0;
+        float rngValue = UnityEngine.Random.Range(0f, totalWeight + 1f);
+        float threshold = 0;
         for(int i  = 0; i < cell.tileOptions.Count; i++) 
         {
             threshold += cell.tileOptions[i].weight;
             if (rngValue <= threshold)
                 return cell.tileOptions[i];
         }
-        Debug.Log("Help" + rngValue +" "+ totalWeight+" "+ cell.tileOptions.Count);
         return cell.tileOptions[cell.tileOptions.Count-1];
     }
 
-    //void UpdateGeneration()
-    //{
-    //    Cell[,] newGenerationCell =(Cell[,])cellArray.Clone();
-    //    int nbreNotCollapsed = 0;
-    //    for (int y = 0; y < dimensions.y; y++)
-    //    {
-    //        for (int x = 0; x < dimensions.x; x++)
-    //        {
-    //            var index = x * dimensions.x + y * dimensions.y;
-    //            if (cellArray[x,y].collapsed)
-    //            {
-    //                newGenerationCell[x, y] = cellArray[x, y];
-    //            }
-    //            else
-    //            {
-    //                nbreNotCollapsed++;
-    //                List<Tile> options = new List<Tile>();
-    //                foreach (Tile t in tileObjects)
-    //                {
-    //                    options.Add(t);
-    //                }
-
-    //                //update below
-    //                if (y > 0)
-    //                {
-    //                    Cell up = cellArray[x,y-1];
-    //                    List<Tile> validOptions = new List<Tile>();
-                        
-    //                    foreach (Tile possibleOptions in up.tileOptions)
-    //                    {
-    //                        var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-    //                        var valid = tileObjects[valOption].upNeighbours;
-
-    //                        validOptions = validOptions.Concat(valid).ToList();
-    //                    }
-
-    //                    CheckValidity(options, validOptions);
-    //                }
-
-    //                //update right
-    //                if (x < dimensions.x - 1)
-    //                {
-    //                    Cell right = cellArray[x+1 , y ];
-    //                    List<Tile> validOptions = new List<Tile>();
-
-    //                    foreach (Tile possibleOptions in right.tileOptions)
-    //                    {
-    //                        var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-    //                        var valid = tileObjects[valOption].leftNeighbours;
-
-    //                        validOptions = validOptions.Concat(valid).ToList();
-    //                    }
-
-    //                    CheckValidity(options, validOptions);
-    //                }
-
-    //                //look down
-    //                if (y < dimensions.y - 1)
-    //                {
-    //                    Cell down = cellArray[x, y+1];
-    //                    List<Tile> validOptions = new List<Tile>();
-
-    //                    foreach (Tile possibleOptions in down.tileOptions)
-    //                    {
-    //                        var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-    //                        var valid = tileObjects[valOption].downNeighbours;
-
-    //                        validOptions = validOptions.Concat(valid).ToList();
-    //                    }
-
-    //                    CheckValidity(options, validOptions);
-    //                }
-
-    //                //look left
-    //                if (x > 0)
-    //                {
-    //                    Cell left = cellArray[x - 1, y];
-    //                    List<Tile> validOptions = new List<Tile>();
-
-    //                    foreach (Tile possibleOptions in left.tileOptions)
-    //                    {
-    //                        var valOption = Array.FindIndex(tileObjects, obj => obj == possibleOptions);
-    //                        var valid = tileObjects[valOption].rightNeighbours;
-
-    //                        validOptions = validOptions.Concat(valid).ToList();
-    //                    }
-
-    //                    CheckValidity(options, validOptions);
-    //                }
-
-    //                Tile[] newTileList = new Tile[options.Count];
-
-    //                for (int i = 0; i < options.Count; i++)
-    //                {
-    //                    newTileList[i] = options[i];
-    //                }
-
-    //                newGenerationCell[x, y].RecreateCell(newTileList.ToList());
-    //            }
-    //        }
-    //    }
-
-    //    cellArray = newGenerationCell;
-    //    iterations++;
-
-       
-    //    //else 
-    //    //{
-    //    //    placeAllTile();
-    //    //    StopAllCoroutines();
-    //    //    iterations = 0;
-    //    //    ProcessCompleted?.Invoke();
-    //    //}
-    //}
+  
 
     public List<Tile> GetRightPossibleNeighbor(Cell cell) 
     {

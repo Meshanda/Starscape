@@ -38,6 +38,8 @@ public class World : Singleton<World>
     public Vector3 tileSize = new Vector2(0.32f, 0.32f);
     public Vector3 entityCheckMargin = new Vector2(0.05f, 0.05f);
     public LayerMask entityLayers;
+    [SerializeField] private PolygonCollider2D _confinerBox;
+    public PolygonCollider2D ConfinerBox => _confinerBox;
 
     public static event Action<Tilemap, Vector3Int, Item> OnMineTile; // tilemap, tilePos, item
     public static event Action<Tilemap, Vector3Int, Item> OnPlaceTile; // tilemap, tilePos, item

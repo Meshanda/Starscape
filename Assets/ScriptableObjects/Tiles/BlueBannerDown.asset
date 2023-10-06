@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e4d0072cb0a75947ad9892ed3d43365, type: 3}
+  m_Name: BlueBannerDown
+  m_EditorClassIdentifier: 
+  tile: {fileID: 11400000, guid: d320c60df8a54b9418d98718d2fcafe8, type: 2}
+  weight: 0.0001
+  inDecor: 1
+  upNeighbours:
+  - {fileID: 11400000, guid: f238bea11a817724e99f8759ab1f5876, type: 2}
+  - {fileID: 11400000, guid: 9a9a1ddaa3d9b484eb82a084e0be2539, type: 2}
+  - {fileID: 11400000, guid: 7d4c904265eccee46bda100983fb3c75, type: 2}
+  rightNeighbours:
+  - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
+  - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
+  - {fileID: 11400000, guid: 4c9556d1dfd91ad45b21d78f898731b1, type: 2}
+  downNeighbours:
+  - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
+  leftNeighbours:
+  - {fileID: 11400000, guid: a1331f9d7ba6229419fa4cec2de745dc, type: 2}
+  - {fileID: 11400000, guid: 1df1525cbb9b83d4dafbdfb4c0bdb7fc, type: 2}
+  - {fileID: 11400000, guid: 5ecc79b7ba64c3d41af5dc2bc3471732, type: 2}

@@ -1,5 +1,4 @@
 using Inventory;
-using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InventorySlot : Slot, IPointerEnterHandler, IPointerExitHandler

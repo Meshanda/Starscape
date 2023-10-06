@@ -167,7 +167,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         if (_splitRoutine is not null)  
             StopCoroutine(_splitRoutine);
     }
-    
+
     public void ToggleInventory()
     {
         _invSlotsParent.gameObject.SetActive(!_invOpen);
@@ -228,7 +228,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
     #region Slots
 
-    private void SelectSlot(int slotIndex)
+    public void SelectSlot(int slotIndex)
     {
         if (_quickSlots[_selectedSlotIndex])
             _quickSlots[_selectedSlotIndex].Select(false);

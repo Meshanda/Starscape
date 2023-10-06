@@ -2,9 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using DG;
 using DG.Tweening;
-using UnityEngine.Serialization;
 
 namespace Inventory
 {
