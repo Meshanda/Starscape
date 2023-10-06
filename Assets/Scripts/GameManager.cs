@@ -1,10 +1,13 @@
-﻿
-using System;
+﻿using System;
+using UI;
+using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
 	public DatabaseSO database;
 	public Player player;
+
+    [SerializeField] private Camera _minimapCamera;
 
     public void Start()
     {
@@ -14,11 +17,18 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         TimerSystem.TimerFinished += OnTimerFinished;
+        Minimap.ChangeMinimapZoom += OnChangeMinimapZoom;
     }
 
     private void OnDisable()
     {
         TimerSystem.TimerFinished -= OnTimerFinished;
+        Minimap.ChangeMinimapZoom -= OnChangeMinimapZoom;
+    }
+
+    private void OnChangeMinimapZoom(int value)
+    {
+        _minimapCamera.orthographicSize = value;
     }
 
     private void OnTimerFinished()
