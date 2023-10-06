@@ -11,7 +11,6 @@ public class Mining : MonoBehaviour
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
 
-    private Coroutine _miningRoutine;
     private Camera _cam;
     
     private Item _currentMiningItem;
@@ -51,13 +50,12 @@ public class Mining : MonoBehaviour
 
     private void OnMine()
     {
-        _miningRoutine = StartCoroutine(MiningRoutine());
+        StartCoroutine(MiningRoutine());
     }
     
     private void OnMineRelease()
     {
-        if (_miningRoutine is not null)
-            StopCoroutine(_miningRoutine);
+        StopAllCoroutines();
             
         CurrentMiningProgress = 0.0f;
     }

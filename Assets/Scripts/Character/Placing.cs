@@ -11,7 +11,6 @@ public class Placing : MonoBehaviour
     private Vector2 _mousePosition => _cam.ScreenToWorldPoint(Input.mousePosition);
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
 
-    private Coroutine _placingRoutine;
     private Camera _cam;
 
     private void Awake()
@@ -48,12 +47,12 @@ public class Placing : MonoBehaviour
 
     private void OnPlace()
     {
-        _placingRoutine = StartCoroutine(PlacingRoutine());
+        StartCoroutine(PlacingRoutine());
     }
 
     private void OnPlaceRelease()
     {
-        StopCoroutine(_placingRoutine);
+        StopAllCoroutines();
     }
 
     private void PlaceBlock() // input action
