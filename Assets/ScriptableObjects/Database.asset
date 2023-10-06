@@ -2635,46 +2635,22 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 2b61fe9e9e122a9499daf290770cc119, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: 934ea17dd4260454cbb55daaddd3c43d, type: 2}
-      canBeBuiltFrom: 1
+      canBeBuiltFrom: 0
       placingRules:
         placeLayer: 2
         requirements:
-        - inspectorName: ' neighbours(Up <Decor, Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 1
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 6
-        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+        - inspectorName: ' neighbours(Down <Ground>)'
           whitelistCenter: []
           whitelistCenterLayers: 0
           requiredNeighbours: 2
           whitelistNeighbours: []
-          whitelistNeighbourLayers: 6
-        - inspectorName: ' neighbours(Left <Decor, Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 4
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 6
-        - inspectorName: ' neighbours(Right <Decor, Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 8
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 6
-        - inspectorName: ' center(<Decor, Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 6
-          requiredNeighbours: 0
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 0
+          whitelistNeighbourLayers: 4
       breakingRules:
-        life: 0.25
+        life: 1
         requiredStrength:
           inspectorName: 
-          type: 8
-          level: 1
+          type: 0
+          level: 0
         loot:
           inspectorName: 
           itemID: chest_solo
@@ -2867,43 +2843,31 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: c4ea3fd374171d74caafd2643c75b213, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: e90be45797331da4fb856aa95d524750, type: 2}
-      canBeBuiltFrom: 1
+      canBeBuiltFrom: 0
       placingRules:
         placeLayer: 2
         requirements:
-        - inspectorName: ' neighbours(Up <Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 1
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 4
         - inspectorName: ' neighbours(Down <Ground>)'
           whitelistCenter: []
           whitelistCenterLayers: 0
           requiredNeighbours: 2
           whitelistNeighbours: []
           whitelistNeighbourLayers: 4
-        - inspectorName: ' neighbours(Left <Ground>)'
+        - inspectorName: ' center(<Background>)'
           whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 4
+          whitelistCenterLayers: 1
+          requiredNeighbours: 0
           whitelistNeighbours: []
-          whitelistNeighbourLayers: 4
-        - inspectorName: ' neighbours(Right <Ground>)'
-          whitelistCenter: []
-          whitelistCenterLayers: 0
-          requiredNeighbours: 8
-          whitelistNeighbours: []
-          whitelistNeighbourLayers: 4
+          whitelistNeighbourLayers: 0
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
           type: 0
           level: 0
         loot:
           inspectorName: 
-          itemID: crafting_table
+          itemID: torche
           number: 1
     toolData:
       isTool: 0

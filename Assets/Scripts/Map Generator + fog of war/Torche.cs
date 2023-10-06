@@ -4,8 +4,8 @@ using UnityEngine;
 public class Torche : MonoBehaviour
 {
     public Vector2Int Position;
-    public float intensity;
-    public int range;
+    public float intensity = 0.8f;
+    public int range = 5;
     FogOfWarGenerator fog;
 
     void Start()
@@ -13,8 +13,6 @@ public class Torche : MonoBehaviour
         fog = FindAnyObjectByType<FogOfWarGenerator>();
         Position = fog.generator.GetTilesPos(transform.position);
         Position.y--;
-        intensity = 0.8f;
-        range = 5;
         fog.CallEventTorche(this);
     }
 
