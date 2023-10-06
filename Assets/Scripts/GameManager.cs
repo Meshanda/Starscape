@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] private GameObject _settingsCanvas;
 	public DatabaseSO database;
 	public Player player;
 
@@ -37,5 +38,11 @@ public class GameManager : Singleton<GameManager>
     private void OnTimerFinished()
     {
         SceneLoader.LoadScene(GameState.EndScreen);
+    }
+
+    public void ToggleSettings()
+    {
+        _settingsCanvas.SetActive(!_settingsCanvas.activeSelf);
+        SoundManager.Instance.PlayClickSound();
     }
 }
