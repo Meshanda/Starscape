@@ -2887,34 +2887,6 @@ MonoBehaviour:
         level: 0
       tileDamagePerSecond: 1
   craftRecipes:
-  - inspectorName: oak_wood (x1)
-    itemsRequired: []
-    itemCrafted:
-      inspectorName: oak_wood (x1)
-      itemID: oak_wood
-      number: 1
-    requiredFlags: 0
-  - inspectorName: dirt (x1)
-    itemsRequired: []
-    itemCrafted:
-      inspectorName: dirt (x1)
-      itemID: dirt
-      number: 1
-    requiredFlags: 0
-  - inspectorName: stone (x1)
-    itemsRequired: []
-    itemCrafted:
-      inspectorName: stone (x1)
-      itemID: stone
-      number: 1
-    requiredFlags: 0
-  - inspectorName: bedrock (x1)
-    itemsRequired: []
-    itemCrafted:
-      inspectorName: bedrock (x1)
-      itemID: bedrock
-      number: 1
-    requiredFlags: 0
   - inspectorName: wood_pickaxe (x1) [ <oak_wood (x3)> <dirt (x1)> ]
     itemsRequired:
     - inspectorName: oak_wood (x3)
@@ -3038,10 +3010,13 @@ MonoBehaviour:
       itemID: ruby
       number: 2
     requiredFlags: 2
-  - inspectorName: torche (x1)
-    itemsRequired: []
-    itemCrafted:
-      inspectorName: torche (x1)
-      itemID: torche
+  - inspectorName: torche (x10) [ <oak_wood (x1)> ]
+    itemsRequired:
+    - inspectorName: oak_wood (x1)
+      itemID: oak_wood
       number: 1
+    itemCrafted:
+      inspectorName: torche (x10)
+      itemID: torche
+      number: 10
     requiredFlags: 0
