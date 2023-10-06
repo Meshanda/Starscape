@@ -48,7 +48,7 @@ public class StrateGeneration : MonoBehaviour
         if (_pasteGrotto != null)
             _pasteGrotto.SpawnGrotte();
     }
-
+    public List<Strate> GetStrates() { return _strates; }
     public TileBase GetTile(int i, int j)
     {
         return tileGround.GetTile(new Vector3Int(i - tileGround.size.x/2, j - tileGround.size.y +1 + OffsetXY.y));

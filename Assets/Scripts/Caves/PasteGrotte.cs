@@ -18,22 +18,19 @@ public class PasteGrotte : MonoBehaviour
     private Cell[,] _Cells ;
     private List<Cell[,]> _cells = new List<Cell[,]>();
     [SerializeField] private float _depthToEndLoading;
+    [SerializeField] private GrottosChestFiller _chestFiller;
 
     // Start is called before the first frame update
     void Awake() => _waveFunction.OnFinishedGrotto += LaunchWaveCollapse;
     public  void LaunchWaveCollapse()
     {
-        //foreach (var cell in _cells)
-        //{
-        //    _waveFunction.InitializeGrid(cell);
-        //}
         if (_cells.Count <= 0)
         {
-            Debug.Log("Done");
+            StartCoroutine(_chestFiller.Fill(_waveFunction.GetChests()));
             return;
         }
         var cell = _cells[0];
-
+       
         _cells.RemoveAt(0);
         _waveFunction.InitializeGrid(cell);
     }

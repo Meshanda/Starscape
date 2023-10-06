@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using UI;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -16,6 +17,8 @@ public class WaveFunction : MonoBehaviour
     public TileBase _tileError;
 
     //public List<Cell> gridComponents;
+    public Tile chest;
+    public List<ChestAndPos> chestList = new List<ChestAndPos>();
     public Cell cellObj;
     public Cell[,] cellArray;
     public Tilemap tileMap;
@@ -223,6 +226,7 @@ public class WaveFunction : MonoBehaviour
             //Debug.Log("working");
             Iterate();
 		}
+
         //ProcessCompleted?.Invoke();
         return _tilesToPlace;
     }
@@ -315,9 +319,24 @@ public class WaveFunction : MonoBehaviour
         {
             Tilemap placeTilemap = World.Instance.GetTilemapsFromLayers(GameManager.Instance.database.GetItemByTile(tile.tile).tileInfo.placingRules.placeLayer)[0];
             placeTilemap.SetTile(tile.pos, tile.tile);
+            
+            
+            if (tile.tile == chest.tile)
+            {
+                var Tile = placeTilemap.GetTile(tile.pos);
+                
+                chestList.Add(new ChestAndPos 
+                { 
+                    chest = tile.tile, 
+                    pos = tile.pos
+                });
+            }
+
         }
         _tilesToPlace.Clear();
     }
+
+    public List<ChestAndPos> GetChests() => chestList;
     public Tile GetTileWithWeight(Cell cell) 
     {
         float totalWeight = 0;
@@ -553,4 +572,10 @@ public struct  TileToPlace
     public TileBase tile;
     public string SOname;
     public bool inDecor;
+}
+[Serializable]
+public struct ChestAndPos 
+{
+    public Vector3Int pos;
+    public TileBase chest;
 }
