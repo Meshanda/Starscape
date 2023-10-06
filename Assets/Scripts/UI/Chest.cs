@@ -48,14 +48,36 @@ namespace UI
         {
             ChestOpen = status;
             if (status)
+            {
                 InventorySystem.Instance.OpenChest(this);
+            }
             else
             {
                 InventorySystem.Instance.CloseChest(this);
                 InventorySystem.Instance.ToggleInventory();
             }
-            
-            
+        }
+
+        private bool _isQuitting = false;
+        
+        void OnApplicationQuit()
+        {
+            _isQuitting = true;
+        }
+
+        private void OnDestroy()
+        {
+            if (!_isQuitting)
+            {
+                // drop everything that is in the chest
+                foreach (var itemStack in itemStacks)
+                {
+                    if (ItemStack.IsValid(itemStack))
+                    {
+                        World.Instance.GenerateDrop(itemStack.Clone(), transform.position).AddRandomForce();
+                    }
+                }
+            }
         }
     }
 }
