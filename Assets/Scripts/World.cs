@@ -298,22 +298,21 @@ public class World : Singleton<World>
         var cellPos = UtilTilemap.WorldToCell(worldPos);
         
         Tilemap tilemap = null;
-        if (heldItem != null && heldItem.toolData.isTool && heldItem.toolData.toolStrength.type == ToolType.Hammer)
+        
+        if (GroundTilemap.GetTile(cellPos) != null)
         {
-            if (BackgroundTilemap.GetTile(cellPos) != null)
+            tilemap = GroundTilemap;
+        }
+        else if (DecorTilemap.GetTile(cellPos) != null)
+        {
+            tilemap = DecorTilemap;
+        }
+        else if (BackgroundTilemap.GetTile(cellPos) != null)
+        {
+            if (heldItem != null && heldItem.toolData.isTool &&
+                ((heldItem.toolData.toolStrength.type & ToolType.Hammer) != 0))
             {
                 tilemap = BackgroundTilemap;
-            }
-        }
-        else
-        {
-            if (GroundTilemap.GetTile(cellPos) != null)
-            {
-                tilemap = GroundTilemap;
-            }
-            else if (DecorTilemap.GetTile(cellPos) != null)
-            {
-                tilemap = DecorTilemap;
             }
         }
 

@@ -49,6 +49,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
     private bool _chestOpen;
     private Chest _currentChest;
+    private bool _isInCreative;
     
     #endregion
 
@@ -128,12 +129,23 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ToggleCreative();
+        }
+        
         if (_currentChest is null) return;
         
         if (Vector3.Distance(GameManager.Instance.player.transform.position, _currentChest.transform.position) >= _currentChest.distance)
         {
             CloseChest(_currentChest);
         }
+    }
+
+    public void ToggleCreative()
+    {
+        _isInCreative = !_isInCreative;
+        DoRefreshCraftables();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -531,14 +543,49 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
 
     private void RefreshCraftables()
     {
+        if (_isInCreative) // don't refresh on every change, we don't care!
+        {
+            return;
+        }
+        
+        DoRefreshCraftables();
+    }
+    
+    private void DoRefreshCraftables()
+    {
         List<CraftRecipe> newCraftables = new List<CraftRecipe>();
 
         var database = GameManager.Instance.database;
-        foreach (var craftRecipe in database.craftRecipes)
+        if (_isInCreative)
         {
-            if (craftRecipe.CanBeCrafted())
+            List<string> uniqueIDs = new List<string>();
+            foreach (var item in database.items)
             {
-                newCraftables.Add(craftRecipe);
+                if (string.IsNullOrEmpty(item.id))
+                    continue;
+                
+                if (!uniqueIDs.Contains(item.id))
+                {
+                    uniqueIDs.Add(item.id);
+                    newCraftables.Add(new CraftRecipe()
+                    {
+                        itemCrafted = new ItemStack()
+                        {
+                            itemID = item.id,
+                            number = 1,
+                        }
+                    });
+                }
+            }
+        }
+        else
+        {
+            foreach (var craftRecipe in database.craftRecipes)
+            {
+                if (craftRecipe.CanBeCrafted())
+                {
+                    newCraftables.Add(craftRecipe);
+                }
             }
         }
 

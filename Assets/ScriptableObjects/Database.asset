@@ -13,6 +13,64 @@ MonoBehaviour:
   m_Name: Database
   m_EditorClassIdentifier: 
   items:
+  - inspectorName: creative_pickaxe (TOOL)
+    id: creative_pickaxe
+    name: Creative Pickaxe
+    description: The world is yours.
+    sprite: {fileID: 21300000, guid: 60a8c5a78298137428ba278f19bf1e77, type: 3}
+    tileInfo:
+      tile: {fileID: 0}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 0
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 100000
+        loot:
+          inspectorName: 
+          itemID: chest_solo
+          number: 1
+    toolData:
+      isTool: 1
+      toolStrength:
+        inspectorName: 
+        type: -1
+        level: 10000
+      tileDamagePerSecond: 10000
   - inspectorName: grass (TILE)
     id: grass
     name: Grass
@@ -2558,7 +2616,7 @@ MonoBehaviour:
         requiredStrength:
           inspectorName: 
           type: 8
-          level: 100000
+          level: 1000
         loot:
           inspectorName: 
           itemID: oak_wood_wall
@@ -2616,7 +2674,7 @@ MonoBehaviour:
         requiredStrength:
           inspectorName: 
           type: 8
-          level: 100000
+          level: 1000
         loot:
           inspectorName: 
           itemID: oak_wood_wall
@@ -2708,7 +2766,7 @@ MonoBehaviour:
         requiredStrength:
           inspectorName: 
           type: 8
-          level: 100000
+          level: 1000
         loot:
           inspectorName: 
           itemID: chest_solo
