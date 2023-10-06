@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Inventory;
+using UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,6 +14,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     [Header("Parameters")]
     [SerializeField] [Range(1,9)] private int _nbColumns;
     [SerializeField] [Range(1,4)] private int _nbRows;
+    [SerializeField] public int _nbChestSlots = 18;
 
     public float _splitInitialDelay = .25f;
     public float _splitMinDelay = .02f;
@@ -23,11 +25,13 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     [SerializeField] private Transform _invSlotsParent;
     [SerializeField] private Transform _craftSlotsParent;
     [SerializeField] private Transform _craftSlotsTransform;
+    [SerializeField] private Transform _chestSlotsTransform;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject _slotPfb;
     [SerializeField] private GameObject _dropPfb;
     [SerializeField] private GameObject _craftSlotPfb;
+    [SerializeField] private GameObject _chestSlotPfb;
 
     [Header("References")] 
     [SerializeField] private CraftingUI _craftingUI;
@@ -37,10 +41,13 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     private readonly List<InventorySlot> _quickSlots = new();
     private readonly List<InventorySlot> _inventorySlots = new();
     private readonly List<CraftingSlot> _craftingSlots = new();
+    private readonly List<InventorySlot> _chestSlots = new();
 
     private int _selectedSlotIndex; 
     private int _craftSelectedSlotIndex;
     private Coroutine _splitRoutine;
+
+    private bool _chestOpen;
     
     #endregion
 
@@ -107,6 +114,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     {
         InitQuickslots();
         InitInventorySlots();
+        InitChestInventory();
         _handSlot = FindObjectOfType<HandSlot>();
         _invSlotsParent.gameObject.SetActive(false);
         _craftSlotsTransform.gameObject.SetActive(false);
@@ -133,7 +141,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
             {
                 GrabSlot(slot);
 
-                if (slot.ItemStack is not null)
+                if (ItemStack.IsValid(slot.ItemStack))
                     TooltipSystem.Instance.Show(slot.ItemStack.ItemName, slot.ItemStack.ItemDescription);
             }
             else if (eventData.button.Equals(PointerEventData.InputButton.Right))
@@ -180,8 +188,10 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     public void ToggleInventory()
     {
         _invSlotsParent.gameObject.SetActive(!_invOpen);
+        _chestSlotsTransform.gameObject.SetActive(_invOpen && _chestOpen);
         _craftSlotsTransform.gameObject.SetActive(craftables.Count > 0 && _invOpen);
         _quickSlots[_selectedSlotIndex].Select(!_invOpen);
+        
 
         ForAllSlots(slot => slot.Refresh());
 
@@ -232,11 +242,45 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
             }
         }
     }
+    
+    private void InitChestInventory()
+    {
+        _chestSlotsTransform.gameObject.SetActive(false);
+        for (var i = 0; i < _nbChestSlots; i++)
+        {
+            var slot = Instantiate(_chestSlotPfb, _chestSlotsTransform).GetComponent<InventorySlot>();
+            _chestSlots.Add(slot);
+        }
+    }
 
     #endregion
 
     #region Slots
 
+    public void OpenChest(List<ItemStack> chestSlots)
+    {
+        _chestOpen = true;
+        for (int i = 0; i < _nbChestSlots; i++)
+        {
+            _chestSlots[i].ItemStack = chestSlots[i];
+        }
+    }
+
+    public void CloseChest()
+    {
+        _chestOpen = false;
+        _chestSlotsTransform.gameObject.SetActive(_chestOpen);
+        EmptyChestSlot();
+    }
+
+    public void EmptyChestSlot()
+    {
+        foreach (var slot in _chestSlots)
+        {
+            slot.ItemStack = null;
+        }
+    }
+    
     public void SelectSlot(int slotIndex)
     {
         if (_quickSlots[_selectedSlotIndex])

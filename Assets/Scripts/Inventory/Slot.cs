@@ -32,7 +32,7 @@ namespace Inventory
         {
             get
             {
-                if (isActiveAndEnabled)
+                if (isActiveAndEnabled && ItemStack.IsValid(_itemStack)) 
                 {
                     StartCoroutine(RefreshRoutine());
                 }
