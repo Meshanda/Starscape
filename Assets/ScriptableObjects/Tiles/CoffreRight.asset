@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4d0072cb0a75947ad9892ed3d43365, type: 3}
   m_Name: CoffreRight
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 79abddcf3055bec4ba5e49d5ee81aae5, type: 2}
+  tile: {fileID: 11400000, guid: e19da605829893f4faf8405101eb79bc, type: 2}
   weight: 100
   inDecor: 0
   upNeighbours:
