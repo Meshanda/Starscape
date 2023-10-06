@@ -13,228 +13,2705 @@ MonoBehaviour:
   m_Name: Database
   m_EditorClassIdentifier: 
   items:
-  - inspectorName: dirt_01 (TILE)
-    id: dirt_01
-    name: Dirt
-    description: This is a dirt block.
-    sprite: {fileID: 21300000, guid: 42971c32d57da1a4e8480bce4cb9ff75, type: 3}
-    canHaveDecorOnTop: 0
-    tileInfo:
-      inspectorName: dirt (LOOT [dirt_01 (x1)])
-      inspectorNameSimple: 
-      tile: {fileID: 11400000, guid: f3d287865af96c144a480a3924d5b4a4, type: 2}
-      life: 0.5
-      requiredToBreak:
-        inspectorName: None (lvl 0)
-        type: 0
-        level: 0
-      lootOnBreak:
-        inspectorName: dirt_01 (x1)
-        itemID: dirt_01
-        number: 1
-    toolData:
-      inspectorName: None (lvl 0) (dmg 1)
-      toolStrength:
-        inspectorName: None (lvl 0)
-        type: 0
-        level: 0
-      tileDamagePerSecond: 1
-  - inspectorName: ground_01 (TILE)
-    id: ground_01
-    name: Ground
-    description: 
-    sprite: {fileID: -1479925464, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
-    canHaveDecorOnTop: 0
-    tileInfo:
-      inspectorName: Atlas_67 (LOOT [ground_01 (x1)])
-      inspectorNameSimple: 
-      tile: {fileID: 11400000, guid: d126fc884407fb547bf9e01114edc564, type: 2}
-      life: 0.5
-      requiredToBreak:
-        inspectorName: None (lvl 0)
-        type: 0
-        level: 0
-      lootOnBreak:
-        inspectorName: ground_01 (x1)
-        itemID: ground_01
-        number: 1
-    toolData:
-      inspectorName: None (lvl 0) (dmg 1)
-      toolStrength:
-        inspectorName: None (lvl 0)
-        type: 0
-        level: 0
-      tileDamagePerSecond: 1
-  - inspectorName: crafting_table_01 (TILE)
-    id: crafting_table_01
-    name: Crafting Table
-    description: 
-    sprite: {fileID: 21300000, guid: 5a8df7a6d1f43d841869ac3097a34b01, type: 3}
-    canHaveDecorOnTop: 0
-    tileInfo:
-      inspectorName: CraftingTableTile (LOOT [crafting_table_01 (x1)])
-      inspectorNameSimple: 
-      tile: {fileID: 11400000, guid: bb85747b5b13686478b4c92c9766ed46, type: 2}
-      life: 1
-      requiredToBreak:
-        inspectorName: None (lvl 0)
-        type: 0
-        level: 0
-      lootOnBreak:
-        inspectorName: crafting_table_01 (x1)
-        itemID: crafting_table_01
-        number: 1
-    toolData:
-      inspectorName: None (lvl 0) (dmg 1)
-      toolStrength:
-        inspectorName: None (lvl 0)
-        type: 0
-        level: 0
-      tileDamagePerSecond: 1
-  - inspectorName: pickaxe_01 (TOOL)
-    id: pickaxe_01
-    name: Pickaxe
-    description: 
-    sprite: {fileID: 21300000, guid: 8afca7ff5b1c29348b2129e86c114c14, type: 3}
-    canHaveDecorOnTop: 0
-    tileInfo:
-      inspectorName: <invalid>
-      inspectorNameSimple: 
-      tile: {fileID: 0}
-      life: 1
-      requiredToBreak:
-        inspectorName: None (lvl 0)
-        type: 0
-        level: 0
-      lootOnBreak:
-        inspectorName: <invalid>
-        itemID: 
-        number: 0
-    toolData:
-      inspectorName: Pickaxe (lvl 0) (dmg 2)
-      toolStrength:
-        inspectorName: Pickaxe (lvl 0)
-        type: 2
-        level: 0
-      tileDamagePerSecond: 2
-  - inspectorName: cobblestone_01 (TILE)
-    id: cobblestone_01
-    name: Cobblestone
-    description: 
-    sprite: {fileID: 21300000, guid: a0f1f2edaf746a54b837e6b7e8ede516, type: 3}
-    canHaveDecorOnTop: 0
-    tileInfo:
-      inspectorName: stone (BREAK COND. [Pickaxe (lvl 0)]) (LOOT [cobblestone_01
-        (x1)])
-      inspectorNameSimple: 
-      tile: {fileID: 11400000, guid: e99a9437ce45fc54db42c471a07749f5, type: 2}
-      life: 1
-      requiredToBreak:
-        inspectorName: Pickaxe (lvl 0)
-        type: 2
-        level: 0
-      lootOnBreak:
-        inspectorName: cobblestone_01 (x1)
-        itemID: cobblestone_01
-        number: 1
-    toolData:
-      inspectorName: None (lvl 0) (dmg 1)
-      toolStrength:
-        inspectorName: None (lvl 0)
-        type: 0
-        level: 0
-      tileDamagePerSecond: 1
-  - inspectorName: grass_01 (TILE)
-    id: grass_01
+  - inspectorName: grass (TILE)
+    id: grass
     name: Grass
     description: 
     sprite: {fileID: 21300000, guid: eff8bda531123ab499ad5d794bbedc32, type: 3}
-    canHaveDecorOnTop: 1
     tileInfo:
-      inspectorName: dirt_grass (LOOT [dirt_01 (x1)])
-      inspectorNameSimple: 
       tile: {fileID: 11400000, guid: cdcb2f2f1890ef54e866c39566ce3254, type: 2}
-      life: 1
-      requiredToBreak:
-        inspectorName: None (lvl 0)
-        type: 0
-        level: 0
-      lootOnBreak:
-        inspectorName: dirt_01 (x1)
-        itemID: dirt_01
-        number: 1
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 0.5
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: dirt
+          number: 1
     toolData:
-      inspectorName: None (lvl 0) (dmg 1)
+      isTool: 0
       toolStrength:
-        inspectorName: None (lvl 0)
+        inspectorName: 
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: bedrock_01 (TILE)
-    id: bedrock_01
+  - inspectorName: dirt (TILE)
+    id: dirt
+    name: Dirt
+    description: 
+    sprite: {fileID: 21300000, guid: 42971c32d57da1a4e8480bce4cb9ff75, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: f3d287865af96c144a480a3924d5b4a4, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 0.5
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: dirt
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: gravel_dirt (TILE)
+    id: gravel_dirt
+    name: Gravel Dirt
+    description: 
+    sprite: {fileID: 21300000, guid: 84e8985bbd7a7de4ca13cf9fd3da34c1, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: f481abf869bad104b9965f52e78eb057, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: gravel_dirt
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: bedrock (TILE)
+    id: bedrock
     name: Bedrock
     description: How did you get this?
-    sprite: {fileID: 1576435574, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
-    canHaveDecorOnTop: 0
+    sprite: {fileID: 1669423760, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
     tileInfo:
-      inspectorName: Atlas_81 (BREAK COND. [None (lvl 1000)]) (LOOT [bedrock_01 (x1)])
-      inspectorNameSimple: 
-      tile: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
-      life: 1
-      requiredToBreak:
-        inspectorName: None (lvl 1000)
-        type: 0
-        level: 1000
-      lootOnBreak:
-        inspectorName: bedrock_01 (x1)
-        itemID: bedrock_01
-        number: 1
+      tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 1000
+        loot:
+          inspectorName: 
+          itemID: bedrock
+          number: 1
     toolData:
-      inspectorName: None (lvl 0) (dmg 1)
+      isTool: 0
       toolStrength:
-        inspectorName: None (lvl 0)
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: oak_wood (TILE)
+    id: oak_wood
+    name: Oak Wood
+    description: 
+    sprite: {fileID: 1459649114, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: aa693ec34c4d6fc44aec815a68403bfa, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: oak_wood
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: oak_wood_02 (TILE)
+    id: oak_wood_02
+    name: Oak Wood
+    description: 
+    sprite: {fileID: 885090668, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 4a6942212546e4747939a9c794dd6caa, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: oak_wood
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: birch_wood_dark (TILE)
+    id: birch_wood_dark
+    name: Dark Birch Wood
+    description: 
+    sprite: {fileID: -303458876, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 051efc23755722b48b633c125f94387a, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: birch_wood_dark
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: oak_leaves_01 (TILE)
+    id: oak_leaves_01
+    name: Oak Leaves
+    description: 
+    sprite: {fileID: 231191421, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 10cc8c2cd49a62a4295baffc0140f038, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: oak_leaves_01
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: oak_leaves_02 (TILE)
+    id: oak_leaves_02
+    name: Oak Leaves
+    description: 
+    sprite: {fileID: 1785856176, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: a9a80fd02ef9ff04b9bbc7f6323fd442, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: oak_leaves_01
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: oak_branch_leaves (TILE)
+    id: oak_branch_leaves
+    name: Oak Branch Leaves
+    description: 
+    sprite: {fileID: 992367956, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 20f3ef476663e0d42a3c21bdcc53d6b1, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: oak_branch_leaves
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: golden_leaves (TILE)
+    id: golden_leaves
+    name: Golden Leaves
+    description: 
+    sprite: {fileID: 1344842851, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 3c70ba9f22c30524497093d825d8af39, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: golden_leaves
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: grass_blade_01 (TILE)
+    id: grass_blade_01
+    name: Blade of Grass
+    description: 
+    sprite: {fileID: 21300000, guid: e1495cfa83b979e40ab2537cddbec1cc, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 83b30fe66030fcf45adc82289898d83f, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Down <specific>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours:
+          - grass
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: grass_blade_01
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: grass_blade_02 (TILE)
+    id: grass_blade_02
+    name: Blade of Grass
+    description: 
+    sprite: {fileID: 21300000, guid: aab510222c5e8bb4cb5c985c8b58d7db, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 4db738bd8357d204ebe1553554200561, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Down <specific>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours:
+          - grass
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: grass_blade_02
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: grass_blade_03 (TILE)
+    id: grass_blade_03
+    name: Blade of Grass
+    description: 
+    sprite: {fileID: 21300000, guid: fdff0cd470e048f49a0238857a09f6cb, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 671885d49050be7459ec3f755613ee55, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Down <specific>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours:
+          - grass
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: grass_blade_03
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: grass_blade_04 (TILE)
+    id: grass_blade_04
+    name: Blade of Grass
+    description: 
+    sprite: {fileID: 21300000, guid: ff53cb68887341b48a8c7ec2baed849f, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: e2ef4a087f7a07d42abc43fe2fed077d, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Down <specific>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours:
+          - grass
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: grass_blade_04
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: mushroom_red (TILE)
+    id: mushroom_red
+    name: Red Mushroom
+    description: 
+    sprite: {fileID: 21300000, guid: 522d6cb7a87a7204c8b788433ef5a545, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 650df526e008d7746999236cff676662, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Down <specific>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours:
+          - grass
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: mushroom_red
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: stone (TILE)
+    id: stone
+    name: Stone
+    description: 
+    sprite: {fileID: 21300000, guid: a0f1f2edaf746a54b837e6b7e8ede516, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: e99a9437ce45fc54db42c471a07749f5, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 2
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: stone
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: stone_copper_dense (TILE)
+    id: stone_copper_dense
+    name: Copper Ore
+    description: 
+    sprite: {fileID: 21300000, guid: 0f0bef09a63128f4a864ce681f353b93, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 9cb449c5979d6cc4bbf196ca38602be5, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 2
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: stone_copper
+          number: 2
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: stone_copper (TILE)
+    id: stone_copper
+    name: Copper Ore
+    description: 
+    sprite: {fileID: 21300000, guid: 162809ad9c027094391029bb5f5b8df1, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: ab6104784bd5b5b40b9c7cd957c34f0a, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 2
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: stone_copper
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: greystone (TILE)
+    id: greystone
+    name: Greystone
+    description: 
+    sprite: {fileID: 21300000, guid: 9d7ca374ca84122499068c2530332dba, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 461f27b2e682f054ebce5a2cc62f09d8, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1.5
+        requiredStrength:
+          inspectorName: 
+          type: 2
+          level: 1
+        loot:
+          inspectorName: 
+          itemID: greystone
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: greystone_ruby_dense (TILE)
+    id: greystone_ruby_dense
+    name: Ruby Ore
+    description: 
+    sprite: {fileID: 21300000, guid: c6596b380c1ad8241b82b3032a97d407, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 58f8459b5870c4a49a03460b697fcd86, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1.5
+        requiredStrength:
+          inspectorName: 
+          type: 2
+          level: 1
+        loot:
+          inspectorName: 
+          itemID: greystone_ruby
+          number: 2
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: greystone_ruby (TILE)
+    id: greystone_ruby
+    name: Ruby Ore
+    description: 
+    sprite: {fileID: 21300000, guid: ce395c20b5384544d9ec282034e62451, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 70a9a7a7638cc7b47a4f02db14087db6, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1.5
+        requiredStrength:
+          inspectorName: 
+          type: 2
+          level: 1
+        loot:
+          inspectorName: 
+          itemID: greystone_ruby
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: wood_chest_01 (TILE)
+    id: wood_chest_01
+    name: Wood Chest
+    description: 
+    sprite: {fileID: 596879963, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 79abddcf3055bec4ba5e49d5ee81aae5, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: wood_chest_01
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: wood_chest_02 (TILE)
+    id: wood_chest_02
+    name: Wood Chest
+    description: 
+    sprite: {fileID: 912830914, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 19c6d78de53e2404aa10c185fd615612, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: wood_chest_01
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: wood_hammer (TOOL)
+    id: wood_hammer
+    name: Wood Hammer
+    description: 
+    sprite: {fileID: 21300000, guid: 9b191b66e74d5ba418a0f0fd7d179094, type: 3}
+    tileInfo:
+      tile: {fileID: 0}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: 
+          number: 0
+    toolData:
+      isTool: 1
+      toolStrength:
+        inspectorName: 
+        type: 8
+        level: 1
+      tileDamagePerSecond: 2
+  - inspectorName: wood_pickaxe (TOOL)
+    id: wood_pickaxe
+    name: Wood Pickaxe
+    description: 
+    sprite: {fileID: 21300000, guid: 45328e2a57af3a64d98a817640cedd42, type: 3}
+    tileInfo:
+      tile: {fileID: 0}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: 
+          number: 0
+    toolData:
+      isTool: 1
+      toolStrength:
+        inspectorName: 
+        type: 2
+        level: 0
+      tileDamagePerSecond: 2
+  - inspectorName: copper_pickaxe (TOOL)
+    id: copper_pickaxe
+    name: Copper Pickaxe
+    description: 
+    sprite: {fileID: 21300000, guid: cce4612e4bd679b4c9e958cc5560e71c, type: 3}
+    tileInfo:
+      tile: {fileID: 0}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: 
+          number: 0
+    toolData:
+      isTool: 1
+      toolStrength:
+        inspectorName: 
+        type: 2
+        level: 1
+      tileDamagePerSecond: 3
+  - inspectorName: crafting_table (TILE)
+    id: crafting_table
+    name: Crafting Table
+    description: 
+    sprite: {fileID: 21300000, guid: 5a8df7a6d1f43d841869ac3097a34b01, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: bb85747b5b13686478b4c92c9766ed46, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: crafting_table
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: stone_furnace (TILE)
+    id: stone_furnace
+    name: Stone Furnace
+    description: 
+    sprite: {fileID: 21300000, guid: 42b6101c4f1e0d142839d96bcb76ea44, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 0a8fb8fd14ac46e48b9fbc6da6ff7ee8, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 2
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 2
+        requiredStrength:
+          inspectorName: 
+          type: 2
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: stone_furnace
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 2
+        level: 2
+      tileDamagePerSecond: 3
+  - inspectorName: copper_ingot
+    id: copper_ingot
+    name: Copper Ingot
+    description: 
+    sprite: {fileID: 21300000, guid: 1e7aa42ed017a9b4e9b9e01a9c942b70, type: 3}
+    tileInfo:
+      tile: {fileID: 0}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 1
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: 
+          number: 0
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: wood_barrel (TILE)
+    id: wood_barrel
+    name: Wood Barrel
+    description: 
+    sprite: {fileID: -860830036, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: ae4189fd1aff8e44ba13e749d3ff4297, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: wood_barrel
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: cobweb (TILE)
+    id: cobweb
+    name: Cobweb
+    description: 
+    sprite: {fileID: 448471290, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 69f7fd5513e7e5f4395f5300960e0178, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: cobweb
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: pillar_dark_up (TILE)
+    id: pillar_dark_up
+    name: Dark Pillar
+    description: 
+    sprite: {fileID: 483659570, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 6e2f9221b583e674a94e9d31aba2046b, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: pillar_dark_up
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: pillar_dark_mid (TILE)
+    id: pillar_dark_mid
+    name: Dark Pillar
+    description: 
+    sprite: {fileID: 1757986844, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: f5a3ce4f4d126bb4fa16de9c8bda9556, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: pillar_dark_mid
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: pillar_dark_down (TILE)
+    id: pillar_dark_down
+    name: Dark Pillar
+    description: 
+    sprite: {fileID: 611170909, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 717f9c474fc2d55438441bbe72aaad8e, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: pillar_dark_down
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: ancient_torch (TILE)
+    id: ancient_torch
+    name: Ancient Torch
+    description: 
+    sprite: {fileID: -1784202084, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 3aa1dd24ca36f524e9076b338311e44d, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: ancient_torch
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: flag_red_up (TILE)
+    id: flag_red_up
+    name: Red Flag
+    description: 
+    sprite: {fileID: 668663921, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: cc60883e56f26704994628d815f55b10, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: flag_red_up
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: flag_red_mid (TILE)
+    id: flag_red_mid
+    name: Red Flag
+    description: 
+    sprite: {fileID: 1120933735, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: aed1478eba63e5d48b22bcdc7a6663ae, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: flag_red_mid
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: flag_red_down (TILE)
+    id: flag_red_down
+    name: Red Flag
+    description: 
+    sprite: {fileID: 940313314, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 9596b36c8b3e0284eb913c1b073f1539, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: flag_red_down
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: flag_blue_up (TILE)
+    id: flag_blue_up
+    name: Blue Flag
+    description: 
+    sprite: {fileID: 504150954, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 59eb57d73836fdc4caaedfb718923427, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: flag_blue_up
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: flag_blue_mid (TILE)
+    id: flag_blue_mid
+    name: Blue Flag
+    description: 
+    sprite: {fileID: 931205566, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 1fa7df4b0c2655e4cb06b2e69b5df33c, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: flag_blue_mid
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: flag_blue_down (TILE)
+    id: flag_blue_down
+    name: Blue Flag
+    description: 
+    sprite: {fileID: -1159716946, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: d320c60df8a54b9418d98718d2fcafe8, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: flag_blue_down
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: flag_green_up (TILE)
+    id: flag_green_up
+    name: Green Flag
+    description: 
+    sprite: {fileID: 1067177298, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: bb81bba81169ef14480488d08b359983, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: flag_green_up
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: flag_green_mid (TILE)
+    id: flag_green_mid
+    name: Green Flag
+    description: 
+    sprite: {fileID: 1770365816, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: b73f31b8bfb897a46a43cdc9eb62126b, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: flag_green_mid
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: flag_green_down (TILE)
+    id: flag_green_down
+    name: Green Flag
+    description: 
+    sprite: {fileID: -1420333809, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 93c2f839faf156f4799eed189d606e4c, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: flag_green_down
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: oak_wood_wall (TILE)
+    id: oak_wood_wall
+    name: Oak Wood Wall
+    description: 
+    sprite: {fileID: -718766767, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: ab7b6482305dd864389455f4bad644fb, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <-1>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: -1
+        - inspectorName: ' neighbours(Down <-1>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: -1
+        - inspectorName: ' neighbours(Left <-1>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: -1
+        - inspectorName: ' neighbours(Right <-1>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: -1
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: oak_wood_wall
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: dirt_wall (TILE)
+    id: dirt_wall
+    name: Dirt Wall
+    description: 
+    sprite: {fileID: 832037546, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 80a80f2df27c14d4f83086184c025cc8, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: dirt_wall
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: stone_wall (TILE)
+    id: stone_wall
+    name: Stone Wall
+    description: 
+    sprite: {fileID: 1576435574, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: stone_wall
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: cave_wall (TILE)
+    id: cave_wall
+    name: Cave Wall
+    description: 
+    sprite: {fileID: -1746994382, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: f99bfef743684194db7a26fbae1ec9c2, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: cave_wall
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: chest_right (TILE)
+    id: chest_right
+    name: Chest
+    description: 
+    sprite: {fileID: 21300000, guid: 7ac4ed40dd324a34fb0667d4ddadec4a, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 5d63afaf366801143bd1e7dd731ae551, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 100000
+        loot:
+          inspectorName: 
+          itemID: oak_wood_wall
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: chest_left (TILE)
+    id: chest_left
+    name: Chest
+    description: 
+    sprite: {fileID: 21300000, guid: 099e51862300a01499aa1f0e4eca322c, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: e19da605829893f4faf8405101eb79bc, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 1
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 100000
+        loot:
+          inspectorName: 
+          itemID: oak_wood_wall
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
         type: 0
         level: 0
       tileDamagePerSecond: 1
   craftRecipes:
-  - inspectorName: cobblestone_01 (x1)
+  - inspectorName: oak_wood (x1)
     itemsRequired: []
     itemCrafted:
-      inspectorName: cobblestone_01 (x1)
-      itemID: cobblestone_01
+      inspectorName: oak_wood (x1)
+      itemID: oak_wood
       number: 1
     requiredFlags: 0
-  - inspectorName: dirt_01 (x1)
+  - inspectorName: dirt (x1)
     itemsRequired: []
     itemCrafted:
-      inspectorName: dirt_01 (x1)
-      itemID: dirt_01
+      inspectorName: dirt (x1)
+      itemID: dirt
       number: 1
     requiredFlags: 0
-  - inspectorName: pickaxe_01 (x1)
+  - inspectorName: stone (x1)
+    itemsRequired: []
+    itemCrafted:
+      inspectorName: stone (x1)
+      itemID: stone
+      number: 1
+    requiredFlags: 0
+  - inspectorName: bedrock (x1)
+    itemsRequired: []
+    itemCrafted:
+      inspectorName: bedrock (x1)
+      itemID: bedrock
+      number: 1
+    requiredFlags: 0
+  - inspectorName: wood_pickaxe (x1) [ <oak_wood (x3)> ]
     itemsRequired:
-    - inspectorName: dirt_01 (x3)
-      itemID: dirt_01
+    - inspectorName: oak_wood (x3)
+      itemID: oak_wood
       number: 3
     itemCrafted:
-      inspectorName: pickaxe_01 (x1)
-      itemID: pickaxe_01
+      inspectorName: wood_pickaxe (x1)
+      itemID: wood_pickaxe
       number: 1
     requiredFlags: 1
-  - inspectorName: crafting_table_01 (x1)
+  - inspectorName: wood_hammer (x1) [ <oak_wood (x3)> ]
     itemsRequired:
-    - inspectorName: dirt_01 (x4)
-      itemID: dirt_01
+    - inspectorName: oak_wood (x3)
+      itemID: oak_wood
+      number: 3
+    itemCrafted:
+      inspectorName: wood_hammer (x1)
+      itemID: wood_hammer
+      number: 1
+    requiredFlags: 1
+  - inspectorName: copper_pickaxe (x1) [ <copper_ingot (x3)> ]
+    itemsRequired:
+    - inspectorName: copper_ingot (x3)
+      itemID: copper_ingot
+      number: 3
+    itemCrafted:
+      inspectorName: copper_pickaxe (x1)
+      itemID: copper_pickaxe
+      number: 1
+    requiredFlags: 1
+  - inspectorName: copper_ingot (x1) [ <stone_copper (x1)> ]
+    itemsRequired:
+    - inspectorName: stone_copper (x1)
+      itemID: stone_copper
+      number: 1
+    itemCrafted:
+      inspectorName: copper_ingot (x1)
+      itemID: copper_ingot
+      number: 1
+    requiredFlags: 2
+  - inspectorName: oak_wood_wall (x4) [ <oak_wood (x1)> ]
+    itemsRequired:
+    - inspectorName: oak_wood (x1)
+      itemID: oak_wood
+      number: 1
+    itemCrafted:
+      inspectorName: oak_wood_wall (x4)
+      itemID: oak_wood_wall
+      number: 4
+    requiredFlags: 0
+  - inspectorName: crafting_table (x1) [ <oak_wood (x4)> ]
+    itemsRequired:
+    - inspectorName: oak_wood (x4)
+      itemID: oak_wood
       number: 4
     itemCrafted:
-      inspectorName: crafting_table_01 (x1)
-      itemID: crafting_table_01
+      inspectorName: crafting_table (x1)
+      itemID: crafting_table
       number: 1
     requiredFlags: 0
-  - inspectorName: bedrock_01 (x1)
-    itemsRequired: []
+  - inspectorName: stone_furnace (x1) [ <stone (x4)> ]
+    itemsRequired:
+    - inspectorName: stone (x4)
+      itemID: stone
+      number: 4
     itemCrafted:
-      inspectorName: bedrock_01 (x1)
-      itemID: bedrock_01
+      inspectorName: stone_furnace (x1)
+      itemID: stone_furnace
       number: 1
-    requiredFlags: 0
+    requiredFlags: 1

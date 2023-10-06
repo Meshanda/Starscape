@@ -16,7 +16,6 @@ namespace UI
 
         public void SetText(int index)
         {
-            Debug.Log(index);
             _text.text = _options[index];
         }
 

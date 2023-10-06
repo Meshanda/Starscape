@@ -8,14 +8,12 @@ public class Rocket : MonoBehaviour
 
     private Tilemap GroundTile => World.Instance.GroundTilemap;
 
-    private void Start()
-    {
-        
-    }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         CreatePlatform();
+
+        Destroy(this);
     }
 
     public void CreatePlatform()
@@ -32,6 +30,6 @@ public class Rocket : MonoBehaviour
                     GroundTile.SetTile(new Vector3Int(i, j) + pos, tile);
                 }
             }
-        }
+        } 
     }
 }

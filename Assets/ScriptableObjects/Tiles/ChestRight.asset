@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e4d0072cb0a75947ad9892ed3d43365, type: 3}
-  m_Name: CoffreLeft
+  m_Name: ChestRight
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: 19c6d78de53e2404aa10c185fd615612, type: 2}
+  tile: {fileID: 11400000, guid: 5d63afaf366801143bd1e7dd731ae551, type: 2}
   weight: 100
   inDecor: 0
   upNeighbours:

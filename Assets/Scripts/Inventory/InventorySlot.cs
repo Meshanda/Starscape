@@ -1,4 +1,5 @@
 using Inventory;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InventorySlot : Slot, IPointerEnterHandler, IPointerExitHandler
@@ -13,7 +14,7 @@ public class InventorySlot : Slot, IPointerEnterHandler, IPointerExitHandler
     { 
         if (!CanInteractWithInventory())
             return;
-        
+
         TooltipSystem.Instance.Show(_itemStack.ItemName, _itemStack.ItemDescription);
     }
 
@@ -30,7 +31,7 @@ public class InventorySlot : Slot, IPointerEnterHandler, IPointerExitHandler
     #region Utils
     private bool CanInteractWithInventory()
     {
-        return _itemStack is not null && InventorySystem.Instance.IsInventoryOpen;
+        return ItemStack.IsValid(_itemStack) && InventorySystem.Instance.IsInventoryOpen;
     }
     
     #endregion

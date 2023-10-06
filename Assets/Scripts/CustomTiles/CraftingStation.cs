@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CraftingTable : MonoBehaviour
+public class CraftingStation : MonoBehaviour
 {
 	public float distance = 1.0f;
 	public CraftingFlags craftingFlags;
@@ -10,11 +10,11 @@ public class CraftingTable : MonoBehaviour
 	private void Update()
 	{
 		bool isInRange = Vector3.Distance(GameManager.Instance.player.transform.position, transform.position) < distance;
-		if (isInRange && !wasInRange)
+		if (isInRange)
 		{
 			InventorySystem.Instance.CraftingFlags |= craftingFlags;
 		}
-		else if (!isInRange && wasInRange)
+		else if (wasInRange)
 		{
 			InventorySystem.Instance.CraftingFlags &= ~craftingFlags;
 		}
