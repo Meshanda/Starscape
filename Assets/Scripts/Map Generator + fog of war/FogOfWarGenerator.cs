@@ -33,6 +33,7 @@ public class FogOfWarGenerator : MonoBehaviour
     {
         RemoveTocheShadow(torche);
         LTorche.Remove(torche);
+        UpdateAllTorcheLight();
     }
     private void CallEventShadowPlayer(Vector3 vector)
     {
@@ -214,7 +215,7 @@ public class FogOfWarGenerator : MonoBehaviour
     }
     public void UpdateAllTorcheLight()
     {
-        InitShadowTorche();
+        //InitShadowTorche();
         foreach (Torche T in LTorche)
         {
             UpdateTorcheLight(T);
@@ -223,14 +224,16 @@ public class FogOfWarGenerator : MonoBehaviour
 
     public void UpdateTorcheLight(Torche torche)
     {
+        float C = 0;
         for (int i = -torche.range; i <= torche.range; i++)
         {
             for (int j = -torche.range; j <= torche.range; j++)
             {
                 int x = torche.Position.x + generator.OffsetXY.x + i;
                 int y = textureSize.y + torche.Position.y + j - generator.OffsetXY.y;
-                if (y < textureSize.y && y >= 0)
-                    TorcheTexture.SetPixel(x, y, new Color(torche.intensity - ((torche.intensity / torche.range) * Mathf.Abs(i) + (torche.intensity / torche.range) * Mathf.Abs(j)), 0, 0, 1));
+                if (y < textureSize.y && y >= 0 && x < textureSize.x && x >= 0 && j <= torche.range - i && i <= torche.range - j)
+                    C = TorcheTexture.GetPixel(x,y).r + torche.intensity - ((torche.intensity / torche.range) * Mathf.Abs(i) + (torche.intensity / torche.range) * Mathf.Abs(j));
+                    TorcheTexture.SetPixel(x, y, new Color(C, 0, 0, 1));
             }
         }
         TorcheTexture.Apply();
@@ -243,7 +246,7 @@ public class FogOfWarGenerator : MonoBehaviour
             {
                 int x = torche.Position.x + generator.OffsetXY.x + i;
                 int y = textureSize.y + torche.Position.y + j - generator.OffsetXY.y;
-                if (y < textureSize.y && y >= 0)
+                if (y < textureSize.y && y >= 0 && x < textureSize.x && x >= 0 && j <= torche.range - i && i <= torche.range - j)
                     TorcheTexture.SetPixel(x, y, new Color(0, 0, 0, 1));
             }
         }
