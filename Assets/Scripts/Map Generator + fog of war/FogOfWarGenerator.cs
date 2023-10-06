@@ -40,7 +40,7 @@ public class FogOfWarGenerator : MonoBehaviour
     }
     private void CallEventShadowGroundMining(Tilemap tilemap, Vector3Int V3, Item item)
     {
-        UpdateShadowGround();
+        UpdateAllShadowGround();
     }
     private void CallEventShadowGroundPlacing(Tilemap tilemap, Vector3Int V3, Item item)
     {
