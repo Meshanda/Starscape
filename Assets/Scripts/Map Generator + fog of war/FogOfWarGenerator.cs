@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(StrateGeneration))]
 public class FogOfWarGenerator : MonoBehaviour
@@ -18,8 +19,8 @@ public class FogOfWarGenerator : MonoBehaviour
 
     private void Awake()
     {
-        Mining.OnMineTile += CallEventShadowGroundMining;
-        Placing.OnPlaceTile += CallEventShadowGroundPlacing;
+        World.OnMineTile += CallEventShadowGroundMining;
+        World.OnPlaceTile += CallEventShadowGroundPlacing;
         CharacterController2D.OnMoveEvent += CallEventShadowPlayer;
         generator = GetComponent<StrateGeneration>();
     }
@@ -37,22 +38,21 @@ public class FogOfWarGenerator : MonoBehaviour
     {
         UpdatePlayerLight(vector);
     }
-    private void CallEventShadowGroundMining(Item item, Vector3Int V3, Vector2 vector)
+    private void CallEventShadowGroundMining(Tilemap tilemaps, Vector3Int vector, Item item)
     {
-        UpdateTileGround(vector);
-        
-
+        Debug.Log(vector);
+        UpdateTileGround((Vector2Int) vector);
         foreach (Torche T in LTorche)
         {
-            if (T.Position == (Vector2Int)V3)
+            if (T.Position == (Vector2Int)vector)
             {
                 CallEventRemoveTorche(T);
             }
         }
     }
-    private void CallEventShadowGroundPlacing(Item item, Vector3Int V3, Vector2 vector)
+    private void CallEventShadowGroundPlacing(Tilemap tilemaps, Vector3Int vector, Item item)
     {
-        UpdateTileGround(vector);
+        UpdateTileGround((Vector2Int)vector);
     }
     public void InitShadow(Vector2Int SizeXY, Vector2 position, Vector2 scale)
     {
@@ -85,16 +85,15 @@ public class FogOfWarGenerator : MonoBehaviour
         wordTilesMap.Apply();
     }
 
-    public void UpdateTileGround(Vector2 pos)
+    public void UpdateTileGround(Vector2Int pos)
     {
-        Vector2Int tilePos = generator.GetTilesPos(pos);
-        //tilePos.x -= textureSize.x;
+        
         for (int i = 10; i >= - 11; i--)
         {
             for (int j = 10; j >= - 11; j--)
             {
-                int x = tilePos.x + generator.OffsetXY.x + i;
-                int y = textureSize.y + tilePos.y + j - generator.OffsetXY.y;
+                int x = pos.x + generator.OffsetXY.x + i;
+                int y = textureSize.y + pos.y + j - generator.OffsetXY.y;
                 float temp = 1;
                 if (generator.GetTile(x,y) != null && y != textureSize.y - 1)
                 {
@@ -110,16 +109,18 @@ public class FogOfWarGenerator : MonoBehaviour
                 }
             }
         }
-        /*for (int i = -10; i < 11; i++)
+        for (int i = 10; i >= -11; i--)
         {
-            for (int j = -10; j < 11; j++)
+            for (int j = 10; j >= -11; j--)
             {
-                if (generator.GetTile( i +1, j) == null || generator.GetTile(i -1, j) == null)
+                int x = pos.x + generator.OffsetXY.x + i;
+                int y = textureSize.y + pos.y + j - generator.OffsetXY.y;
+                if (generator.GetTile( x +1, y) == null || generator.GetTile(x -1, y) == null)
                 {
-                    wordTilesMap.SetPixel(i, j, new Color(wordTilesMap.GetPixel(i, j).r + 0.3f, 0, 0, 1));
+                    wordTilesMap.SetPixel(x, y, new Color(wordTilesMap.GetPixel(x, y).r + 0.3f, 0, 0, 1));
                 }
             }
-        }*/
+        }
         wordTilesMap.Apply();
     }
     public void UpdateAllShadowGround()
