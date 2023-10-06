@@ -45,8 +45,8 @@ public class StrateGeneration : MonoBehaviour
     void Start()
     {
         InitializeGrid();
-        /*if (_pasteGrotto != null)
-            _pasteGrotto.SpawnGrotte();*/
+        if (_pasteGrotto != null)
+            _pasteGrotto.SpawnGrotte();
     }
 
     public TileBase GetTile(int i, int j)

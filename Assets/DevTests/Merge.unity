@@ -9900,7 +9900,7 @@ MonoBehaviour:
   _tileGround: {fileID: 11400000, guid: 184ca936e019e5b42a9235082b5e5c51, type: 2}
   _tileError: {fileID: 0}
   tileMap: {fileID: 1780645444}
-  tileMapDecor: {fileID: 1187536430}
+  tileMapDecor: {fileID: 237056825}
 --- !u!114 &1720046741
 MonoBehaviour:
   m_ObjectHideFlags: 0

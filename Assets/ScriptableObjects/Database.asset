@@ -173,9 +173,9 @@ MonoBehaviour:
     id: bedrock
     name: Bedrock
     description: How did you get this?
-    sprite: {fileID: 1576435574, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    sprite: {fileID: 1669423760, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
     tileInfo:
-      tile: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
+      tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
       canBeBuiltFrom: 1
       placingRules:
         placeLayer: 4
@@ -1488,7 +1488,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: wood_barrel (TILE NO LOOT)
+  - inspectorName: wood_barrel (TILE)
     id: wood_barrel
     name: Wood Barrel
     description: 
@@ -1497,7 +1497,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: ae4189fd1aff8e44ba13e749d3ff4297, type: 2}
       canBeBuiltFrom: 0
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Ground>)'
           whitelistCenter: []
@@ -1524,15 +1524,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 4
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 0
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: wood_barrel
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -1540,7 +1540,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: cobweb (TILE NO LOOT)
+  - inspectorName: cobweb (TILE)
     id: cobweb
     name: Cobweb
     description: 
@@ -1549,7 +1549,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: 69f7fd5513e7e5f4395f5300960e0178, type: 2}
       canBeBuiltFrom: 0
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -1576,15 +1576,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 0
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: cobweb
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -1592,7 +1592,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: pillar_dark_up (TILE NO LOOT)
+  - inspectorName: pillar_dark_up (TILE)
     id: pillar_dark_up
     name: Dark Pillar
     description: 
@@ -1601,7 +1601,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: 6e2f9221b583e674a94e9d31aba2046b, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -1628,15 +1628,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 2
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: pillar_dark_up
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -1644,7 +1644,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: pillar_dark_mid (TILE NO LOOT)
+  - inspectorName: pillar_dark_mid (TILE)
     id: pillar_dark_mid
     name: Dark Pillar
     description: 
@@ -1653,7 +1653,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: f5a3ce4f4d126bb4fa16de9c8bda9556, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -1680,15 +1680,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 2
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: pillar_dark_mid
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -1696,7 +1696,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: pillar_dark_down (TILE NO LOOT)
+  - inspectorName: pillar_dark_down (TILE)
     id: pillar_dark_down
     name: Dark Pillar
     description: 
@@ -1705,7 +1705,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: 717f9c474fc2d55438441bbe72aaad8e, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -1732,15 +1732,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 2
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: pillar_dark_down
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -1748,7 +1748,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: ancient_torch (TILE NO LOOT)
+  - inspectorName: ancient_torch (TILE)
     id: ancient_torch
     name: Ancient Torch
     description: 
@@ -1757,7 +1757,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: 3aa1dd24ca36f524e9076b338311e44d, type: 2}
       canBeBuiltFrom: 0
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -1784,15 +1784,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 2
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: ancient_torch
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -1800,7 +1800,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: flag_red_up (TILE NO LOOT)
+  - inspectorName: flag_red_up (TILE)
     id: flag_red_up
     name: Red Flag
     description: 
@@ -1809,7 +1809,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: cc60883e56f26704994628d815f55b10, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -1836,15 +1836,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 0
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: flag_red_up
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -1852,7 +1852,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: flag_red_mid (TILE NO LOOT)
+  - inspectorName: flag_red_mid (TILE)
     id: flag_red_mid
     name: Red Flag
     description: 
@@ -1861,7 +1861,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: aed1478eba63e5d48b22bcdc7a6663ae, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -1888,15 +1888,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 0
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: flag_red_mid
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -1904,7 +1904,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: flag_red_down (TILE NO LOOT)
+  - inspectorName: flag_red_down (TILE)
     id: flag_red_down
     name: Red Flag
     description: 
@@ -1913,7 +1913,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: 9596b36c8b3e0284eb913c1b073f1539, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -1940,15 +1940,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 0
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: flag_red_down
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -1956,7 +1956,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: flag_blue_up (TILE NO LOOT)
+  - inspectorName: flag_blue_up (TILE)
     id: flag_blue_up
     name: Blue Flag
     description: 
@@ -1965,7 +1965,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: 59eb57d73836fdc4caaedfb718923427, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -1992,15 +1992,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 0
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: flag_blue_up
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -2008,7 +2008,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: flag_blue_mid (TILE NO LOOT)
+  - inspectorName: flag_blue_mid (TILE)
     id: flag_blue_mid
     name: Blue Flag
     description: 
@@ -2017,7 +2017,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: 1fa7df4b0c2655e4cb06b2e69b5df33c, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -2044,15 +2044,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 0
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: flag_blue_mid
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -2060,7 +2060,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: flag_blue_down (TILE NO LOOT)
+  - inspectorName: flag_blue_down (TILE)
     id: flag_blue_down
     name: Blue Flag
     description: 
@@ -2069,7 +2069,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: d320c60df8a54b9418d98718d2fcafe8, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -2096,15 +2096,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 0
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: flag_blue_down
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -2112,7 +2112,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: flag_green_up (TILE NO LOOT)
+  - inspectorName: flag_green_up (TILE)
     id: flag_green_up
     name: Green Flag
     description: 
@@ -2121,7 +2121,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: bb81bba81169ef14480488d08b359983, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -2148,15 +2148,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 0
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: flag_green_up
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -2164,7 +2164,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: flag_green_mid (TILE NO LOOT)
+  - inspectorName: flag_green_mid (TILE)
     id: flag_green_mid
     name: Green Flag
     description: 
@@ -2173,7 +2173,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: b73f31b8bfb897a46a43cdc9eb62126b, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -2200,15 +2200,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 0
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: flag_green_mid
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -2216,7 +2216,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: flag_green_down (TILE NO LOOT)
+  - inspectorName: flag_green_down (TILE)
     id: flag_green_down
     name: Green Flag
     description: 
@@ -2225,7 +2225,7 @@ MonoBehaviour:
       tile: {fileID: 11400000, guid: 93c2f839faf156f4799eed189d606e4c, type: 2}
       canBeBuiltFrom: 1
       placingRules:
-        placeLayer: 2
+        placeLayer: 1
         requirements:
         - inspectorName: ' neighbours(Up <Decor, Ground>)'
           whitelistCenter: []
@@ -2252,15 +2252,15 @@ MonoBehaviour:
           whitelistNeighbours: []
           whitelistNeighbourLayers: 6
       breakingRules:
-        life: 1
+        life: 0.25
         requiredStrength:
           inspectorName: 
-          type: 0
+          type: 8
           level: 0
         loot:
           inspectorName: 
-          itemID: 
-          number: 0
+          itemID: flag_green_down
+          number: 1
     toolData:
       isTool: 0
       toolStrength:
@@ -2375,7 +2375,7 @@ MonoBehaviour:
           level: 0
         loot:
           inspectorName: 
-          itemID: oak_wood_wall
+          itemID: dirt_wall
           number: 1
     toolData:
       isTool: 0
@@ -2388,9 +2388,9 @@ MonoBehaviour:
     id: stone_wall
     name: Stone Wall
     description: 
-    sprite: {fileID: 1669423760, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    sprite: {fileID: 1576435574, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
     tileInfo:
-      tile: {fileID: 11400000, guid: 00d9a210ce064b649b620cecf3c7833d, type: 2}
+      tile: {fileID: 11400000, guid: 7261aa4a1bcdbb34f84c5ca6aa713354, type: 2}
       canBeBuiltFrom: 1
       placingRules:
         placeLayer: 1
@@ -2433,7 +2433,7 @@ MonoBehaviour:
           level: 0
         loot:
           inspectorName: 
-          itemID: oak_wood_wall
+          itemID: stone_wall
           number: 1
     toolData:
       isTool: 0
@@ -2446,9 +2446,9 @@ MonoBehaviour:
     id: cave_wall
     name: Cave Wall
     description: 
-    sprite: {fileID: -1038340778, guid: a6946d57b9283314ebc456722b176a90, type: 3}
+    sprite: {fileID: -1746994382, guid: a6946d57b9283314ebc456722b176a90, type: 3}
     tileInfo:
-      tile: {fileID: 11400000, guid: 10d64e5de60b9ba4f940e2ec697a7e72, type: 2}
+      tile: {fileID: 11400000, guid: f99bfef743684194db7a26fbae1ec9c2, type: 2}
       canBeBuiltFrom: 1
       placingRules:
         placeLayer: 1
@@ -2491,7 +2491,7 @@ MonoBehaviour:
           level: 0
         loot:
           inspectorName: 
-          itemID: oak_wood_wall
+          itemID: cave_wall
           number: 1
     toolData:
       isTool: 0
