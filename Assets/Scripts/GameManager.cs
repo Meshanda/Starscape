@@ -1,6 +1,7 @@
 ﻿using System;
 using UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
@@ -79,6 +80,11 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1;
         SoundManager.Instance.PlayClickSound();
         SceneLoader.LoadScene(GameState.GameScene);
+    }
+    
+    public void LoseFocus()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
     }
     
 }
