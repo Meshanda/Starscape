@@ -9118,6 +9118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   database: {fileID: 11400000, guid: 49089a01855aca84f98e75336df8382b, type: 2}
   player: {fileID: 954475035}
+  _minimapCamera: {fileID: 1298907120}
 --- !u!114 &954475035 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5193773151194222891, guid: c81cb624c96da8146b39a5e07c51494d, type: 3}
@@ -9579,6 +9580,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c81cb624c96da8146b39a5e07c51494d, type: 3}
+--- !u!20 &1298907120 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5350058880380717443, guid: c81cb624c96da8146b39a5e07c51494d, type: 3}
+  m_PrefabInstance: {fileID: 1298907119}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1379197392 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3357289250064673775, guid: c8ac2647ea18f0840b491db39486ffe4, type: 3}
