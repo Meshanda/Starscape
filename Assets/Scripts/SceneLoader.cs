@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public enum GameState
 {
     MainMenu,
-    SelectPlanet,
     GameScene,
     EndScreen
 }
@@ -13,7 +12,6 @@ public enum GameState
 public static class SceneLoader
 {
     private const string MAIN_MENU_SCENE = "MainMenu";
-    private const string SELECT_PLANET_SCENE = "SelectPlanet";
     private const string GAME_SCENE = "GameScene";
     private const string ENDSCREEN_SCENE = "EndScreen";
 
@@ -30,7 +28,6 @@ public static class SceneLoader
         return state switch
         {
             GameState.MainMenu => MAIN_MENU_SCENE,
-            GameState.SelectPlanet => SELECT_PLANET_SCENE,
             GameState.GameScene => GAME_SCENE,
             GameState.EndScreen => ENDSCREEN_SCENE,
             _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)

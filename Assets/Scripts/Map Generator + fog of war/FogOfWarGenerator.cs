@@ -1,12 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
-using UnityEngine.Tilemaps;
-using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
 
 [RequireComponent(typeof(StrateGeneration))]
 public class FogOfWarGenerator : MonoBehaviour

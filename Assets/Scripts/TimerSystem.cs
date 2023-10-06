@@ -14,7 +14,7 @@ public class TimerSystem : MonoBehaviour
     private void Start()
     {
         _timerVariable.value = _timerMaxVariable.value;
-        OnTimerReset.Invoke();
+        OnTimerReset?.Invoke();
     }
 
     private void Update()
