@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39d8eed6aec249d696b6f269cc8ecdf8, type: 3}
-  m_Name: StoneFurnaceTile
+  m_Name: ChestSoloTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 42b6101c4f1e0d142839d96bcb76ea44, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2b61fe9e9e122a9499daf290770cc119, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -31,6 +31,6 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 8688669891700445473, guid: c9a167985743e2443beae69f0eea456d, type: 3}
+  m_InstancedGameObject: {fileID: 8688669891700445473, guid: 4fb6f07a403cde04ba75b260cfe75539, type: 3}
   m_Flags: 1
   m_ColliderType: 1
