@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UI;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
@@ -42,8 +44,16 @@ public class StrateGeneration : MonoBehaviour
     [SerializeField] private Tilemap _bg;
     [SerializeField] private TileBase _bgTile;
 
+    [Header("Artifact")]
+    [SerializeField] private Tilemap _artifact;
+    [SerializeField] private CraftingTableTile _artifactChest;
+    [SerializeField] private TileBase _artifactTile;
+    private int _artefactRange;
+    private Vector3Int _artefactPos;
+
     void Start()
     {
+        _artefactRange = Mathf.Abs(_artifact.cellBounds.min.x - _artifact.cellBounds.max.x);
         InitializeGrid();
         if (_pasteGrotto != null)
             _pasteGrotto.SpawnGrotte();
@@ -112,6 +122,62 @@ public class StrateGeneration : MonoBehaviour
 
 
     }
+
+    public void PasteArtifact(Vector3Int pos)
+    {
+        Tilemap toPastePrefab = _artifact;
+        _artefactPos = pos;
+        for (int i = toPastePrefab.cellBounds.min.x - 1; i < toPastePrefab.cellBounds.max.x + 1; i++)
+        {
+            for (int j = toPastePrefab.cellBounds.min.y - 1; j < toPastePrefab.cellBounds.max.y + 1; j++)
+            {
+                TileBase tile = toPastePrefab.GetTile(new Vector3Int(i, j));
+                
+                if (tile != null)
+                {
+                    Tilemap placeTilemap;
+                    if (GameManager.Instance.database.GetItemByTile(tile) == null) 
+                    {
+                        placeTilemap = _tileMapTree;
+                        placeTilemap.SetTile(new Vector3Int(i, j) + pos, _artifactChest);
+                        _artefactPos = new Vector3Int(i, j) + pos;
+                        StartCoroutine(PlaceArtifact(_artefactPos));
+                    }  
+                    else 
+                    {
+                        placeTilemap = World.Instance.GetTilemapsFromLayers(GameManager.Instance.database.GetItemByTile(tile).tileInfo.placingRules.placeLayer)[0];
+                        placeTilemap.SetTile(new Vector3Int(i, j) + pos, tile);
+                    }
+
+                   
+                }
+
+            }
+        }
+    }
+    public IEnumerator PlaceArtifact(Vector3Int posChest)
+    {
+        yield return new WaitForSeconds(0.5f);
+        Tilemap placeTilemap = _tileMapTree;
+        Vector3 pos = placeTilemap.CellToWorld(posChest);
+        pos -= Camera.main.transform.forward * 10 - Camera.main.transform.up * 0.16f;
+        Debug.DrawRay(pos, Camera.main.transform.forward * 11, Color.white, 1000);
+        RaycastHit2D hit = Physics2D.Raycast(pos, Camera.main.transform.forward, 11);
+
+        List<ItemStack> list = new List<ItemStack>();
+        for (int i = 0; i < InventorySystem.Instance._nbChestSlots; i++)
+        {
+            list.Add(null);
+        }
+        int nbrOfitem = Random.Range(1, InventorySystem.Instance._nbChestSlots);
+        ItemStack itemStack = new ItemStack();
+        var item = GameManager.Instance.database.GetItemByTile(_artifactTile);
+        itemStack.itemID = item.id;
+        itemStack.number =1;
+        list[0] = itemStack;
+
+        hit.collider.GetComponent<Chest>().PlaceLoot(list);
+    }
     public void PasteTree(Vector3Int pos)
     {
         if (_trees == null || _trees.Length == 0 || _tileMapTree == null)
@@ -161,10 +227,23 @@ public class StrateGeneration : MonoBehaviour
     {
         int treeDist = 0;
         int rng = Random.Range(0, st.SizeY);
+        bool left = Random.Range(0,2) == 1;
+        int artefactPosX;
+        if (left) 
+        {
+            artefactPosX = Random.Range(_artefactRange, dimensionsX/2 - _artefactRange*2);
+        }
+        else
+            artefactPosX = Random.Range(dimensionsX / 2 + _artefactRange * 2, dimensionsX - _artefactRange);
+
+
         for (int x = 0; x < dimensionsX; x++)
         {
+            int diff = Mathf.Abs( x- artefactPosX);
             for (int y = 0; y <= rng; y++)
             {
+                if (tileGround.GetTile(new Vector3Int(x - OffsetXY.x, y)) != null)
+                    continue;
                 if (y == rng)
                 {
                     tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y ), st.Tiles[0].Tile);
@@ -175,12 +254,16 @@ public class StrateGeneration : MonoBehaviour
                     tileGround.SetTile(new Vector3Int(x - OffsetXY.x, y ), st.Tiles[1].Tile);
                 }
             }
-            if (treeDist > _treeMinDist && Random.Range(0f, 1f) < _treeChance / 100f)
+            if(artefactPosX == x) 
+            {
+                PasteArtifact(new Vector3Int(x - OffsetXY.x, rng + 1, 0));
+            }
+            if (diff > _artefactRange  && treeDist > _treeMinDist && Random.Range(0f, 1f) < _treeChance / 100f)
             {
                 PasteTree(new Vector3Int(x - OffsetXY.x, rng  + 1, 0));
                 treeDist = 0;
             }
-            if (Random.Range(0f, 1f) < _decorsChance / 100f && _Decor != null && treeDist > 1)
+            if (diff > _artefactRange && Random.Range(0f, 1f) < _decorsChance / 100f && _Decor != null && treeDist > 1)
             {
                 _Decor.SetTile(new Vector3Int(x - OffsetXY.x, rng  + 1, 0), _decors[Random.Range(0, _decors.Length)]);
                 _posDecor.Add(new Vector3Int(x - OffsetXY.x, rng  + 1, 0));

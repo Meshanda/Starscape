@@ -4,7 +4,6 @@ using System.Linq;
 using UI;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.WSA;
 
 public class GrottosChestFiller : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class GrottosChestFiller : MonoBehaviour
     {
         if (list == null || list.Count == 0)
             yield break;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         var strates = _stratesGeneration.GetStrates();
         List<TileBase> tiles = new List<TileBase>();
         int range = 0; 

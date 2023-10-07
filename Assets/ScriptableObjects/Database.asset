@@ -2886,6 +2886,62 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+  - inspectorName: Ancien_Wall (TILE NO LOOT)
+    id: Ancien_Wall
+    name: Ancien Wall
+    description: 
+    sprite: {fileID: 21300000, guid: 577c684e961b5924bbf4f62b182a4b38, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: d5a069c22bf31244db30dacd981f085e, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 4
+        requirements: []
+      breakingRules:
+        life: 10
+        requiredStrength:
+          inspectorName: 
+          type: 2
+          level: 4
+        loot:
+          inspectorName: 
+          itemID: Ancien Wall
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+  - inspectorName: Artefact (TILE)
+    id: Artefact
+    name: Artefact
+    description: 
+    sprite: {fileID: 21300000, guid: 3c259e988d7e7fc4192200d08ec8fc88, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 468def1a7cbb0ed43970937ff07be9f4, type: 2}
+      canBeBuiltFrom: 0
+      placingRules:
+        placeLayer: 4
+        requirements: []
+      breakingRules:
+        life: 10
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: Artefact
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
   craftRecipes:
   - inspectorName: wood_pickaxe (x1) [ <oak_wood (x3)> <dirt (x1)> ]
     itemsRequired:
