@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: b520d6fd526816d42aaba048166c809a
   - enabled: 1
-    path: Assets/DevTests/Merge.unity
+    path: Assets/Scenes/GameScene.unity
     guid: fd4cc9c48d61e4044b19d6e04abfcfe3
   - enabled: 0
     path: Assets/Scenes/EndScreen.unity

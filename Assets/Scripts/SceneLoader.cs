@@ -6,18 +6,15 @@ public enum GameState
 {
     MainMenu,
     GameScene,
-    EndScreen
 }
 
 public static class SceneLoader
 {
     private const string MAIN_MENU_SCENE = "MainMenu";
-    private const string GAME_SCENE = "Merge";
-    private const string ENDSCREEN_SCENE = "EndScreen";
+    private const string GAME_SCENE = "GameScene";
 
     public static GameState currentState = GameState.MainMenu;
-    
-    
+
     public static void LoadScene(GameState newState, Action<AsyncOperation> callback = null)
     {
         SceneManager.LoadSceneAsync(GetSceneNameWithState(newState)).completed += callback;
@@ -30,7 +27,6 @@ public static class SceneLoader
         {
             GameState.MainMenu => MAIN_MENU_SCENE,
             GameState.GameScene => GAME_SCENE,
-            GameState.EndScreen => ENDSCREEN_SCENE,
             _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
         };
     }
