@@ -283,9 +283,9 @@ MonoBehaviour:
     id: oak_wood
     name: Oak Wood
     description: 
-    sprite: {fileID: 1459649114, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    sprite: {fileID: 21300000, guid: 99801db6513dae24e954b23bb5504f9c, type: 3}
     tileInfo:
-      tile: {fileID: 11400000, guid: aa693ec34c4d6fc44aec815a68403bfa, type: 2}
+      tile: {fileID: 11400000, guid: ca6803329a86bbb4c86dc0ad7cafe31c, type: 2}
       canBeBuiltFrom: 1
       placingRules:
         placeLayer: 2
@@ -335,9 +335,9 @@ MonoBehaviour:
     id: oak_wood_02
     name: Oak Wood
     description: 
-    sprite: {fileID: 885090668, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    sprite: {fileID: 21300000, guid: 47eeba8e47202154ba49a8344c948c45, type: 3}
     tileInfo:
-      tile: {fileID: 11400000, guid: 4a6942212546e4747939a9c794dd6caa, type: 2}
+      tile: {fileID: 11400000, guid: b63eb0bc999d5b44ba15cf603725b142, type: 2}
       canBeBuiltFrom: 1
       placingRules:
         placeLayer: 2
@@ -439,9 +439,9 @@ MonoBehaviour:
     id: oak_leaves_01
     name: Oak Leaves
     description: 
-    sprite: {fileID: 231191421, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    sprite: {fileID: 21300000, guid: 7e15992958aa3f34f8e8e26407468d7f, type: 3}
     tileInfo:
-      tile: {fileID: 11400000, guid: 10cc8c2cd49a62a4295baffc0140f038, type: 2}
+      tile: {fileID: 11400000, guid: 5166fbf39142f4241b1a5d9e0d5576fc, type: 2}
       canBeBuiltFrom: 1
       placingRules:
         placeLayer: 2
@@ -491,9 +491,9 @@ MonoBehaviour:
     id: oak_leaves_02
     name: Oak Leaves
     description: 
-    sprite: {fileID: 1785856176, guid: 22e91f9f98f77ee43ba95c46ee1e5b98, type: 3}
+    sprite: {fileID: 21300000, guid: 729bc4f2799656447806cdd44faa2cde, type: 3}
     tileInfo:
-      tile: {fileID: 11400000, guid: a9a80fd02ef9ff04b9bbc7f6323fd442, type: 2}
+      tile: {fileID: 11400000, guid: 7959c8c28e08c1646b435fc93467ee38, type: 2}
       canBeBuiltFrom: 1
       placingRules:
         placeLayer: 2
