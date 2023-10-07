@@ -25,6 +25,9 @@ public class GameManager : Singleton<GameManager>
         
         CursorManager.Instance?.SetColor(Settings.cursorColor);
         CursorManager.Instance?.SetSize(Settings.cursorSize);
+
+        InventorySystem.Instance.AddItem(new ItemStack{ itemID = "wood_pickaxe", number = 1});
+        InventorySystem.Instance.AddItem(new ItemStack{ itemID = "wood_hammer", number = 1});
     }
 
     private void OnEnable()
