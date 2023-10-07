@@ -92,6 +92,7 @@ public class Drop : MonoBehaviour
         {
             if (InventorySystem.Instance.AddItem(ItemStack))
             {
+                Player.DropLoot?.Invoke(ItemStack);
                 _hasBeenAdded = true;
                 Destroy(gameObject);
             }

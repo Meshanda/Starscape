@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +8,13 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _selectedSprite;
     [SerializeField] private Transform _dropPosition;
+    
+    [Header("Floating Text")]
+    [SerializeField] private GameObject _floatingText;
+    [SerializeField] private GameObject _floatingTextPrefab;
 
+
+    public static Action<ItemStack> DropLoot;
     public Transform DropPosition => _dropPosition;
 
     public void OnQuickSlot1() { InventorySystem.Instance.SelectSlot(0); }
@@ -18,12 +26,37 @@ public class Player : MonoBehaviour
     public void OnQuickSlot7() { InventorySystem.Instance.SelectSlot(6); }
     public void OnQuickSlot8() { InventorySystem.Instance.SelectSlot(7); }
     public void OnQuickSlot9() { InventorySystem.Instance.SelectSlot(8); }
+
+    private void OnEnable()
+    {
+        DropLoot += OnDropLoot;
+    }
     
+    private void OnDisable()
+    {
+        DropLoot -= OnDropLoot;
+    }
+    
+    private void OnDropLoot(ItemStack itemstack)
+    {
+        var text = Instantiate(_floatingTextPrefab, _floatingText.transform).GetComponent<TextMeshPro>();
+        text.text = itemstack.ItemName;
+    }
+
     public void OnToggleInventory()
     {
         InventorySystem.Instance.ToggleInventory();
     }
-    
+
+    private void Update()
+    {
+        if (_floatingText.activeSelf)
+            _floatingText.transform.localScale = new Vector3(
+                Mathf.Abs(_floatingText.transform.localScale.x) * Mathf.Sign(transform.localScale.x),
+                _floatingText.transform.localScale.y,
+                _floatingText.transform.localScale.z);
+    }
+
     public void OnInventoryScroll(InputValue value)
     {
         var scrollValue = value.Get<float>();
