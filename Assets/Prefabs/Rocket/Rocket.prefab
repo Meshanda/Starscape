@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 8996423746600593117}
   - component: {fileID: 7180736772193278876}
   - component: {fileID: 1218594005200367561}
+  - component: {fileID: 6813124608423179586}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -361,6 +362,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 8
   craftingFlags: 2
+--- !u!114 &6813124608423179586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7884077206010958793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562dc772a41a4832a40ff5cd415496ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rocketAnimator: {fileID: 2430189690152072249}
+  _rocketCamera: {fileID: 1228244146050183642}
 --- !u!1 &8176633145419486879
 GameObject:
   m_ObjectHideFlags: 0
