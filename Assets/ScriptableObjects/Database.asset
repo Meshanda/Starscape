@@ -2914,10 +2914,10 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: Artefact (TILE)
-    id: Artefact
-    name: Artefact
-    description: 
+  - inspectorName: rocket_engine (TILE NO LOOT)
+    id: rocket_engine
+    name: Rocket Engine
+    description: You can finally leave this planet!
     sprite: {fileID: 21300000, guid: 3c259e988d7e7fc4192200d08ec8fc88, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: 468def1a7cbb0ed43970937ff07be9f4, type: 2}

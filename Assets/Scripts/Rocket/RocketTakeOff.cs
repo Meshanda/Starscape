@@ -9,7 +9,17 @@ public class RocketTakeOff : MonoBehaviour
     
     private static readonly int _takeOffTrigger = Animator.StringToHash("TakeOff");
 
-    private void Start()
+    private void OnEnable()
+    {
+        GameManager.GameWon += OnGameWon;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.GameWon -= OnGameWon;
+    }
+
+    private void OnGameWon()
     {
         TakeOff();
     }
@@ -27,5 +37,10 @@ public class RocketTakeOff : MonoBehaviour
     {
         Debug.Log("takeoff anim");
         _rocketAnimator.SetTrigger(_takeOffTrigger);
+    }
+
+    public void TakeOffDone()
+    {
+        GameManager.Instance.ToggleWinScreen();
     }
 }

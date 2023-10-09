@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,7 @@ namespace Inventory
         [SerializeField] protected float _selectTime = .5f;
         
         private Tween _currentTween;
+        public event Action<ItemStack> slotChanged;
 
         public bool IsSelected { get; protected set; }
 
@@ -43,6 +45,7 @@ namespace Inventory
             {
                 _itemStack = value;
                 Refresh();
+                slotChanged?.Invoke(value);
             }
         }
 
