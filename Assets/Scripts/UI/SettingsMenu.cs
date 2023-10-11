@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,22 +26,15 @@ namespace UI
         [SerializeField] private Selector _frameRate;
         [SerializeField] private Toggle _vSync;
 
-        private void Start()
+        private void Awake()
         {
-            CoroutineHelper.Instance.StartCoroutine(InitSettingsCanvas());
+            gameObject.SetActive(false);
+            GetComponent<Canvas>().enabled = true;
+            CoroutineHelper.Instance.StartCoroutine(RefreshSettings());
         }
 
-        public IEnumerator InitSettingsCanvas()
+        private IEnumerator RefreshSettings()
         {
-            // Don't. Ask. Me. Why. (ask Unity's ContentSizeFitter)
-            gameObject.SetActive(false);
-            GetComponent<Canvas>().enabled = true;
-            yield return null;
-            gameObject.SetActive(true);
-            GetComponent<Canvas>().enabled = false;
-            yield return null;
-            gameObject.SetActive(false);
-            GetComponent<Canvas>().enabled = true;
             yield return null;
             ApplyDefaultSettings();
             UpdateUI();
