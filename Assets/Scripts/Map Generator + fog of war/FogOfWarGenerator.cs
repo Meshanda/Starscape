@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -19,11 +20,23 @@ public class FogOfWarGenerator : MonoBehaviour
 
     private void Awake()
     {
-        World.OnMineTile += CallEventShadowGround;
-        World.OnPlaceTile += CallEventShadowGround;
-        CharacterController2D.OnMoveEvent += CallEventShadowPlayer;
         generator = GetComponent<StrateGeneration>();
     }
+
+    private void OnEnable()
+    {
+        CharacterController2D.OnMoveEvent += CallEventShadowPlayer;
+        World.OnMineTile += CallEventShadowGround;
+        World.OnPlaceTile += CallEventShadowGround;
+    }
+
+    private void OnDisable()
+    {
+        CharacterController2D.OnMoveEvent -= CallEventShadowPlayer;
+        World.OnMineTile -= CallEventShadowGround;
+        World.OnPlaceTile -= CallEventShadowGround;
+    }
+
     public void CallEventTorche(Torche torche)
     {
         LTorche.Add(torche);

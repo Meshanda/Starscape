@@ -11,7 +11,7 @@ namespace UI
         
         private GameObject _cursor;
 
-        private void Start()
+        protected override void SingletonAwake()
         {
             SetCursor();
         }
