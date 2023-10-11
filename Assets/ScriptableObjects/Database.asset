@@ -71,6 +71,34 @@ MonoBehaviour:
         type: -1
         level: 10000
       tileDamagePerSecond: 10000
+  - inspectorName: angel_block (TILE)
+    id: angel_block
+    name: Angel Block
+    description: Can be placed in the air.
+    sprite: {fileID: 21300000, guid: 200b93bbb4c3f4e4aa814d2a6089bfae, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 68b2ab679a408d74489f3faafbe28550, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements: []
+      breakingRules:
+        life: 0.5
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: angel_block
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
   - inspectorName: grass (TILE)
     id: grass
     name: Grass
@@ -2886,17 +2914,41 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: Ancien_Wall (TILE NO LOOT)
-    id: Ancien_Wall
-    name: Ancien Wall
+  - inspectorName: ancient_Wall (TILE)
+    id: ancient_Wall
+    name: Ancient Wall
     description: 
     sprite: {fileID: 21300000, guid: 577c684e961b5924bbf4f62b182a4b38, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: d5a069c22bf31244db30dacd981f085e, type: 2}
-      canBeBuiltFrom: 0
+      canBeBuiltFrom: 1
       placingRules:
         placeLayer: 4
-        requirements: []
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
       breakingRules:
         life: 10
         requiredStrength:
@@ -2905,7 +2957,7 @@ MonoBehaviour:
           level: 4
         loot:
           inspectorName: 
-          itemID: Ancien Wall
+          itemID: ancient_Wall
           number: 1
     toolData:
       isTool: 0
@@ -2914,7 +2966,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: rocket_engine (TILE NO LOOT)
+  - inspectorName: rocket_engine (TILE)
     id: rocket_engine
     name: Rocket Engine
     description: You can finally leave this planet!
@@ -2924,16 +2976,22 @@ MonoBehaviour:
       canBeBuiltFrom: 0
       placingRules:
         placeLayer: 4
-        requirements: []
+        requirements:
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
       breakingRules:
         life: 10
         requiredStrength:
           inspectorName: 
-          type: 0
-          level: 0
+          type: 2
+          level: 4
         loot:
           inspectorName: 
-          itemID: Artefact
+          itemID: rocket_engine
           number: 1
     toolData:
       isTool: 0

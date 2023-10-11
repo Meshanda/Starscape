@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1050346866710576648}
   - component: {fileID: 4913560671974574296}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RocketCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 2703023404105508660}
   - component: {fileID: 960460973437918846}
   - component: {fileID: 4355407500389366506}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 7180736772193278876}
   - component: {fileID: 1218594005200367561}
   - component: {fileID: 6813124608423179586}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7884077206010958793}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 5293130598423724195}
   - component: {fileID: 7714762596873122398}
   - component: {fileID: 9177227022913093898}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -481,7 +481,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4907771236501377855}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlatformPos
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 2256291066272713073}
   - component: {fileID: 8128307736417481402}
   - component: {fileID: 2746413761779151577}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Interaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}

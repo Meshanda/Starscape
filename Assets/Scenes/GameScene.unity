@@ -11717,26 +11717,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2051317115822242958, guid: c81cb624c96da8146b39a5e07c51494d, type: 3}
-      propertyPath: m_ClearFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2051317115822242958, guid: c81cb624c96da8146b39a5e07c51494d, type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2051317115822242958, guid: c81cb624c96da8146b39a5e07c51494d, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2051317115822242958, guid: c81cb624c96da8146b39a5e07c51494d, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2051317115822242958, guid: c81cb624c96da8146b39a5e07c51494d, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3633506197213965983, guid: c81cb624c96da8146b39a5e07c51494d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -13346,7 +13326,7 @@ MonoBehaviour:
   entityCheckMargin: {x: 0, y: 0, z: 0}
   entityLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 1032
   _confinerBox: {fileID: 30166672}
 --- !u!114 &1720046742
 MonoBehaviour:

@@ -85,7 +85,9 @@ public class Mining : MonoBehaviour
                 return;
             }
             
-            _crackObject.transform.position = World.Instance.GetWorldCenterOfTile(tile.Item3);
+            Vector3 newPos = World.Instance.GetWorldCenterOfTile(tile.Item3);
+            newPos.z = tile.Item1.transform.position.z;
+            _crackObject.transform.position = newPos;
             _crackSpriteRenderer.sprite = _currentMiningItem.sprite;
         }
 
