@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     [Header("References")]
     public DatabaseSO database;
     public Player player;
+    public Transform rocketTeleportSocket;
     [SerializeField] private Camera _minimapCamera;
     [SerializeField] private List<GameObject> _uiToDisableOnWin;
     
@@ -26,6 +27,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Start()
     {
+        UsableItem.ResetAllItems();
         SoundManager.OnGameStartMusic();
         
         CursorManager.Instance?.SetColor(Settings.cursorColor);
@@ -34,6 +36,7 @@ public class GameManager : Singleton<GameManager>
         InventorySystem.Instance.AddItem(new ItemStack{ itemID = "wood_pickaxe", number = 1});
         InventorySystem.Instance.AddItem(new ItemStack{ itemID = "wood_hammer", number = 1});
         InventorySystem.Instance.AddItem(new ItemStack{ itemID = "rocket_engine", number = 1});
+        InventorySystem.Instance.AddItem(new ItemStack{ itemID = "mirror", number = 1});
     }
 
     private void OnEnable()

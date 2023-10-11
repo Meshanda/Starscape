@@ -50,6 +50,7 @@ public class Mining : MonoBehaviour
 
     private void OnMine()
     {
+        UsableItem.TryUseItem(InventorySystem.Instance?.GetSelectedSlot()?.ItemStack); // TODO pref a clean func inside Player
         StartCoroutine(MiningRoutine());
     }
     
