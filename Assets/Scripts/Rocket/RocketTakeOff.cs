@@ -6,6 +6,7 @@ public class RocketTakeOff : MonoBehaviour
 {
     [SerializeField] private Animator _rocketAnimator;
     [SerializeField] private GameObject _rocketCamera;
+    [SerializeField] private GameObject _rocketSprite;
     
     private static readonly int _takeOffTrigger = Animator.StringToHash("TakeOff");
 
@@ -41,5 +42,10 @@ public class RocketTakeOff : MonoBehaviour
     public void TakeOffDone()
     {
         GameManager.Instance.ToggleWinScreen();
+    }
+    
+    public void TakeOffRemoveRocket()
+    {
+        _rocketSprite.SetActive(false);
     }
 }

@@ -378,6 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rocketAnimator: {fileID: 2430189690152072249}
   _rocketCamera: {fileID: 1228244146050183642}
+  _rocketSprite: {fileID: 6572227437857911823}
 --- !u!1 &8176633145419486879
 GameObject:
   m_ObjectHideFlags: 0
