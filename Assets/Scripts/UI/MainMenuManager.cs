@@ -58,6 +58,7 @@ namespace UI
         private void Update()
         {
             var pz = _mainCam.ScreenToViewportPoint(Input.mousePosition);
+            pz = new Vector3(Mathf.Abs(pz.x), Mathf.Abs(pz.y), Mathf.Abs(pz.z));
 
             _startPosCurrent = GetStartPos();
             var posX = Mathf.Lerp(GetCurrentVCam().localEulerAngles.x, _startPosCurrent.x + (pz.x * moveModifier), 2f * Time.deltaTime);
