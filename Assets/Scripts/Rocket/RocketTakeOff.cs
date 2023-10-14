@@ -35,7 +35,6 @@ public class RocketTakeOff : MonoBehaviour
 
     private void TakeOffAnimation()
     {
-        Debug.Log("takeoff anim");
         _rocketAnimator.SetTrigger(_takeOffTrigger);
     }
 

@@ -5,7 +5,7 @@ public class CharacterMovement : MonoBehaviour
 {
 
     private CharacterController2D _controller2D;
-    [SerializeField] private GameObject _playerSprite;
+    [SerializeField] private GameObject[] _hidesOnWon;
 
 
     private void Awake()
@@ -25,8 +25,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnGameWon()
     {
-        if(_playerSprite)
-            _playerSprite.SetActive(false);
+        foreach (var obj in _hidesOnWon)
+        {
+            obj.SetActive(false);
+        }
+
     }
 
     

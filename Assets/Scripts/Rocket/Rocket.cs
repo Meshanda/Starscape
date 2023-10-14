@@ -14,7 +14,6 @@ public class Rocket : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         
-        Debug.Log(LayerMask.GetMask("Minable"));
         if (other.gameObject.layer != LayerMask.NameToLayer("Minable"))
             return; 
         
