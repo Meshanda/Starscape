@@ -104,6 +104,8 @@ public class Mining : MonoBehaviour
         }
         else
         {
+            CurrentMiningProgress = 0.25f;
+            // Play Sound
             return; // do nothing, we can't mine this tile with the item we currently have selected
         }
 
