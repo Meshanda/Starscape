@@ -59,9 +59,7 @@ public class GrottosChestFiller : MonoBehaviour
 
         for (int i = 0; i < nbrOfitem; i++) 
         {
-            ItemStack itemStack = new ItemStack();
-            var item = GameManager.Instance.database.GetItemByTile(tiles[Random.Range(0, tiles.Count)]);
-            itemStack.itemID = item.id;
+            var itemStack = GameManager.Instance.database.GetLootByTile(tiles[Random.Range(0, tiles.Count)]);
             itemStack.number = Random.Range(1, _nbrePossibleStack);
             list[i] = itemStack;
         }
