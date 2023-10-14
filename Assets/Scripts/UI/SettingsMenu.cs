@@ -25,17 +25,10 @@ namespace UI
         [SerializeField] private Selector _resolution;
         [SerializeField] private Selector _frameRate;
         [SerializeField] private Toggle _vSync;
-
-        private void Awake()
+        
+        private void Start()
         {
-            gameObject.SetActive(false);
-            GetComponent<Canvas>().enabled = true;
-            CoroutineHelper.Instance.StartCoroutine(RefreshSettings());
-        }
-
-        private IEnumerator RefreshSettings()
-        {
-            yield return null;
+            Canvas.ForceUpdateCanvases(); 
             ApplyDefaultSettings();
             UpdateUI();
         }
