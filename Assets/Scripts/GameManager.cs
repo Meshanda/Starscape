@@ -35,7 +35,6 @@ public class GameManager : Singleton<GameManager>
 
         InventorySystem.Instance.AddItem(new ItemStack{ itemID = "wood_pickaxe", number = 1});
         InventorySystem.Instance.AddItem(new ItemStack{ itemID = "wood_hammer", number = 1});
-        InventorySystem.Instance.AddItem(new ItemStack{ itemID = "rocket_engine", number = 1});
         InventorySystem.Instance.AddItem(new ItemStack{ itemID = "mirror", number = 1});
     }
 

@@ -10,7 +10,7 @@ public class UsableItemMirror : UsableItem
 
     protected override bool OnUse(ItemStack fromItemStack)
     {
-        if (!GameManager.Instance?.rocketTeleportSocket || !GetPlayer())
+        if (!GameManager.Instance?.rocketTeleportSocket || !GetPlayer() || InventorySystem.Instance.IsInventoryOpen)
         {
             return false;
         }
