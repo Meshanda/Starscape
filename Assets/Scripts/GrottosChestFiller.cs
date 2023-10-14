@@ -36,8 +36,8 @@ public class GrottosChestFiller : MonoBehaviour
                     pos -= Camera.main.transform.forward * 10 - Camera.main.transform.up * 0.16f;
                     Debug.DrawRay(pos, Camera.main.transform.forward * 11, Color.white, 1000);
                     RaycastHit2D hit = Physics2D.Raycast(pos, Camera.main.transform.forward, 11);
-                   
-                    hit.collider.GetComponent<Chest>().PlaceLoot(GenerateLoot(tiles));
+                    if(hit.collider != null)
+                        hit.collider.GetComponent<Chest>().PlaceLoot(GenerateLoot(tiles));
                 }
                 //else 
                 //{
