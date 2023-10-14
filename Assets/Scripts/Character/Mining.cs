@@ -50,6 +50,7 @@ public class Mining : MonoBehaviour
 
     private void OnMine()
     {
+        UsableItem.TryUseItem(InventorySystem.Instance?.GetSelectedSlot()?.ItemStack); // TODO pref a clean func inside Player
         StartCoroutine(MiningRoutine());
     }
     
@@ -85,7 +86,9 @@ public class Mining : MonoBehaviour
                 return;
             }
             
-            _crackObject.transform.position = World.Instance.GetWorldCenterOfTile(tile.Item3);
+            Vector3 newPos = World.Instance.GetWorldCenterOfTile(tile.Item3);
+            newPos.z = tile.Item1.transform.position.z;
+            _crackObject.transform.position = newPos;
             _crackSpriteRenderer.sprite = _currentMiningItem.sprite;
         }
 
@@ -101,6 +104,8 @@ public class Mining : MonoBehaviour
         }
         else
         {
+            CurrentMiningProgress = 0.25f;
+            // Play Sound
             return; // do nothing, we can't mine this tile with the item we currently have selected
         }
 

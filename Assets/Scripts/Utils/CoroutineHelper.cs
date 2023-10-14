@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-public class CoroutineHelper : MonoBehaviour
+public class CoroutineHelper : LazySingleton<CoroutineHelper>
 {
-	
 }

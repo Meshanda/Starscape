@@ -392,6 +392,7 @@ MonoBehaviour:
   _renderTexture:
   - {fileID: 8400000, guid: 0f76515ad3dfd8c4ebc85b718ba8ad31, type: 2}
   - {fileID: 8400000, guid: 029b86e49fc096546913709592e78a6d, type: 2}
+  _bigMapOrthoSize: 12
 --- !u!114 &3884696617782433079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +504,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589d8549f1b0e6e419774c1917ef74cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hidesOnWon:
+  - {fileID: 4355925594926244066}
+  - {fileID: 2569560105788870111}
 --- !u!114 &1818466177013907183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -966,7 +970,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

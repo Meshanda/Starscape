@@ -18,20 +18,16 @@ public class CraftingUI : MonoBehaviour
 
     private Coroutine _scrollUpRoutine;
     private Coroutine _scrollDownRoutine;
-    private CoroutineHelper _co;
+    private Coroutine _scrollToRoutine;
 
     public int SelectedIndex { get; private set; } = -1;
     public bool HasCenteredSelection { get; private set; } = false;
 
     public void Select(Transform rt, CraftRecipe recipe, int selectedIndex)
     {
-        if (!_co)
-        {
-            var go = new GameObject();
-            _co = go.AddComponent<CoroutineHelper>();
-        }
+        if (_scrollToRoutine != null)
+            CoroutineHelper.Instance.StopCoroutine(_scrollToRoutine);
         
-        _co.StopAllCoroutines();
         _recipe = recipe;
         
         ClearHorizontalContainer();
@@ -40,7 +36,7 @@ public class CraftingUI : MonoBehaviour
         SelectedIndex = selectedIndex;
         HasCenteredSelection = false;
 
-        _co.StartCoroutine(ScrollTo(rt));
+        _scrollToRoutine = CoroutineHelper.Instance.StartCoroutine(ScrollTo(rt));
     }
 
     private void ClearHorizontalContainer()

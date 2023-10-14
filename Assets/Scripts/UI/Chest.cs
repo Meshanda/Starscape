@@ -67,8 +67,10 @@ namespace UI
 
         private void OnDestroy()
         {
-            if (!_isQuitting)
+            if (!_isQuitting && gameObject.scene.isLoaded)
             {
+                InventorySystem.Instance.CloseChest(this);
+                
                 // drop everything that is in the chest
                 foreach (var itemStack in itemStacks)
                 {

@@ -24,6 +24,9 @@ public class CraftingStation : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		InventorySystem.Instance.CraftingFlags &= ~craftingFlags;
+		if (InventorySystem.Instance && GameManager.Instance)
+		{
+			InventorySystem.Instance.CraftingFlags &= ~craftingFlags;
+		}
 	}
 }

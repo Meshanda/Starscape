@@ -71,6 +71,36 @@ MonoBehaviour:
         type: -1
         level: 10000
       tileDamagePerSecond: 10000
+    useType: 0
+  - inspectorName: angel_block (TILE)
+    id: angel_block
+    name: Angel Block
+    description: Can be placed in the air.
+    sprite: {fileID: 21300000, guid: 200b93bbb4c3f4e4aa814d2a6089bfae, type: 3}
+    tileInfo:
+      tile: {fileID: 11400000, guid: 68b2ab679a408d74489f3faafbe28550, type: 2}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 4
+        requirements: []
+      breakingRules:
+        life: 0.5
+        requiredStrength:
+          inspectorName: 
+          type: 0
+          level: 0
+        loot:
+          inspectorName: 
+          itemID: angel_block
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: grass (TILE)
     id: grass
     name: Grass
@@ -123,6 +153,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: dirt (TILE)
     id: dirt
     name: Dirt
@@ -175,10 +206,11 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: gravel_dirt (TILE)
     id: gravel_dirt
     name: Gravel Dirt
-    description: 
+    description: Place and break to get silex!
     sprite: {fileID: 21300000, guid: 84e8985bbd7a7de4ca13cf9fd3da34c1, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: f481abf869bad104b9965f52e78eb057, type: 2}
@@ -227,6 +259,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: bedrock (TILE)
     id: bedrock
     name: Bedrock
@@ -279,10 +312,11 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: oak_wood (TILE)
     id: oak_wood
     name: Oak Wood
-    description: 
+    description: Can be used to make a workbench!
     sprite: {fileID: 21300000, guid: 99801db6513dae24e954b23bb5504f9c, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: ca6803329a86bbb4c86dc0ad7cafe31c, type: 2}
@@ -331,6 +365,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: oak_wood_02 (TILE)
     id: oak_wood_02
     name: Oak Wood
@@ -383,6 +418,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: birch_wood_dark (TILE)
     id: birch_wood_dark
     name: Dark Birch Wood
@@ -435,6 +471,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: oak_leaves_01 (TILE)
     id: oak_leaves_01
     name: Oak Leaves
@@ -487,6 +524,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: oak_leaves_02 (TILE)
     id: oak_leaves_02
     name: Oak Leaves
@@ -539,6 +577,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: oak_branch_leaves (TILE)
     id: oak_branch_leaves
     name: Oak Branch Leaves
@@ -591,6 +630,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: golden_leaves (TILE)
     id: golden_leaves
     name: Golden Leaves
@@ -643,6 +683,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: grass_blade_01 (TILE)
     id: grass_blade_01
     name: Blade of Grass
@@ -678,6 +719,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: grass_blade_02 (TILE)
     id: grass_blade_02
     name: Blade of Grass
@@ -713,6 +755,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: grass_blade_03 (TILE)
     id: grass_blade_03
     name: Blade of Grass
@@ -748,6 +791,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: grass_blade_04 (TILE)
     id: grass_blade_04
     name: Blade of Grass
@@ -783,6 +827,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: mushroom_red (TILE)
     id: mushroom_red
     name: Red Mushroom
@@ -818,6 +863,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: stone (TILE)
     id: stone
     name: Stone
@@ -870,6 +916,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: stone_copper_dense (TILE)
     id: stone_copper_dense
     name: Copper Ore
@@ -922,6 +969,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: stone_copper (TILE)
     id: stone_copper
     name: Copper Ore
@@ -974,6 +1022,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: greystone (TILE)
     id: greystone
     name: Greystone
@@ -1026,6 +1075,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: greystone_ruby_dense (TILE)
     id: greystone_ruby_dense
     name: Ruby Ore
@@ -1078,6 +1128,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: greystone_ruby (TILE)
     id: greystone_ruby
     name: Ruby Ore
@@ -1130,10 +1181,11 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: wood_hammer (TOOL)
     id: wood_hammer
     name: Wood Hammer
-    description: 
+    description: Let's break some background!
     sprite: {fileID: 21300000, guid: 4a3e1dd1604181f498f2c2ba61553d01, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -1182,10 +1234,11 @@ MonoBehaviour:
         type: 8
         level: 1
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: wood_pickaxe (TOOL)
     id: wood_pickaxe
     name: Wood Pickaxe
-    description: 
+    description: Can be upgraded with silex inside a workbench.
     sprite: {fileID: 21300000, guid: 96d43918a7239be42bfaba2b31e0d000, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -1234,10 +1287,11 @@ MonoBehaviour:
         type: 2
         level: 1
       tileDamagePerSecond: 2
+    useType: 0
   - inspectorName: silex_pickaxe (TOOL)
     id: silex_pickaxe
     name: Silex Pickaxe
-    description: 
+    description: Can be upgraded with copper!
     sprite: {fileID: 21300000, guid: 7533f5e54b6dbfe429402e4769747397, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -1292,10 +1346,11 @@ MonoBehaviour:
         type: 2
         level: 2
       tileDamagePerSecond: 3
+    useType: 0
   - inspectorName: copper_pickaxe (TOOL)
     id: copper_pickaxe
     name: Copper Pickaxe
-    description: 
+    description: Can be upgraded with ruby!
     sprite: {fileID: 21300000, guid: abf070506d45f9045a996d858d960455, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -1344,10 +1399,12 @@ MonoBehaviour:
         type: 2
         level: 3
       tileDamagePerSecond: 4.5
+    useType: 0
   - inspectorName: ruby_pickaxe (TOOL)
     id: ruby_pickaxe
     name: Ruby pickaxe
-    description: Diamond pickaxe identifying as a ruby pickaxe
+    description: Can finally break ancient walls !! Diamond pickaxe identifying as
+      a ruby pickaxe
     sprite: {fileID: 21300000, guid: 4ec2a7858144fef4c91b34421bd0dca5, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -1402,10 +1459,11 @@ MonoBehaviour:
         type: 2
         level: 4
       tileDamagePerSecond: 8
+    useType: 0
   - inspectorName: crafting_table (TILE)
     id: crafting_table
     name: Crafting Table
-    description: 
+    description: Once placed, unlocks new recipes!
     sprite: {fileID: 21300000, guid: c991a649b8e876f4e936185aef18d8f3, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: bb85747b5b13686478b4c92c9766ed46, type: 2}
@@ -1454,10 +1512,11 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: stone_furnace (TILE)
     id: stone_furnace
     name: Stone Furnace
-    description: 
+    description: Same furnace than inside the rocket! Allows to melt ores.
     sprite: {fileID: 21300000, guid: 74e90b3ccf68537428809ece4c51c50a, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: 0a8fb8fd14ac46e48b9fbc6da6ff7ee8, type: 2}
@@ -1506,10 +1565,11 @@ MonoBehaviour:
         type: 2
         level: 2
       tileDamagePerSecond: 3
+    useType: 0
   - inspectorName: copper_ingot
     id: copper_ingot
     name: Copper Ingot
-    description: 
+    description: Pretty sturdy !
     sprite: {fileID: 21300000, guid: 3c57128045809c74abd4bd96bf83b2ee, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -1558,6 +1618,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: wood_barrel (TILE)
     id: wood_barrel
     name: Wood Barrel
@@ -1610,6 +1671,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: cobweb (TILE)
     id: cobweb
     name: Cobweb
@@ -1662,6 +1724,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: pillar_dark_up (TILE)
     id: pillar_dark_up
     name: Dark Pillar
@@ -1714,6 +1777,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: pillar_dark_mid (TILE)
     id: pillar_dark_mid
     name: Dark Pillar
@@ -1766,6 +1830,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: pillar_dark_down (TILE)
     id: pillar_dark_down
     name: Dark Pillar
@@ -1818,6 +1883,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: ancient_torch (TILE)
     id: ancient_torch
     name: Ancient Torch
@@ -1870,6 +1936,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: flag_red_up (TILE)
     id: flag_red_up
     name: Red Flag
@@ -1922,6 +1989,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: flag_red_mid (TILE)
     id: flag_red_mid
     name: Red Flag
@@ -1974,6 +2042,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: flag_red_down (TILE)
     id: flag_red_down
     name: Red Flag
@@ -2026,6 +2095,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: flag_blue_up (TILE)
     id: flag_blue_up
     name: Blue Flag
@@ -2078,6 +2148,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: flag_blue_mid (TILE)
     id: flag_blue_mid
     name: Blue Flag
@@ -2130,6 +2201,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: flag_blue_down (TILE)
     id: flag_blue_down
     name: Blue Flag
@@ -2182,6 +2254,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: flag_green_up (TILE)
     id: flag_green_up
     name: Green Flag
@@ -2234,6 +2307,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: flag_green_mid (TILE)
     id: flag_green_mid
     name: Green Flag
@@ -2286,6 +2360,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: flag_green_down (TILE)
     id: flag_green_down
     name: Green Flag
@@ -2338,6 +2413,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: oak_wood_wall (TILE)
     id: oak_wood_wall
     name: Oak Wood Wall
@@ -2396,6 +2472,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: dirt_wall (TILE)
     id: dirt_wall
     name: Dirt Wall
@@ -2454,6 +2531,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: stone_wall (TILE)
     id: stone_wall
     name: Stone Wall
@@ -2512,6 +2590,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: cave_wall (TILE)
     id: cave_wall
     name: Cave Wall
@@ -2570,6 +2649,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: chest_right (TILE NO LOOT)
     id: chest_right
     name: Chest
@@ -2604,6 +2684,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: chest_left (TILE NO LOOT)
     id: chest_left
     name: Chest
@@ -2638,6 +2719,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: chest_solo (TILE)
     id: chest_solo
     name: Chest
@@ -2672,6 +2754,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: rocket_platform (TILE)
     id: rocket_platform
     name: "Si tu vois \xE7a c'est que t'es un bg ;)"
@@ -2730,10 +2813,11 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: silex
     id: silex
     name: Silex
-    description: 
+    description: It looks stronger than wood.
     sprite: {fileID: 21300000, guid: 989152029d678cc41b83650287d3100f, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -2788,10 +2872,11 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: ruby
     id: ruby
     name: Ruby
-    description: 
+    description: Woaw...
     sprite: {fileID: 21300000, guid: 173a141581d51cc45ae3830b066a5dcd, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -2846,6 +2931,7 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
   - inspectorName: torche (TILE)
     id: torche
     name: Torche
@@ -2886,17 +2972,42 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: Ancien_Wall (TILE NO LOOT)
-    id: Ancien_Wall
-    name: Ancien Wall
+    useType: 0
+  - inspectorName: ancient_Wall (TILE)
+    id: ancient_Wall
+    name: Ancient Wall
     description: 
     sprite: {fileID: 21300000, guid: 577c684e961b5924bbf4f62b182a4b38, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: d5a069c22bf31244db30dacd981f085e, type: 2}
-      canBeBuiltFrom: 0
+      canBeBuiltFrom: 1
       placingRules:
         placeLayer: 4
-        requirements: []
+        requirements:
+        - inspectorName: ' neighbours(Up <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Left <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
+        - inspectorName: ' neighbours(Right <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
       breakingRules:
         life: 10
         requiredStrength:
@@ -2905,7 +3016,7 @@ MonoBehaviour:
           level: 4
         loot:
           inspectorName: 
-          itemID: Ancien Wall
+          itemID: ancient_Wall
           number: 1
     toolData:
       isTool: 0
@@ -2914,26 +3025,33 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
-  - inspectorName: Artefact (TILE)
-    id: Artefact
-    name: Artefact
-    description: 
+    useType: 0
+  - inspectorName: rocket_engine (TILE)
+    id: rocket_engine
+    name: Rocket Engine
+    description: You can finally leave this planet!
     sprite: {fileID: 21300000, guid: 3c259e988d7e7fc4192200d08ec8fc88, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: 468def1a7cbb0ed43970937ff07be9f4, type: 2}
       canBeBuiltFrom: 0
       placingRules:
         placeLayer: 4
-        requirements: []
+        requirements:
+        - inspectorName: ' neighbours(Down <Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 4
       breakingRules:
         life: 10
         requiredStrength:
           inspectorName: 
-          type: 0
-          level: 0
+          type: 2
+          level: 4
         loot:
           inspectorName: 
-          itemID: Artefact
+          itemID: rocket_engine
           number: 1
     toolData:
       isTool: 0
@@ -2942,6 +3060,66 @@ MonoBehaviour:
         type: 0
         level: 0
       tileDamagePerSecond: 1
+    useType: 0
+  - inspectorName: mirror (USE)
+    id: mirror
+    name: Mirror
+    description: Teleports to the rocket on use.
+    sprite: {fileID: 21300000, guid: f054050aed4a1c24786fc7faa67ed00a, type: 3}
+    tileInfo:
+      tile: {fileID: 0}
+      canBeBuiltFrom: 1
+      placingRules:
+        placeLayer: 0
+        requirements:
+        - inspectorName: ' neighbours(Up <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 1
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Down <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 2
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Left <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 4
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' neighbours(Right <Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 0
+          requiredNeighbours: 8
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 6
+        - inspectorName: ' center(<Decor, Ground>)'
+          whitelistCenter: []
+          whitelistCenterLayers: 6
+          requiredNeighbours: 0
+          whitelistNeighbours: []
+          whitelistNeighbourLayers: 0
+      breakingRules:
+        life: 0.25
+        requiredStrength:
+          inspectorName: 
+          type: 8
+          level: 100000
+        loot:
+          inspectorName: 
+          itemID: chest_solo
+          number: 1
+    toolData:
+      isTool: 0
+      toolStrength:
+        inspectorName: 
+        type: 0
+        level: 0
+      tileDamagePerSecond: 1
+    useType: 1
   craftRecipes:
   - inspectorName: wood_pickaxe (x1) [ <oak_wood (x3)> <dirt (x1)> ]
     itemsRequired:

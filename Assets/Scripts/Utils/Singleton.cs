@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T> 
@@ -25,5 +26,12 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
             Destroy(gameObject);
         }
     }
-    
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 }

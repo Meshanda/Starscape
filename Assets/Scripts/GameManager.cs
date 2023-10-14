@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,7 +10,9 @@ public class GameManager : Singleton<GameManager>
     [Header("References")]
     public DatabaseSO database;
     public Player player;
+    public Transform rocketTeleportSocket;
     [SerializeField] private Camera _minimapCamera;
+    [SerializeField] private List<GameObject> _uiToDisableOnWin;
     
     [Header("Menus")]
     [SerializeField] private GameObject _settingsCanvas;
@@ -17,10 +20,14 @@ public class GameManager : Singleton<GameManager>
     [Header("Pop ups")]
     [SerializeField] private GameObject _confirmerPopUp;
     [SerializeField] private GameObject _lostPopUp;
-	
+    [SerializeField] private GameObject _rocketPopup;
+    [SerializeField] private GameObject _wonPopup;
+
+    public static event Action GameWon;
 
     public void Start()
     {
+        UsableItem.ResetAllItems();
         SoundManager.OnGameStartMusic();
         
         CursorManager.Instance?.SetColor(Settings.cursorColor);
@@ -28,6 +35,7 @@ public class GameManager : Singleton<GameManager>
 
         InventorySystem.Instance.AddItem(new ItemStack{ itemID = "wood_pickaxe", number = 1});
         InventorySystem.Instance.AddItem(new ItemStack{ itemID = "wood_hammer", number = 1});
+        InventorySystem.Instance.AddItem(new ItemStack{ itemID = "mirror", number = 1});
     }
 
     private void OnEnable()
@@ -89,5 +97,22 @@ public class GameManager : Singleton<GameManager>
     {
         EventSystem.current.SetSelectedGameObject(null);
     }
-    
+
+    public void ToggleRocketPopUp()
+    {
+        _rocketPopup.SetActive(!_rocketPopup.activeSelf);
+    }
+
+    public void Win()
+    {
+        RenderSettings.skybox = null;
+        ToggleRocketPopUp();
+        _uiToDisableOnWin.ForEach(obj => obj.SetActive(false));
+        GameWon?.Invoke();
+    }
+
+    public void ToggleWinScreen()
+    {
+        _wonPopup.SetActive(true);
+    }
 }

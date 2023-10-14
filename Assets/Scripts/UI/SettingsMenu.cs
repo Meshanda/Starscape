@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,9 +25,10 @@ namespace UI
         [SerializeField] private Selector _resolution;
         [SerializeField] private Selector _frameRate;
         [SerializeField] private Toggle _vSync;
-
+        
         private void Start()
         {
+            Canvas.ForceUpdateCanvases(); 
             ApplyDefaultSettings();
             UpdateUI();
         }
@@ -34,6 +37,7 @@ namespace UI
         {
             SetFullscreenMode((int)Settings.fullScreenMode);
             SetResolution((int)Settings.resolution); 
+            ToggleVSync(Settings.toggleVsync);
             SetFrameRate((int)Settings.targetFPS);
         }
 
@@ -51,19 +55,17 @@ namespace UI
             _fullscreenMode.SetText((int)Settings.fullScreenMode);
             _resolution.SetText((int)Settings.resolution);
             _frameRate.SetText((int)Settings.targetFPS);
-            _vSync.isOn = false;
+            _vSync.isOn = Settings.toggleVsync;
         }
 
         public void ToggleVSync(bool status)
         {
-            if (status)
-                SetFrameRate((int) Settings.targetFPS);
-            else
-                SetFrameRate(-1);
-
+            _frameRate.transform.parent.gameObject.SetActive(!status);
             Settings.toggleVsync = status;
+            QualitySettings.vSyncCount = status ? 1 : 0;
             SoundManager.Instance.PlayClickSound();
         }
+        
         public void SetFullscreenMode(int index)
         {
             switch ((SelectorMode) index)

@@ -302,6 +302,7 @@ public class Item
     public Sprite sprite;
     public TileInfo tileInfo = new();
     public ToolData toolData = new();
+    public UsableItem.UsableItemType useType = UsableItem.UsableItemType.None;
 
     #region Inspector
     
@@ -326,6 +327,11 @@ public class Item
         if (toolData.isTool)
         {
             inspectorName += " (TOOL)";
+        }
+        
+        if (useType != UsableItem.UsableItemType.None)
+        {
+            inspectorName += " (USE)";
         }
     }
     

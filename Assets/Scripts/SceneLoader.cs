@@ -13,7 +13,7 @@ public static class SceneLoader
     private const string MAIN_MENU_SCENE = "MainMenu";
     private const string GAME_SCENE = "GameScene";
 
-    public static GameState currentState = GameState.MainMenu;
+    public static GameState currentState = GameState.MainMenu; // TODO CHECK
 
     public static void LoadScene(GameState newState, Action<AsyncOperation> callback = null)
     {

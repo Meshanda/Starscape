@@ -53,4 +53,11 @@ public abstract class LazySingleton<T> : MonoBehaviour where T : LazySingleton<T
         }
     }
     
+    private void OnDestroy()
+    {
+        if (_instance == this)
+        {
+            _instance = null;
+        }
+    }
 }

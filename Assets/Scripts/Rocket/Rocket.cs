@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,10 +13,17 @@ public class Rocket : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
+        if (other.gameObject.layer != LayerMask.NameToLayer("Minable"))
+            return; 
+        
         CreatePlatform();
+        
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
         Destroy(this);
     }
+
 
     public void CreatePlatform()
     {
