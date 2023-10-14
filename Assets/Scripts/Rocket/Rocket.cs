@@ -18,9 +18,12 @@ public class Rocket : MonoBehaviour
             return; 
         
         CreatePlatform();
+        
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
         Destroy(this);
     }
+
 
     public void CreatePlatform()
     {
