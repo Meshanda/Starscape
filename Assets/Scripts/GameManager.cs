@@ -57,6 +57,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnTimerFinished()
     {
+        SoundManager.Instance.PlayLoseMusic();
         TogglePopUpLost();
         Time.timeScale = 0;
     }
@@ -105,6 +106,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Win()
     {
+        SoundManager.Instance.PlayWinMusic();
         RenderSettings.skybox = null;
         ToggleRocketPopUp();
         _uiToDisableOnWin.ForEach(obj => obj.SetActive(false));

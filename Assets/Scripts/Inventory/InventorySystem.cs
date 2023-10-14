@@ -157,7 +157,7 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         InventorySlot slot = results.FirstOrDefault(h => h.collider.GetComponent<InventorySlot>() is not null)
             .collider?.GetComponent<InventorySlot>();
 
-
+        
         if (slot is not null)
         {
             if (eventData.button.Equals(PointerEventData.InputButton.Left))
@@ -401,6 +401,9 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     
     private void GrabSlot(InventorySlot slot)
     {
+        if (_handSlot.ItemStack is not null || slot.ItemStack is not null)
+            SoundManager.Instance.PlayInventoryClickSound();
+
         if (_handSlot.ItemStack is not null &&
             slot.ItemStack is not null &&
             _handSlot.ItemStack.itemID.Equals(slot.ItemStack.itemID))
@@ -423,6 +426,8 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
     {
         if (slot.ItemStack is null)
             return;
+        
+        SoundManager.Instance.PlayInventoryClickSound();
         
         if (_handSlot.ItemStack is null)
         {
@@ -538,7 +543,10 @@ public class InventorySystem : Singleton<InventorySystem>, IPointerDownHandler, 
         if (_handSlot.ItemStack is null)
             _handSlot.ItemStack = recipe.itemCrafted.Clone();
         else
+        {
             _handSlot.ItemStack.Add(recipe.itemCrafted.number);
+            SoundManager.Instance.PlayInventoryClickSound();
+        }
     }
 
     private void RefreshCraftables()

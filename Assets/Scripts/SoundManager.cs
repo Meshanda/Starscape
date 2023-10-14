@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -12,21 +14,28 @@ public class SoundManager : Singleton<SoundManager>
     [Header("Audio Sources")]
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _sfxSource;
-
+    
     [Header("Music")]
-    [SerializeField] private AudioClip _music;
+    [SerializeField] private AudioClip _gameMusic;
     [SerializeField] private AudioClip _menuMusic;
+    [SerializeField] private AudioClip _winMusic;
+    [SerializeField] private AudioClip _loseMusic;
 
     [Header("Sfx Sounds")]
     [SerializeField] private AudioClip _breakBlock;
     [SerializeField] private AudioClip _rocketTakeoff;
     [SerializeField] private AudioClip _playerFootStep;
     [SerializeField] private AudioClip _playerJump;
+    [SerializeField] private AudioClip _teleport;
+    [SerializeField] private AudioClip _inventoryClick;
+    [SerializeField] private AudioClip _breaking;
     
     [Header("UI Sounds")]
     [SerializeField] private AudioClip _screenChanged;
     [SerializeField] private AudioClip _buttonClicked;
 
+    private bool _breakingCooldown;
+    
     private void OnEnable()
     {
         OnGameStartMusic += Event_OnGameStartMusic;
@@ -53,7 +62,7 @@ public class SoundManager : Singleton<SoundManager>
     
     private void Event_OnGameStartMusic()
     {
-        _musicSource.clip = _music;
+        _musicSource.clip = _gameMusic;
         _musicSource.Play();
     }
 
@@ -85,10 +94,38 @@ public class SoundManager : Singleton<SoundManager>
     {
         _sfxSource.PlayOneShot(_screenChanged);
     }
+    public void PlayTeleportSound()
+    {
+        _sfxSource.PlayOneShot(_teleport);
+    }
+    public void PlayInventoryClickSound()
+    {
+        _sfxSource.PlayOneShot(_inventoryClick);
+    }
+    
+    public void PlayBreakingSound()
+    {
+        if (!_breakingCooldown)
+        {
+            _breakingCooldown = true;
+            StartCoroutine(PlayClipWithCooldown(_breaking, .06f, () => _breakingCooldown = false));
+        }
+
+    }
 
     public void PlayMenuMusic()
     {
         _musicSource.clip = _menuMusic;
+        _musicSource.Play();
+    }
+    public void PlayWinMusic()
+    {
+        _musicSource.clip = _winMusic;
+        _musicSource.Play();
+    }
+    public void PlayLoseMusic()
+    {
+        _musicSource.clip = _loseMusic;
         _musicSource.Play();
     }
     
@@ -101,5 +138,12 @@ public class SoundManager : Singleton<SoundManager>
     {
         _sfxSource.volume = value;
         Settings.volumeFx = value;
+    }
+
+    private IEnumerator PlayClipWithCooldown(AudioClip clip, float delay, Action callback = null)
+    {
+        _sfxSource.PlayOneShot(clip);
+        yield return new WaitForSeconds(delay);
+        callback?.Invoke();
     }
 }

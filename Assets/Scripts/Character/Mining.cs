@@ -12,7 +12,7 @@ public class Mining : MonoBehaviour
     private float _distanceFromPlayer => Mathf.Abs(Vector2.Distance(transform.position, _mousePosition));
 
     private Camera _cam;
-    
+    private Coroutine _miningRoutine;
     private Item _currentMiningItem;
     private (Tilemap, TileBase, Vector3Int) _currentMiningTile;
     
@@ -25,6 +25,8 @@ public class Mining : MonoBehaviour
             _currentMiningProgress = value;
             _crackSpriteRenderer?.material?.SetFloat("_Health", _currentMiningProgress);
             _crackObject?.SetActive(_currentMiningProgress > 0.0f);
+            if ((value % .5) is 0 && _miningRoutine is not null)
+                SoundManager.Instance.PlayBreakingSound();
         }
     }
     
@@ -50,14 +52,16 @@ public class Mining : MonoBehaviour
 
     private void OnMine()
     {
-        UsableItem.TryUseItem(InventorySystem.Instance?.GetSelectedSlot()?.ItemStack); // TODO pref a clean func inside Player
-        StartCoroutine(MiningRoutine());
+        if (UsableItem.TryUseItem(InventorySystem.Instance?.GetSelectedSlot()?.ItemStack))
+            SoundManager.Instance.PlayTeleportSound(); // TODO pref a clean func inside Player
+        _miningRoutine = StartCoroutine(MiningRoutine());
     }
     
     private void OnMineRelease()
     {
         StopAllCoroutines();
-            
+        _miningRoutine = null;
+        
         CurrentMiningProgress = 0.0f;
     }
 

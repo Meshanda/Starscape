@@ -48,12 +48,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicSource: {fileID: 5717563174048110411}
   _sfxSource: {fileID: 40757489545793658}
-  _music: {fileID: 8300000, guid: 498b1a920c222d34caa0332e93514245, type: 3}
+  _gameMusic: {fileID: 8300000, guid: 404da8029ee99af4c835e3e1c43c6ae6, type: 3}
   _menuMusic: {fileID: 8300000, guid: 58ef08b2386fbe544b40d5cc0eebf0ad, type: 3}
+  _winMusic: {fileID: 8300000, guid: 69edd3b8718552348b76fed79352f324, type: 3}
+  _loseMusic: {fileID: 8300000, guid: f5f9da0aade05194f9eed1ad33b880e6, type: 3}
   _breakBlock: {fileID: 8300000, guid: d078473ff141e7449a42363f2652b083, type: 3}
   _rocketTakeoff: {fileID: 8300000, guid: a9f8c877fd5cb384ba164277e73d97c8, type: 3}
   _playerFootStep: {fileID: 8300000, guid: 9c23204fc90bc0749bedb181819935e1, type: 3}
   _playerJump: {fileID: 8300000, guid: b644ecfce5068c04fa04230b5c436b62, type: 3}
+  _teleport: {fileID: 8300000, guid: 99cba47f63908714a9ec609a85f95a01, type: 3}
+  _inventoryClick: {fileID: 8300000, guid: fe72e84b7f371d74a97e7f7a20308440, type: 3}
+  _breaking: {fileID: 8300000, guid: 9cb8e88229392ac40af562ef343b5163, type: 3}
   _screenChanged: {fileID: 8300000, guid: 99cba47f63908714a9ec609a85f95a01, type: 3}
   _buttonClicked: {fileID: 8300000, guid: d2021c3b91a815a4dbe375eb10ed67e6, type: 3}
 --- !u!82 &5717563174048110411

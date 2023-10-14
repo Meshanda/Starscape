@@ -46,23 +46,25 @@ public class GrottosChestFiller : MonoBehaviour
             }
             range += strates[i].SizeY;
         }
-    }    
+    }
 
-    public List<ItemStack> GenerateLoot(List<TileBase> tiles) 
+    public List<ItemStack> GenerateLoot(List<TileBase> tiles)
     {
         List<ItemStack> list = new List<ItemStack>();
-        for(int i = 0; i<InventorySystem.Instance._nbChestSlots; i++) 
+        for (int i = 0; i < InventorySystem.Instance._nbChestSlots; i++)
         {
             list.Add(null);
         }
+
         int nbrOfitem = Random.Range(1, InventorySystem.Instance._nbChestSlots);
 
-        for (int i = 0; i < nbrOfitem; i++) 
+        for (int i = 0; i < nbrOfitem; i++)
         {
             var itemStack = GameManager.Instance.database.GetLootByTile(tiles[Random.Range(0, tiles.Count)]);
             itemStack.number = Random.Range(1, _nbrePossibleStack);
             list[i] = itemStack;
         }
+
         return list;
     }
 }
