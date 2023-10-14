@@ -210,7 +210,7 @@ MonoBehaviour:
   - inspectorName: gravel_dirt (TILE)
     id: gravel_dirt
     name: Gravel Dirt
-    description: 
+    description: Place and break to get silex!
     sprite: {fileID: 21300000, guid: 84e8985bbd7a7de4ca13cf9fd3da34c1, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: f481abf869bad104b9965f52e78eb057, type: 2}
@@ -316,7 +316,7 @@ MonoBehaviour:
   - inspectorName: oak_wood (TILE)
     id: oak_wood
     name: Oak Wood
-    description: 
+    description: Can be used to make a workbench!
     sprite: {fileID: 21300000, guid: 99801db6513dae24e954b23bb5504f9c, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: ca6803329a86bbb4c86dc0ad7cafe31c, type: 2}
@@ -1185,7 +1185,7 @@ MonoBehaviour:
   - inspectorName: wood_hammer (TOOL)
     id: wood_hammer
     name: Wood Hammer
-    description: 
+    description: Let's break some background!
     sprite: {fileID: 21300000, guid: 4a3e1dd1604181f498f2c2ba61553d01, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -1238,7 +1238,7 @@ MonoBehaviour:
   - inspectorName: wood_pickaxe (TOOL)
     id: wood_pickaxe
     name: Wood Pickaxe
-    description: 
+    description: Can be upgraded with silex inside a workbench.
     sprite: {fileID: 21300000, guid: 96d43918a7239be42bfaba2b31e0d000, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -1291,7 +1291,7 @@ MonoBehaviour:
   - inspectorName: silex_pickaxe (TOOL)
     id: silex_pickaxe
     name: Silex Pickaxe
-    description: 
+    description: Can be upgraded with copper!
     sprite: {fileID: 21300000, guid: 7533f5e54b6dbfe429402e4769747397, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -1350,7 +1350,7 @@ MonoBehaviour:
   - inspectorName: copper_pickaxe (TOOL)
     id: copper_pickaxe
     name: Copper Pickaxe
-    description: 
+    description: Can be upgraded with ruby!
     sprite: {fileID: 21300000, guid: abf070506d45f9045a996d858d960455, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -1403,7 +1403,8 @@ MonoBehaviour:
   - inspectorName: ruby_pickaxe (TOOL)
     id: ruby_pickaxe
     name: Ruby pickaxe
-    description: Diamond pickaxe identifying as a ruby pickaxe
+    description: Can finally break ancient walls !! Diamond pickaxe identifying as
+      a ruby pickaxe
     sprite: {fileID: 21300000, guid: 4ec2a7858144fef4c91b34421bd0dca5, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -1462,7 +1463,7 @@ MonoBehaviour:
   - inspectorName: crafting_table (TILE)
     id: crafting_table
     name: Crafting Table
-    description: 
+    description: Once placed, unlocks new recipes!
     sprite: {fileID: 21300000, guid: c991a649b8e876f4e936185aef18d8f3, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: bb85747b5b13686478b4c92c9766ed46, type: 2}
@@ -1515,7 +1516,7 @@ MonoBehaviour:
   - inspectorName: stone_furnace (TILE)
     id: stone_furnace
     name: Stone Furnace
-    description: 
+    description: Same furnace than inside the rocket! Allows to melt ores.
     sprite: {fileID: 21300000, guid: 74e90b3ccf68537428809ece4c51c50a, type: 3}
     tileInfo:
       tile: {fileID: 11400000, guid: 0a8fb8fd14ac46e48b9fbc6da6ff7ee8, type: 2}
@@ -1568,7 +1569,7 @@ MonoBehaviour:
   - inspectorName: copper_ingot
     id: copper_ingot
     name: Copper Ingot
-    description: 
+    description: Pretty sturdy !
     sprite: {fileID: 21300000, guid: 3c57128045809c74abd4bd96bf83b2ee, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -2816,7 +2817,7 @@ MonoBehaviour:
   - inspectorName: silex
     id: silex
     name: Silex
-    description: 
+    description: It looks stronger than wood.
     sprite: {fileID: 21300000, guid: 989152029d678cc41b83650287d3100f, type: 3}
     tileInfo:
       tile: {fileID: 0}
@@ -2875,7 +2876,7 @@ MonoBehaviour:
   - inspectorName: ruby
     id: ruby
     name: Ruby
-    description: 
+    description: Woaw...
     sprite: {fileID: 21300000, guid: 173a141581d51cc45ae3830b066a5dcd, type: 3}
     tileInfo:
       tile: {fileID: 0}
