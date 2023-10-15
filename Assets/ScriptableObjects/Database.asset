@@ -3134,11 +3134,11 @@ MonoBehaviour:
       itemID: wood_pickaxe
       number: 1
     requiredFlags: 1
-  - inspectorName: silex_pickaxe (x1) [ <silex (x6)> <wood_pickaxe (x1)> ]
+  - inspectorName: silex_pickaxe (x1) [ <silex (x18)> <wood_pickaxe (x1)> ]
     itemsRequired:
-    - inspectorName: silex (x6)
+    - inspectorName: silex (x18)
       itemID: silex
-      number: 6
+      number: 18
     - inspectorName: wood_pickaxe (x1)
       itemID: wood_pickaxe
       number: 1
@@ -3147,12 +3147,12 @@ MonoBehaviour:
       itemID: silex_pickaxe
       number: 1
     requiredFlags: 1
-  - inspectorName: copper_pickaxe (x1) [ <copper_ingot (x12)> <silex_pickaxe (x1)>
+  - inspectorName: copper_pickaxe (x1) [ <copper_ingot (x36)> <silex_pickaxe (x1)>
       ]
     itemsRequired:
-    - inspectorName: copper_ingot (x12)
+    - inspectorName: copper_ingot (x36)
       itemID: copper_ingot
-      number: 12
+      number: 36
     - inspectorName: silex_pickaxe (x1)
       itemID: silex_pickaxe
       number: 1
@@ -3161,11 +3161,11 @@ MonoBehaviour:
       itemID: copper_pickaxe
       number: 1
     requiredFlags: 1
-  - inspectorName: ruby_pickaxe (x1) [ <ruby (x16)> <copper_pickaxe (x1)> ]
+  - inspectorName: ruby_pickaxe (x1) [ <ruby (x64)> <copper_pickaxe (x1)> ]
     itemsRequired:
-    - inspectorName: ruby (x16)
+    - inspectorName: ruby (x64)
       itemID: ruby
-      number: 16
+      number: 64
     - inspectorName: copper_pickaxe (x1)
       itemID: copper_pickaxe
       number: 1
@@ -3214,16 +3214,6 @@ MonoBehaviour:
       itemID: crafting_table
       number: 1
     requiredFlags: 0
-  - inspectorName: stone_furnace (x1) [ <stone (x4)> ]
-    itemsRequired:
-    - inspectorName: stone (x4)
-      itemID: stone
-      number: 4
-    itemCrafted:
-      inspectorName: stone_furnace (x1)
-      itemID: stone_furnace
-      number: 1
-    requiredFlags: 1
   - inspectorName: chest_solo (x1) [ <oak_wood (x2)> ]
     itemsRequired:
     - inspectorName: oak_wood (x2)
