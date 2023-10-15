@@ -39,6 +39,9 @@ namespace UI
         
         private void Start()
         {
+            CursorManager.Instance?.SetColor(Settings.cursorColor);
+            CursorManager.Instance?.SetSize(Settings.cursorSize);
+            
             SoundManager.Instance.PlayMenuMusic();
             _startPosTitle = _camTitle.transform.localEulerAngles;
             _startPosSettings = _camSettings.transform.localEulerAngles;
