@@ -26,7 +26,7 @@ public class DatabaseSO : ScriptableObject
     }
     public ItemStack GetLootByTile(TileBase tile)
     {
-        return items.FirstOrDefault(item => item.tileInfo.tile && item.tileInfo.tile.Equals(tile)).tileInfo.breakingRules.loot;
+        return items.FirstOrDefault(item => item.tileInfo.tile && item.tileInfo.tile.Equals(tile)).tileInfo.breakingRules.loot.Clone();
     }
 
     #region Inspector
