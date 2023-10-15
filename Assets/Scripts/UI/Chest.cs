@@ -69,8 +69,6 @@ namespace UI
         {
             if (!_isQuitting && gameObject.scene.isLoaded)
             {
-                InventorySystem.Instance.CloseChest(this);
-                
                 // drop everything that is in the chest
                 foreach (var itemStack in itemStacks)
                 {
@@ -79,6 +77,8 @@ namespace UI
                         World.Instance.GenerateDrop(itemStack.Clone(), transform.position).AddRandomForce();
                     }
                 }
+                
+                InventorySystem.Instance.CloseChest(this);
             }
         }
     }
